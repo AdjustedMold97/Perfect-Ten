@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Experiment1try3">
         <activity
+            android:name=".Counter"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="Experiment1/app/build/generated/source/buildConfig/debug"/>
+	<classpathentry kind="src" path="Experiment1/app/src/androidTest/java"/>
+	<classpathentry kind="src" path="Experiment1/app/src/main/java"/>
+	<classpathentry kind="src" path="Experiment1/app/src/test/java"/>
+	<classpathentry kind="lib" path="Experiment1/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="Experiment1/app/build/intermediates/merged_java_res/debug/base.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="Experiment1/app/build/intermediates/project_dex_archive/debug/out/0d855cdc9d393918662c2112baf6a2fdc3470d624b67dd6ae5c6ef9c66b9c43e_0.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="Experiment1/app/build/intermediates/project_dex_archive/debug/out/0d855cdc9d393918662c2112baf6a2fdc3470d624b67dd6ae5c6ef9c66b9c43e_1.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="Experiment1/app/build/intermediates/project_dex_archive/debug/out/0d855cdc9d393918662c2112baf6a2fdc3470d624b67dd6ae5c6ef9c66b9c43e_2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="Experiment1/app/build/intermediates/project_dex_archive/debug/out/0d855cdc9d393918662c2112baf6a2fdc3470d624b67dd6ae5c6ef9c66b9c43e_3.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="Experiment1/gradle/wrapper/gradle-wrapper.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="Experiment1/app/build/intermediates/javac/debug/classes"/>
+</classpath>

@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button counterButton = findViewById(R.id.counter_button);
+        Button gorilla_activity_button = findViewById(R.id.gorilla_activity_button);
 
         counterButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,6 +25,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        gorilla_activity_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(view.getContext(), CounterActivity.class));
+
+            }
+        });
+
     }
 
 }

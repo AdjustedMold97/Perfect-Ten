@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,15 +23,21 @@ public class MainActivity extends AppCompatActivity {
         // buttons code below
         //initialize buttons
         Button Abut = findViewById(R.id.aButton);
-        Button Dbut = findViewById(R.id.dButton);
+        Button Mbut = findViewById(R.id.mButton);
         Button Obut = findViewById(R.id.oButton);
         Button Rbut = findViewById(R.id.rButton);
         Button Fbut = findViewById(R.id.fButton);
-        Button Gbut = findViewById(R.id.gButton);
+        Button Nbut = findViewById(R.id.nButton);
 
         //final String[] stringVal = {""};
         ArrayList<String> stringVal = new ArrayList<>();
 
+
+//        public static String outPut(ArrayList<Stirng>() inPut){
+//            for(inputString.size()){
+//
+//            }
+//        }
         TextView wordAnswer = findViewById(R.id.wordAnswer);
 
         Abut.setOnClickListener(new View.OnClickListener() {
@@ -44,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Dbut.setOnClickListener(new View.OnClickListener() {
+        Mbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 //                stringVal[0] = "d";
 //                wordAnswer.setText(stringVal[0]);
-                stringVal.add("d");
+                stringVal.add("m");
                 wordAnswer.setText(stringVal.toString());
             }
         });
@@ -82,11 +87,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Gbut.setOnClickListener(new View.OnClickListener() {
+        Nbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                stringVal.add("g");
+                stringVal.add("n");
                 wordAnswer.setText(stringVal.toString());
             }
         });
@@ -94,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //check if answer is correct
-        String answer = "[d,o,g]";
+        String answer = "man";
 
         Button submit = findViewById(R.id.submit);
 
@@ -103,29 +108,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(stringVal.toString().equals(answer)) {
-
-                    wordAnswer.setText("correct!");
-                }
-                else{
-                    wordAnswer.setText("Wrong!");
-
-//                    while(stringVal.size() > 0){
-//
-//                        stringVal.remove(stringVal.size());
-//
-//                    }
-                    }
-                }
+                wordAnswer.setText("submitted");
 
 
-
+            }
 
 
         });
-
-
-
 
     }
 }

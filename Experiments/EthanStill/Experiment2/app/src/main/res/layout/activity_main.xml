@@ -10,7 +10,7 @@
         android:id="@+id/wordAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Word Match"
+        android:text="Your Text!"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -24,16 +24,16 @@
         android:layout_height="wrap_content"
         android:text="F"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/dButton"
+        app:layout_constraintEnd_toStartOf="@+id/mButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.699" />
 
     <Button
-        android:id="@+id/dButton"
+        android:id="@+id/mButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="D"
+        android:text="M"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,13 +41,13 @@
         app:layout_constraintVertical_bias="0.699" />
 
     <Button
-        android:id="@+id/gButton"
+        android:id="@+id/nButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="G"
+        android:text="N"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dButton"
+        app:layout_constraintStart_toEndOf="@+id/mButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.699" />
 
@@ -55,14 +55,14 @@
         android:id="@+id/textView"
         android:layout_width="325dp"
         android:layout_height="40dp"
-        android:text="Type the name of the picture below"
+        android:text="Type out some text!"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/wordAnswer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.259" />
+        app:layout_constraintVertical_bias="0.252" />
 
     <Button
         android:id="@+id/oButton"
@@ -82,7 +82,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dButton" />
+        app:layout_constraintTop_toBottomOf="@+id/mButton" />
 
     <Button
         android:id="@+id/aButton"
@@ -92,7 +92,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rButton"
-        app:layout_constraintTop_toBottomOf="@+id/gButton" />
+        app:layout_constraintTop_toBottomOf="@+id/nButton" />
 
     <Button
         android:id="@+id/submit"
@@ -103,5 +103,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rButton" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/wordAnswer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.702"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

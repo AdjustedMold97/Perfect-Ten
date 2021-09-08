@@ -1,15 +1,15 @@
 package com.example.experiment3;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity2 extends AppCompatActivity {
-    public int cnt2;
     Button btn2;
     Button btn3;
     @Override
@@ -19,8 +19,8 @@ public class MainActivity2 extends AppCompatActivity {
         Button btn2 = (Button) findViewById(R.id.button2);
         Button btn3 = (Button) findViewById(R.id.button3);
         TextView text1 = (TextView) findViewById(R.id.textView2);
-        cnt2++;
-        text1.setText("you have visited this screen "+ cnt2 +" times");
+        text1.setText("This is screen 2");
+
         btn2.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent = new Intent(MainActivity2.this, MainActivity.class);

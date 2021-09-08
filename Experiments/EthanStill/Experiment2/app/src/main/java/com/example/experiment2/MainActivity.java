@@ -7,40 +7,56 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        // buttons code below
         //initialize buttons
         Button Abut = findViewById(R.id.aButton);
-        Button Dbut = findViewById(R.id.dButton);
+        Button Mbut = findViewById(R.id.mButton);
         Button Obut = findViewById(R.id.oButton);
         Button Rbut = findViewById(R.id.rButton);
         Button Fbut = findViewById(R.id.fButton);
-        Button Gbut = findViewById(R.id.gButton);
+        Button Nbut = findViewById(R.id.nButton);
 
-        final String[] stringVal = {""};
+        //final String[] stringVal = {""};
+        ArrayList<String> stringVal = new ArrayList<>();
 
+
+//        public static String outPut(ArrayList<Stirng>() inPut){
+//            for(inputString.size()){
+//
+//            }
+//        }
         TextView wordAnswer = findViewById(R.id.wordAnswer);
 
         Abut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                stringVal[0] = "a";
-                wordAnswer.setText(stringVal[0]);
+                stringVal.add("a");
+                wordAnswer.setText(stringVal.toString());
             }
         });
 
-        Dbut.setOnClickListener(new View.OnClickListener() {
+        Mbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                stringVal[0] = "d";
-                wordAnswer.setText(stringVal[0]);
+//                stringVal[0] = "d";
+//                wordAnswer.setText(stringVal[0]);
+                stringVal.add("m");
+                wordAnswer.setText(stringVal.toString());
             }
         });
 
@@ -48,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                stringVal[0] = "o";
-                wordAnswer.setText(stringVal[0]);
+                stringVal.add("o");
+                wordAnswer.setText(stringVal.toString());
             }
         });
 
@@ -57,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                stringVal[0] = "r";
-                wordAnswer.setText(stringVal[0]);
+                stringVal.add("r");
+                wordAnswer.setText(stringVal.toString());
             }
         });
 
@@ -66,18 +82,39 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                stringVal[0] = "f";
-                wordAnswer.setText(stringVal[0]);
+                stringVal.add("r");
+                wordAnswer.setText(stringVal.toString());
             }
         });
 
-        Gbut.setOnClickListener(new View.OnClickListener() {
+        Nbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                stringVal[0] = "g";
-                wordAnswer.setText(stringVal[0]);
+                stringVal.add("n");
+                wordAnswer.setText(stringVal.toString());
             }
         });
+
+
+
+        //check if answer is correct
+        String answer = "man";
+
+        Button submit = findViewById(R.id.submit);
+
+        submit.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+
+                wordAnswer.setText("submitted");
+
+
+            }
+
+
+        });
+
     }
 }

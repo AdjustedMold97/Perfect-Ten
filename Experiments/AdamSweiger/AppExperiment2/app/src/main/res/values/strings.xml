@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">AppExperiment2</string>
-    <string name="main_activity">This is the main activity</string>
-    <string name="btn">Press to change activity</string>
+    <string name="main_activity">Please enter some text here</string>
+    <string name="second_activity">This is the second activity</string>
+    <string name="btn">Press to send message to second activity</string>
+    <string name="btn2">Press to change to main activity</string>
 </resources>

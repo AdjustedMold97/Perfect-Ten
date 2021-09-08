@@ -17,11 +17,19 @@ public class GorillaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gorilla);
 
+        //initializing objects
         ImageView gorilla_image = findViewById(R.id.gorilla_image);
         TextView gorilla_text = findViewById(R.id.gorilla_text);
         Button appear = findViewById(R.id.view_gorilla_button);
         Button disappear = findViewById(R.id.delete_gorilla_button);
 
+        //setting default state
+        gorilla_text.setVisibility(View.INVISIBLE);
+        gorilla_image.setVisibility(View.INVISIBLE);
+        appear.setVisibility(View.VISIBLE);
+        disappear.setVisibility(View.INVISIBLE);
+
+        //fixing buttons
         appear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

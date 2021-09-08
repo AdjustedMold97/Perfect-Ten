@@ -38,6 +38,11 @@ public class Counter extends AppCompatActivity {
 
                 value[0]++;
                 counterText.setText(value[0].toString());
+
+                if(value[0] >= 10){
+
+                    startActivity(new Intent(view.getContext(), activityThree.class));
+                }
             }
         });
 

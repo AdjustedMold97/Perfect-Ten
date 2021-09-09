@@ -2,6 +2,7 @@ package com.example.experiment1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ public class GorillaActivity extends AppCompatActivity {
         TextView gorilla_text = findViewById(R.id.gorilla_text);
         Button appear = findViewById(R.id.view_gorilla_button);
         Button disappear = findViewById(R.id.delete_gorilla_button);
+        Button homeButton = findViewById(R.id.gorilla_home_button);
 
         //setting default state
         gorilla_text.setVisibility(View.INVISIBLE);
@@ -50,6 +52,15 @@ public class GorillaActivity extends AppCompatActivity {
                 gorilla_image.setVisibility(View.INVISIBLE);
                 appear.setVisibility(View.VISIBLE);
                 disappear.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(view.getContext(), MainActivity.class));
 
             }
         });

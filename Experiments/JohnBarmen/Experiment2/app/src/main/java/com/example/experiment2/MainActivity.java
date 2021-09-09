@@ -23,11 +23,9 @@ public class MainActivity extends AppCompatActivity {
                 if(cnt%2==0){
                     Toast.makeText(getApplicationContext(), k + cnt, Toast.LENGTH_SHORT).show();
                 }
-                else if(cnt>= 10){
-                    while(cnt <= 50){
-                        Toast.makeText(getApplicationContext(), k + cnt, Toast.LENGTH_SHORT).show();
-                        cnt++;
-                    }
+                else if(cnt>= 10) while (cnt <= 50) {
+                    Toast.makeText(getApplicationContext(), k + cnt, Toast.LENGTH_SHORT).show();
+                    cnt++;
                 }
                 else{
                     Toast.makeText(getApplicationContext(), k + cnt, Toast.LENGTH_LONG).show();

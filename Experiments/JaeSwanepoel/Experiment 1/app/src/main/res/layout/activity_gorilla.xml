@@ -22,8 +22,8 @@
         android:id="@+id/view_gorilla_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="56dp"
         android:text="View Gorilla"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gorilla_image" />
@@ -32,11 +32,10 @@
         android:id="@+id/delete_gorilla_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="40dp"
         android:text="Gorilla Away"
-        app:layout_constraintStart_toEndOf="@+id/view_gorilla_button"
-        app:layout_constraintTop_toBottomOf="@+id/gorilla_image"
+        app:layout_constraintStart_toStartOf="@+id/view_gorilla_button"
+        app:layout_constraintTop_toBottomOf="@+id/view_gorilla_button"
         tools:visibility="invisible" />
 
     <TextView
@@ -49,5 +48,15 @@
         android:textSize="48sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/gorilla_image"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/gorilla_home_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginBottom="24dp"
+        android:text="home"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

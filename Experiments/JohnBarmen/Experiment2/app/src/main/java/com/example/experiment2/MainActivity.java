@@ -5,32 +5,39 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     public static final String k = "cool number is ";
-    public int cnt;
+    public int cnt1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        cnt = 0;
+        TextView text = (TextView) findViewById(R.id.text);
+        cnt1 = 0;
 
 
-        Button btn = (Button) findViewById(R.id.button);
+        Button btn = (Button) findViewById(R.id.btn1);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                if(cnt%2==0){
-                    Toast.makeText(getApplicationContext(), k + cnt, Toast.LENGTH_SHORT).show();
+                if(cnt1%2==0){
+                    text.setText(k+cnt1);
+                    Toast.makeText(getApplicationContext(), k + cnt1, Toast.LENGTH_SHORT).show();
                 }
-                else if(cnt>= 10) while (cnt <= 50) {
-                    Toast.makeText(getApplicationContext(), k + cnt, Toast.LENGTH_SHORT).show();
-                    cnt++;
+                else if(cnt1>= 10) {
+                    while (cnt1 <= 50) {
+                        text.setText(k + cnt1);
+                        Toast.makeText(getApplicationContext(), k + cnt1, Toast.LENGTH_SHORT).show();
+                        cnt1++;
+                    }
                 }
                 else{
-                    Toast.makeText(getApplicationContext(), k + cnt, Toast.LENGTH_LONG).show();
+                    text.setText(k+cnt1);
+                    Toast.makeText(getApplicationContext(), k + cnt1, Toast.LENGTH_LONG).show();
                 }
-                cnt++;
+                cnt1++;
             }
         });
     }

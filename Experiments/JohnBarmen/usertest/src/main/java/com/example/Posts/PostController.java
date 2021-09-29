@@ -18,17 +18,17 @@ public class PostController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
-    @GetMapping(path = "/phones")
-    List<Post> getAllPhones(){
+    @GetMapping(path = "/posts")
+    List<Post> getAllPosts(){
         return postRepository.findAll();
     }
 
-    @GetMapping(path = "/phones/{id}")
-    Post getPhoneById( @PathVariable int id){
+    @GetMapping(path = "/posts/{id}")
+    Post getPostById( @PathVariable int id){
         return postRepository.findById(id);
     }
 
-    @PostMapping(path = "/phones")
+    @PostMapping(path = "/posts")
     String createPost(Post post){
         if (post == null)
             return failure;
@@ -36,8 +36,8 @@ public class PostController {
         return success;
     }
 
-    @PutMapping("/phones/{id}")
-    Post updatePhone(@PathVariable int id, @RequestBody Post request){
+    @PutMapping("/posts/{id}")
+    Post updatePost(@PathVariable int id, @RequestBody Post request){
         Post post = postRepository.findById(id);
         if(post == null)
             return null;

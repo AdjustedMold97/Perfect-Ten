@@ -22,6 +22,7 @@ public class Post {
     @Id
     private int id;
     private String message;
+    private String title;
     
 
     /*
@@ -64,6 +65,13 @@ public class Post {
         this.message = message;
     }
 
+    public void setTitle(String title) {
+    	this.title = title;
+    }
+    
+    public String getTitle() {
+    	return title;
+    }
 
     public User getUser() {
         return user;

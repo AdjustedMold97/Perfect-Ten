@@ -24,5 +24,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(view.getContext(), StringRequestActivity.class));
             }
         });
+
+        Button jsonReqBtn = findViewById(R.id.btnJsonRequest);
+
+        jsonReqBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(view.getContext(), JsonRequestActivity.class));
+            }
+        });
     }
 }

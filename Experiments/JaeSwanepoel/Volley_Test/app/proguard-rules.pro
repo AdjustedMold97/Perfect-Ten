@@ -19,3 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#uncomment this if you change you mind - Jae
+#-keepclassmembers class * implements javax.net.ssl.SSLSocketFactory {
+#    private final javax.net.ssl.SSLSocketFactory delegate;
+#}

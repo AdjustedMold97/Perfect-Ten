@@ -39,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
 
         Button home = findViewById(R.id.Home);
 
+        /*
+         * Commenting out this code because there's really no need to
+         * have a button from the home screen that goes to the home screen.
+         * just having it do nothing here. -Jae
+         * 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(view.getContext(),MainActivity.class));
 
             }
-        });
+        });*/
     }
 
 

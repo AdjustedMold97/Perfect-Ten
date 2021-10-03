@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
          * have a button from the home screen that goes to the home screen.
          * just having it do nothing here. -Jae
          *
+         * -Ethan its just meant as a test or to reload page
+         * */
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,7 +53,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(view.getContext(),MainActivity.class));
 
             }
-        });*/
+        });
+
+
+        Button toLogin = findViewById(R.id.login);
+
+        toLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(view.getContext(),LoginScreen.class));
+
+            }
+        });
     }
 
 

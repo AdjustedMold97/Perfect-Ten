@@ -15,14 +15,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Button to get to Friend Activity - Jae Swanepoel
         Button friend = findViewById(R.id.Friends);
 
         friend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 startActivity(new Intent(view.getContext(),FriendsScreen.class));
-
             }
         });
 
@@ -82,8 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
         post_button.setOnClickListener(new View.OnClickListener() {
             /*
-             * TODO need Ethan
-             *
              * - button sends to post creation screen onClick
              * - Ethan Still
              */
@@ -91,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 startActivity(new Intent(view.getContext(),PostCreation.class));
-
 
             }
         });

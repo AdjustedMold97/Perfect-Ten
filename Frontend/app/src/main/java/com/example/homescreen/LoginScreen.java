@@ -18,8 +18,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.homescreen.app.AppController;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.*;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -34,7 +33,7 @@ public class LoginScreen extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-        String url = "SET URL";
+        String url = "coms-309-060.cs.iastate.edu";
         String tag_json_obj ="Login Information";
 
         /*
@@ -73,6 +72,7 @@ public class LoginScreen extends AppCompatActivity {
 
                 username = String.valueOf(username_input.getText());
                 password = String.valueOf(password_input.getText());
+
                 login_info = new JSONObject();
 
                 /*

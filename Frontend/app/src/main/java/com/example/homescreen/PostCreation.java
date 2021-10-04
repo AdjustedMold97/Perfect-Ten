@@ -29,7 +29,7 @@ public class PostCreation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_creation);
 
-        String url = "";
+        String url = "coms-309-060.cs.iastate.edu";
         String tag_json_obj = "Post Data";
 
         /*
@@ -59,12 +59,14 @@ public class PostCreation extends AppCompatActivity {
 
             /*
              * <postText> post text data
+             * <postTitle> the title of the post
              * <post> JSON Object storing post data
              * <json_obj_req> The request we will send to the server
              *
              * - Jae Swanepoel
              */
             String postText;
+            String postTitle;
             JSONObject post;
             JsonObjectRequest json_obj_req;
 
@@ -77,11 +79,12 @@ public class PostCreation extends AppCompatActivity {
                  */
 
                 postText = String.valueOf(post_input.getText());
+                postTitle = "filler for now"; //TODO
                 post = new JSONObject();
 
                 try {
-                    post.put("post text", post);
-
+                    post.put("title", postTitle);
+                    post.put("message", postText);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

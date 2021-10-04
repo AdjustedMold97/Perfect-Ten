@@ -11,9 +11,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         Button friend = findViewById(R.id.Friends);
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
          * just having it do nothing here. -Jae
          *
          * -Ethan its just meant as a test or to reload page
-         * */
+         */
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +66,37 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        Button post_button = findViewById(R.id.post);
+
+        post_button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                /*
+                 * TODO need Ethan
+                 *
+                 *  we need to come up with a post editor view
+                 * this button will direct us to that view
+                 *
+                 * - Jae
+                 */
+
+            }
+        });
+
+        /*
+
+         The following will be code used in the post editor screen.
+         Entering it here for now so that we can apply it when necessary
+
+         - Jae
+
+         */
+
+
+
     }
 
 

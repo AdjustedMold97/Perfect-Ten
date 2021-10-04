@@ -19,10 +19,12 @@ public class MainActivity extends AppCompatActivity {
         Button friend = findViewById(R.id.Friends);
 
         friend.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(view.getContext(),FriendsScreen.class));
             }
+
         });
 //========================================
         /*

@@ -24,6 +24,9 @@ public class StringRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_string_request);
 
+        //initializing the request queue
+       // RequestQueue queue = Volley.newRequestQueue(this.getBaseContext());
+
         Button requestString = findViewById(R.id.button);
 
         // Tag used to cancel the request

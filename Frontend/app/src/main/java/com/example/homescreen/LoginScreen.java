@@ -2,6 +2,7 @@ package com.example.homescreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -98,6 +99,15 @@ public class LoginScreen extends AppCompatActivity {
                          * TODO Need info from backend
                          * need to figure out what kind of response we are receiving
                          */
+
+
+                        /*
+                         * response "logs a user in if information is correct"
+                         * will send user to their home page
+                         * - Ethan Still
+                         */
+                        startActivity(new Intent(view.getContext(),MainActivity.class));
+
                     }
 
                 }, new Response.ErrorListener() {

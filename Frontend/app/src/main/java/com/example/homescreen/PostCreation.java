@@ -52,7 +52,7 @@ public class PostCreation extends AppCompatActivity {
 
             String post;
             JSONObject postText;
-            @Override // server request
+            @Override // server request onClick
             public void onClick(View view) {
 
                 /*
@@ -71,6 +71,12 @@ public class PostCreation extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 //TODO finish up send request - Ethan and Jae
+
+                /*
+                 * response posts to home screen
+                 * - Ethan Still
+                 */
+                //TODO Ethan figure out how to send post to home screen and pop it up in a box
 
             }
         });

@@ -100,7 +100,6 @@ public class LoginScreen extends AppCompatActivity {
                          * need to figure out what kind of response we are receiving
                          */
 
-
                         /*
                          * response "logs a user in if information is correct"
                          * will send user to their home page

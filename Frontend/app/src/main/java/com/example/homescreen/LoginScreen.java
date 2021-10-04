@@ -36,6 +36,10 @@ public class LoginScreen extends AppCompatActivity {
         String url = "SET URL";
         String tag_json_obj ="Login Information";
 
+        /*
+         * when clicked will submit the text entered in the username and password fields
+         * - Ethan Still
+         */
         Button login = findViewById(R.id.Submit);
 
         /*

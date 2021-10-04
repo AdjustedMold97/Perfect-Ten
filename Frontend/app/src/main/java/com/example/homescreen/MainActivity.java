@@ -25,7 +25,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+//========================================
+        /*
+         * these three buttons make up the bottom tab buttons they go on each screen
+         * they include Home, Settings, and Friends and reroute the user to that page form anywhere in the app
+         * - Ethan Still
+         */
         Button settings = findViewById(R.id.Settings);
 
         settings.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
          * have a button from the home screen that goes to the home screen.
          * just having it do nothing here. -Jae
          *
-         * -Ethan its just meant as a test or to reload page
+         * -Ethan Still:  its just meant as a test or to reload page
          */
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,8 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+//===========================================
 
-
+        /*
+         * signs the user out, back to the login screen
+         * - Ethan Still
+         */
         Button toLogin = findViewById(R.id.login);
 
         toLogin.setOnClickListener(new View.OnClickListener() {
@@ -70,18 +79,17 @@ public class MainActivity extends AppCompatActivity {
         Button post_button = findViewById(R.id.post);
 
         post_button.setOnClickListener(new View.OnClickListener() {
-
+            /*
+             * TODO need Ethan
+             *
+             * - button sends to post creation screen onClick
+             * - Ethan Still
+             */
             @Override
             public void onClick(View view) {
 
-                /*
-                 * TODO need Ethan
-                 *
-                 *  we need to come up with a post editor view
-                 * this button will direct us to that view
-                 *
-                 * - Jae
-                 */
+                startActivity(new Intent(view.getContext(),PostCreation.class));
+
 
             }
         });

@@ -12,7 +12,11 @@ import android.widget.EditText;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.homescreen.app.AppController;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,9 +25,12 @@ public class PostCreation extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_creation);
 
+        String url = "";
+        String tag_json_obj = "Post Data";
 
         /*
          * back button to leave post creation window
@@ -50,8 +57,17 @@ public class PostCreation extends AppCompatActivity {
 
         postSubmit.setOnClickListener(new View.OnClickListener()        {
 
-            String post;
-            JSONObject postText;
+            /*
+             * <postText> post text data
+             * <post> JSON Object storing post data
+             * <json_obj_req> The request we will send to the server
+             *
+             * - Jae Swanepoel
+             */
+            String postText;
+            JSONObject post;
+            JsonObjectRequest json_obj_req;
+
             @Override // server request onClick
             public void onClick(View view) {
 
@@ -60,17 +76,15 @@ public class PostCreation extends AppCompatActivity {
                  * - Ethan Still
                  */
 
-                post = String.valueOf(post_input.getText());
-
-                postText = new JSONObject();
+                postText = String.valueOf(post_input.getText());
+                post = new JSONObject();
 
                 try {
-                    postText.put("postText", post);
+                    post.put("post text", post);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //TODO finish up send request - Ethan and Jae
 
                 /*
                  * response posts to home screen
@@ -78,7 +92,30 @@ public class PostCreation extends AppCompatActivity {
                  */
                 //TODO Ethan figure out how to send post to home screen and pop it up in a box
 
+                json_obj_req = new JsonObjectRequest(Request.Method.POST, url, post,
+
+                        new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(tag_json_obj, response.toString());
+                    }
+
+
+                }, new Response.ErrorListener(){
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d("Error: " + error.getMessage());
+                    }
+
+                });
+
+                //Adding to RequestQueue
+                AppController.getInstance().addToRequestQueue(json_obj_req);
+
             }
+
         });
 
     }

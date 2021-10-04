@@ -94,19 +94,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*
-
-         The following will be code used in the post editor screen.
-         Entering it here for now so that we can apply it when necessary
-
-         - Jae
-
-         */
-
-
-
     }
-
-
 
 }

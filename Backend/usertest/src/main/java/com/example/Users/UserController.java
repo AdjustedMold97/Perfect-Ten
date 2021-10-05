@@ -91,20 +91,33 @@ public class UserController {
         return userRepository.findById(id);
     }
 
-    @PutMapping(path = "/users/{userId}/posts/{postId}")
-    String assignPostToUser(@PathVariable int userId, @PathVariable int postId) {
-        User user = userRepository.findById(userId);
+    @PutMapping(path = "/user/{user}/posts/{postId}")
+    String assignPostToUser(@PathVariable String user, @PathVariable int postId) {
+        User temp = userRepository.findByUsername(user);
         Post post = null; 
-        if (user == null || post == null) {
+        if (temp == null || post == null) {
             return failure;
         }
-        post.setUser(user);
-        user.addPost(post);
-        userRepository.save(user);
+        post.setUser(temp);
+        temp.addPost(post);
+        userRepository.save(temp);
+        return success;
+    }
+    
+    @PutMapping(path = "/user/id/{user}/posts/{postId}")
+    String assignPostToUserID(@PathVariable int user, @PathVariable int postId) {
+        User temp = userRepository.findById(user);
+        Post post = null; 
+        if (temp == null || post == null) {
+            return failure;
+        }
+        post.setUser(temp);
+        temp.addPost(post);
+        userRepository.save(temp);
         return success;
     }
 
-    @DeleteMapping(path = "/users/{id}")
+    @DeleteMapping(path = "/user/rm/{id}")
     String deleteUser(@PathVariable int id) {
         userRepository.deleteById(id);
         return success;

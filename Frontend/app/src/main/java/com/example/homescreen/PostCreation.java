@@ -29,7 +29,7 @@ public class PostCreation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_creation);
 
-        String url = "coms-309-060.cs.iastate.edu";
+        String url = "http://coms-309-060.cs.iastate.edu:8080/posts";
         String tag_json_obj = "Post Data";
 
         /*
@@ -96,7 +96,7 @@ public class PostCreation extends AppCompatActivity {
                  */
                 //TODO Ethan figure out how to send post to home screen and pop it up in a box
 
-                json_obj_req = new JsonObjectRequest(Request.Method.POST, url, post,
+                json_obj_req = new JsonObjectRequest(Request.Method.GET, url, post,
 
                         new Response.Listener<JSONObject>() {
 
@@ -111,6 +111,9 @@ public class PostCreation extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         VolleyLog.d("Error: " + error.getMessage());
+
+                        startActivity(new Intent(view.getContext(),MainActivity.class));
+                        
                     }
 
                 });

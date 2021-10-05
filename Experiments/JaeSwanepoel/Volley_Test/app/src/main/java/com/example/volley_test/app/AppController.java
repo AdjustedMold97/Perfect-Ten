@@ -31,7 +31,7 @@ public class AppController extends Application {
     public ImageLoader getImageLoader() {
         getRequestQueue();
         if (mImageLoader == null) {
-            mImageLoader = new ImageLoader(this.mRequestQueue, (ImageLoader.ImageCache)/*not sure this cast will work TODO*/ new LruBitmapCache());
+            mImageLoader = new ImageLoader(this.mRequestQueue, (ImageLoader.ImageCache) new LruBitmapCache());
         }
         return this.mImageLoader;
     }

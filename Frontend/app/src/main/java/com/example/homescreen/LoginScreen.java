@@ -50,11 +50,6 @@ public class LoginScreen extends AppCompatActivity {
         EditText username_input = findViewById(R.id.editTextName);
         EditText password_input = findViewById(R.id.editTextPassword);
 
-        ProgressDialog pDialog =new ProgressDialog(this);
-
-        pDialog.setMessage("Loading...");
-        pDialog.show();
-
         /*
          * This checks the Name and Password fields for a login attempt and sends a request to the server
          * - Ethan Still
@@ -96,7 +91,7 @@ public class LoginScreen extends AppCompatActivity {
                  * Posts a JSON Object <login_info> to the server url
                  * - Jae Swanepoel
                  */
-                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, login_info, new Response.Listener<JSONObject>() {
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -117,10 +112,12 @@ public class LoginScreen extends AppCompatActivity {
                     }
 
                 }, new Response.ErrorListener() {
+
                     @Override
                     public void onErrorResponse(VolleyError error){
                         VolleyLog.d("Error: "+ error.getMessage());
                     }
+
                 });
 
                 //adding request to RequestQueue

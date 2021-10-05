@@ -17,6 +17,9 @@ import com.example.homescreen.app.AppController;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LoginScreen extends AppCompatActivity {
 
     @Override
@@ -31,8 +34,9 @@ public class LoginScreen extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-        String url = "http://coms-309-060.cs.iastate.edu:8080/login";
-        String tag_json_obj ="Login Information";
+        final String URL = "http://coms-309-060.cs.iastate.edu:8080/login";
+        final String TAG_JSON_OBJ ="Login Information";
+        final String SUCCESS_MSG = "success";
 
         /*
          * when clicked will submit the text entered in the username and password fields
@@ -77,28 +81,28 @@ public class LoginScreen extends AppCompatActivity {
                 username = String.valueOf(username_input.getText());
                 password = String.valueOf(password_input.getText());
 
-                /*
-                 * adding <username> and <password> into <login_info>
-                 * - Jae Swanepoel
-                 */
-                login_info = new JSONObject();
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                params.put("password", password);
 
-                try {
-                    login_info.put("username", username);
-                    login_info.put("password", password);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                login_info = new JSONObject(params);
 
                 /*
                  * Creating the Request to add to the RequestQueue
                  * - Jae Swanepoel
                  */
-                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, login_info,
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, URL, login_info,
 
                         response -> {
                             //logging response
-                            Log.d(tag_json_obj, response.toString());
+                            Log.d(TAG_JSON_OBJ, response.toString());
+
+                            try {
+                                if (response.get("message") == SUCCESS_MSG)
+                                    startActivity(new Intent(view.getContext(), MainActivity.class));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         },
 
                         error -> {
@@ -108,7 +112,7 @@ public class LoginScreen extends AppCompatActivity {
                 );
 
                 //adding request to RequestQueue
-                AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+                AppController.getInstance().addToRequestQueue(jsonObjReq);
             }
         });
 

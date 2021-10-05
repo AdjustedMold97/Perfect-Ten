@@ -63,6 +63,14 @@ public class UserController {
             return failure;
         }
 
+        if (user.getUsername() == null || user.getEmail() == null || user.getPassword() == null) {
+            return failure;
+        }
+
+        if (user.getUsername() == "" || user.getEmail() == "" || user.getPassword() == "") {
+            return failure;
+        }        
+
         if(userRepository.findByUsername(user.getUsername()) != null) {
             return failure + ": user with username \" " + user.getUsername() + "\" already exists";
         }

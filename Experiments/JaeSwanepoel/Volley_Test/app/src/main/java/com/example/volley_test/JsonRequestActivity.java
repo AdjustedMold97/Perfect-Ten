@@ -24,7 +24,7 @@ public class JsonRequestActivity extends AppCompatActivity {
 
         // Tag used to cancel the request
         String tag_json_obj ="json_obj_req";
-        String url ="https://bfde5fcb-e6a1-4665-afe1-dd6dc2a1fdf7.mock.pstmn.io";
+        String url ="http://coms-309-060.cs.iastate.edu:8080/users/Bob";
 
         ProgressDialog pDialog =new ProgressDialog(this);
 

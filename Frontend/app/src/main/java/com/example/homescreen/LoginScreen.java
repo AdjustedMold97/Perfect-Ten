@@ -34,7 +34,7 @@ public class LoginScreen extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-        String url = "http://coms-309-060.cs.iastate.edu:8080/posts";
+        String url = "http://coms-309-060.cs.iastate.edu:8080/users/Bob";
         String tag_json_obj ="Login Information";
 
         /*
@@ -106,6 +106,7 @@ public class LoginScreen extends AppCompatActivity {
                         /*
                          * response "logs a user in if information is correct"
                          * will send user to their home page
+                         * might need a user profile
                          * - Ethan Still
                          */
                         //startActivity(new Intent(view.getContext(),MainActivity.class));

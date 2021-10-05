@@ -2,6 +2,7 @@ package com.example.homescreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,6 +50,11 @@ public class LoginScreen extends AppCompatActivity {
         EditText username_input = findViewById(R.id.editTextName);
         EditText password_input = findViewById(R.id.editTextPassword);
 
+        ProgressDialog pDialog =new ProgressDialog(this);
+
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
         /*
          * This checks the Name and Password fields for a login attempt and sends a request to the server
          * - Ethan Still
@@ -94,6 +100,7 @@ public class LoginScreen extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
+
                         Log.d(tag_json_obj, response.toString());
                         /*
                          * TODO Need info from backend
@@ -118,7 +125,6 @@ public class LoginScreen extends AppCompatActivity {
 
                 //adding request to RequestQueue
                 AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
             }
         });
 

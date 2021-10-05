@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,8 @@ import com.example.homescreen.app.AppController;
 
 import org.json.*;
 
+import java.io.InputStreamReader;
+
 public class LoginScreen extends AppCompatActivity {
 
     @Override
@@ -34,7 +37,7 @@ public class LoginScreen extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-        String url = "http://coms-309-060.cs.iastate.edu:8080/users/Bob";
+        String url = "http://coms-309-060.cs.iastate.edu:8080/username/";
         String tag_json_obj ="Login Information";
 
         /*
@@ -66,7 +69,9 @@ public class LoginScreen extends AppCompatActivity {
              */
             String username;
             String password;
+            String finalUrl;
             JSONObject login_info;
+
 
             @Override
             public void onClick(View view) {
@@ -74,8 +79,10 @@ public class LoginScreen extends AppCompatActivity {
                 username = String.valueOf(username_input.getText());
                 password = String.valueOf(password_input.getText());
 
-                login_info = new JSONObject();
+                //creating the final url based on username - Jae Swanepoel
+                finalUrl = url + username;
 
+                login_info = new JSONObject();
 
                 /*
                  * adding <username> and <password> into <login_info>
@@ -92,15 +99,15 @@ public class LoginScreen extends AppCompatActivity {
                  * Posts a JSON Object <login_info> to the server url
                  * - Jae Swanepoel
                  */
-                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, login_info, new Response.Listener<JSONObject>() {
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, finalUrl, login_info, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
 
                         Log.d(tag_json_obj, response.toString());
                         /*
-                         * TODO Need info from backend
-                         * need to figure out what kind of response we are receiving
+                         * TODO parse response data for password - JAE
+                         * authenticate baBy
                          */
 
                         /*
@@ -109,7 +116,11 @@ public class LoginScreen extends AppCompatActivity {
                          * might need a user profile
                          * - Ethan Still
                          */
-                        //startActivity(new Intent(view.getContext(),MainActivity.class));
+
+                        System.out.println(response.toString());
+
+                        //if (password == )
+                            startActivity(new Intent(view.getContext(),MainActivity.class));
 
                     }
 

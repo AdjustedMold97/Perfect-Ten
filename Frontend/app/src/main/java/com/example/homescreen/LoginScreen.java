@@ -34,7 +34,7 @@ public class LoginScreen extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-        String url = "https://bfde5fcb-e6a1-4665-afe1-dd6dc2a1fdf7.mock.pstmn.io";
+        String url = "http://coms-309-060.cs.iastate.edu:8080/posts";
         String tag_json_obj ="Login Information";
 
         /*
@@ -92,7 +92,7 @@ public class LoginScreen extends AppCompatActivity {
                  * Posts a JSON Object <login_info> to the server url
                  * - Jae Swanepoel
                  */
-                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, login_info, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {

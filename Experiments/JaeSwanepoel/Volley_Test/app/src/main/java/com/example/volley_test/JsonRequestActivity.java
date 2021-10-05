@@ -24,7 +24,7 @@ public class JsonRequestActivity extends AppCompatActivity {
 
         // Tag used to cancel the request
         String tag_json_obj ="json_obj_req";
-        String url ="https://api.androidhive.info/volley/person_object.json";
+        String url ="http://echo.jsontest.com/key/value/one/two";
 
         ProgressDialog pDialog =new ProgressDialog(this);
 
@@ -45,7 +45,6 @@ public class JsonRequestActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
                 VolleyLog.d("Error: "+ error.getMessage());
-                // hide the progress dialog
                 pDialog.hide();
 
             }

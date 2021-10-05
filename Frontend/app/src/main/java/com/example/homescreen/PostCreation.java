@@ -54,6 +54,7 @@ public class PostCreation extends AppCompatActivity {
         Button postSubmit = findViewById(R.id.postSubmit);
 
         EditText post_input = findViewById(R.id.postEditText);
+        EditText post_title = findViewById(R.id.post_title);
 
         postSubmit.setOnClickListener(new View.OnClickListener()        {
 
@@ -79,7 +80,7 @@ public class PostCreation extends AppCompatActivity {
                  */
 
                 postText = String.valueOf(post_input.getText());
-                postTitle = "filler for now"; //TODO
+                postTitle = String.valueOf(post_title.getText());
                 post = new JSONObject();
 
                 try {

@@ -33,7 +33,7 @@ public class LoginScreen extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-        String url = "coms-309-060.cs.iastate.edu";
+        String url = "http://echo.jsontest.com/key/value/one/two";
         String tag_json_obj ="Login Information";
 
         /*
@@ -100,12 +100,14 @@ public class LoginScreen extends AppCompatActivity {
                          * need to figure out what kind of response we are receiving
                          */
 
+                        System.out.println(response.toString());
+
                         /*
                          * response "logs a user in if information is correct"
                          * will send user to their home page
                          * - Ethan Still
                          */
-                        startActivity(new Intent(view.getContext(),MainActivity.class));
+                       // startActivity(new Intent(view.getContext(),MainActivity.class));
 
                     }
 

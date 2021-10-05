@@ -93,18 +93,29 @@ public class LoginScreen extends AppCompatActivity {
                  */
                 JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, URL, login_info,
 
+                        /*
+                         * Code for successful responses
+                         */
                         response -> {
+
                             //logging response
                             Log.d(TAG_JSON_OBJ, response.toString());
 
                             try {
-                                if (response.get("message") == SUCCESS_MSG)
+                                if (response.get("message").equals(SUCCESS_MSG))
                                     startActivity(new Intent(view.getContext(), MainActivity.class));
+
+                                //else
+                                    //TODO failed login screen?
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         },
 
+                        /*
+                         * Code for http errors
+                         */
                         error -> {
                             VolleyLog.d("Error: "+ error.getMessage());
                             startActivity(new Intent(LoginScreen.this,LoginFail.class));

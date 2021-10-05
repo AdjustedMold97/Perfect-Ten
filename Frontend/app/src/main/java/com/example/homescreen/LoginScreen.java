@@ -75,6 +75,7 @@ public class LoginScreen extends AppCompatActivity {
 
                 login_info = new JSONObject();
 
+
                 /*
                  * adding <username> and <password> into <login_info>
                  * - Jae Swanepoel
@@ -107,7 +108,7 @@ public class LoginScreen extends AppCompatActivity {
                          * will send user to their home page
                          * - Ethan Still
                          */
-                       // startActivity(new Intent(view.getContext(),MainActivity.class));
+                        //startActivity(new Intent(view.getContext(),MainActivity.class));
 
                     }
 

@@ -31,9 +31,14 @@ public class Post {
 
     }
     
-    public Post( String message, String title) {
+    public Post(String message, String title) {
         this.message = message;
         this.title = title;
+    }
+    
+    public Post(String message) {
+    	this.message = message;
+    	title = "default";
     }
 
 

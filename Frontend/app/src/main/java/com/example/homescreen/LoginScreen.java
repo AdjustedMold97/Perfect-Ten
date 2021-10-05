@@ -34,7 +34,7 @@ public class LoginScreen extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-        String url = "https://bfde5fcb-e6a1-4665-afe1-dd6dc2a1fdf7.mock.pstmn.io";
+        String url = "http://coms-309-060.cs.iastate.edu:8080/posts";
         String tag_json_obj ="Login Information";
 
         /*
@@ -49,11 +49,6 @@ public class LoginScreen extends AppCompatActivity {
          */
         EditText username_input = findViewById(R.id.editTextName);
         EditText password_input = findViewById(R.id.editTextPassword);
-
-        ProgressDialog pDialog =new ProgressDialog(this);
-
-        pDialog.setMessage("Loading...");
-        pDialog.show();
 
         /*
          * This checks the Name and Password fields for a login attempt and sends a request to the server
@@ -117,10 +112,12 @@ public class LoginScreen extends AppCompatActivity {
                     }
 
                 }, new Response.ErrorListener() {
+
                     @Override
                     public void onErrorResponse(VolleyError error){
                         VolleyLog.d("Error: "+ error.getMessage());
                     }
+
                 });
 
                 //adding request to RequestQueue

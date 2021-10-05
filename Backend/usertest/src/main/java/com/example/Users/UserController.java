@@ -51,7 +51,7 @@ public class UserController {
         if(userRepository.findByUsername(user.getUsername()) != null) {
             return failure + ": user with username \" " + user.getUsername() + "\" already exists";
         }
-        
+
         userRepository.save(user);
         return success;
     }
@@ -68,8 +68,9 @@ public class UserController {
         	return null;
         }
         
+        List<Post> userPosts = user.getPosts();
         deleteUser(id);
-        request.setPosts(user.getPosts());
+        request.setPosts(userPosts);
         userRepository.save(request);
         request.setId(id);
         return userRepository.findById(id);

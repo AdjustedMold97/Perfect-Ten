@@ -29,7 +29,7 @@ public class PostController {
     }
 
     @PostMapping(path = "/posts")
-    String createPost(Post post){
+    String createPost(@RequestBody Post post){
         if (post == null)
             return failure;
         postRepository.save(post);

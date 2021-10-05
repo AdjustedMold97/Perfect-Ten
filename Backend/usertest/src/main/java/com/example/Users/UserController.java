@@ -37,9 +37,9 @@ public class UserController {
         if(userRepository.findByUsername(json.get("username").textValue()) == null)
     		return "User with username " + json.get("username").textValue() + " not found";
     	if(userRepository.findByUsername(json.get("username").textValue()).getPassword().equals(json.get("password").textValue()))
-    		return "yes";
+            return success;
     	else 
-    		return "no";
+    		return failure;
     }
     
     @GetMapping(path = "user/{user}/posts/list")

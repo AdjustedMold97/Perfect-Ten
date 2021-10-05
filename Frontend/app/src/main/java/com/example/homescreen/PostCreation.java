@@ -19,6 +19,9 @@ import com.example.homescreen.app.AppController;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PostCreation extends AppCompatActivity {
 
     @Override
@@ -71,11 +74,14 @@ public class PostCreation extends AppCompatActivity {
              *
              * - Jae Swanepoel
              */
+
             String postText;
             String postTitle;
             JSONObject post;
             JsonObjectRequest json_obj_req;
+
 //=================================================================
+
             @Override // server request onClick
             public void onClick(View view) {
 
@@ -86,14 +92,12 @@ public class PostCreation extends AppCompatActivity {
 
                 postText = String.valueOf(post_input.getText());
                 postTitle = String.valueOf(post_title.getText());
-                post = new JSONObject();
 
-                try {
-                    post.put("title", postTitle);
-                    post.put("message", postText);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                Map<String, String> params = new HashMap<>();
+                params.put("title", postTitle);
+                params.put("message", postText);
+
+                post = new JSONObject(params);
 
                 /*
                  * response posts to home screen
@@ -101,48 +105,31 @@ public class PostCreation extends AppCompatActivity {
                  */
                 //TODO Ethan figure out how to send post to home screen and pop it up in a box
 
+                json_obj_req = new JsonObjectRequest(Request.Method.POST, url, post,
 
-                json_obj_req = new JsonObjectRequest(Request.Method.GET, url, post,
+                        response -> {
 
-                        new Response.Listener<JSONObject>() {
+                            Log.d(tag_json_obj, response.toString());
+                            startActivity(new Intent(view.getContext(),MainActivity.class));
+                        },
 
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d(tag_json_obj, response.toString());
+                        error -> {
 
+                            VolleyLog.d("Error: " + error.getMessage());
 
-                        startActivity(new Intent(view.getContext(),MainActivity.class));
-                    }
-
-
-                },
-                        new Response.ErrorListener(){
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        VolleyLog.d("Error: " + error.getMessage());
-
-                        /*
-                         * pop up screen for errors
-                         * <Error.java>
-                         * check Error.java for the code to the pop up screen
-                         * - Ethan Still
-                         */
-                        startActivity(new Intent(PostCreation.this,Error.class));
-
-
-                    }
-
-                });
+                            /*
+                             * pop up screen for errors
+                             * <Error.java>
+                             * check Error.java for the code to the pop up screen
+                             * - Ethan Still
+                             */
+                            startActivity(new Intent(PostCreation.this,Error.class));
+                        });
 
                 //Adding to RequestQueue
                 AppController.getInstance().addToRequestQueue(json_obj_req);
-
             }
 //===============================================
         });
-
     }
-
-
 }

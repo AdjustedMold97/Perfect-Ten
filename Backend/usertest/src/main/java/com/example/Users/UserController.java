@@ -46,24 +46,25 @@ public class UserController {
         return success;
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping(path = "/users/{id}")
     User updateUser(@PathVariable int id, @RequestBody User request) {
         User user = userRepository.findById(id);
         if (user == null) {
             return null;
         }
         
-        if(user.getUsername() != request.getUsername()) {
+        if(!user.getUsername().equals(request.getUsername())) {
         	return null;
         }
         
         deleteUser(id);
-        request.setId(id);
+        request.setPosts(user.getPosts());
         userRepository.save(request);
+        request.setId(id);
         return userRepository.findById(id);
     }
 
-    @PutMapping("/users/{userId}/posts/{postId}")
+    @PutMapping(path = "/users/{userId}/posts/{postId}")
     String assignPostToUser(@PathVariable int userId, @PathVariable int postId) {
         User user = userRepository.findById(userId);
         Post post = null; 

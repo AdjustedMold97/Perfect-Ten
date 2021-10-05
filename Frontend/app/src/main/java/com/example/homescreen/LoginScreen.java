@@ -114,6 +114,8 @@ public class LoginScreen extends AppCompatActivity {
                 try {
                     login_info.put("username", username);
                     login_info.put("password", password);
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -219,6 +221,7 @@ public class LoginScreen extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error){
                         VolleyLog.d("Error: "+ error.getMessage());
 
+                        
                         startActivity(new Intent(LoginScreen.this,LoginFail.class));
                     }
 

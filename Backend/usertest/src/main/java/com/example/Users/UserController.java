@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +12,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Posts.Post;
 import com.example.Posts.PostRepository;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @RestController
 public class UserController {
@@ -27,22 +31,34 @@ public class UserController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
-    @GetMapping(path = "/username/{user}")
+    
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    String login(@RequestBody ObjectNode json) {
+    	if(userRepository.findByUsername(json.get("username").toString()) == null)
+    		return null;
+    	User temp= userRepository.findByUsername(json.get("username").toString());
+    	if(temp.getPassword().equals(json.get("password").toString()))
+    		return "yes";
+    	else 
+    		return "no";
+    }
+    
+    @GetMapping(path = "/user/{user}")
     User getUserByUsername(@PathVariable String user) {
     	return userRepository.findByUsername(user);
     }
     
-    @GetMapping(path = "/users")
+    @GetMapping(path = "/user/list")
     List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    @GetMapping(path = "/users/{id}")
+    @GetMapping(path = "/user/id/{id}")
     User getUserById(@PathVariable int id) {
         return userRepository.findById(id);
     }
 
-    @PostMapping(path = "/users")
+    @PostMapping(path = "/user/new")
     String createUser(@RequestBody User user) {
         if (user == null) {
             return failure;
@@ -57,7 +73,7 @@ public class UserController {
     }
 
 
-    @PutMapping(path = "/users/{id}")
+    @PutMapping(path = "/user/{id}")
     User updateUser(@PathVariable int id, @RequestBody User request) {
         User user = userRepository.findById(id);
         if (user == null) {

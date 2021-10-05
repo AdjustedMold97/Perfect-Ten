@@ -47,6 +47,24 @@ public class PostCreation extends AppCompatActivity {
             }
         });
 
+
+// testing pop up screen error - Ethan Still
+// TODO DON"T REMOVE THIS TEST CODE YET JAE!
+
+//        Button test = findViewById(R.id.popUp);
+//
+//        test.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//           public void onClick(View view) {
+//
+//                startActivity(new Intent(PostCreation.this,Error.class));
+//           }
+//
+//        });
+
+
+
+
         /*
          * button to post the textField to home - sends a request to server
          * - Ethan
@@ -70,7 +88,7 @@ public class PostCreation extends AppCompatActivity {
             String postTitle;
             JSONObject post;
             JsonObjectRequest json_obj_req;
-
+//=================================================================
             @Override // server request onClick
             public void onClick(View view) {
 
@@ -96,6 +114,7 @@ public class PostCreation extends AppCompatActivity {
                  */
                 //TODO Ethan figure out how to send post to home screen and pop it up in a box
 
+
                 json_obj_req = new JsonObjectRequest(Request.Method.GET, url, post,
 
                         new Response.Listener<JSONObject>() {
@@ -103,17 +122,28 @@ public class PostCreation extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d(tag_json_obj, response.toString());
+
+
+                        startActivity(new Intent(view.getContext(),MainActivity.class));
                     }
 
 
-                }, new Response.ErrorListener(){
+                },
+                        new Response.ErrorListener(){
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         VolleyLog.d("Error: " + error.getMessage());
 
-                        startActivity(new Intent(view.getContext(),MainActivity.class));
-                        
+                        /*
+                         * pop up screen for errors
+                         * <Error.java>
+                         * check Error.java for the code to the pop up screen
+                         * - Ethan Still
+                         */
+                        startActivity(new Intent(PostCreation.this,Error.class));
+
+
                     }
 
                 });
@@ -122,7 +152,7 @@ public class PostCreation extends AppCompatActivity {
                 AppController.getInstance().addToRequestQueue(json_obj_req);
 
             }
-
+//===============================================
         });
 
     }

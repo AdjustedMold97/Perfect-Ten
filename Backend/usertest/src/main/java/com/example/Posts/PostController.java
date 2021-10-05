@@ -19,7 +19,7 @@ public class PostController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
-    @GetMapping(path = "/posts")
+    @GetMapping(path = "/posts/list")
     List<Post> getAllPosts(){
         return postRepository.findAll();
     }
@@ -29,7 +29,7 @@ public class PostController {
         return postRepository.findById(id);
     }
 
-    @PostMapping(path = "/posts")
+    @PostMapping(path = "/posts/new")
     String createPost(@RequestBody Post post){
         if (post == null)
             return failure;
@@ -45,11 +45,10 @@ public class PostController {
         postRepository.save(request);
         return postRepository.findById(id);
     } 
-    /*
-    @DeleteMapping(path = "/posts/{id}")
+    
+    @DeleteMapping(path = "/posts/rm/{id}")
     String deletePost(@PathVariable long id){
     	postRepository.deleteById(id);
     	return success;
     }
-    */
 }

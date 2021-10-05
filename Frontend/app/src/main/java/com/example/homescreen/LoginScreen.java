@@ -189,6 +189,8 @@ public class LoginScreen extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error){
                         VolleyLog.d("Error: "+ error.getMessage());
+
+                        startActivity(new Intent(LoginScreen.this,LoginFail.class));
                     }
 
                 });

@@ -50,6 +50,13 @@ public class UserController {
         if (user == null) {
             return null;
         }
+        
+        if(user.getUsername() != request.getUsername()) {
+        	return null;
+        }
+        
+        deleteUser(id);
+        request.setId(id);
         userRepository.save(request);
         return userRepository.findById(id);
     }

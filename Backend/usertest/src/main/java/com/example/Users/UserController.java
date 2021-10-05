@@ -47,9 +47,15 @@ public class UserController {
         if (user == null) {
             return failure;
         }
+
+        if(userRepository.findByUsername(user.getUsername()) != null) {
+            return failure + ": user with username \" " + user.getUsername() + "\" already exists";
+        }
+        
         userRepository.save(user);
         return success;
     }
+
 
     @PutMapping(path = "/users/{id}")
     User updateUser(@PathVariable int id, @RequestBody User request) {

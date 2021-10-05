@@ -10,12 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.homescreen.app.AppController;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -29,8 +28,16 @@ public class PostCreation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_creation);
 
+        /*
+         * final constants for use throughout code
+         */
         final String URL = "http://coms-309-060.cs.iastate.edu:8080/posts";
         final String TAG_JSON_OBJ = "Post Data";
+        final String SUCCESS_MSG = "success";
+        final String TITLE_FIELD_NAME = "title";
+        final String TEXT_FIELD_NAME = "text";
+        final String MSG_FIELD_NAME = "message";
+        final String RESPONSE_TAG = "JSON Response: ";
 
         /*
          * back button to leave post creation window
@@ -61,13 +68,13 @@ public class PostCreation extends AppCompatActivity {
         Button postSubmit = findViewById(R.id.postSubmit);
 
         /*
-         * <post_input> input field for the post's message
-         * <post_title> input field for post's title
+         * <postTextBox> input field for the post's message
+         * <postTitleBox> input field for post's title
          *
          * - Jae Swanepoel
          */
-        EditText post_input = findViewById(R.id.postEditText);
-        EditText post_title = findViewById(R.id.postTitleText);
+        EditText postTextBox = findViewById(R.id.postEditText);
+        EditText postTitleBox = findViewById(R.id.postTitleText);
 
         //onClickListener for submit button - Jae Swanepoel
         postSubmit.setOnClickListener(new View.OnClickListener()        {
@@ -96,8 +103,8 @@ public class PostCreation extends AppCompatActivity {
                  * - Ethan Still
                  */
 
-                postText = String.valueOf(post_input.getText());
-                postTitle = String.valueOf(post_title.getText());
+                postText = String.valueOf(postTextBox.getText());
+                postTitle = String.valueOf(postTitleBox.getText());
 
                 /*
                  * <params> HashMap for instantiating <post>
@@ -105,8 +112,8 @@ public class PostCreation extends AppCompatActivity {
                  * - Jae Swanepoel
                  */
                 Map<String, String> params = new HashMap<>();
-                params.put("title", postTitle);
-                params.put("message", postText);
+                params.put(TITLE_FIELD_NAME, postTitle);
+                params.put(TEXT_FIELD_NAME, postText);
 
                 post = new JSONObject(params);
 
@@ -116,12 +123,14 @@ public class PostCreation extends AppCompatActivity {
                  */
                 //TODO Ethan figure out how to send post to home screen and pop it up in a box
 
+                /*
+                 * Creating the Request to add to the RequestQueue - Jae Swanepoel
+                 */
                 json_obj_req = new JsonObjectRequest(Request.Method.POST, URL, post,
 
                         response -> {
 
-                            Log.d(TAG_JSON_OBJ, response.toString());
-                            startActivity(new Intent(view.getContext(),MainActivity.class));
+                            Log.d(RESPONSE_TAG, response.toString());
 
                             /*
                              * TODO: handle responses to posts
@@ -130,6 +139,19 @@ public class PostCreation extends AppCompatActivity {
                              *      idea: redirect to "Success!" page for a moment, then home page
                              * if failure: failure message popup
                              */
+
+                            try {
+
+                                if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG))
+                                    startActivity(new Intent(view.getContext(), MainActivity.class));
+
+                                else {
+                                    //TODO failed post screen?
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         },
 
                         error -> {
@@ -145,7 +167,7 @@ public class PostCreation extends AppCompatActivity {
                             startActivity(new Intent(PostCreation.this,Error.class));
                         });
 
-                //Adding to RequestQueue
+                //Adding to RequestQueue - Jae Swanepoel
                 AppController.getInstance().addToRequestQueue(json_obj_req);
             }
 //===============================================

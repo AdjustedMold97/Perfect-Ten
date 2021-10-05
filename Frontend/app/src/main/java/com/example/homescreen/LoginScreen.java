@@ -29,14 +29,16 @@ public class LoginScreen extends AppCompatActivity {
         setContentView(R.layout.activity_login_screen);
 
         /*
-         * <url> url of the server
-         * <tag_json_obj> the tag for the JSON object
+         * final constants for use throughout code
          *
          * - Jae Swanepoel
          */
         final String URL = "http://coms-309-060.cs.iastate.edu:8080/login";
         final String TAG_JSON_OBJ ="Login Information";
         final String SUCCESS_MSG = "success";
+        final String MSG_FIELD_NAME = "message";
+        final String USER_FIELD_NAME = "username";
+        final String PASS_FIELD_NAME = "password";
 
         /*
          * when clicked will submit the text entered in the username and password fields
@@ -82,8 +84,8 @@ public class LoginScreen extends AppCompatActivity {
                 password = String.valueOf(password_input.getText());
 
                 Map<String, String> params = new HashMap<>();
-                params.put("username", username);
-                params.put("password", password);
+                params.put(USER_FIELD_NAME, username);
+                params.put(PASS_FIELD_NAME, password);
 
                 login_info = new JSONObject(params);
 
@@ -93,16 +95,14 @@ public class LoginScreen extends AppCompatActivity {
                  */
                 JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, URL, login_info,
 
-                        /*
-                         * Code for successful responses
-                         */
+                        //Code for successful responses - Jae Swanepoel
                         response -> {
 
                             //logging response
                             Log.d(TAG_JSON_OBJ, response.toString());
 
                             try {
-                                if (response.get("message").equals(SUCCESS_MSG))
+                                if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG))
                                     startActivity(new Intent(view.getContext(), MainActivity.class));
 
                                 //else
@@ -113,9 +113,7 @@ public class LoginScreen extends AppCompatActivity {
                             }
                         },
 
-                        /*
-                         * Code for http errors
-                         */
+                        //Code for errors - Jae Swanepoel
                         error -> {
                             VolleyLog.d("Error: "+ error.getMessage());
                             startActivity(new Intent(LoginScreen.this,LoginFail.class));

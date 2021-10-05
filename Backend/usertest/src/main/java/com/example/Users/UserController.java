@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.json.JSONObject;
+//import org.json.JSONObject;
 import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,7 +38,7 @@ public class UserController {
     @PostMapping(path = "/login")
     String login(@RequestBody ObjectNode json) {
         if(userRepository.findByUsername(json.get("username").textValue()) == null)
-    		return "User with username " + json.get("username").textValue() + " not found";
+    		return failure;
     	if(userRepository.findByUsername(json.get("username").textValue()).getPassword().equals(json.get("password").textValue()))
             return success;
     	else 

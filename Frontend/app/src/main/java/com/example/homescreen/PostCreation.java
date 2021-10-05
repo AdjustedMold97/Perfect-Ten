@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -15,7 +14,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.homescreen.app.AppController;
 
 import org.json.JSONException;
@@ -38,15 +36,7 @@ public class PostCreation extends AppCompatActivity {
          */
         Button back = findViewById(R.id.backButton1);
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                startActivity(new Intent(view.getContext(),MainActivity.class));
-
-            }
-        });
-
+        back.setOnClickListener(view -> startActivity(new Intent(view.getContext(),MainActivity.class)));
 
 // testing pop up screen error - Ethan Still
 // TODO DON"T REMOVE THIS TEST CODE YET JAE!
@@ -62,9 +52,6 @@ public class PostCreation extends AppCompatActivity {
 //
 //        });
 
-
-
-
         /*
          * button to post the textField to home - sends a request to server
          * - Ethan
@@ -72,7 +59,7 @@ public class PostCreation extends AppCompatActivity {
         Button postSubmit = findViewById(R.id.postSubmit);
 
         EditText post_input = findViewById(R.id.postEditText);
-        EditText post_title = findViewById(R.id.post_title);
+        EditText post_title = findViewById(R.id.postTitleText);
 
         postSubmit.setOnClickListener(new View.OnClickListener()        {
 

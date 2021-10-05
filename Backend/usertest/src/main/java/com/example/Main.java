@@ -20,7 +20,7 @@ public class Main {
 	@Bean
 	CommandLineRunner initUser(UserRepository userRepository, PostRepository postRepository) {
 		return args -> {
-			User user1 = new User("Bob", "bob123@gmail.com", "password1");
+			/* User user1 = new User("Bob", "bob123@gmail.com", "password1");
 			User user2 = new User("Tom", "tom123@test.com", "password2");
 			User user3 = new User("Jeff", "jeff123@test.com", "password3");
 			Post post1 = new Post("Test message", "Test title");
@@ -34,7 +34,10 @@ public class Main {
 			user3.addPost(post3);
 			userRepository.save(user1);
 			userRepository.save(user2);
-			userRepository.save(user3);
+			userRepository.save(user3); */
+
+			//User newTestUser = new User("newtestuser", "newtest123@test.com", "newtest123");
+			//userRepository.save(newTestUser);
 		};
 	}
 

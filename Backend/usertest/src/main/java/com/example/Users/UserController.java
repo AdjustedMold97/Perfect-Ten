@@ -32,12 +32,11 @@ public class UserController {
     private String failure = "{\"message\":\"failure\"}";
 
     
-    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    @GetMapping(path = "/login")
     String login(@RequestBody ObjectNode json) {
-    	if(userRepository.findByUsername(json.get("username").toString()) == null)
-    		return null;
-    	User temp= userRepository.findByUsername(json.get("username").toString());
-    	if(temp.getPassword().equals(json.get("password").toString()))
+        if(userRepository.findByUsername(json.get("username").textValue()) == null)
+    		return "User with username " + json.get("username").textValue() + " not found";
+    	if(userRepository.findByUsername(json.get("username").textValue()).getPassword().equals(json.get("password").textValue()))
     		return "yes";
     	else 
     		return "no";

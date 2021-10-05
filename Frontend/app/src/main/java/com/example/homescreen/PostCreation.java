@@ -30,7 +30,10 @@ public class PostCreation extends AppCompatActivity {
 
         /*
          * final constants for use throughout code
+         *
+         * - Jae Swanepoel
          */
+
         final String URL = "http://coms-309-060.cs.iastate.edu:8080/posts";
         final String TAG_JSON_OBJ = "Post Data";
         final String SUCCESS_MSG = "success";
@@ -43,9 +46,9 @@ public class PostCreation extends AppCompatActivity {
          * back button to leave post creation window
          * - Ethan Still
          */
-        Button back = findViewById(R.id.backButton1);
+        Button backBtn = findViewById(R.id.post_back_Button);
 
-        back.setOnClickListener(view -> startActivity(new Intent(view.getContext(),MainActivity.class)));
+        backBtn.setOnClickListener(view -> startActivity(new Intent(view.getContext(),MainActivity.class)));
 
 // testing pop up screen error - Ethan Still
 // TODO DON"T REMOVE THIS TEST CODE YET JAE!
@@ -65,7 +68,7 @@ public class PostCreation extends AppCompatActivity {
          * button to post the textField to home - sends a request to server
          * - Ethan
          */
-        Button postSubmit = findViewById(R.id.postSubmit);
+        Button postSubmit = findViewById(R.id.post_submit_Button);
 
         /*
          * <postTextBox> input field for the post's message
@@ -73,8 +76,8 @@ public class PostCreation extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-        EditText postTextBox = findViewById(R.id.postEditText);
-        EditText postTitleBox = findViewById(R.id.postTitleText);
+        EditText postTextBox = findViewById(R.id.post_body_EditText);
+        EditText postTitleBox = findViewById(R.id.post_title_EditText);
 
         //onClickListener for submit button - Jae Swanepoel
         postSubmit.setOnClickListener(new View.OnClickListener()        {
@@ -168,7 +171,7 @@ public class PostCreation extends AppCompatActivity {
                         });
 
                 //Adding to RequestQueue - Jae Swanepoel
-                AppController.getInstance().addToRequestQueue(json_obj_req);
+                AppController.getInstance().addToRequestQueue(json_obj_req, TAG_JSON_OBJ);
             }
 //===============================================
         });

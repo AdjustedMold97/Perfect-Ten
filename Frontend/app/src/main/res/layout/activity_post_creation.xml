@@ -7,10 +7,10 @@
     tools:context=".PostCreation">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/post_creation_TextView"
         android:layout_width="282dp"
         android:layout_height="56dp"
-        android:text="    Create a Post"
+        android:text="    Create a Post!"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.146" />
 
     <EditText
-        android:id="@+id/postEditText"
+        android:id="@+id/post_body_EditText"
         android:layout_width="240dp"
         android:layout_height="361dp"
         android:ems="10"
@@ -34,7 +34,7 @@
         app:layout_constraintVertical_bias="0.654" />
 
     <Button
-        android:id="@+id/backButton1"
+        android:id="@+id/post_back_Button"
         android:layout_width="66dp"
         android:layout_height="54dp"
         android:text="X"
@@ -46,7 +46,7 @@
         app:layout_constraintVertical_bias="0.023" />
 
     <Button
-        android:id="@+id/postSubmit"
+        android:id="@+id/post_submit_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Post"
@@ -58,7 +58,7 @@
         app:layout_constraintVertical_bias="0.95" />
 
     <EditText
-        android:id="@+id/postTitleText"
+        android:id="@+id/post_title_EditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"

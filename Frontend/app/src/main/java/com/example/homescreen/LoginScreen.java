@@ -33,7 +33,7 @@ public class LoginScreen extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-        String url = "http://echo.jsontest.com/key/value/one/two";
+        String url = "https://bfde5fcb-e6a1-4665-afe1-dd6dc2a1fdf7.mock.pstmn.io";
         String tag_json_obj ="Login Information";
 
         /*
@@ -90,7 +90,7 @@ public class LoginScreen extends AppCompatActivity {
                  * Posts a JSON Object <login_info> to the server url
                  * - Jae Swanepoel
                  */
-                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, url, login_info, new Response.Listener<JSONObject>() {
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, login_info, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -99,8 +99,6 @@ public class LoginScreen extends AppCompatActivity {
                          * TODO Need info from backend
                          * need to figure out what kind of response we are receiving
                          */
-
-                        System.out.println(response.toString());
 
                         /*
                          * response "logs a user in if information is correct"

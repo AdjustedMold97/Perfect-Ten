@@ -2,6 +2,7 @@ package com.example.Posts;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,5 +45,11 @@ public class PostController {
         postRepository.save(request);
         return postRepository.findById(id);
     } 
-      
+    /*
+    @DeleteMapping(path = "/posts/{id}")
+    String deletePost(@PathVariable long id){
+    	postRepository.deleteById(id);
+    	return success;
+    }
+    */
 }

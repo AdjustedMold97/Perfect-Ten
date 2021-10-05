@@ -16,7 +16,6 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.homescreen.app.AppController;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -30,8 +29,8 @@ public class PostCreation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_creation);
 
-        String url = "http://coms-309-060.cs.iastate.edu:8080/posts";
-        String tag_json_obj = "Post Data";
+        final String URL = "http://coms-309-060.cs.iastate.edu:8080/posts";
+        final String TAG_JSON_OBJ = "Post Data";
 
         /*
          * back button to leave post creation window
@@ -61,9 +60,16 @@ public class PostCreation extends AppCompatActivity {
          */
         Button postSubmit = findViewById(R.id.postSubmit);
 
+        /*
+         * <post_input> input field for the post's message
+         * <post_title> input field for post's title
+         *
+         * - Jae Swanepoel
+         */
         EditText post_input = findViewById(R.id.postEditText);
         EditText post_title = findViewById(R.id.postTitleText);
 
+        //onClickListener for submit button - Jae Swanepoel
         postSubmit.setOnClickListener(new View.OnClickListener()        {
 
             /*
@@ -93,6 +99,11 @@ public class PostCreation extends AppCompatActivity {
                 postText = String.valueOf(post_input.getText());
                 postTitle = String.valueOf(post_title.getText());
 
+                /*
+                 * <params> HashMap for instantiating <post>
+                 *
+                 * - Jae Swanepoel
+                 */
                 Map<String, String> params = new HashMap<>();
                 params.put("title", postTitle);
                 params.put("message", postText);
@@ -105,12 +116,20 @@ public class PostCreation extends AppCompatActivity {
                  */
                 //TODO Ethan figure out how to send post to home screen and pop it up in a box
 
-                json_obj_req = new JsonObjectRequest(Request.Method.POST, url, post,
+                json_obj_req = new JsonObjectRequest(Request.Method.POST, URL, post,
 
                         response -> {
 
-                            Log.d(tag_json_obj, response.toString());
+                            Log.d(TAG_JSON_OBJ, response.toString());
                             startActivity(new Intent(view.getContext(),MainActivity.class));
+
+                            /*
+                             * TODO: handle responses to posts
+                             *
+                             * if success: redirect to MainActivity
+                             *      idea: redirect to "Success!" page for a moment, then home page
+                             * if failure: failure message popup
+                             */
                         },
 
                         error -> {

@@ -129,58 +129,81 @@ public class LoginScreen extends AppCompatActivity {
                          *
                          * - Jae Swanepoel
                          */
+
                         response_text = response.toString();
+                        System.out.println(response_text);
+//
+//                        //logging response
+//                        Log.d(tag_json_obj, response_text);
+//
+//                        //trimming the brackets off the string
+//                        response_text = response_text.substring(1, response_text.length() - 2);
+//
+//                        //initializing response_reader
+//                        //assigning comma as delimiter
+//                        response_reader = new Scanner(response_text);
+//                        response_reader.useDelimiter(",");
+//
+//                        /*
+//                         * Going through the JSON data until
+//                         * we find the password field.
+//                         *
+//                         * - Jae Swanepoel
+//                         */
+//                        while (response_reader.hasNext()) {
+//
+//                            temp = response_reader.next();
+//
+//                            //identifying the password field
+//                            if (temp.substring(1,8) == "password") {
+//
+//                                sub_scanner = new Scanner(temp.substring(10));
+//                                sub_scanner.useDelimiter("\"");
+//
+//                                //skipping the first substring,
+//                                //which should just be " : "
+//                                sub_scanner.next();
+//
+//                                if (sub_scanner.next() == password) {
+//
+//                                    response_reader.close();
+//                                    sub_scanner.close();
+//
+//                                    startActivity(new Intent(view.getContext(),MainActivity.class));
+//                                }
+//                            }
+//                        }
+//
+//                        response_reader.close();
+//                        /*
+//                         * response "logs a user in if information is correct"
+//                         * will send user to their home page
+//                         * might need a user profile
+//                         * - Ethan Still
+//                         */
+//
+//                        System.out.println(response.toString());
 
-                        //logging response
-                        Log.d(tag_json_obj, response_text);
 
-                        //trimming the brackets off the string
-                        response_text = response_text.substring(1, response_text.length() - 2);
 
-                        //initializing response_reader
-                        //assigning comma as delimiter
-                        response_reader = new Scanner(response_text);
-                        response_reader.useDelimiter(",");
 
-                        /*
-                         * Going through the JSON data until
-                         * we find the password field.
-                         *
-                         * - Jae Swanepoel
-                         */
-                        while (response_reader.hasNext()) {
 
-                            temp = response_reader.next();
 
-                            //identifying the password field
-                            if (temp.substring(1,8) == "password") {
+                        // onResponse not asking for correct kind of object
 
-                                sub_scanner = new Scanner(temp.substring(10));
-                                sub_scanner.useDelimiter("\"");
 
-                                //skipping the first substring,
-                                //which should just be " : "
-                                sub_scanner.next();
 
-                                if (sub_scanner.next() == password) {
+                        //"{\"message\":\"success\"}"
 
-                                    response_reader.close();
-                                    sub_scanner.close();
+//                        if(response == "{\"message\":\"success\"}"){
+//
+//                            startActivity(new Intent(view.getContext(),MainActivity.class));
+//
+//                        }
 
-                                    startActivity(new Intent(view.getContext(),MainActivity.class));
-                                }
-                            }
-                        }
 
-                        response_reader.close();
-                        /*
-                         * response "logs a user in if information is correct"
-                         * will send user to their home page
-                         * might need a user profile
-                         * - Ethan Still
-                         */
 
-                        System.out.println(response.toString());
+
 
                     }},
 

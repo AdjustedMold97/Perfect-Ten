@@ -11,7 +11,7 @@
         android:layout_width="158dp"
         android:layout_height="117dp"
         android:background="#00DA7272"
-        android:text="Error posting"
+        android:text="Error"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

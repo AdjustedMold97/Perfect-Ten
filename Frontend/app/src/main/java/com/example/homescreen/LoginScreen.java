@@ -39,7 +39,8 @@ public class LoginScreen extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-        String url = "http://coms-309-060.cs.iastate.edu:8080/username/";
+        //String url = "http://coms-309-060.cs.iastate.edu:8080/username/";
+        String url = "http://coms-309-060.cs.iastate.edu:8080/login";
         String tag_json_obj ="Login Information";
 
         /*
@@ -96,8 +97,13 @@ public class LoginScreen extends AppCompatActivity {
                 username = String.valueOf(username_input.getText());
                 password = String.valueOf(password_input.getText());
 
+                /*
+                 * URL got changed testing with new url
+                 * -Ethan
+                 */
                 //creating the final url based on username - Jae Swanepoel
-                final_url = url + username;
+                //final_url = url + username;
+                final_url = url;
 
                 /*
                  * adding <username> and <password> into <login_info>
@@ -132,9 +138,9 @@ public class LoginScreen extends AppCompatActivity {
 
                         response_text = response.toString();
                         System.out.println(response_text);
-//
-//                        //logging response
-//                        Log.d(tag_json_obj, response_text);
+
+                        //logging response
+                        Log.d(tag_json_obj, response_text);
 //
 //                        //trimming the brackets off the string
 //                        response_text = response_text.substring(1, response_text.length() - 2);

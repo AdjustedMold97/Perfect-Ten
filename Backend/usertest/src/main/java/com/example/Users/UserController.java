@@ -42,6 +42,11 @@ public class UserController {
     		return "no";
     }
     
+    @GetMapping(path = "user/{user}/posts/list")
+    List<Post> getPostsByusername(@PathVariable String user){
+    	return userRepository.findByUsername(user).getPosts();
+    }
+    
     @GetMapping(path = "/user/{user}")
     User getUserByUsername(@PathVariable String user) {
     	return userRepository.findByUsername(user);

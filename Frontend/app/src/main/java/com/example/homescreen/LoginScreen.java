@@ -20,7 +20,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.homescreen.app.MyApplication;
 import com.example.homescreen.net_utils.Const;
 
 public class LoginScreen extends AppCompatActivity {
@@ -108,7 +107,7 @@ public class LoginScreen extends AppCompatActivity {
                             try {
                                 if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG)) {
 
-                                    MyApplication.setUsername(username);
+                                    AppController.setUsername(username);
                                     startActivity(new Intent(view.getContext(), MainActivity.class));
                                 }
 

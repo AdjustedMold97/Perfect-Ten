@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.homescreen.app.AppController;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -53,7 +54,11 @@ public class MainActivity extends AppCompatActivity {
          */
         Button toLogin = findViewById(R.id.sign_out_Button);
 
-        toLogin.setOnClickListener(view -> startActivity(new Intent(view.getContext(),LoginScreen.class)));
+        toLogin.setOnClickListener(view -> {
+
+            AppController.setUsername("");
+            startActivity(new Intent(view.getContext(),LoginScreen.class));
+        });
 
         Button post_button = findViewById(R.id.post_create_Button);
 

@@ -57,4 +57,18 @@ public class AppController extends Application {
         mRequestQueue.cancelAll(tag);
     }
     }
+
+    static private String username;
+
+    static public String getUsername() {
+
+        return username;
+
+    }
+
+    public static void setUsername(String username1) {
+
+        username = username1;
+
+    }
 }

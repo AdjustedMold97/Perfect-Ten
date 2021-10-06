@@ -1,10 +1,19 @@
 package com.example.homescreen;
 
+import static com.example.homescreen.net_utils.Const.POST_LIST_URL;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
+
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.homescreen.net_utils.Const;
+
+import org.json.JSONObject;
 
 
 
@@ -16,9 +25,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*
-         * TODO load posts
-         */
+        final String RESPONSE_TAG = "JSON Response: ";
+
+        //need to know what user is active
+
+        String user_Post_URL = POST_LIST_URL + MyApplication.getUsername();
+
+        JsonObjectRequest post1 = new JsonObjectRequest(Request.Method.GET, user_Post_URL,null
+
+                response -> {
+
+                Log.d(RESPONSE_TAG, response.toString());
+
+
+
+                }
+
+                error -> {
+
+
+                }
+
+        );
+
 
         //Button to get to Friend Activity - Jae Swanepoel
         Button friend = findViewById(R.id.friends_Button);

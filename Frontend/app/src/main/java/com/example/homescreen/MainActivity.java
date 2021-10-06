@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 },
 
                 error -> VolleyLog.d("Error: " + error.getMessage())
@@ -103,7 +102,5 @@ public class MainActivity extends AppCompatActivity {
          * - Ethan Still
          */
         post_button.setOnClickListener(view -> startActivity(new Intent(view.getContext(),PostCreation.class)));
-
     }
-
 }

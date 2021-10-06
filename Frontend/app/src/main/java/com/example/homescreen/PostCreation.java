@@ -50,20 +50,6 @@ public class PostCreation extends AppCompatActivity {
 
         backBtn.setOnClickListener(view -> startActivity(new Intent(view.getContext(),MainActivity.class)));
 
-// testing pop up screen error - Ethan Still
-// TODO DON"T REMOVE THIS TEST CODE YET JAE!
-
-//        Button test = findViewById(R.id.popUp);
-//
-//        test.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//           public void onClick(View view) {
-//
-//                startActivity(new Intent(PostCreation.this,Error.class));
-//           }
-//
-//        });
-
         /*
          * button to post the textField to home - sends a request to server
          * - Ethan
@@ -124,11 +110,6 @@ public class PostCreation extends AppCompatActivity {
                  * response posts to home screen
                  * - Ethan Still
                  */
-                //TODO Ethan figure out how to send post to home screen and pop it up in a box
-
-                /*
-                 * Creating the Request to add to the RequestQueue - Jae Swanepoel
-                 */
                 json_obj_req = new JsonObjectRequest(Request.Method.POST, Const.POSTING_URL + AppController.getUsername(), post,
 
                         response -> {
@@ -136,8 +117,6 @@ public class PostCreation extends AppCompatActivity {
                             Log.d(RESPONSE_TAG, response.toString());
 
                             /*
-                             * TODO: handle responses to posts
-                             *
                              * if success: redirect to MainActivity - DONE
                              *      idea: redirect to "Success!" page for a moment, then home page
                              * if failure: failure message popup - Ethan, DONE

@@ -9,17 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
-
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.homescreen.net_utils.Const;
 
 import org.json.JSONObject;
 
-
 import com.example.homescreen.app.AppController;
-
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
         //need to know what user is active
 
-        String user_Post_URL = POST_LIST_URL + AppController.getUsername();
+        String finalUrl = Const.USER_POST_URL_1 + AppController.getUsername() + Const.USER_POST_URL_2;
 
-        JsonObjectRequest post1 = new JsonObjectRequest(Request.Method.GET, user_Post_URL,null
+        JsonObjectRequest post1 = new JsonObjectRequest(Request.Method.GET, finalUrl, null,
 
                 response -> {
 
@@ -43,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                }
+                },
 
                 error -> {
 

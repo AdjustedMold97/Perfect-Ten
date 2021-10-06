@@ -8,12 +8,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.Request;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.homescreen.net_utils.Const;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import com.example.homescreen.app.AppController;
 
@@ -31,26 +37,37 @@ public class MainActivity extends AppCompatActivity {
 
         String finalUrl = Const.USER_POST_URL_1 + AppController.getUsername() + Const.USER_POST_URL_2;
 
+        TextView post_title_TextView = findViewById(R.id.post_title_TextView);
+        TextView post_body_TextView = findViewById(R.id.post_body_TextView);
 
-
-        JsonObjectRequest post1 = new JsonObjectRequest(Request.Method.GET, finalUrl, null,
-
+        JsonArrayRequest json_arr_req = new JsonArrayRequest(finalUrl,
 
                 response -> {
 
-                Log.d(RESPONSE_TAG, response.toString());
+                    Log.d(RESPONSE_TAG, response.toString());
 
+                    JSONObject temp;
 
+                    try {
+
+                        temp = response.getJSONObject(response.length() - 1);
+                        post_body_TextView.setText(temp.get("message").toString());
+                        post_title_TextView.setText(temp.get("title").toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                 },
 
                 error -> {
 
+                    VolleyLog.d("Error: " + error.getMessage());
 
                 }
-
         );
 
+        if (!(AppController.getUsername() == null))
+            AppController.getInstance().addToRequestQueue(json_arr_req);
 
         //Button to get to Friend Activity - Jae Swanepoel
         Button friend = findViewById(R.id.friends_Button);

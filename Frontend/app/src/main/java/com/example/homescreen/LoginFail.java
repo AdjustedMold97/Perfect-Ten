@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class LoginFail extends Activity {
 
@@ -17,7 +18,8 @@ public class LoginFail extends Activity {
         super.onCreate(savedInstancesState);
 
         setContentView(R.layout.errorwindow);
-
+        TextView error_Box = findViewById(R.id.textView7);
+        error_Box.setText("Username or Password are incorrect");
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 

@@ -108,9 +108,14 @@ public class LoginScreen extends AppCompatActivity {
                                 if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG))
                                     startActivity(new Intent(view.getContext(), MainActivity.class));
 
-                                //else
-                                    //TODO failed login screen?
+                                else {
+                                    /*
+                                     * - if a correct object is returned but "success" is fail then a pop up screen, LoginFail.java pops up
+                                     * - Ethan Still
+                                     */
+                                    startActivity(new Intent(LoginScreen.this, LoginFail.class));
 
+                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -121,7 +126,7 @@ public class LoginScreen extends AppCompatActivity {
                         //Code for errors - Jae Swanepoel
                         error -> {
                             VolleyLog.d("Error: "+ error.getMessage());
-                            startActivity(new Intent(LoginScreen.this,LoginFail.class));
+                            startActivity(new Intent(LoginScreen.this,Error.class));
                         }
                 );
 

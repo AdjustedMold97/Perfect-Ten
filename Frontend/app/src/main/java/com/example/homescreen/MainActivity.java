@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         String user_Post_URL = POST_LIST_URL + AppController.getUsername();
 
-        JsonObjectRequest post1 = new JsonObjectRequest(Request.Method.GET, user_Post_URL,null
+        JsonObjectRequest post1 = new JsonObjectRequest(Request.Method.GET, user_Post_URL,null,
 
                 response -> {
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                }
+                },
 
                 error -> {
 

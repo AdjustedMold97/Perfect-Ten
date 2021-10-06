@@ -14,7 +14,7 @@ public class SettingsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_screen);
 
-        Button home = findViewById(R.id.Home);
+        Button home = findViewById(R.id.home_Button);
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,7 +24,7 @@ public class SettingsScreen extends AppCompatActivity {
 
             }
         });
-        Button friend = findViewById(R.id.Friends);
+        Button friend = findViewById(R.id.friends_Button);
 
         friend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +35,7 @@ public class SettingsScreen extends AppCompatActivity {
             }
         });
 
-        Button settings = findViewById(R.id.Settings);
+        Button settings = findViewById(R.id.settings_Button);
 
         settings.setOnClickListener(new View.OnClickListener() {
             @Override

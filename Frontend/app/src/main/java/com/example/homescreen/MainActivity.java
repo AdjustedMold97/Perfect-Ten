@@ -15,8 +15,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*
+         * TODO load posts
+         */
+
         //Button to get to Friend Activity - Jae Swanepoel
-        Button friend = findViewById(R.id.Friends);
+        Button friend = findViewById(R.id.friends_Button);
 
         friend.setOnClickListener(new View.OnClickListener() {
 
@@ -26,14 +30,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
 //========================================
         /*
          * these three buttons make up the bottom tab buttons they go on each screen
          * they include Home, Settings, and Friends and reroute the user to that page form anywhere in the app
          * - Ethan Still
          */
-        Button settings = findViewById(R.id.Settings);
+        Button settings = findViewById(R.id.settings_Button);
 
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button home = findViewById(R.id.Home);
+        Button home = findViewById(R.id.home_Button);
 
         /*
          * Commenting out this code because there's really no need to
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
          * signs the user out, back to the login screen
          * - Ethan Still
          */
-        Button toLogin = findViewById(R.id.login);
+        Button toLogin = findViewById(R.id.sign_out_Button);
 
         toLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -77,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button post_button = findViewById(R.id.post);
+        Button post_button = findViewById(R.id.post_create_Button);
 
         post_button.setOnClickListener(new View.OnClickListener() {
             /*

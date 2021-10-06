@@ -20,6 +20,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.homescreen.net_utils.Const;
+
 public class PostCreation extends AppCompatActivity {
 
     @Override
@@ -34,11 +36,9 @@ public class PostCreation extends AppCompatActivity {
          * - Jae Swanepoel
          */
 
-        final String URL = "http://coms-309-060.cs.iastate.edu:8080/posts";
         final String TAG_JSON_OBJ = "Post Data";
         final String SUCCESS_MSG = "success";
         final String TITLE_FIELD_NAME = "title";
-        final String TEXT_FIELD_NAME = "text";
         final String MSG_FIELD_NAME = "message";
         final String RESPONSE_TAG = "JSON Response: ";
 
@@ -68,7 +68,7 @@ public class PostCreation extends AppCompatActivity {
          * button to post the textField to home - sends a request to server
          * - Ethan
          */
-        Button postSubmit = findViewById(R.id.post_submit_Button);
+        Button submitBtn = findViewById(R.id.post_submit_Button);
 
         /*
          * <postTextBox> input field for the post's message
@@ -76,11 +76,11 @@ public class PostCreation extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-        EditText postTextBox = findViewById(R.id.post_body_EditText);
-        EditText postTitleBox = findViewById(R.id.post_title_EditText);
+        EditText bodyEditText = findViewById(R.id.post_body_EditText);
+        EditText titleEditText = findViewById(R.id.post_title_EditText);
 
         //onClickListener for submit button - Jae Swanepoel
-        postSubmit.setOnClickListener(new View.OnClickListener()        {
+        submitBtn.setOnClickListener(new View.OnClickListener()        {
 
             /*
              * <postText> post text data
@@ -106,8 +106,8 @@ public class PostCreation extends AppCompatActivity {
                  * - Ethan Still
                  */
 
-                postText = String.valueOf(postTextBox.getText());
-                postTitle = String.valueOf(postTitleBox.getText());
+                postText = String.valueOf(bodyEditText.getText());
+                postTitle = String.valueOf(titleEditText.getText());
 
                 /*
                  * <params> HashMap for instantiating <post>
@@ -116,7 +116,7 @@ public class PostCreation extends AppCompatActivity {
                  */
                 Map<String, String> params = new HashMap<>();
                 params.put(TITLE_FIELD_NAME, postTitle);
-                params.put(TEXT_FIELD_NAME, postText);
+                params.put(MSG_FIELD_NAME, postText);
 
                 post = new JSONObject(params);
 
@@ -129,7 +129,7 @@ public class PostCreation extends AppCompatActivity {
                 /*
                  * Creating the Request to add to the RequestQueue - Jae Swanepoel
                  */
-                json_obj_req = new JsonObjectRequest(Request.Method.POST, URL, post,
+                json_obj_req = new JsonObjectRequest(Request.Method.POST, Const.POSTS_URL, post,
 
                         response -> {
 
@@ -138,7 +138,7 @@ public class PostCreation extends AppCompatActivity {
                             /*
                              * TODO: handle responses to posts
                              *
-                             * if success: redirect to MainActivity
+                             * if success: redirect to MainActivity - DONE
                              *      idea: redirect to "Success!" page for a moment, then home page
                              * if failure: failure message popup
                              */

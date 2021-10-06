@@ -20,6 +20,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.homescreen.net_utils.Const;
+
 public class LoginScreen extends AppCompatActivity {
 
     @Override
@@ -33,7 +35,7 @@ public class LoginScreen extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-        final String URL = "http://coms-309-060.cs.iastate.edu:8080/login";
+
         final String TAG_JSON_OBJ ="Login Information";
         final String SUCCESS_MSG = "success";
         final String MSG_FIELD_NAME = "message";
@@ -93,7 +95,7 @@ public class LoginScreen extends AppCompatActivity {
                  * Creating the Request to add to the RequestQueue
                  * - Jae Swanepoel
                  */
-                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, URL, login_info,
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Const.LOGIN_URL, login_info,
 
                         //Code for successful responses - Jae Swanepoel
                         response -> {

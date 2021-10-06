@@ -68,8 +68,8 @@
 
     <TextView
         android:id="@+id/post_title_TextView"
-        android:layout_width="117dp"
-        android:layout_height="37dp"
+        android:layout_width="259dp"
+        android:layout_height="33dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="120dp"
         android:text="Loading..."
@@ -79,8 +79,8 @@
 
     <TextView
         android:id="@+id/post_body_TextView"
-        android:layout_width="165dp"
-        android:layout_height="118dp"
+        android:layout_width="259dp"
+        android:layout_height="119dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="36dp"
         android:text="Loading..."

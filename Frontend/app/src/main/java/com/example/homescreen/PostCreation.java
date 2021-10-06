@@ -129,7 +129,7 @@ public class PostCreation extends AppCompatActivity {
                 /*
                  * Creating the Request to add to the RequestQueue - Jae Swanepoel
                  */
-                json_obj_req = new JsonObjectRequest(Request.Method.POST, Const.POSTS_URL, post,
+                json_obj_req = new JsonObjectRequest(Request.Method.POST, Const.POSTING_URL + AppController.getUsername(), post,
 
                         response -> {
 

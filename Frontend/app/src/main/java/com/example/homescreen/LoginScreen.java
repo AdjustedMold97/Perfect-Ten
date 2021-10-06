@@ -105,8 +105,11 @@ public class LoginScreen extends AppCompatActivity {
                             Log.d(TAG_JSON_OBJ, response.toString());
 
                             try {
-                                if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG))
+                                if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG)) {
+
+                                    AppController.setUsername(username);
                                     startActivity(new Intent(view.getContext(), MainActivity.class));
+                                }
 
                                 else {
                                     /*

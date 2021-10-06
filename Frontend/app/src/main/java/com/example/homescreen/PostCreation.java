@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.example.homescreen.net_utils.Const;
+import com.example.homescreen.net_utils.FailedPost;
 
 public class PostCreation extends AppCompatActivity {
 
@@ -128,7 +129,8 @@ public class PostCreation extends AppCompatActivity {
                                     startActivity(new Intent(view.getContext(), MainActivity.class));
 
                                 else {
-                                    //TODO failed post screen?
+                                    startActivity(new Intent(PostCreation.this, FailedPost.class));
+
                                 }
 
                             } catch (JSONException e) {

@@ -35,7 +35,7 @@ public class PostController {
 
     @PostMapping(path = "/posts/new/{username}")
     String createPost(@RequestBody Post post, @PathVariable String username){
-        if (post == null)
+        if (post == null || userRepository.findByUsername(username) == null)
             return failure;
         // User user = userRepository.findByUsername(username);
         post.setUser(userRepository.findByUsername(username));

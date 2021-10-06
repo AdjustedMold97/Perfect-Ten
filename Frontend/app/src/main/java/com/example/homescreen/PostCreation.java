@@ -124,6 +124,7 @@ public class PostCreation extends AppCompatActivity {
                         Log.d(tag_json_obj, response.toString());
 
 
+                        
                         startActivity(new Intent(view.getContext(),MainActivity.class));
                     }
 

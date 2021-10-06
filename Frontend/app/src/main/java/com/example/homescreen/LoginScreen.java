@@ -40,6 +40,7 @@ public class LoginScreen extends AppCompatActivity {
          * - Jae Swanepoel
          */
         //String url = "http://coms-309-060.cs.iastate.edu:8080/username/";
+
         String url = "http://coms-309-060.cs.iastate.edu:8080/login";
         String tag_json_obj ="Login Information";
 
@@ -221,7 +222,7 @@ public class LoginScreen extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error){
                         VolleyLog.d("Error: "+ error.getMessage());
 
-                        
+
                         startActivity(new Intent(LoginScreen.this,LoginFail.class));
                     }
 

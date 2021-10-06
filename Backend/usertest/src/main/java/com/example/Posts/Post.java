@@ -41,6 +41,11 @@ public class Post {
     	title = "default";
     }
 
+    public Post(String message, String title, User user) {
+        this.message = message;
+        this.title = title;
+        this.user = user;
+    }
 
     // =============================== Getters and Setters for each field ================================== //
 

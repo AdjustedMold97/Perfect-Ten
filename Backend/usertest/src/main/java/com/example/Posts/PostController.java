@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.Posts.*;
 
+import com.example.Users.*;
+
 @RestController
 public class PostController {
 
     @Autowired
     PostRepository postRepository;
+    @Autowired
+    UserRepository userRepository;
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
@@ -29,11 +33,15 @@ public class PostController {
         return postRepository.findById(id);
     }
 
-    @PostMapping(path = "/posts/new")
-    String createPost(@RequestBody Post post){
+    @PostMapping(path = "/posts/new/{username}")
+    String createPost(@RequestBody Post post, @PathVariable String username){
         if (post == null)
             return failure;
+        // User user = userRepository.findByUsername(username);
+        post.setUser(userRepository.findByUsername(username));
         postRepository.save(post);
+        userRepository.findByUsername(username).addPost(post);
+        userRepository.save(userRepository.findByUsername(username));
         return success;
     }
 

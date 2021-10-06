@@ -36,11 +36,16 @@ public class LoginScreen extends AppCompatActivity {
          * - Jae Swanepoel
          */
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> bcc6a12feba5b8b62c3dc44d064d2c1b182cb366
         final String TAG_JSON_OBJ ="Login Information";
         final String SUCCESS_MSG = "success";
         final String MSG_FIELD_NAME = "message";
         final String USER_FIELD_NAME = "username";
         final String PASS_FIELD_NAME = "password";
+
 
         /*
          * when clicked will submit the text entered in the username and password fields
@@ -110,10 +115,12 @@ public class LoginScreen extends AppCompatActivity {
                                 //else
                                     //TODO failed login screen?
 
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         },
+
 
                         //Code for errors - Jae Swanepoel
                         error -> {

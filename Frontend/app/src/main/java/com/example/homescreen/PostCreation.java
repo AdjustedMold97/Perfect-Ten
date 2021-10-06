@@ -135,6 +135,8 @@ public class PostCreation extends AppCompatActivity {
 
                             Log.d(RESPONSE_TAG, response.toString());
 
+
+
                             /*
                              * TODO: handle responses to posts
                              *
@@ -142,6 +144,7 @@ public class PostCreation extends AppCompatActivity {
                              *      idea: redirect to "Success!" page for a moment, then home page
                              * if failure: failure message popup
                              */
+
 
                             try {
 

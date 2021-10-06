@@ -82,8 +82,6 @@ public class PostCreation extends AppCompatActivity {
             JSONObject post;
             JsonObjectRequest json_obj_req;
 
-//=================================================================
-
             @Override // server request onClick
             public void onClick(View view) {
 
@@ -107,8 +105,11 @@ public class PostCreation extends AppCompatActivity {
                 post = new JSONObject(params);
 
                 /*
-                 * response posts to home screen
-                 * - Ethan Still
+                 * Request to be sent to the server
+                 * Uses the POST method to send a JSONObject with
+                 * the necessary post data, including title, message, and username.
+                 *
+                 * - Jae Swanepoel
                  */
                 json_obj_req = new JsonObjectRequest(Request.Method.POST, Const.POSTING_URL + AppController.getUsername(), post,
 
@@ -130,7 +131,6 @@ public class PostCreation extends AppCompatActivity {
                                 else {
                                     //TODO failed post screen?
                                 }
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -152,7 +152,6 @@ public class PostCreation extends AppCompatActivity {
                 //Adding to RequestQueue - Jae Swanepoel
                 AppController.getInstance().addToRequestQueue(json_obj_req, TAG_JSON_OBJ);
             }
-//===============================================
         });
     }
 }

@@ -58,6 +58,17 @@ public class AppController extends Application {
     }
     }
 
+    /*
+     * Global Variable for username
+     * with getter and setter.
+     *
+     * The username is important for:
+     *  - Maintaining Friends list
+     *  - Assigning posts with a user
+     *  - Populating "Home" feed
+     *
+     * - Jae Swanepoel
+     */
     static private String username;
 
     static public String getUsername() {
@@ -66,9 +77,9 @@ public class AppController extends Application {
 
     }
 
-    public static void setUsername(String username1) {
+    public static void setUsername(String _username) {
 
-        username = username1;
+        username = _username;
 
     }
 }

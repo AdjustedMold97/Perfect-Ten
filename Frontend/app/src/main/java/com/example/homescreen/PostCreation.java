@@ -140,7 +140,7 @@ public class PostCreation extends AppCompatActivity {
                              *
                              * if success: redirect to MainActivity - DONE
                              *      idea: redirect to "Success!" page for a moment, then home page
-                             * if failure: failure message popup
+                             * if failure: failure message popup - Ethan, DONE
                              */
 
                             try {

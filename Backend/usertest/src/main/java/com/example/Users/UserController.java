@@ -1,9 +1,11 @@
 package com.example.Users;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+//import org.json.JSONObject;
 import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Posts.Post;
@@ -32,15 +35,35 @@ public class UserController {
     private String failure = "{\"message\":\"failure\"}";
 
     
-    @GetMapping(path = "/login")
+    @PostMapping(path = "/login")
     String login(@RequestBody ObjectNode json) {
         if(userRepository.findByUsername(json.get("username").textValue()) == null)
-    		return "User with username " + json.get("username").textValue() + " not found";
+    		return failure;
     	if(userRepository.findByUsername(json.get("username").textValue()).getPassword().equals(json.get("password").textValue()))
             return success;
     	else 
     		return failure;
-    }
+    } 
+
+    /*@GetMapping(path = "/login")
+    String login(@RequestParam HashMap<String, String> json) {
+        if(userRepository.findByUsername(json.get("username").toString()) == null)
+    		return "User with username " + json.get("username").toString() + " not found";
+    	if(userRepository.findByUsername(json.get("username").toString()).getPassword().equals(json.get("password").toString()))
+            return success;
+    	else 
+    		return failure;
+    }*/
+
+    /* String login(@RequestParam String username, @RequestParam String password) {
+        if (userRepository.findByUsername(username) == null) {
+            return "User with username " + username + " not found";
+        }
+        if(userRepository.findByUsername(username).getPassword().equals(password))
+            return success;
+    	else 
+    		return failure;
+    } */
     
     @GetMapping(path = "user/{user}/posts/list")
     List<Post> getPostsByusername(@PathVariable String user){

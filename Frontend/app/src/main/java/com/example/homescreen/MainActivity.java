@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                         temp = response.getJSONObject(response.length() - 1);
                         post_body_TextView.setText(temp.get("message").toString());
                         post_title_TextView.setText(temp.get("title").toString());
-                        
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

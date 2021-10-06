@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.view.View;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,13 +23,7 @@ public class MainActivity extends AppCompatActivity {
         //Button to get to Friend Activity - Jae Swanepoel
         Button friend = findViewById(R.id.friends_Button);
 
-        friend.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(view.getContext(),FriendsScreen.class));
-            }
-        });
+        friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(),FriendsScreen.class)));
 
 //========================================
         /*
@@ -38,14 +33,7 @@ public class MainActivity extends AppCompatActivity {
          */
         Button settings = findViewById(R.id.settings_Button);
 
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                startActivity(new Intent(view.getContext(),SettingsScreen.class));
-
-            }
-        });
+        settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SettingsScreen.class)));
 
         Button home = findViewById(R.id.home_Button);
 
@@ -56,14 +44,7 @@ public class MainActivity extends AppCompatActivity {
          *
          * -Ethan Still:  its just meant as a test or to reload page
          */
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                startActivity(new Intent(view.getContext(),MainActivity.class));
-
-            }
-        });
+        home.setOnClickListener(view -> startActivity(new Intent(view.getContext(),MainActivity.class)));
 //===========================================
 
         /*
@@ -72,28 +53,15 @@ public class MainActivity extends AppCompatActivity {
          */
         Button toLogin = findViewById(R.id.sign_out_Button);
 
-        toLogin.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(view.getContext(),LoginScreen.class));
-            }
-        });
+        toLogin.setOnClickListener(view -> startActivity(new Intent(view.getContext(),LoginScreen.class)));
 
         Button post_button = findViewById(R.id.post_create_Button);
 
-        post_button.setOnClickListener(new View.OnClickListener() {
-            /*
-             * - button sends to post creation screen onClick
-             * - Ethan Still
-             */
-            @Override
-            public void onClick(View view) {
-
-                startActivity(new Intent(view.getContext(),PostCreation.class));
-
-            }
-        });
+        /*
+         * - button sends to post creation screen onClick
+         * - Ethan Still
+         */
+        post_button.setOnClickListener(view -> startActivity(new Intent(view.getContext(),PostCreation.class)));
 
     }
 

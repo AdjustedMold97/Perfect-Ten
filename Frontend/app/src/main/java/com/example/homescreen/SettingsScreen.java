@@ -20,7 +20,7 @@ public class SettingsScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(view.getContext(), MainActivity.class));
+                startActivity(new Intent(view.getContext(), HomeScreen.class));
 
             }
         });

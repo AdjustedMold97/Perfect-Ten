@@ -89,6 +89,18 @@ public class LoginScreen extends AppCompatActivity {
                 username = String.valueOf(username_input.getText());
                 password = String.valueOf(password_input.getText());
 
+                /*
+                 * Backdoor for testing when server is down.
+                 *
+                 * -Jae Swanepoel
+                 */
+                if (username.equals("Chuck") && password.equals("1")) {
+
+                    AppController.setUsername("Chuck");
+                    startActivity(new Intent(view.getContext(), HomeScreen.class));
+
+                }
+
                 Map<String, String> params = new HashMap<>();
                 params.put(USER_FIELD_NAME, username);
                 params.put(PASS_FIELD_NAME, password);
@@ -111,7 +123,7 @@ public class LoginScreen extends AppCompatActivity {
                                 if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG)) {
 
                                     AppController.setUsername(username);
-                                    startActivity(new Intent(view.getContext(), MainActivity.class));
+                                    startActivity(new Intent(view.getContext(), HomeScreen.class));
                                 }
 
                                 else {

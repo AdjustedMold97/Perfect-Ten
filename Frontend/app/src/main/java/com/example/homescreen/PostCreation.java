@@ -49,7 +49,7 @@ public class PostCreation extends AppCompatActivity {
          */
         Button backBtn = findViewById(R.id.post_back_Button);
 
-        backBtn.setOnClickListener(view -> startActivity(new Intent(view.getContext(),MainActivity.class)));
+        backBtn.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
 
         /*
          * button to post the textField to home - sends a request to server
@@ -127,7 +127,7 @@ public class PostCreation extends AppCompatActivity {
                             try {
 
                                 if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG))
-                                    startActivity(new Intent(view.getContext(), MainActivity.class));
+                                    startActivity(new Intent(view.getContext(), HomeScreen.class));
 
                                 else {
                                     startActivity(new Intent(PostCreation.this, FailedPost.class));

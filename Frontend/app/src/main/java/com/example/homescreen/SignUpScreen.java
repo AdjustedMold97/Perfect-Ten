@@ -44,7 +44,7 @@ public class SignUpScreen extends AppCompatActivity {
          */
         String username;
         String password;
-        JSONObject login_info;
+        JSONObject signUp_info;
 
     }
 

@@ -14,7 +14,7 @@
         android:theme="@style/Theme.HomeScreen"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".SignUpScreen"
+            android:name=".SignUp"
             android:exported="true" />
         <activity
             android:name=".PostCreation"

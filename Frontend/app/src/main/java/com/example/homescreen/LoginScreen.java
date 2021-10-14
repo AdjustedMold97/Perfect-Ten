@@ -46,7 +46,7 @@ public class LoginScreen extends AppCompatActivity {
          * -Ethan Still
          */
         Button signUp = findViewById(R.id.SignUp);
-        signUp.setOnClickListener(view -> startActivity(new Intent((view.getContext()), SignUpScreen.class)));
+        signUp.setOnClickListener(view -> startActivity(new Intent((view.getContext()), SignUp.class)));
 
 
 

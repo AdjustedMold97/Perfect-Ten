@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import org.json.JSONObject;
 
-public class SignUpScreen extends AppCompatActivity {
+public class SignUp extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

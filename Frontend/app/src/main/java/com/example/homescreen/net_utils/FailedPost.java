@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.homescreen.LoginScreen;
 import com.example.homescreen.PostCreation;
 import com.example.homescreen.R;
 
@@ -21,11 +19,14 @@ public class FailedPost extends Activity {
      * - Ethan Still
      */
     protected void onCreate(Bundle savedInstancesState) {
+
+        String error_message = "Post failed to send";
+
         super.onCreate(savedInstancesState);
 
         setContentView(R.layout.errorwindow);
         TextView error_Box = findViewById(R.id.textView7);
-        error_Box.setText("Post failed to send");
+        error_Box.setText(error_message);
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -37,13 +38,7 @@ public class FailedPost extends Activity {
 
         Button back = findViewById(R.id.errorCancel);
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), PostCreation.class));
-
-            }
-        });
+        back.setOnClickListener(view -> startActivity(new Intent(view.getContext(), PostCreation.class)));
 
     }
 

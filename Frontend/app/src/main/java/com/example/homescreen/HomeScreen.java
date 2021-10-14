@@ -56,12 +56,14 @@ public class HomeScreen extends AppCompatActivity {
         //adding request to queue - Jae Swanepoel
         AppController.getInstance().addToRequestQueue(json_arr_req);
 
+
+
+//========================================
         //Button to get to Friend Activity - Jae Swanepoel
         Button friend = findViewById(R.id.friends_Button);
 
         friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(),FriendsScreen.class)));
 
-//========================================
         /*
          * these three buttons make up the bottom tab buttons they go on each screen
          * they include Home, Settings, and Friends and reroute the user to that page form anywhere in the app

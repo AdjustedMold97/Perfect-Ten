@@ -4,9 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.homescreen.app.AppController;
+import com.example.homescreen.net_utils.Const;
+
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUp extends AppCompatActivity {
 
@@ -34,17 +45,62 @@ public class SignUp extends AppCompatActivity {
         final String USER_FIELD_NAME = "username";
         final String PASS_FIELD_NAME = "password";
 
-        /*
-         * <username> stores the entered username
-         * <password> stores the entered password
-         * <signUp_info> stores the username and password inputs
-         *              in a JSONObject
-         *
-         * - Jae Swanepoel
-         */
-        String username;
-        String password;
-        JSONObject signUp_info;
+        EditText name_input = findViewById(R.id.editTextName);
+        EditText pass_input = findViewById(R.id.editTextPassword);
+
+        Button submit = findViewById(R.id.Submit);
+
+        submit.setOnClickListener(view -> {
+
+            /*
+             * <username> stores the entered username
+             * <password> stores the entered password
+             * <signup_info> stores the username and password inputs
+             *              in a JSONObject
+             *
+             * - Jae Swanepoel
+             */
+            String username;
+            String password;
+            JSONObject signup_info;
+
+            username = String.valueOf(name_input.getText());
+            password = String.valueOf(pass_input.getText());
+
+            Map<String, String> params = new HashMap<>();
+            params.put(USER_FIELD_NAME, username);
+            params.put(PASS_FIELD_NAME, password);
+
+            signup_info = new JSONObject(params);
+
+            JsonObjectRequest json_obj_req = new JsonObjectRequest(Request.Method.POST, Const.SIGN_UP_URL, signup_info,
+
+                    response -> {
+
+                        //log the response
+                        Log.d(TAG_JSON_OBJ, response.toString());
+
+                        try {
+
+                            /*
+                             * Upon a successful response message, redirect to the login
+                             * screen.
+                             */
+                            if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG))
+                                startActivity(new Intent(view.getContext(), LoginScreen.class));
+
+                            else {
+                                //TODO
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    },
+                    error -> startActivity(new Intent(view.getContext(), Error.class)));
+
+            AppController.getInstance().addToRequestQueue(json_obj_req);
+        });
 
     }
 

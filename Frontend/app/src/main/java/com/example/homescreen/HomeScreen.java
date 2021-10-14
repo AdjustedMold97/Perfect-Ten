@@ -18,7 +18,7 @@ import org.json.JSONObject;
 
 import com.example.homescreen.app.AppController;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
          *
          * -Ethan Still:  its just meant as a test or to reload page
          */
-        home.setOnClickListener(view -> startActivity(new Intent(view.getContext(),MainActivity.class)));
+        home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
 //===========================================
 
         /*

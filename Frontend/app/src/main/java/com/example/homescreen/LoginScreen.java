@@ -111,7 +111,7 @@ public class LoginScreen extends AppCompatActivity {
                                 if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG)) {
 
                                     AppController.setUsername(username);
-                                    startActivity(new Intent(view.getContext(), MainActivity.class));
+                                    startActivity(new Intent(view.getContext(), HomeScreen.class));
                                 }
 
                                 else {

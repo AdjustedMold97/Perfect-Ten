@@ -59,29 +59,18 @@ public class HomeScreen extends AppCompatActivity {
 
 
 //========================================
-        //Button to get to Friend Activity - Jae Swanepoel
-        Button friend = findViewById(R.id.friends_Button);
-
-        friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(),FriendsScreen.class)));
-
         /*
          * these three buttons make up the bottom tab buttons they go on each screen
          * they include Home, Settings, and Friends and reroute the user to that page form anywhere in the app
          * - Ethan Still
          */
-        Button settings = findViewById(R.id.settings_Button);
+        Button friend = findViewById(R.id.friends_Button);
+        friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(),FriendsScreen.class)));
 
+        Button settings = findViewById(R.id.settings_Button);
         settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SettingsScreen.class)));
 
         Button home = findViewById(R.id.home_Button);
-
-        /*
-         * Commenting out this code because there's really no need to
-         * have a button from the home screen that goes to the home screen.
-         * just having it do nothing here. -Jae
-         *
-         * -Ethan Still:  its just meant as a test or to reload page
-         */
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
 //===========================================
 

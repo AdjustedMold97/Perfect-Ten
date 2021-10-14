@@ -14,36 +14,15 @@ public class FriendsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_screen);
 
-        Button home2 = findViewById(R.id.home_Button);
 
-        home2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                startActivity(new Intent(view.getContext(), HomeScreen.class));
-
-            }
-        });
         Button friend = findViewById(R.id.friends_Button);
-
-        friend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                startActivity(new Intent(view.getContext(),FriendsScreen.class));
-
-            }
-        });
+        friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(),FriendsScreen.class)));
 
         Button settings = findViewById(R.id.settings_Button);
+        settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SettingsScreen.class)));
 
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        Button home = findViewById(R.id.home_Button);
+        home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
 
-                startActivity(new Intent(view.getContext(),SettingsScreen.class));
-
-            }
-        });
     }
 }

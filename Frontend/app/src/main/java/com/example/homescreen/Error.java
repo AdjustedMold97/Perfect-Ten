@@ -32,7 +32,7 @@ public class Error extends Activity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(view.getContext(),PostCreation.class));
+                startActivity(new Intent(view.getContext(),LoginScreen.class));
 
             }
         });

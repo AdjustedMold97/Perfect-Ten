@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyLog;
@@ -16,6 +17,7 @@ import com.example.homescreen.app.AppController;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,6 +58,7 @@ public class LoginScreen extends AppCompatActivity {
          */
         EditText username_input = findViewById(R.id.editTextName);
         EditText password_input = findViewById(R.id.editTextPassword);
+        TextView login_fail = findViewById(R.id.login_fail_textView);
 
 
         /*
@@ -131,7 +134,7 @@ public class LoginScreen extends AppCompatActivity {
                                      * - if a correct object is returned but "success" is fail then a pop up screen, LoginFail.java pops up
                                      * - Ethan Still
                                      */
-                                    startActivity(new Intent(LoginScreen.this, LoginFail.class));
+                                    login_fail.setVisibility(0);
 
                                 }
 

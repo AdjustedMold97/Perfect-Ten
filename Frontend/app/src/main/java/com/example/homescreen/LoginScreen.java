@@ -35,19 +35,20 @@ public class LoginScreen extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-
         final String TAG_JSON_OBJ ="Login Information";
         final String SUCCESS_MSG = "success";
         final String MSG_FIELD_NAME = "message";
         final String USER_FIELD_NAME = "username";
         final String PASS_FIELD_NAME = "password";
 
-
         /*
-         * when clicked will submit the text entered in the username and password fields
-         * - Ethan Still
+         * Button to sign up screen
+         * -Ethan Still
          */
-        Button login = findViewById(R.id.Submit);
+        Button signUp = findViewById(R.id.SignUp);
+        signUp.setOnClickListener(view -> startActivity(new Intent((view.getContext()), SignUpScreen.class)));
+
+
 
         /*
          * Text inputs for username and password.
@@ -56,10 +57,12 @@ public class LoginScreen extends AppCompatActivity {
         EditText username_input = findViewById(R.id.editTextName);
         EditText password_input = findViewById(R.id.editTextPassword);
 
+
         /*
          * This checks the Name and Password fields for a login attempt and sends a request to the server
          * - Ethan Still
          */
+        Button login = findViewById(R.id.Submit);
         login.setOnClickListener(new View.OnClickListener() {
 
             /*

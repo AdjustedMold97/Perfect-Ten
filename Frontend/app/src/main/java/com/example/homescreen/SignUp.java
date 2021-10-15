@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -33,6 +35,17 @@ public class SignUp extends AppCompatActivity {
         Button login = findViewById(R.id.Login);
         login.setOnClickListener(view -> startActivity(new Intent((view.getContext()),LoginScreen.class)));
 
+        //==========================================================
+        //test
+
+        Button test = findViewById(R.id.button);
+        TextView taken = findViewById(R.id.taken);
+        test.setOnClickListener(view -> {
+            taken.setVisibility(View.VISIBLE);
+
+
+        });
+        //====================================================
 
         /*
          * final constants for use throughout code
@@ -51,7 +64,6 @@ public class SignUp extends AppCompatActivity {
         Button submit = findViewById(R.id.Submit);
 
         submit.setOnClickListener(view -> {
-
             /*
              * <username> stores the entered username
              * <password> stores the entered password
@@ -89,9 +101,18 @@ public class SignUp extends AppCompatActivity {
                             if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG))
                                 startActivity(new Intent(view.getContext(), LoginScreen.class));
 
+                            /*
+                             * if a failed response is received
+                             * should only ever happen if the username is already taken
+                             * -Ethan Still
+                             */
                             else {
                                 //TODO
+//                                TextView taken = findViewById(R.id.taken);
+//                                taken.setVisibility(View.VISIBLE);
+
                             }
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();

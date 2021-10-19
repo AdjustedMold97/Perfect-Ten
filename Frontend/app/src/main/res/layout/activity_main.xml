@@ -66,27 +66,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
-    <TextView
-        android:id="@+id/post_title_TextView"
-        android:layout_width="151dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="4dp"
-        android:text="Loading..."
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/post_body_TextView"
-        android:layout_width="169dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="36dp"
-        android:text="Loading..."
-        app:layout_constraintStart_toStartOf="@+id/post_title_TextView"
-        app:layout_constraintTop_toBottomOf="@+id/post_title_TextView" />
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="283dp"
@@ -100,31 +79,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/sampleTitle"
+                android:id="@+id/post_title_TextView"
                 android:layout_width="match_parent"
-                android:layout_height="366dp"
-                android:text="title" />
+                android:layout_height="61dp"
+                android:text="Loading..."
+                android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/sampleBody"
+                android:id="@+id/post_body_TextView"
                 android:layout_width="match_parent"
-                android:layout_height="334dp"
-                android:text="body" />
+                android:layout_height="156dp"
+                android:text="Loading..." />
 
-            <TextView
-                android:id="@+id/sampleTitle2"
-                android:layout_width="match_parent"
-                android:layout_height="258dp"
-                android:text="title" />
-
-            <TextView
-                android:id="@+id/sampleBody2"
-                android:layout_width="match_parent"
-                android:layout_height="145dp"
-                android:text="body" />
         </LinearLayout>
     </ScrollView>
 

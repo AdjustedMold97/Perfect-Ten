@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class SignUp extends AppCompatActivity {
 
@@ -35,17 +36,12 @@ public class SignUp extends AppCompatActivity {
         Button login = findViewById(R.id.Login);
         login.setOnClickListener(view -> startActivity(new Intent((view.getContext()),LoginScreen.class)));
 
-        //==========================================================
-        //test
-
-        Button test = findViewById(R.id.button);
-        TextView taken = findViewById(R.id.taken);
-        test.setOnClickListener(view -> {
-            taken.setVisibility(View.VISIBLE);
-
-
-        });
-        //====================================================
+        /*
+         * Still not sure what an AtomicReference is.
+         * It seems to make things work, though, so we use them.
+         * - Jae Swanepoel
+         */
+        AtomicReference<TextView> taken = new AtomicReference<>(findViewById(R.id.taken));
 
         /*
          * final constants for use throughout code
@@ -107,10 +103,8 @@ public class SignUp extends AppCompatActivity {
                              * -Ethan Still
                              */
                             else {
-                                //TODO
-//                                TextView taken = findViewById(R.id.taken);
-//                                taken.setVisibility(View.VISIBLE);
-
+                                taken.set(findViewById(R.id.taken));
+                                taken.get().setVisibility(View.VISIBLE);
                             }
 
 

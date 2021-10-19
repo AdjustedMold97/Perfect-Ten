@@ -17,7 +17,6 @@ import com.example.homescreen.app.AppController;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -134,7 +133,7 @@ public class LoginScreen extends AppCompatActivity {
                                      * - if a correct object is returned but "success" is fail then a pop up screen, LoginFail.java pops up
                                      * - Ethan Still
                                      */
-                                    login_fail.setVisibility(0);
+                                    login_fail.setVisibility(View.VISIBLE);
 
                                 }
 

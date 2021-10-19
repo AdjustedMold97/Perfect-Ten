@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -30,16 +32,16 @@ public class SignUp extends AppCompatActivity {
          * Button to login screen
          * -Ethan Still
          */
-        Button login = findViewById(R.id.Login);
-        login.setOnClickListener(view -> startActivity(new Intent((view.getContext()),LoginScreen.class)));
+        Button toLogin = findViewById(R.id.to_login_button);
+        toLogin.setOnClickListener(view -> startActivity(new Intent((view.getContext()),LoginScreen.class)));
 
 
         /*
-         * final constants for use throughout code
+         * constants for use throughout code
          *
          * - Jae Swanepoel
          */
-        final String TAG_JSON_OBJ ="SignUp Information";
+        final String TAG_JSON_OBJ ="Sign-Up Information";
         final String SUCCESS_MSG = "success";
         final String MSG_FIELD_NAME = "message";
         final String USER_FIELD_NAME = "username";
@@ -49,6 +51,8 @@ public class SignUp extends AppCompatActivity {
         EditText pass_input = findViewById(R.id.editTextPassword);
 
         Button submit = findViewById(R.id.Submit);
+
+        TextView errorView = findViewById(R.id.error_view);
 
         submit.setOnClickListener(view -> {
 
@@ -84,13 +88,15 @@ public class SignUp extends AppCompatActivity {
 
                             /*
                              * Upon a successful response message, redirect to the login
-                             * screen.
+                             * screen and set global username
                              */
-                            if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG))
+                            if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG)) {
                                 startActivity(new Intent(view.getContext(), LoginScreen.class));
+                                AppController.setUsername(username);
+                            }
 
                             else {
-                                //TODO
+                                errorView.setVisibility(View.VISIBLE);
                             }
 
                         } catch (JSONException e) {
@@ -101,7 +107,5 @@ public class SignUp extends AppCompatActivity {
 
             AppController.getInstance().addToRequestQueue(json_obj_req);
         });
-
     }
-
 }

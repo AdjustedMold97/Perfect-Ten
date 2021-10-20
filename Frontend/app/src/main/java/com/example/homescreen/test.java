@@ -3,6 +3,7 @@ package com.example.homescreen;
 import static com.example.homescreen.net_utils.Const.POST_LIST_URL;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,20 +13,67 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.homescreen.app.AppController;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.homescreen.app.AppController;
-
-public class HomeScreen extends AppCompatActivity {
+public class test extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_test);
+
+        //============================================================================
+        final String RESPONSE_TAG2 = "JSON Response: ";
+
+        TextView post_title_TextView2 = findViewById(R.id.post_title_TextView2);
+        TextView post_body_TextView2 = findViewById(R.id.post_body_TextView2);
+
+        final JSONArray[] posts_arr2 = new JSONArray[1];
+
+        JsonArrayRequest json_arr_req2 = new JsonArrayRequest(POST_LIST_URL,
+
+                response -> {
+
+                    Log.d(RESPONSE_TAG2, response.toString());
+
+                    JSONObject temp;
+
+                    try {
+
+                        /*
+                         * As of now, when we request a post, we really take in all posts
+                         * ever created. We will change this, but for now we get around this
+                         * by selecting the most recent post.
+                         */
+                        temp = response.getJSONObject(response.length() - 1);
+                        post_body_TextView2.setText(temp.get("message").toString());
+                        post_title_TextView2.setText(temp.get("title").toString());
+
+                        posts_arr2[0] = response;
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+
+                error -> VolleyLog.d("Error: " + error.getMessage())
+        );
+
+        //adding request to queue - Jae Swanepoel
+        AppController.getInstance().addToRequestQueue(json_arr_req2);
+
+        RecyclerView Recycler = findViewById(R.id.recycle);
+
+        Recycler.getChildAt(0);
+
+
+
+
+        //===============================================================================================
 
         final String RESPONSE_TAG = "JSON Response: ";
 
@@ -33,7 +81,7 @@ public class HomeScreen extends AppCompatActivity {
         TextView post_body_TextView = findViewById(R.id.post_body_TextView);
 
         final JSONArray[] posts_arr = new JSONArray[1];
-        
+
         JsonArrayRequest json_arr_req = new JsonArrayRequest(POST_LIST_URL,
 
                 response -> {
@@ -67,11 +115,7 @@ public class HomeScreen extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(json_arr_req);
 
 
-
-
-
-
-//========================================
+        //========================================
         /*
          * these three buttons make up the bottom tab buttons they go on each screen
          * they include Home, Settings, and Friends and reroute the user to that page form anywhere in the app
@@ -86,36 +130,5 @@ public class HomeScreen extends AppCompatActivity {
         Button home = findViewById(R.id.home_Button);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
 //===========================================
-
-        /*
-         * signs the user out, back to the login screen
-         * - Ethan Still
-         */
-        Button toLogin = findViewById(R.id.sign_out_Button);
-
-        toLogin.setOnClickListener(view -> {
-
-            AppController.setUsername(null);
-            startActivity(new Intent(view.getContext(),LoginScreen.class));
-        });
-
-        Button post_button = findViewById(R.id.post_create_Button);
-
-        /*
-         * - button sends to post creation screen onClick
-         * - Ethan Still
-         */
-        post_button.setOnClickListener(view -> startActivity(new Intent(view.getContext(),PostCreation.class)));
-
-
-        /*
-         * - button sends to test screen onClick
-         * - Ethan Still
-         */
-        Button test = findViewById(R.id.admin);
-        test.setOnClickListener(view -> startActivity(new Intent(view.getContext(),test.class)));
     }
-
-
-
 }

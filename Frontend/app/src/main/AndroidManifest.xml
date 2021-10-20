@@ -14,6 +14,9 @@
         android:theme="@style/Theme.HomeScreen"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".test"
+            android:exported="true" />
+        <activity
             android:name=".SignUp"
             android:exported="true" />
         <activity
@@ -22,11 +25,12 @@
         <activity
             android:name=".LoginScreen"
             android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SettingsScreen"
             android:exported="true" />
@@ -35,12 +39,9 @@
             android:exported="true" />
         <activity
             android:name=".HomeScreen"
-            android:exported="true">
-
-        </activity>
-
-        <activity android:name = ".Error" ></activity>
-        <activity android:name=".LoginFail" ></activity>
+            android:exported="true"></activity>
+        <activity android:name=".Error" />
+        <activity android:name=".LoginFail" />
     </application>
 
 </manifest>

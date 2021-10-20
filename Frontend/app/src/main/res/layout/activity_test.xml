@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeScreen">
+    tools:context=".test">
 
     <Button
         android:id="@+id/home_Button"
@@ -42,73 +42,63 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
 
-    <Button
-        android:id="@+id/sign_out_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign Out"
-        app:layout_constraintBottom_toTopOf="@+id/settings_Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.98"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
-
-    <Button
-        android:id="@+id/post_create_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Make a Post!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
     <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="283dp"
-        android:layout_height="447dp"
+        android:id="@+id/scrollView2"
+        android:layout_width="257dp"
+        android:layout_height="232dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.724">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/post_title_TextView"
+                android:layout_width="330dp"
+                android:layout_height="158dp"
+                android:text="Loading..."
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/post_body_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="156dp"
+                android:text="Loading..." />
+        </LinearLayout>
     </ScrollView>
 
     <TextView
-        android:id="@+id/post_title_TextView"
-        android:layout_width="match_parent"
-        android:layout_height="61dp"
-        android:text="Loading..."
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="89dp" />
-
-    <TextView
-        android:id="@+id/post_body_TextView"
-        android:layout_width="match_parent"
-        android:layout_height="156dp"
-        android:text="Loading..."
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="576dp" />
-
-    <Button
-        android:id="@+id/admin"
+        android:id="@+id/post_title_TextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ADMIN"
+        android:text="title"
+        tools:layout_editor_absoluteX="325dp"
+        tools:layout_editor_absoluteY="111dp" />
+
+    <TextView
+        android:id="@+id/post_body_TextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="body"
+        tools:layout_editor_absoluteX="325dp"
+        tools:layout_editor_absoluteY="180dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="256dp"
+        android:layout_height="295dp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.583"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
+        app:layout_constraintVertical_bias="0.096" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

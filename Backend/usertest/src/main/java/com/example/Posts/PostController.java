@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.Posts.*;
-
 import com.example.Users.*;
 
 @RestController
@@ -21,7 +19,10 @@ public class PostController {
     @Autowired
     UserRepository userRepository;
     private String success = "{\"message\":\"success\"}";
-    private String failure = "{\"message\":\"failure\"}";
+    private String failure = "{\"message\":\"error1\"}";
+    private String usernameFail = "{\"message\":\"error2\"}";;
+    private String emailFail = "{\"message\":\"error3\"}";;
+    private String passFail = "{\"message\":\"error4\"}";;
 
     @GetMapping(path = "/posts/list")
     List<Post> getAllPosts(){
@@ -36,7 +37,7 @@ public class PostController {
     @PostMapping(path = "/posts/new/{username}")
     String createPost(@RequestBody Post post, @PathVariable String username){
         if (post == null || userRepository.findByUsername(username) == null)
-            return failure;
+            return usernameFail;
         // User user = userRepository.findByUsername(username);
         post.setUser(userRepository.findByUsername(username));
         postRepository.save(post);

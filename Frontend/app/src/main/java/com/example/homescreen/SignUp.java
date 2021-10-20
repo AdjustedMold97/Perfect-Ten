@@ -44,21 +44,31 @@ public class SignUp extends AppCompatActivity {
         final String TAG_JSON_OBJ ="Sign-Up Information";
         final String SUCCESS_MSG = "success";
         final String MSG_FIELD_NAME = "message";
-        final String USER_FIELD_NAME = "username";
-        final String PASS_FIELD_NAME = "password";
+        final String USER_FIELD_JSON = "username";
+        final String PASS_FIELD_JSON = "password";
+        final String EMAIL_FIELD_JSON = "email";
 
         EditText name_input = findViewById(R.id.editTextName);
         EditText pass_input = findViewById(R.id.editTextPassword);
+        EditText email_input = findViewById(R.id.editTextEmail);
 
         Button submit = findViewById(R.id.Submit);
 
         TextView errorView = findViewById(R.id.error_view);
+        TextView enter_user = findViewById(R.id.enter_user);
+        TextView enter_pass = findViewById(R.id.enter_pass);
+        TextView enter_email = findViewById(R.id.enter_email);
+
+        enter_user.setVisibility(View.INVISIBLE);
+        enter_pass.setVisibility(View.INVISIBLE);
+        enter_email.setVisibility(View.INVISIBLE);
 
         submit.setOnClickListener(view -> {
 
             /*
              * <username> stores the entered username
              * <password> stores the entered password
+             * <email> stores entered email
              * <signup_info> stores the username and password inputs
              *              in a JSONObject
              *
@@ -66,14 +76,59 @@ public class SignUp extends AppCompatActivity {
              */
             String username;
             String password;
+            String email;
             JSONObject signup_info;
 
             username = String.valueOf(name_input.getText());
             password = String.valueOf(pass_input.getText());
+            email = String.valueOf(email_input.getText());
+
+            /*
+             * if any of the entered fields are empty or null,
+             * we won't create a request.
+             *
+             * - Jae Swanepoel
+             */
+
+            boolean flag = false;
+
+            if (username.equals("")) {
+
+                flag = true;
+                enter_user.setVisibility(View.VISIBLE);
+
+            }
+
+            else
+                enter_user.setVisibility(View.INVISIBLE);
+
+            if (password.equals("")) {
+
+                flag = true;
+                enter_pass.setVisibility(View.VISIBLE);
+
+            }
+
+            else
+                enter_pass.setVisibility(View.INVISIBLE);
+
+            if (email.equals("")) {
+
+                flag = true;
+                enter_email.setVisibility(View.VISIBLE);
+
+            }
+
+            else
+                enter_email.setVisibility(View.INVISIBLE);
+
+            if (flag)
+                return;
 
             Map<String, String> params = new HashMap<>();
-            params.put(USER_FIELD_NAME, username);
-            params.put(PASS_FIELD_NAME, password);
+            params.put(USER_FIELD_JSON, username);
+            params.put(PASS_FIELD_JSON, password);
+            params.put(EMAIL_FIELD_JSON, email);
 
             signup_info = new JSONObject(params);
 
@@ -90,12 +145,45 @@ public class SignUp extends AppCompatActivity {
                              * Upon a successful response message, redirect to the login
                              * screen and set global username
                              */
+
                             if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG)) {
-                                startActivity(new Intent(view.getContext(), LoginScreen.class));
+
                                 AppController.setUsername(username);
+                                startActivity(new Intent(view.getContext(), LoginScreen.class));
+
                             }
 
                             else {
+
+                                //hoping this cast will cut it
+                                String response_msg = (String) response.get((MSG_FIELD_NAME));
+                                String error_msg;
+
+                                //TODO
+                                switch(response_msg) {
+
+                                    default:
+                                        //generic error
+                                        error_msg = "Something went wrong...";
+                                        break;
+
+                                    case "error2":
+                                        //username taken
+                                        error_msg = "This username is taken. Try another one!";
+                                        break;
+
+                                    case "error3":
+                                        //email invalid
+                                        error_msg = "This email is invalid.";
+                                        break;
+
+                                    case "error4":
+                                        //password invalid
+                                        error_msg = "This password is invalid.";
+                                        break;
+                                }
+
+                                errorView.setText(error_msg);
                                 errorView.setVisibility(View.VISIBLE);
                             }
 
@@ -103,6 +191,7 @@ public class SignUp extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     },
+
                     error -> startActivity(new Intent(view.getContext(), Error.class)));
 
             AppController.getInstance().addToRequestQueue(json_obj_req);

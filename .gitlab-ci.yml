@@ -4,6 +4,7 @@ stages:
   - maventest
   - mavenDeploy
   - androidtry
+  - android-test
 
 maven-build:   #this is a JOB
   stage: mavenbuild

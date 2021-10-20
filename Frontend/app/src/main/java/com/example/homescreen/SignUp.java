@@ -160,6 +160,7 @@ public class SignUp extends AppCompatActivity {
                                 String error_msg;
 
                                 //TODO
+                                //standardize errors across classes
                                 switch(response_msg) {
 
                                     default:

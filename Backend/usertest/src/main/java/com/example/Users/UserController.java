@@ -34,7 +34,7 @@ public class UserController {
         if(userRepository.findByUsername(json.get("username").textValue()) == null)
     		return usernameFail;
     	if(userRepository.findByUsername(json.get("username").textValue()).getPassword().equals(json.get("password").textValue()))
-            return passFail;
+            return success;
     	else 
     		return failure;
     } 

@@ -31,44 +31,7 @@ public class test extends AppCompatActivity {
         recycle = findViewById(R.id.recycle);
         String [] test = {"1","2","3","4","5","6"};
 
-        final String RESPONSE_TAG2 = "JSON Response: ";
 
-        TextView post_title_TextView2 = findViewById(R.id.post_title_TextView2);
-        TextView post_body_TextView2 = findViewById(R.id.post_body_TextView2);
-
-        final JSONArray[] posts_arr2 = new JSONArray[1];
-
-        JsonArrayRequest json_arr_req2 = new JsonArrayRequest(POST_LIST_URL,
-
-                response -> {
-
-                    Log.d(RESPONSE_TAG2, response.toString());
-
-                    JSONObject temp;
-
-                    try {
-
-                        /*
-                         * As of now, when we request a post, we really take in all posts
-                         * ever created. We will change this, but for now we get around this
-                         * by selecting the most recent post.
-                         */
-                        temp = response.getJSONObject(response.length() - 1);
-                        post_body_TextView2.setText(temp.get("message").toString());
-                        post_title_TextView2.setText(temp.get("title").toString());
-
-                        posts_arr2[0] = response;
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                },
-
-                error -> VolleyLog.d("Error: " + error.getMessage())
-        );
-
-        //adding request to queue - Jae Swanepoel
-        AppController.getInstance().addToRequestQueue(json_arr_req2);
 
         RecyclerView Recycler = findViewById(R.id.recycle);
 

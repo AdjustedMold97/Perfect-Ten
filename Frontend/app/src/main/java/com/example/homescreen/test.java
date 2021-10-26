@@ -66,13 +66,13 @@ public class test extends AppCompatActivity {
 
                 error -> VolleyLog.d("Error: " + error.getMessage())
         );
-        
+
         //adding request to queue - Jae Swanepoel
         AppController.getInstance().addToRequestQueue(json_arr_req2);
 
         RecyclerView Recycler = findViewById(R.id.recycle);
 
-        Recycler.getChildAt(0);
+
 
 
 

@@ -87,17 +87,5 @@
         app:layout_constraintStart_toStartOf="@+id/post_title_TextView"
         app:layout_constraintTop_toBottomOf="@+id/post_title_TextView" />
 
-    <ScrollView
-        android:layout_width="260dp"
-        android:layout_height="194dp"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="299dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

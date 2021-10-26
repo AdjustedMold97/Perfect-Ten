@@ -100,6 +100,7 @@ public class LoginScreen extends AppCompatActivity {
 
                     AppController.setUsername("Chuck");
                     startActivity(new Intent(view.getContext(), HomeScreen.class));
+                    return;
 
                 }
 

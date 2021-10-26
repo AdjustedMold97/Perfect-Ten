@@ -62,13 +62,13 @@ public class HomeScreen extends AppCompatActivity {
          * they include Home, Settings, and Friends and reroute the user to that page form anywhere in the app
          * - Ethan Still
          */
-        Button friend = findViewById(R.id.friends_Button);
+        Button friend = findViewById(R.id.friends_Button_home);
         friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(),FriendsScreen.class)));
 
-        Button settings = findViewById(R.id.settings_Button);
+        Button settings = findViewById(R.id.settings_Button_home);
         settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SettingsScreen.class)));
 
-        Button home = findViewById(R.id.home_Button);
+        Button home = findViewById(R.id.home_Button_home);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
 //===========================================
 

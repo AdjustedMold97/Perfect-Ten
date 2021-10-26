@@ -27,6 +27,10 @@ public class test extends AppCompatActivity {
         setContentView(R.layout.activity_test);
 
         //============================================================================
+        RecyclerView recycle;
+        recycle = findViewById(R.id.recycle);
+        String [] test = {"1","2","3","4","5","6"};
+
         final String RESPONSE_TAG2 = "JSON Response: ";
 
         TextView post_title_TextView2 = findViewById(R.id.post_title_TextView2);
@@ -62,7 +66,7 @@ public class test extends AppCompatActivity {
 
                 error -> VolleyLog.d("Error: " + error.getMessage())
         );
-
+        
         //adding request to queue - Jae Swanepoel
         AppController.getInstance().addToRequestQueue(json_arr_req2);
 

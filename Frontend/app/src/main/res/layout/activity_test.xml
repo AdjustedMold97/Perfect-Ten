@@ -78,15 +78,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="title"
-        tools:layout_editor_absoluteX="325dp"
-        tools:layout_editor_absoluteY="111dp" />
+        tools:layout_editor_absoluteX="371dp"
+        tools:layout_editor_absoluteY="93dp" />
 
     <TextView
         android:id="@+id/post_body_TextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="body"
-        tools:layout_editor_absoluteX="325dp"
+        tools:layout_editor_absoluteX="364dp"
         tools:layout_editor_absoluteY="180dp" />
 
     <androidx.recyclerview.widget.RecyclerView

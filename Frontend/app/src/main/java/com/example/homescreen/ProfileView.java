@@ -76,6 +76,8 @@ public class ProfileView extends AppCompatActivity {
             AppController.getInstance().addToRequestQueue(addFriendRequest);
         });
 
+        /*
+
         //Setting the username TextView
         TextView username = findViewById(R.id.username_TextView_profile);
         username.setText(AppController.getTargetUser());
@@ -90,7 +92,7 @@ public class ProfileView extends AppCompatActivity {
         JSONObject postRequestObject = new JSONObject(postRequestInfo);
 
         //Instantiating the Request to get a post from the target user
-        JsonObjectRequest userPostRequest = new JsonObjectRequest(Request.Method.GET, "TODO"/*TODO GET URL*/, postRequestObject,
+        JsonObjectRequest userPostRequest = new JsonObjectRequest(Request.Method.GET, "TODO"/*TODO GET URL*//*, postRequestObject,
 
                 response -> {
 
@@ -117,5 +119,7 @@ public class ProfileView extends AppCompatActivity {
 
         postTitleTextView.setText(postTitle[0]);
         postBodyTextView.setText(postBody[0]);
+
+*/
     }
 }

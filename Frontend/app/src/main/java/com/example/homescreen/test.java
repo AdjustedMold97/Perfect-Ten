@@ -29,9 +29,6 @@ public class test extends AppCompatActivity {
         //============================================================================
         RecyclerView recycle;
         recycle = findViewById(R.id.recycle);
-        String [] test = {"1","2","3","4","5","6"};
-
-
 
         RecyclerView Recycler = findViewById(R.id.recycle);
 

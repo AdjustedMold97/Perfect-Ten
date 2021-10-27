@@ -1,5 +1,7 @@
 package com.example.homescreen;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -9,15 +11,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    @NonNull
+import java.util.List;
+
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+
+    private List<ListItem> listItems;
+    private Context context;
+
+
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.activity_test, parent, false);
+
+        return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        ListItem listItem = listItems.get(position);
+
+        holder.textViewHead.setText(listItem.getHead());
+        holder.textViewDesc.setText(listItem.getDesc());
 
     }
 
@@ -26,17 +41,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return 0;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView textViewHead;
         public TextView textViewDesc;
 
 
 
-        public MyViewHolder(@NonNull View itemView){
+        public ViewHolder(@NonNull View itemView){
             super(itemView);
 
-            textViewHead = (TextView) itemView.findViewById(R.id.textViewHead);
+
+//TODO textViewHead = (TextView) itemView.findViewById(R.id.); don't know what goes in R.id
+            textViewHead = (TextView) itemView.findViewById(R.id.recycle);
 
         }
     }

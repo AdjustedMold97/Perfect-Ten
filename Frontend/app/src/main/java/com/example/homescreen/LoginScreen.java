@@ -37,10 +37,7 @@ public class LoginScreen extends AppCompatActivity {
          * - Jae Swanepoel
          */
         final String TAG_JSON_OBJ ="Login Information";
-        final String SUCCESS_MSG = "success";
         final String MSG_FIELD_NAME = "message";
-        final String USER_FIELD_NAME = "username";
-        final String PASS_FIELD_NAME = "password";
 
         /*
          * Button to sign up screen
@@ -105,8 +102,8 @@ public class LoginScreen extends AppCompatActivity {
                 }
 
                 Map<String, String> params = new HashMap<>();
-                params.put(USER_FIELD_NAME, username);
-                params.put(PASS_FIELD_NAME, password);
+                params.put(Const.USER_FIELD, username);
+                params.put(Const.PASS_FIELD, password);
 
                 login_info = new JSONObject(params);
 
@@ -123,7 +120,7 @@ public class LoginScreen extends AppCompatActivity {
                             Log.d(TAG_JSON_OBJ, response.toString());
 
                             try {
-                                if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG)) {
+                                if (response.get(MSG_FIELD_NAME).equals(Const.SUCCESS_MSG)) {
 
                                     AppController.setUsername(username);
                                     startActivity(new Intent(view.getContext(), HomeScreen.class));

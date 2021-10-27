@@ -53,8 +53,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
 //TODO textViewHead = (TextView) itemView.findViewById(R.id.); don't know what goes in R.id
-            textViewHead = (TextView) itemView.findViewById(R.id.recycle);
-            textViewDesc = (TextView) itemView.findViewById(R.id.recycle);
+            textViewHead = (TextView) itemView.findViewById(R.id.textView4);
+            textViewDesc = (TextView) itemView.findViewById(R.id.textView5);
 
         }
     }

@@ -30,8 +30,9 @@ public class test extends AppCompatActivity {
         RecyclerView recycle;
         recycle = findViewById(R.id.recycle);
 
-        recycle.getAdapter().getItemId(1);
-        
+
+
+
 
 
 

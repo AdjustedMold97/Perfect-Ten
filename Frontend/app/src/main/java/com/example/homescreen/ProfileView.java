@@ -66,7 +66,7 @@ public class ProfileView extends AppCompatActivity {
                         },
 
                         error -> {
-
+                            //TODO
                         });
             }
         });

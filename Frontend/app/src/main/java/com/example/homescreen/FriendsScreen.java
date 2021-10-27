@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+
+import com.example.homescreen.app.AppController;
 
 public class FriendsScreen extends AppCompatActivity {
 
@@ -22,6 +26,17 @@ public class FriendsScreen extends AppCompatActivity {
 
         Button home = findViewById(R.id.home_Button_home);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
+
+        /*
+         * For now, clicking on the ImageButton will
+         * set the target user to "Bob" and direct you to
+         * the profile page.
+         */
+        ImageButton bob = findViewById(R.id.Bob_profile_Button);
+        bob.setOnClickListener(view -> {
+            AppController.setTargetUser("Bob");
+            startActivity(new Intent(view.getContext(), ProfileView.class));
+        });
 
     }
 }

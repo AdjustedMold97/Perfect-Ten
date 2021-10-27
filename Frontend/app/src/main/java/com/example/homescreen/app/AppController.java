@@ -72,14 +72,29 @@ public class AppController extends Application {
     static private String username;
 
     static public String getUsername() {
-
         return username;
-
     }
 
     public static void setUsername(String _username) {
-
         username = _username;
+    }
 
+    /*
+     * targetUser is a global variable that
+     * we use for addressing other users (aside from the main user)
+     * in the app. Specifically:
+     * - Getting data for profile page
+     * -
+     *
+     */
+
+    static private String targetUser;
+
+    static public String getTargetUser() {
+        return targetUser;
+    }
+
+    static public void setTargetUser(String _targetUser) {
+        targetUser = _targetUser;
     }
 }

@@ -51,4 +51,24 @@
         app:layout_constraintStart_toEndOf="@+id/friends_Button_home"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
+
+    <ImageButton
+        android:id="@+id/Bob_profile_Button"
+        android:layout_width="114dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="108dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/user_name_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="116dp"
+        android:text="Bob"
+        app:layout_constraintStart_toStartOf="@+id/Bob_profile_Button"
+        app:layout_constraintTop_toTopOf="@+id/Bob_profile_Button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -135,7 +135,7 @@ public class LoginScreen extends AppCompatActivity {
                                      * - if a correct object is returned but "success" is fail then a pop up screen, LoginFail.java pops up
                                      * - Ethan Still
                                      */
-                                    login_fail.setVisibility(0);
+                                    login_fail.setVisibility(View.VISIBLE);
 
                                 }
 

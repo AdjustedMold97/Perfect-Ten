@@ -99,13 +99,5 @@
             android:orientation="vertical" />
     </ScrollView>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="trst"
-        tools:layout_editor_absoluteX="307dp"
-        tools:layout_editor_absoluteY="153dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,9 +8,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.example.Posts.Post;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -27,15 +31,24 @@ public class User {
     
     private List<Post> posts;
 
+    @ManyToMany
+    @JoinTable(name="friends_with", 
+    joinColumns={@JoinColumn(name="user_id")},
+    inverseJoinColumns={@JoinColumn(name="friend_id")})
+    @JsonIgnore
+    private List<User> friends;
+
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
         posts = new ArrayList<>();
+        friends = new ArrayList<>();
     }
 
     public User() {
         posts = new ArrayList<>();
+        friends = new ArrayList<>();
     }
 
     public int getId() {
@@ -80,5 +93,17 @@ public class User {
 
     public void addPost(Post post) {
         this.posts.add(post);
+    }
+
+    public List<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
+    }
+
+    public void addFriend(User friend) {
+        this.friends.add(friend);
     }
 }

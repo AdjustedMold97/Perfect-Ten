@@ -20,16 +20,16 @@ import java.util.Map;
 
 public class ProfileView extends AppCompatActivity {
 
+    Button addFriendButton;
+    TextView postTitleTextView;
+    TextView postBodyTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_view);
 
-        /*
-         * Rigging bottom buttons.
-         *
-         * - Jae Swanepoel
-         */
+        //Rigging Universal Buttons
         Button home = findViewById(R.id.home_Button_profile);
         Button friends = findViewById(R.id.friends_Button_profile);
         Button settings = findViewById(R.id.settings_Button_profile);
@@ -39,8 +39,21 @@ public class ProfileView extends AppCompatActivity {
         settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SettingsScreen.class)));
 
         //Rigging the "Add Friend" Button.
-        Button addFriend = findViewById(R.id.add_friend_Button);
-        addFriend.setOnClickListener(view -> {
+        addFriendButton = findViewById(R.id.add_friend_Button);
+        addFriendButton.setOnClickListener(view -> addFriend());
+
+        //Setting the username TextView
+        TextView username = findViewById(R.id.username_TextView_profile);
+        username.setText(AppController.getTargetUser());
+
+        //Setting up post TextViews
+        postTitleTextView = findViewById(R.id.post_title_TextView);
+        postBodyTextView = findViewById(R.id.post_body_TextView);
+
+        fetchPostData();
+    }
+
+    private void addFriend() {
 
             //Compiling data for the JSON Request
             Map<String, String> fields = new HashMap<>();
@@ -57,8 +70,9 @@ public class ProfileView extends AppCompatActivity {
 
                         try {
 
+                            //Changing text on addFriendButton upon successful request
                             if (response.get("message").equals(Const.SUCCESS_MSG))
-                                addFriend.setText("Remove Friend");
+                                addFriendButton.setText("Remove Friend");
 
                             else {
                                 //TODO set up failure response
@@ -68,19 +82,16 @@ public class ProfileView extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     },
+
                     error -> {
                         //TODO set up error response
                     });
 
             //Adding the Request to the Queue
             AppController.getInstance().addToRequestQueue(addFriendRequest);
-        });
+    }
 
-        /*
-
-        //Setting the username TextView
-        TextView username = findViewById(R.id.username_TextView_profile);
-        username.setText(AppController.getTargetUser());
+    private void fetchPostData() {
 
         //Declaring Strings to store post data
         final String[] postTitle = new String[1];
@@ -92,7 +103,7 @@ public class ProfileView extends AppCompatActivity {
         JSONObject postRequestObject = new JSONObject(postRequestInfo);
 
         //Instantiating the Request to get a post from the target user
-        JsonObjectRequest userPostRequest = new JsonObjectRequest(Request.Method.GET, "TODO"/*TODO GET URL*//*, postRequestObject,
+        JsonObjectRequest userPostRequest = new JsonObjectRequest(Request.Method.GET, "TODO"/*TODO GET URL*/, postRequestObject,
 
                 response -> {
 
@@ -103,6 +114,7 @@ public class ProfileView extends AppCompatActivity {
                             postTitle[0] = String.valueOf(response.get("title"));
                             postBody[0] = String.valueOf(response.get("body"));
                         }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -114,12 +126,7 @@ public class ProfileView extends AppCompatActivity {
 
         AppController.getInstance().addToRequestQueue(userPostRequest);
 
-        TextView postTitleTextView = findViewById(R.id.post_title_TextView);
-        TextView postBodyTextView = findViewById(R.id.post_body_TextView);
-
         postTitleTextView.setText(postTitle[0]);
         postBodyTextView.setText(postBody[0]);
-
-*/
     }
 }

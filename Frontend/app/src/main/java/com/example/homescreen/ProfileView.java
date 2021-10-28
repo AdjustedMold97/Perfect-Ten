@@ -18,9 +18,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+ * written by Jae Swanepoel
+ */
 public class ProfileView extends AppCompatActivity {
 
     Button addFriendButton;
+    Button blockButton;
     TextView postTitleTextView;
     TextView postBodyTextView;
 
@@ -38,9 +42,13 @@ public class ProfileView extends AppCompatActivity {
         friends.setOnClickListener(view -> startActivity(new Intent(view.getContext(),FriendsScreen.class)));
         settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SettingsScreen.class)));
 
-        //Rigging the "Add Friend" Button.
+        //Rigging the "Add Friend" Button
         addFriendButton = findViewById(R.id.add_friend_Button);
         addFriendButton.setOnClickListener(view -> addFriend());
+
+        //Rigging the "Block" Button
+        blockButton = findViewById(R.id.block_Button);
+        blockButton.setOnClickListener(view -> block());
 
         //Setting the username TextView
         TextView username = findViewById(R.id.username_TextView_profile);
@@ -50,9 +58,16 @@ public class ProfileView extends AppCompatActivity {
         postTitleTextView = findViewById(R.id.post_title_TextView);
         postBodyTextView = findViewById(R.id.post_body_TextView);
 
+        //populating the post TextViews
         fetchPostData();
     }
 
+    /*
+     * Code for the "Add Friend" Button.
+     * Creates a JSON Request and adds it to the RequestQueue.
+     * upon a successful Request, the text is changed from
+     * "Add Friend" to "Remove Friend".
+     */
     private void addFriend() {
 
             //Compiling data for the JSON Request
@@ -91,28 +106,34 @@ public class ProfileView extends AppCompatActivity {
             AppController.getInstance().addToRequestQueue(addFriendRequest);
     }
 
+    /*
+     * Code for populating the post TextViews.
+     * Creates a JSON Request and adds it to the RequestQueue.
+     * upon a successful Request, the TextViews are populated.
+     */
     private void fetchPostData() {
-
-        //Declaring Strings to store post data
-        final String[] postTitle = new String[1];
-        final String[] postBody = new String[1];
 
         //Setting up JSONObject for the Request
         Map<String, String> postRequestInfo = new HashMap<>();
         postRequestInfo.put("username", AppController.getTargetUser());
         JSONObject postRequestObject = new JSONObject(postRequestInfo);
 
-        //Instantiating the Request to get a post from the target user
+        //Instantiating the Request
         JsonObjectRequest userPostRequest = new JsonObjectRequest(Request.Method.GET, "TODO"/*TODO GET URL*/, postRequestObject,
 
                 response -> {
 
                     try {
 
+                        //upon a successful response, populate the TextViews
                         if (response.get("message").equals(Const.SUCCESS_MSG)){
                             //TODO format fields correctly
-                            postTitle[0] = String.valueOf(response.get("title"));
-                            postBody[0] = String.valueOf(response.get("body"));
+                            postTitleTextView.setText(String.valueOf(response.get("title")));
+                            postBodyTextView.setText(String.valueOf(response.get("body")));
+                        }
+
+                        else {
+                            //TODO set up failure response
                         }
 
                     } catch (JSONException e) {
@@ -124,9 +145,51 @@ public class ProfileView extends AppCompatActivity {
                     //TODO set up error handling
                 });
 
+        //adding the Request to the Queue
         AppController.getInstance().addToRequestQueue(userPostRequest);
+    }
 
-        postTitleTextView.setText(postTitle[0]);
-        postBodyTextView.setText(postBody[0]);
+    /*
+     * Code for the "Block" Button.
+     * Creates a JSON Request and adds it to the RequestQueue.
+     * Upon a successful Request, the Button's text is changed
+     * from "Block" to "Unblock".
+     */
+    private void block() {
+
+        //Compiling data for the JSON Request
+        Map<String, String> fields = new HashMap<>();
+        fields.put("user", AppController.getUsername());
+        fields.put("target", AppController.getTargetUser());
+
+        //Instantiating the JSON Object using the complied data
+        JSONObject info = new JSONObject(fields);
+
+        //Instantiating the JsonObjectRequest
+        JsonObjectRequest blockRequest = new JsonObjectRequest(Request.Method.GET, /*TODO FIND URL*/ "TODO", info,
+
+                response -> {
+
+                    try {
+
+                        //Changing text on addFriendButton upon successful request
+                        if (response.get("message").equals(Const.SUCCESS_MSG))
+                            blockButton.setText("Unblock");
+
+                        else {
+                            //TODO set up failure response
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+
+                error -> {
+                    //TODO set up error response
+                });
+
+        //Adding the Request to the Queue
+        AppController.getInstance().addToRequestQueue(blockRequest);
     }
 }

@@ -154,4 +154,9 @@ public class UserController {
 
         return success;
     }
+
+    @GetMapping(path = "/user/{user}/friends/list")
+    List<User> getFriendsByUsername(@PathVariable String user) {
+        return userRepository.findByUsername(user).getFriends();
+    }
 }

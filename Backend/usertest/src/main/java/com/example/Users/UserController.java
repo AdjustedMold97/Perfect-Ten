@@ -132,4 +132,26 @@ public class UserController {
         userRepository.deleteById(id);
         return success;
     }
+
+    @PostMapping(path = "/user/{user1}")
+    String addFriend(@PathVariable String user1, @RequestBody String user2) {
+        User firstUser = userRepository.findByUsername(user1);
+        User secondUser = userRepository.findByUsername(user2);
+
+        if (firstUser == null || secondUser == null) {
+            return failure;
+        }
+
+        if (user1.equals(user2)) {
+            return failure;
+        }
+
+        firstUser.addFriend(secondUser);
+        secondUser.addFriend(firstUser);
+
+        userRepository.save(firstUser);
+        userRepository.save(secondUser);
+
+        return success;
+    }
 }

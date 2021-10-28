@@ -133,7 +133,7 @@ public class UserController {
         return success;
     }
 
-    @PostMapping(path = "/user/{user1}")
+    @PostMapping(path = "/user/{user1}/friends/new")
     String addFriend(@PathVariable String user1, @RequestBody String user2) {
         User firstUser = userRepository.findByUsername(user1);
         User secondUser = userRepository.findByUsername(user2);

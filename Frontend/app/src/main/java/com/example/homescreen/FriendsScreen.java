@@ -17,7 +17,7 @@ public class FriendsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_screen);
 
-
+        //Rigging the Universal Buttons
         Button friend = findViewById(R.id.friends_Button_home);
         friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(),FriendsScreen.class)));
 
@@ -31,12 +31,13 @@ public class FriendsScreen extends AppCompatActivity {
          * For now, clicking on the ImageButton will
          * set the target user to "Bob" and direct you to
          * the profile page.
+         *
+         * - Jae Swanepoel
          */
         ImageButton bob = findViewById(R.id.Bob_profile_Button);
         bob.setOnClickListener(view -> {
             AppController.setTargetUser("Bob");
             startActivity(new Intent(view.getContext(), ProfileView.class));
         });
-
     }
 }

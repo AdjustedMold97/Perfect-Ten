@@ -31,6 +31,7 @@ public class HomeScreen extends AppCompatActivity {
         TextView post_title_TextView = findViewById(R.id.post_title_TextView);
         TextView post_body_TextView = findViewById(R.id.post_body_TextView);
 
+        //Requesting the list of all posts
         JsonArrayRequest json_arr_req = new JsonArrayRequest(POST_LIST_URL,
 
                 response -> {

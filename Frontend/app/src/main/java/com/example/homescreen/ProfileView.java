@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.Const;
@@ -23,6 +25,9 @@ import java.util.Map;
  */
 public class ProfileView extends AppCompatActivity {
 
+    /*
+     *
+     */
     Button addFriendButton;
     Button blockButton;
     TextView postTitleTextView;
@@ -55,8 +60,8 @@ public class ProfileView extends AppCompatActivity {
         username.setText(AppController.getTargetUser());
 
         //Setting up post TextViews
-        postTitleTextView = findViewById(R.id.post_title_TextView);
-        postBodyTextView = findViewById(R.id.post_body_TextView);
+        postTitleTextView = findViewById(R.id.title_placeholder);
+        postBodyTextView = findViewById(R.id.body_placeholder);
 
         //populating the post TextViews
         fetchPostData();
@@ -112,29 +117,43 @@ public class ProfileView extends AppCompatActivity {
      * upon a successful Request, the TextViews are populated.
      */
     private void fetchPostData() {
-
+        /*
         //Setting up JSONObject for the Request
         Map<String, String> postRequestInfo = new HashMap<>();
         postRequestInfo.put("username", AppController.getTargetUser());
-        JSONObject postRequestObject = new JSONObject(postRequestInfo);
+        JSONArray postRequestObject = null;
+        try {
+            postRequestObject = new JSONArray(postRequestInfo);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
 
         //Instantiating the Request
-        JsonObjectRequest userPostRequest = new JsonObjectRequest(Request.Method.GET, "TODO"/*TODO GET URL*/, postRequestObject,
+        JsonArrayRequest userPostRequest = new JsonArrayRequest(Const.USER_POST_URL_1 + AppController.getTargetUser() + Const.USER_POST_URL_2,
 
                 response -> {
 
                     try {
 
+                        /*
                         //upon a successful response, populate the TextViews
                         if (response.get("message").equals(Const.SUCCESS_MSG)){
-                            //TODO format fields correctly
                             postTitleTextView.setText(String.valueOf(response.get("title")));
-                            postBodyTextView.setText(String.valueOf(response.get("body")));
+                            postBodyTextView.setText(String.valueOf(response.get("message")));
                         }
+                        */
 
-                        else {
+                        Log.d("Response", response.toString());
+
+                        //populating TextViews with post data
+                        JSONObject temp = response.getJSONObject(response.length() - 1);
+
+                        postTitleTextView.setText(temp.get("title").toString());
+                        postBodyTextView.setText(temp.get("message").toString());
+
+                        /*else {
                             //TODO set up failure response
-                        }
+                        }*/
 
                     } catch (JSONException e) {
                         e.printStackTrace();

@@ -196,7 +196,7 @@ public class UserController {
     }
 
     // Return's a User's friends list as a List of Strings (usernames)
-    @GetMapping(path = "user/{user}/friends/list/usernames")
+    @GetMapping(path = "/user/{user}/friends/list/usernames")
     List<String> getFriendUsernamesByUsername(@PathVariable String user) {
         List<String> usernames = new ArrayList<>();
         List<User> friends = userRepository.findByUsername(user).getFriends();
@@ -210,7 +210,7 @@ public class UserController {
     }
 
     // Removes a friend from a User's friends list
-    @PutMapping(path = "user/{user}/friends/remove")
+    @PutMapping(path = "/user/{user1}/friends/remove")
     String removeFriend(@PathVariable String user1, @RequestBody String user2) {
         User firstUser = userRepository.findByUsername(user1);
         User secondUser = userRepository.findByUsername(user2);

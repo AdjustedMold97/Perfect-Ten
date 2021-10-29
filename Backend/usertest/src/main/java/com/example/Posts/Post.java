@@ -1,5 +1,7 @@
 package com.example.Posts;
 
+import java.util.ArrayList;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +21,10 @@ public class Post {
     private int id;
     private String message;
     private String title;
+    private String uname;
+    
+    @JsonIgnore
+    private ArrayList<Comment> comments = new ArrayList<Comment>();
     
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -45,6 +51,7 @@ public class Post {
         this.message = message;
         this.title = title;
         this.user = user;
+        uname = user.getUsername();
     }
 
     // =============================== Getters and Setters for each field ================================== //
@@ -82,6 +89,30 @@ public class Post {
         this.user = user;
     }
 
+    public String getComment(int id) {
+    	if(id >= comments.size()) {
+    		return "{\"message\":\"error1\"}";
+    	}
+    	else {
+    		String temp = new String();
+    		temp = "{\"user\":\"";
+    		temp = temp.concat(comments.get(id).getUser().getUsername());
+    		temp = temp.concat(",\"message\":\"");
+    		temp = temp.concat(comments.get(id).getMessage());
+    		temp = temp.concat("\"}");
+    		return temp;
+    	}
+    }
+    
+    public void delComment(int id) {
+    	if(id < comments.size()) {
+    		comments.remove(id);
+    	}
+    }
+    
+    public void addComment(String m, User u) {
+    	comments.add(new Comment(m,u));
+    }
 }
 
 

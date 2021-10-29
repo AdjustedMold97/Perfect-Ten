@@ -45,7 +45,28 @@ public class PostController {
         userRepository.save(userRepository.findByUsername(username));
         return success;
     }
+    
+    @PostMapping(path = "/posts/new/comment/{username}")
+    String createComment(@RequestBody int id, @RequestBody String message, @PathVariable String username) {
+    	if (userRepository.findByUsername(username) == null)
+            return usernameFail;
+    	if(postRepository.findById(id) == null) 
+    		return failure;
+    	postRepository.findById(id).addComment(message, userRepository.findByUsername(username));
+    	return success;
+    }
+    
+    @GetMapping(path = "/posts/{id}/{index}")
+    String getCommentById( @PathVariable int id, @PathVariable int index){
+        return postRepository.findById(id).getComment(index);
+    }
 
+    //@DeleteMapping(path = "/posts/rm/{id}/{index}")
+    //String deleteComment(@PathVariable long id, @PathVariable int index){
+    //	postRepository.findById(id).delComment(index);
+    //	return success;
+    //}
+    
     @PutMapping("/posts/{id}")
     Post updatePost(@PathVariable int id, @RequestBody Post request){
         Post post = postRepository.findById(id);

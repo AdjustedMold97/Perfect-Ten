@@ -117,16 +117,6 @@ public class ProfileView extends AppCompatActivity {
      * upon a successful Request, the TextViews are populated.
      */
     private void fetchPostData() {
-        /*
-        //Setting up JSONObject for the Request
-        Map<String, String> postRequestInfo = new HashMap<>();
-        postRequestInfo.put("username", AppController.getTargetUser());
-        JSONArray postRequestObject = null;
-        try {
-            postRequestObject = new JSONArray(postRequestInfo);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
 
         //Instantiating the Request
         JsonArrayRequest userPostRequest = new JsonArrayRequest(Const.USER_POST_URL_1 + AppController.getTargetUser() + Const.USER_POST_URL_2,
@@ -135,14 +125,6 @@ public class ProfileView extends AppCompatActivity {
 
                     try {
 
-                        /*
-                        //upon a successful response, populate the TextViews
-                        if (response.get("message").equals(Const.SUCCESS_MSG)){
-                            postTitleTextView.setText(String.valueOf(response.get("title")));
-                            postBodyTextView.setText(String.valueOf(response.get("message")));
-                        }
-                        */
-
                         Log.d("Response", response.toString());
 
                         //populating TextViews with post data
@@ -150,10 +132,6 @@ public class ProfileView extends AppCompatActivity {
 
                         postTitleTextView.setText(temp.get("title").toString());
                         postBodyTextView.setText(temp.get("message").toString());
-
-                        /*else {
-                            //TODO set up failure response
-                        }*/
 
                     } catch (JSONException e) {
                         e.printStackTrace();

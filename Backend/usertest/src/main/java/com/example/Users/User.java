@@ -106,4 +106,12 @@ public class User {
     public void addFriend(User friend) {
         this.friends.add(friend);
     }
+
+    public void removeFriend(User friend) {
+        this.friends.remove(friend);
+    }
+
+    public Boolean isFriendsWith(User friend) {
+        return friends.contains(friend);
+    }
 }

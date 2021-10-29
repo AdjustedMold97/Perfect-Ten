@@ -14,24 +14,35 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+
+/*
+ * Adapter class to be used by recycler view with setAdapter()
+ * Adapter used to create MyViewHolder objects which hold the data for objects requested from server
+ * ViewHolder uses a base post_object.xml structure to create objects
+ * - Ethan Still
+ */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context mContext;
     String mtest[];
 
+    /*
+     * Constructor for MyAdapter
+     * Context sets a context to use for the inflater
+     * String test[] is the array input used in OnBindViewHolder to fill the text for post title and body
+     * - Ethan Still
+     */
     public MyAdapter(Context context, String test[]){
 
         mContext = context;
         mtest = test;
-
-
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflate = LayoutInflater.from(mContext);
-        View view = inflate.inflate(R.layout.post_object,parent,false);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        View view = inflater.inflate(R.layout.post_object,parent,false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return  myViewHolder;
     }

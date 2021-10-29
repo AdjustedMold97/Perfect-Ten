@@ -77,14 +77,14 @@ public class ProfileView extends AppCompatActivity {
 
             //Compiling data for the JSON Request
             Map<String, String> fields = new HashMap<>();
-            fields.put("user", AppController.getUsername());
-            fields.put("target", AppController.getTargetUser());
+            fields.put("user", AppController.getTargetUser());
 
             //Instantiating the JSON Object using the complied data
             JSONObject info = new JSONObject(fields);
 
             //Instantiating the JsonObjectRequest
-            JsonObjectRequest addFriendRequest = new JsonObjectRequest(Request.Method.GET, /*TODO FIND URL*/ "TODO", info,
+            JsonObjectRequest addFriendRequest = new JsonObjectRequest(Request.Method.POST,
+                    Const.ADD_FRIEND_URL_1 + AppController.getUsername() + Const.ADD_FRIEND_URL_2, info,
 
                     response -> {
 
@@ -119,7 +119,9 @@ public class ProfileView extends AppCompatActivity {
     private void fetchPostData() {
 
         //Instantiating the Request
-        JsonArrayRequest userPostRequest = new JsonArrayRequest(Const.USER_POST_URL_1 + AppController.getTargetUser() + Const.USER_POST_URL_2,
+        JsonArrayRequest userPostRequest = new JsonArrayRequest
+
+                (Const.USER_POST_URL_1 + AppController.getTargetUser() + Const.USER_POST_URL_2,
 
                 response -> {
 

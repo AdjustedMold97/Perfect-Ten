@@ -26,7 +26,8 @@ import java.util.Map;
 public class ProfileView extends AppCompatActivity {
 
     /*
-     *
+     * We reference these objects in multiple
+     * functions, so we have to declare them here.
      */
     Button addFriendButton;
     Button blockButton;

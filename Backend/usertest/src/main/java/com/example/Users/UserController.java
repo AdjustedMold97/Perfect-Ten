@@ -166,7 +166,7 @@ public class UserController {
         List<String> usernames = new ArrayList<>();
         List<User> friends = userRepository.findByUsername(user).getFriends();
         
-        for (int i = 0; i < usernames.size(); i++) {
+        for (int i = 0; i < friends.size(); i++) {
             usernames.add(friends.get(i).getUsername());
         }
 

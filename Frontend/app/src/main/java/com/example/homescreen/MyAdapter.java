@@ -1,6 +1,7 @@
 package com.example.homescreen;
 
 import android.content.Context;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,69 +14,48 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
-    private List<ListItem> listItems;
-    private Context context;
+    Context mContext;
+    String mtest[];
 
-    final int View_TYPE_LOADING = 0;
-    final int VIEW_TYPE_ITEM = 1;
+    public MyAdapter(Context context, String test[]){
+
+        mContext = context;
+        mtest = test;
+
+
+    }
+
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflate = LayoutInflater.from(mContext);
+        View view = inflate.inflate(R.layout.post_object,parent,false);
+        MyViewHolder myViewHolder = new MyViewHolder(view);
+        return  myViewHolder;
+    }
 
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if(viewType == VIEW_TYPE_ITEM) {
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.activity_test, parent, false);
-
-            return new ViewHolder(v);
-        }
-//        else{
-//            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading,parent,false);
-//            return LoadingHolder(view);
-//        }
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    holder.postObjectTitle.setText(mtest[position]);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ListItem listItem = listItems.get(position);
-
-        holder.textViewHead.setText(listItem.getHead());
-        holder.textViewDesc.setText(listItem.getDesc());
-
-    }
-
-    public int getItemViewType(int position){
-        return listItems.get(position) == null ? View_TYPE_LOADING : VIEW_TYPE_ITEM;
-
-    }
     @Override
     public int getItemCount() {
-        return 0;
+        return mtest.length;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-
-        public TextView textViewHead;
-        public TextView textViewDesc;
-
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView postObjectTitle;
+        //TextView postObjectBody;
 
 
-        public ViewHolder(@NonNull View itemView){
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-//tvItem = itemView.findByID(R.id.tvitem);
-
-//TODO textViewHead = (TextView) itemView.findViewById(R.id.); don't know what goes in R.id
-//            textViewHead = (TextView) itemView.findViewById(R.id.textView4);
-//            textViewDesc = (TextView) itemView.findViewById(R.id.textView5);
-
-        }
-
-    }
-
-    private class LoadingHolder extends RecyclerView.ViewHolder {
-
-        public LoadingHolder(@NonNull View itemView){
-            super(itemView);
+            postObjectTitle = itemView.findViewById(R.id.postObjectTitle);
+            ///postObjectBody = itemView.findViewById(R.id.postObjectBody);
         }
     }
+
 }

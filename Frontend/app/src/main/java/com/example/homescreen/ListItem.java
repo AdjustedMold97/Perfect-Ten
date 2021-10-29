@@ -2,22 +2,11 @@ package com.example.homescreen;
 
 public class ListItem {
 
-    private String head;
-    private String desc;
-
-    public ListItem(String head, String desc) {
-        this.head = head;
-        this.desc = desc;
-
-    }
+    private String test;
 
 
-    public String getHead(){
-        return head;
-    }
-
-    public String getDesc(){
-        return desc;
+    public ListItem(String test) {
+        this.test = test;
 
     }
 }

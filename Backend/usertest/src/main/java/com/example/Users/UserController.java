@@ -210,7 +210,7 @@ public class UserController {
     }
 
     // Removes a friend from a User's friends list
-    @PutMapping(path = "user/{user}/friends/remove")
+    @DeleteMapping(path = "user/{user}/friends/remove")
     String removeFriend(@PathVariable String user1, @RequestBody String user2) {
         User firstUser = userRepository.findByUsername(user1);
         User secondUser = userRepository.findByUsername(user2);

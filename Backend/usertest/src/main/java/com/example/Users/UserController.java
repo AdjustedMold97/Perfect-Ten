@@ -1,5 +1,6 @@
 package com.example.Users;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -158,5 +159,17 @@ public class UserController {
     @GetMapping(path = "/user/{user}/friends/list")
     List<User> getFriendsByUsername(@PathVariable String user) {
         return userRepository.findByUsername(user).getFriends();
+    }
+
+    @GetMapping(path = "user/{user}/friends/list/usernames")
+    List<String> getFriendUsernamesByUsername(@PathVariable String user) {
+        List<String> usernames = new ArrayList<>();
+        List<User> friends = userRepository.findByUsername(user).getFriends();
+        
+        for (int i = 0; i < usernames.size(); i++) {
+            usernames.add(friends.get(i).getUsername());
+        }
+
+        return usernames;
     }
 }

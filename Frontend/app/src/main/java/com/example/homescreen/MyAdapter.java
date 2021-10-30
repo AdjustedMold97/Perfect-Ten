@@ -29,18 +29,18 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context mContext;
-    String mtest[];
+    JSONArray mtest[];
 
 
 
     /*
      * Constructor for MyAdapter
      * Context sets a context to use for the inflater
-     * JSONArray Body[] is the array input used in OnBindViewHolder to fill the text for post title and body
+     * JSONArray test[] is the array input used in OnBindViewHolder to fill the text for post title and body
      * test[] is converted to a string array
      * - Ethan Still
      */
-    public MyAdapter(Context context, String test[]){
+    public MyAdapter(Context context, JSONArray test[]){
 
         mContext = context;
         mtest = test;
@@ -56,11 +56,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return  myViewHolder;
     }
 
+    /*
+     * OnBind sets the values for each ViewHolder object that will be displayed on the screen
+     * Values set are based on the position of the JSONArray[]
+     */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
     holder.postObjectTitle.setText(mtest[position]);
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
 
     @Override
     public int getItemCount() {

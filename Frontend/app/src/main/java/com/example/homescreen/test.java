@@ -35,7 +35,10 @@ public class test extends AppCompatActivity {
 
         String dogs[] = {"pug","lab","black lab","golden lab","chawawa","flat coat", "bernise moutain dog"};
 
-        MyAdapter mAdapter = new MyAdapter(this, dogs);
+        JSONArray[] aray = new JSONArray[1];
+
+
+        MyAdapter mAdapter = new MyAdapter(this, aray);
         recycle.setAdapter(mAdapter);
 
         mLayoutManager = new LinearLayoutManager(this);

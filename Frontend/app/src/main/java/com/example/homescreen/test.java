@@ -36,19 +36,13 @@ public class test extends AppCompatActivity {
         String dogs[] = {"pug","lab","black lab","golden lab","chawawa","flat coat", "bernise moutain dog"};
 
         MyAdapter mAdapter = new MyAdapter(this, dogs);
-
         recycle.setAdapter(mAdapter);
 
         mLayoutManager = new LinearLayoutManager(this);
         recycle.setLayoutManager(mLayoutManager);
 
 
-
-
-
-
-        //===============================================================================================
-
+        //===================================================================
 //        final String RESPONSE_TAG = "JSON Response: ";
 //
 //        TextView post_title_TextView = findViewById(R.id.post_title_TextView);
@@ -88,8 +82,48 @@ public class test extends AppCompatActivity {
 //        //adding request to queue - Jae Swanepoel
 //        AppController.getInstance().addToRequestQueue(json_arr_req);
 
+        //====================================================================================
+        final String RESPONSE_TAG = "JSON Response: ";
+        final JSONArray[] posts_arr = new JSONArray[1];
 
-        //========================================
+        JsonArrayRequest json_arr_req = new JsonArrayRequest(POST_LIST_URL,
+
+                (JSONArray response) -> {
+
+                    Log.d(RESPONSE_TAG, response.toString());
+
+                    JSONObject temp;
+
+                    String test;
+
+                    try {
+                        //we try to change the default text tot the post text -Ethan
+
+                        //We have the request for the response postArray, use response to get the different posts
+
+
+
+                        temp = response.getJSONObject(response.length() - 1);
+                        test = temp.get("message").toString();
+                        TextView testing = findViewById(R.id.testing);
+                        testing.setText(test);
+                        posts_arr[0] = response;
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+
+                error -> VolleyLog.d("Error: " + error.getMessage())
+        );
+
+        //adding request to queue - Jae Swanepoel
+        AppController.getInstance().addToRequestQueue(json_arr_req);
+
+
+
+
+
         /*
          * these three buttons make up the bottom tab buttons they go on each screen
          * they include Home, Settings, and Friends and reroute the user to that page form anywhere in the app

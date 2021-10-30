@@ -10,6 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.List;
@@ -26,16 +31,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     Context mContext;
     String mtest[];
 
+
+
     /*
      * Constructor for MyAdapter
      * Context sets a context to use for the inflater
-     * String test[] is the array input used in OnBindViewHolder to fill the text for post title and body
+     * JSONArray Body[] is the array input used in OnBindViewHolder to fill the text for post title and body
+     * test[] is converted to a string array
      * - Ethan Still
      */
     public MyAdapter(Context context, String test[]){
 
         mContext = context;
         mtest = test;
+
     }
 
     @NonNull
@@ -51,6 +60,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
     holder.postObjectTitle.setText(mtest[position]);
     }
+
 
     @Override
     public int getItemCount() {

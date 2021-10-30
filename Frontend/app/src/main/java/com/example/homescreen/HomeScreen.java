@@ -66,11 +66,6 @@ public class HomeScreen extends AppCompatActivity {
         //adding request to queue - Jae Swanepoel
         AppController.getInstance().addToRequestQueue(json_arr_req);
 
-
-
-
-
-
 //========================================
         /*
          * these three buttons make up the bottom tab buttons they go on each screen

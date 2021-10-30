@@ -29,7 +29,7 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context mContext;
-    JSONArray mtest[];
+    JSONArray mtest;
 
 
 
@@ -40,7 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
      * test[] is converted to a string array
      * - Ethan Still
      */
-    public MyAdapter(Context context, JSONArray test[]){
+    public MyAdapter(Context context, JSONArray test){
 
         mContext = context;
         mtest = test;
@@ -62,7 +62,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
      */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-    holder.postObjectTitle.setText(mtest[position]);
+        try {
+            holder.postObjectTitle.setText(mtest.get(position).toString());
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -72,7 +77,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mtest.length;
+        return mtest.length();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

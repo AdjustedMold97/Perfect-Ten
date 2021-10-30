@@ -33,12 +33,51 @@ public class test extends AppCompatActivity {
         recycle = findViewById(R.id.recycle);
         RecyclerView.LayoutManager mLayoutManager;
 
-        String dogs[] = {"pug","lab","black lab","golden lab","chawawa","flat coat", "bernise moutain dog"};
+        //String dogs[] = {"pug","lab","black lab","golden lab","chawawa","flat coat", "bernise moutain dog"};
 
-        JSONArray[] aray = new JSONArray[1];
+        //======================================================
+        JSONObject post1 = new JSONObject();
+        JSONObject post2 = new JSONObject();
+        JSONObject post3 = new JSONObject();
+        JSONObject post4 = new JSONObject();
+        JSONObject post5 = new JSONObject();
+        JSONObject post6 = new JSONObject();
 
 
-        MyAdapter mAdapter = new MyAdapter(this, aray);
+
+        try {
+
+            post1.put("title", "poooost 1");
+            post2.put("title", "postttt 2");
+            post3.put("title", "poooost 3");
+            post4.put("title", "poooost 4");
+            post5.put("title", "poooost 5");
+            post6.put("title", "poooost 6");
+
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        JSONArray jsonArray = new JSONArray();
+
+        jsonArray.put(post1);
+        jsonArray.put(post2);
+        jsonArray.put(post3);
+        jsonArray.put(post4);
+        jsonArray.put(post5);
+        jsonArray.put(post6);
+
+        JSONObject postobj = new JSONObject();
+        try {
+            postobj.put("posts", jsonArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //=======================================================
+
+
+        MyAdapter mAdapter = new MyAdapter(this, jsonArray);
         recycle.setAdapter(mAdapter);
 
         mLayoutManager = new LinearLayoutManager(this);
@@ -86,42 +125,7 @@ public class test extends AppCompatActivity {
 //        AppController.getInstance().addToRequestQueue(json_arr_req);
 
         //====================================================================================
-        final String RESPONSE_TAG = "JSON Response: ";
-        final JSONArray[] posts_arr = new JSONArray[1];
 
-        JsonArrayRequest json_arr_req = new JsonArrayRequest(POST_LIST_URL,
-
-                (JSONArray response) -> {
-
-                    Log.d(RESPONSE_TAG, response.toString());
-
-                    JSONObject temp;
-
-                    String test;
-
-                    try {
-                        //we try to change the default text tot the post text -Ethan
-
-                        //We have the request for the response postArray, use response to get the different posts
-
-
-
-                        temp = response.getJSONObject(response.length() - 1);
-                        test = temp.get("message").toString();
-                        TextView testing = findViewById(R.id.testing);
-                        testing.setText(test);
-                        posts_arr[0] = response;
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                },
-
-                error -> VolleyLog.d("Error: " + error.getMessage())
-        );
-
-        //adding request to queue - Jae Swanepoel
-        AppController.getInstance().addToRequestQueue(json_arr_req);
 
 
 

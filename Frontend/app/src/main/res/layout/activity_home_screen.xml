@@ -7,19 +7,19 @@
     tools:context=".HomeScreen">
 
     <Button
-        android:id="@+id/home_Button"
+        android:id="@+id/home_Button_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/friends_Button"
+        app:layout_constraintEnd_toStartOf="@+id/friends_Button_home"
         app:layout_constraintHorizontal_bias="0.26"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
 
     <Button
-        android:id="@+id/friends_Button"
+        android:id="@+id/friends_Button_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/friends"
@@ -30,7 +30,7 @@
         app:layout_constraintVertical_bias="0.976" />
 
     <Button
-        android:id="@+id/settings_Button"
+        android:id="@+id/settings_Button_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -38,7 +38,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/friends_Button"
+        app:layout_constraintStart_toEndOf="@+id/friends_Button_home"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
 
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Out"
-        app:layout_constraintBottom_toTopOf="@+id/settings_Button"
+        app:layout_constraintBottom_toTopOf="@+id/settings_Button_home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.98"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,18 +86,6 @@
         android:text="Loading..."
         app:layout_constraintStart_toStartOf="@+id/post_title_TextView"
         app:layout_constraintTop_toBottomOf="@+id/post_title_TextView" />
-
-    <ScrollView
-        android:layout_width="260dp"
-        android:layout_height="194dp"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="299dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

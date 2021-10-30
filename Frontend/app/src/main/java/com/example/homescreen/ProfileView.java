@@ -91,6 +91,8 @@ public class ProfileView extends AppCompatActivity {
 
                         try {
 
+                            Log.d("Server response ", response.toString());
+
                             //Changing text on addFriendButton upon successful request
                             if (response.get("message").equals(Const.SUCCESS_MSG))
                                 addFriendButton.setText("Remove Friend");
@@ -128,6 +130,7 @@ public class ProfileView extends AppCompatActivity {
 
                     try {
 
+                        //logging the response
                         Log.d("Response", response.toString());
 
                         //populating TextViews with post data

@@ -38,17 +38,22 @@ public class User {
     @JsonIgnore
     private List<User> friends;
 
+    @ManyToMany
+    private List<User> blockedUsers;
+
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
         posts = new ArrayList<>();
         friends = new ArrayList<>();
+        blockedUsers = new ArrayList<>();
     }
 
     public User() {
         posts = new ArrayList<>();
         friends = new ArrayList<>();
+        blockedUsers = new ArrayList<>();
     }
 
     public int getId() {
@@ -113,5 +118,25 @@ public class User {
 
     public Boolean isFriendsWith(User friend) {
         return friends.contains(friend);
+    }
+
+    public List<User> getBlockedUsers() {
+        return blockedUsers;
+    }
+
+    public void setBlockedUsers(List<User> blockedUsers) {
+        this.blockedUsers = blockedUsers;
+    }
+
+    public void addBlockedUser(User blockedUser) {
+        this.blockedUsers.add(blockedUser);
+    }
+
+    public void removeBlockedUser(User blockedUser) {
+        this.blockedUsers.remove(blockedUser);
+    }
+
+    public Boolean isBlocking(User blockedUser) {
+        return blockedUsers.contains(blockedUser);
     }
 }

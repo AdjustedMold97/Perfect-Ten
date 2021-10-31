@@ -239,4 +239,78 @@ public class UserController {
 
         return success;
     }
+
+    // Returns a User's list of blocked Users
+    @GetMapping(path = "/user/{user}/blocked/list")
+    List<User> getBlockedUsersByUsername(@PathVariable String user) {
+        return userRepository.findByUsername(user).getBlockedUsers();
+    }
+
+    // Returns a User's list of blocked Users as a list of Strings (usernames)
+    @GetMapping(path = "/user/{user}/blocked/list/usernames")
+    List<String> getBlockedUsernamesByUsername(@PathVariable String user) {
+        List<String> usernames = new ArrayList<>();
+        List<User> blocked = userRepository.findByUsername(user).getBlockedUsers();
+
+        // Loop through blocked list and retrieve each username
+        for (int i = 0; i < blocked.size(); i++) {
+            usernames.add(blocked.get(i).getUsername());
+        }
+
+        return usernames;
+    }
+
+    // Adds user2 to user1's blocked list
+    @PostMapping(path = "/user/{user1}/blocked/new")
+    String blockUser(@PathVariable String user1, @RequestBody String user2) {
+        User firstUser = userRepository.findByUsername(user1);
+        User secondUser = userRepository.findByUsername(user2);
+
+        // If either User is not found in databse, return failure
+        if (firstUser == null || secondUser == null) {
+            return failure;
+        }
+
+        // If both usernames are the same, return failure
+        if(user1.equals(user2)) {
+            return failure;
+        }
+
+        // If first User is already blocking second User, return failure
+        if(firstUser.isBlocking(secondUser)) {
+            return failure;
+        }
+
+        // Block second User and save result to database, and return success
+        firstUser.addBlockedUser(secondUser);
+        userRepository.save(firstUser);
+        return success;
+    }
+
+    // Removes user2 from user1's blocked list
+    @PutMapping(path = "/user/{user1}/blocked/remove")
+    String unblockUser(@PathVariable String user1, @RequestBody String user2) {
+        User firstUser = userRepository.findByUsername(user1);
+        User secondUser = userRepository.findByUsername(user2);
+
+        // If either User is not found in database, return failure
+        if (firstUser == null || secondUser == null) {
+            return failure;
+        }
+
+        // If requested usernames are identical, return failure
+        if (user1.equals(user2)) {
+            return failure;
+        }
+
+        // If first User is not blocking second User, return failure
+        if (!firstUser.isBlocking(secondUser)) {
+            return failure;
+        }
+
+        // Unblock second User, save result in database, and return success
+        firstUser.removeBlockedUser(secondUser);
+        userRepository.save(firstUser);
+        return success;
+    }
 }

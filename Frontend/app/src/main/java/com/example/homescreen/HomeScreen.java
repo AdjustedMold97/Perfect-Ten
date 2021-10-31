@@ -29,44 +29,41 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        final String RESPONSE_TAG = "JSON Response: ";
-//
-//        TextView post_title_TextView = findViewById(R.id.post_title_TextView);
-//        TextView post_body_TextView = findViewById(R.id.post_body_TextView);
-//
-//        final JSONArray[] posts_arr = new JSONArray[1];
-//
-//        JsonArrayRequest json_arr_req = new JsonArrayRequest(POST_LIST_URL,
-//
-//                response -> {
-//
-//                    Log.d(RESPONSE_TAG, response.toString());
-//
-//                    JSONObject temp;
-//
-//                    try {
-//
-//                        /*
-//                         * As of now, when we request a post, we really take in all posts
-//                         * ever created. We will change this, but for now we get around this
-//                         * by selecting the most recent post.
-//                         */
-//                        temp = response.getJSONObject(response.length() - 1);
-//                        post_body_TextView.setText(temp.get("message").toString());
-//                        post_title_TextView.setText(temp.get("title").toString());
-//
-//                        posts_arr[0] = response;
-//
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                },
-//
-//                error -> VolleyLog.d("Error: " + error.getMessage())
-//        );
-//
-//        //adding request to queue - Jae Swanepoel
-//        AppController.getInstance().addToRequestQueue(json_arr_req);
+        
+//   final String RESPONSE_TAG = "JSON Response: ";
+
+//         TextView post_title_TextView = findViewById(R.id.post_title_TextView);
+//         TextView post_body_TextView = findViewById(R.id.post_body_TextView);
+
+//         JsonArrayRequest json_arr_req = new JsonArrayRequest(POST_LIST_URL,
+
+//                 response -> {
+
+//                     Log.d(RESPONSE_TAG, response.toString());
+
+//                     JSONObject temp;
+
+//                     try {
+
+//                         temp = response.getJSONObject(response.length() - 1);
+//                         post_body_TextView.setText(temp.get("message").toString());
+//                         post_title_TextView.setText(temp.get("title").toString());
+
+//                     } catch (JSONException e) {
+//                         e.printStackTrace();
+//                     }
+//                 },
+
+//                 error -> VolleyLog.d("Error: " + error.getMessage())
+//         );
+
+//         //adding request to queue - Jae Swanepoel
+//         AppController.getInstance().addToRequestQueue(json_arr_req);
+
+
+
+        //==== use above version for homescreen
+
 
 
         /*

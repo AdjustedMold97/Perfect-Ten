@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".HomeScreen">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="409dp"
+        android:layout_height="550dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.43" />
+
     <Button
         android:id="@+id/home_Button"
         android:layout_width="wrap_content"
@@ -72,32 +83,22 @@
         android:layout_height="61dp"
         android:text="Loading..."
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.786"
+        tools:layout_editor_absoluteX="-16dp" />
 
     <TextView
         android:id="@+id/post_body_TextView"
         android:layout_width="match_parent"
         android:layout_height="156dp"
         android:text="Loading..."
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.566"
-        tools:layout_editor_absoluteX="-53dp" />
-
-    <Button
-        android:id="@+id/admin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ADMIN"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.583"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.998"
+        tools:layout_editor_absoluteX="-5dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

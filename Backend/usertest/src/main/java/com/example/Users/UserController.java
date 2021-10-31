@@ -45,7 +45,7 @@ public class UserController {
     
     // Returns list of posts for a specific user's username
     @GetMapping(path = "user/{user}/posts/list")
-    List<Post> getPostsByusername(@PathVariable String user){
+    List<Post> getPostsByUsername(@PathVariable String user){
     	return userRepository.findByUsername(user).getPosts();
     }
     
@@ -63,6 +63,7 @@ public class UserController {
 
     // Returns User associated with a user ID
     @GetMapping(path = "/user/id/{id}")
+    public
     User getUserById(@PathVariable int id) {
         return userRepository.findById(id);
     }

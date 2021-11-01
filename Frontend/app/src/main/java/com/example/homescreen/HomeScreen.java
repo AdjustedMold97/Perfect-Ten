@@ -23,15 +23,15 @@ import com.example.homescreen.app.AppController;
 
 public class HomeScreen extends AppCompatActivity {
 
+    final static String RESPONSE_TAG = "JSON Response: ";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        
-//   final String RESPONSE_TAG = "JSON Response: ";
-
+        //          LEGACY CODE
 //         TextView post_title_TextView = findViewById(R.id.post_title_TextView);
 //         TextView post_body_TextView = findViewById(R.id.post_body_TextView);
 
@@ -68,12 +68,7 @@ public class HomeScreen extends AppCompatActivity {
 //         //adding request to queue - Jae Swanepoel
 //         AppController.getInstance().addToRequestQueue(json_arr_req);
 
-
-
-
         //==== use above version for homescreen
-
-
 
         /*
          * RecyclerView that takes a JSONArray of posts from server
@@ -85,39 +80,74 @@ public class HomeScreen extends AppCompatActivity {
         recycle = findViewById(R.id.recycle);
         RecyclerView.LayoutManager mLayoutManager;
 
-
+        /*
         JSONObject post1 = new JSONObject();
         JSONObject post2 = new JSONObject();
         JSONObject post3 = new JSONObject();
         JSONObject post4 = new JSONObject();
         JSONObject post5 = new JSONObject();
         JSONObject post6 = new JSONObject();
+         */
 
+        /*
+         * getting the array of posts and
+         * initializing the target array
+         *
+         * - Jae Swanepoel
+         */
+        JSONArray postsArray = getPosts();
+        JSONArray jsonArray = new JSONArray();
 
-
+        /*
+         * populating the target array using
+         * data from the posts array
+         *
+         * - Jae Swanepoel
+         */
         try {
 
+            /*
             post1.put("title", "poooost 1");
             post2.put("title", "postttt 2");
             post3.put("title", "poooost 3");
             post4.put("title", "poooost 4");
             post5.put("title", "poooost 5");
             post6.put("title", "poooost 6");
+            */
+
+            JSONObject temp;
+
+            /*
+             * creating a new JSONObject to comply with
+             * the standards of the adapter. inserting that
+             * object into the target array. iterating through all
+             * objects in the posts array.
+             *
+             * - Jae Swanepoel
+             */
+            for (int i = 0; i < postsArray.length(); i++) {
+
+                temp = new JSONObject();
+                temp.put("title", postsArray.getJSONObject(i).get("title").toString());
+
+                jsonArray.put(temp);
+            }
 
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-        JSONArray jsonArray = new JSONArray();
-
+        /*
         jsonArray.put(post1);
         jsonArray.put(post2);
         jsonArray.put(post3);
         jsonArray.put(post4);
         jsonArray.put(post5);
         jsonArray.put(post6);
+        */
 
+        //what is this used for? - Jae
         JSONObject postobj = new JSONObject();
         try {
             postobj.put("posts", jsonArray);
@@ -125,6 +155,7 @@ public class HomeScreen extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //inserting the target array into the adapter.
         MyAdapter mAdapter = new MyAdapter(this, jsonArray);
         recycle.setAdapter(mAdapter);
 
@@ -170,6 +201,42 @@ public class HomeScreen extends AppCompatActivity {
 
     }
 
+    /*
+     * Returns an array containing (currently) all of the posts
+     * on the server as JSON Objects.
+     *
+     * - Jae Swanepoel
+     */
+    private JSONArray getPosts() {
+
+        /*
+         * The JSONArray we will eventually return
+         * not sure why we have to do this, but it seems
+         * to be the only way to pass the value outside of
+         * the method body for the JsonArrayRequest constructor.
+         */
+        final JSONArray[] temp = new JSONArray[1];
+
+        /*
+         * The volley request that will retrieve our data.
+         * Requires a URL pulled from the Const class.
+         */
+        JsonArrayRequest json_arr_req = new JsonArrayRequest(POST_LIST_URL,
 
 
+                 response -> {
+
+                     Log.d(RESPONSE_TAG, response.toString());
+
+                     temp[0] = response;
+                 },
+
+                 error -> VolleyLog.d("Error: " + error.getMessage())
+         );
+
+        //adding request to queue - Jae Swanepoel
+        AppController.getInstance().addToRequestQueue(json_arr_req);
+
+        return temp[0];
+    }
 }

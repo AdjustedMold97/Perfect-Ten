@@ -10,9 +10,9 @@ buildscript {
     dependencies {
 
         //previous classpath, changed for android runner
-        classpath "com.android.tools.build:gradle:7.0.2"
-        //classpath 'com.android.tools.build:gradle:4.2.0'
-
+        //classpath "com.android.tools.build:gradle:7.0.2"
+        classpath 'com.android.tools.build:gradle:7.0.3'
+        //classpath 'com.android.tools.build:gradle:4.0.2'
 
 
 

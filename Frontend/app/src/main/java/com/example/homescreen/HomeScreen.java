@@ -113,12 +113,15 @@ public class HomeScreen extends AppCompatActivity {
                      JSONArray jsonArray = new JSONArray();
                      JSONObject temp;
 
+                     String[] titles = new String[response.length()];
+
                      for (int i = 0; i < response.length(); i++) {
 
                          temp = new JSONObject();
 
                          try {
                              temp.put("title", response.getJSONObject(i).get("title"));
+                             titles[i] = response.getJSONObject(i).get("title").toString();
                          } catch (JSONException e) {
                              e.printStackTrace();
                          }

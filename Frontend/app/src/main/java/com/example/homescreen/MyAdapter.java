@@ -30,7 +30,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context mContext;
     JSONArray mtest;
-
+    String[] strings;
 
 
     /*
@@ -44,6 +44,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         mContext = context;
         mtest = test;
+
+    }
+
+    /*
+     * Constructor for Strings
+     *
+     * - Jae Swanepoel
+     */
+    public MyAdapter (Context context, String[] _strings) {
+
+        mContext = context;
+        strings = _strings;
 
     }
 

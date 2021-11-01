@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class SignUp extends AppCompatActivity {
 
@@ -35,6 +36,12 @@ public class SignUp extends AppCompatActivity {
         Button toLogin = findViewById(R.id.to_login_button);
         toLogin.setOnClickListener(view -> startActivity(new Intent((view.getContext()),LoginScreen.class)));
 
+        /*
+         * Still not sure what an AtomicReference is.
+         * It seems to make things work, though, so we use them.
+         * - Jae Swanepoel
+         */
+        AtomicReference<TextView> taken = new AtomicReference<>(findViewById(R.id.taken));
 
         /*
          * constants for use throughout code
@@ -64,7 +71,6 @@ public class SignUp extends AppCompatActivity {
         enter_email.setVisibility(View.INVISIBLE);
 
         submit.setOnClickListener(view -> {
-
             /*
              * <username> stores the entered username
              * <password> stores the entered password
@@ -151,6 +157,7 @@ public class SignUp extends AppCompatActivity {
                                 AppController.setUsername(username);
                                 startActivity(new Intent(view.getContext(), LoginScreen.class));
 
+
                             }
 
                             else {
@@ -186,7 +193,18 @@ public class SignUp extends AppCompatActivity {
 
                                 errorView.setText(error_msg);
                                 errorView.setVisibility(View.VISIBLE);
+
+//                            /*
+//                             * if a failed response is received
+//                             * should only ever happen if the username is already taken
+//                             * -Ethan Still
+//                             */
+//                            else {
+//                                taken.set(findViewById(R.id.taken));
+//                                taken.get().setVisibility(View.VISIBLE);
+//>>>>>>> 31-scroll-view-set-up
                             }
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();

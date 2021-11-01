@@ -126,4 +126,18 @@
         app:layout_constraintStart_toStartOf="@+id/editTextEmail"
         tools:visibility="invisible" />
 
+    <TextView
+        android:id="@+id/taken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username Taken  "
+        android:textColor="#CF0000"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.48" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

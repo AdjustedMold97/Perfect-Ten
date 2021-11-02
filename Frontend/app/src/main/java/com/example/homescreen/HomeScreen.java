@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -23,115 +22,20 @@ import com.example.homescreen.app.AppController;
 
 public class HomeScreen extends AppCompatActivity {
 
+    final static String RESPONSE_TAG = "JSON Response: ";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        
-//   final String RESPONSE_TAG = "JSON Response: ";
-
-//         TextView post_title_TextView = findViewById(R.id.post_title_TextView);
-//         TextView post_body_TextView = findViewById(R.id.post_body_TextView);
-
-
-//        /*
-//         * The volley request that will retrieve our data.
-//         * Requires a URL pulled from the Const class.
-//         *
-//         * - Jae Swanepoel
-//         */
-//        JsonArrayRequest json_arr_req = new JsonArrayRequest(POST_LIST_URL,
-
-
-//                 response -> {
-
-//                     Log.d(RESPONSE_TAG, response.toString());
-
-//                     JSONObject temp;
-
-//                     try {
-
-//                         temp = response.getJSONObject(response.length() - 1);
-//                         post_body_TextView.setText(temp.get("message").toString());
-//                         post_title_TextView.setText(temp.get("title").toString());
-
-//                     } catch (JSONException e) {
-//                         e.printStackTrace();
-//                     }
-//                 },
-
-//                 error -> VolleyLog.d("Error: " + error.getMessage())
-//         );
-
-//         //adding request to queue - Jae Swanepoel
-//         AppController.getInstance().addToRequestQueue(json_arr_req);
-
-
-
-
-        //==== use above version for homescreen
-
-
-
         /*
-         * RecyclerView that takes a JSONArray of posts from server
-         * Posts are put into ViewHolder objects to be displayed on HomeScreen
-         * - Ethan Still
-         * //TODO put call to server in place of jsonArray below
+         * Retrieves posts and populates the HomeScreen.
+         *
+         * - Jae Swanepoel
          */
-        RecyclerView recycle;
-        recycle = findViewById(R.id.recycle);
-        RecyclerView.LayoutManager mLayoutManager;
-
-
-        JSONObject post1 = new JSONObject();
-        JSONObject post2 = new JSONObject();
-        JSONObject post3 = new JSONObject();
-        JSONObject post4 = new JSONObject();
-        JSONObject post5 = new JSONObject();
-        JSONObject post6 = new JSONObject();
-
-
-
-        try {
-
-            post1.put("title", "poooost 1");
-            post2.put("title", "postttt 2");
-            post3.put("title", "poooost 3");
-            post4.put("title", "poooost 4");
-            post5.put("title", "poooost 5");
-            post6.put("title", "poooost 6");
-
-        } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        JSONArray jsonArray = new JSONArray();
-
-        jsonArray.put(post1);
-        jsonArray.put(post2);
-        jsonArray.put(post3);
-        jsonArray.put(post4);
-        jsonArray.put(post5);
-        jsonArray.put(post6);
-
-        JSONObject postobj = new JSONObject();
-        try {
-            postobj.put("posts", jsonArray);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        MyAdapter mAdapter = new MyAdapter(this, jsonArray);
-        recycle.setAdapter(mAdapter);
-
-        mLayoutManager = new LinearLayoutManager(this);
-        recycle.setLayoutManager(mLayoutManager);
-
-
+        getPosts();
 
 //========================================
         /*
@@ -167,9 +71,76 @@ public class HomeScreen extends AppCompatActivity {
          */
         Button post_button = findViewById(R.id.post_create_Button);
         post_button.setOnClickListener(view -> startActivity(new Intent(view.getContext(),PostCreation.class)));
-
     }
 
+    /*
+     * Retrieves post data from the server and
+     * displays it in an infinite scroll.
+     *
+     * - Jae Swanepoel
+     */
+    private void getPosts() {
+
+        System.out.println("Getting posts");
+
+        /*
+         * The volley request that will retrieve our data.
+         * Requires a URL pulled from the Const class.
+         */
+        JsonArrayRequest json_arr_req = new JsonArrayRequest(POST_LIST_URL,
 
 
+                 response -> {
+
+                     Log.d(RESPONSE_TAG, response.toString());
+
+                     /*
+                      * RecyclerView that takes a JSONArray of posts from server
+                      * Posts are put into ViewHolder objects to be displayed on HomeScreen
+                      * - Ethan Still
+                      */
+                     RecyclerView recycle;
+                     recycle = findViewById(R.id.recycle);
+                     RecyclerView.LayoutManager mLayoutManager;
+
+                     /*
+                      * For now, the only info we need from the post objects
+                      * are the title, so here, we iteratively create a JSONArray
+                      * of JSONObjects that have only titles.
+                      *
+                      * - Jae Swanepoel
+                      */
+                     JSONArray jsonArray = new JSONArray();
+                     JSONObject temp;
+
+                     String[] titles = new String[response.length()];
+
+                     for (int i = 0; i < response.length(); i++) {
+
+                         temp = new JSONObject();
+
+                         try {
+                             temp.put("title", response.getJSONObject(i).get("title"));
+                             titles[i] = response.getJSONObject(i).get("title").toString();
+                         } catch (JSONException e) {
+                             e.printStackTrace();
+                         }
+
+                         jsonArray.put(temp);
+                     }
+
+                     //inserting the new JSONArray into the adapter.
+                     MyAdapter mAdapter = new MyAdapter(this, jsonArray);
+                     recycle.setAdapter(mAdapter);
+
+                     mLayoutManager = new LinearLayoutManager(this);
+                     recycle.setLayoutManager(mLayoutManager);
+                 },
+
+                 error ->  VolleyLog.d("Error: " + error.getMessage())
+         );
+
+        //adding request to queue - Jae Swanepoel
+        AppController.getInstance().addToRequestQueue(json_arr_req);
+    }
 }

@@ -105,39 +105,15 @@ public class HomeScreen extends AppCompatActivity {
                      RecyclerView.LayoutManager mLayoutManager;
 
                      /*
-                      * For now, the only info we need from the post objects
-                      * are the title, so here, we iteratively create a JSONArray
-                      * of JSONObjects that have only titles.
-                      *
-                      * - Jae Swanepoel
+                      * Setting a jsonArray equal to the JSONArray response from the server
+                      * MyAdapter is an adapter class that manages the information from jsonArray
+                      * RecyclerView recycle is set to the adapter
+                      * request is then added to the que
+                      * - Ethan Still
                       */
+
                      JSONArray jsonArray = new JSONArray();
-                     JSONObject temp;
-
                      jsonArray = response;
-
-
-//                     String[] titles = new String[response.length()];
-//                     String[] bodies = new String [response.length()];
-//
-//                     for (int i = 0; i < response.length(); i++) {
-//
-//                         temp = new JSONObject();
-//
-//                         try {
-//                             temp.put("title", response.getJSONObject(i).get("title"));
-//                             titles[i] = response.getJSONObject(i).get("title").toString();
-//
-//                         } catch (JSONException e) {
-//                             e.printStackTrace();
-//                         }
-//
-//                         jsonArray.put(temp);
-//                     }
-
-
-
-
 
 
                      //inserting the new JSONArray into the adapter.

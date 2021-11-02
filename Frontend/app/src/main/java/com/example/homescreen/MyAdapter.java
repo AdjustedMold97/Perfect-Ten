@@ -26,7 +26,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context mContext;
     JSONArray mtest;
-    String[] strings;
 
 
     /*
@@ -43,17 +42,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     /*
-     * Constructor for Strings
-     *
-     * - Jae Swanepoel
+     * MyViewHolder holds an instance of post_object.xml
+     * post_object has two textViews postObjectTitle and postObjectBody
+     * onCreate creates a new instance of base post_object to be filled with information
+     * - Ethan Still
      */
-    public MyAdapter (Context context, String[] _strings) {
-
-        mContext = context;
-        strings = _strings;
-
-    }
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -65,40 +58,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     /*
      * OnBind sets the values for each ViewHolder object that will be displayed on the screen
-     * Values set are based on the position of the JSONArray[]
+     * JSONObject temp is a object to hold the position in mtest JSONArray
+     * The "title" and "message" are pulled from the JSONObject temp
      * - Ethan Still
      */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         try {
 
-//            String[] titles = new String[response.length()];
-//                     String[] bodies = new String [response.length()];
-//
-//                     for (int i = 0; i < response.length(); i++) {
-//
-//                         temp = new JSONObject();
-//
-//                         try {
-//                             temp.put("title", response.getJSONObject(i).get("title"));
-//                             titles[i] = response.getJSONObject(i).get("title").toString();
-//
-//                         } catch (JSONException e) {
-//                             e.printStackTrace();
-//                         }
-//
-//                         jsonArray.put(temp);
-//                     }
-
             JSONObject temp;
             temp = (JSONObject) mtest.get(position);
-//            temp.get("title").toString();
-//            temp.get("message").toString();
+
             holder.postObjectTitle.setText(temp.get("title").toString());
             holder.postObjectBody.setText(temp.get("message").toString());
 
-//            holder.postObjectTitle.setText(mtest.get(position).toString());
-//            holder.postObjectBody.setText(mtest.get(position).toString());
+
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -110,16 +84,31 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return super.getItemViewType(position);
     }
 
+    /*
+     * getItemCount returns the length of mtest JSONArray
+     * - Ethan Still
+     */
     @Override
     public int getItemCount() {
         return mtest.length();
     }
 
+    /*
+     * MyViewHolder has two textViews
+     * postObjectTitle will contain instances of "title" text from JSONObjects
+     * postObjectBody will contain instances of "message" text from JSONObjects
+     * - Ethan Still
+     */
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView postObjectTitle;
         TextView postObjectBody;
 
 
+        /*
+         * ID's for postObjectTitle and postObjectBody
+         * Can be found in post_object.xml
+         * - Ethan Still
+         */
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             postObjectTitle = itemView.findViewById(R.id.postObjectTitle);

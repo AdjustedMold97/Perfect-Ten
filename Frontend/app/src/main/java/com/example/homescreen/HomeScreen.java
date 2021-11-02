@@ -93,35 +93,10 @@ public class HomeScreen extends AppCompatActivity {
 
                  response -> {
 
-                     Log.d(RESPONSE_TAG, response.toString());
+                    //logging JSON response and calling populate()
+                    Log.d(RESPONSE_TAG, response.toString());
+                    populate(response);
 
-                     /*
-                      * RecyclerView that takes a JSONArray of posts from server
-                      * Posts are put into ViewHolder objects to be displayed on HomeScreen
-                      * - Ethan Still
-                      */
-                     RecyclerView recycle;
-                     recycle = findViewById(R.id.recycle);
-                     RecyclerView.LayoutManager mLayoutManager;
-
-                     /*
-                      * Setting a jsonArray equal to the JSONArray response from the server
-                      * MyAdapter is an adapter class that manages the information from jsonArray
-                      * RecyclerView recycle is set to the adapter
-                      * request is then added to the que
-                      * - Ethan Still
-                      */
-
-                     JSONArray jsonArray = new JSONArray();
-                     jsonArray = response;
-
-
-                     //inserting the new JSONArray into the adapter.
-                     MyAdapter mAdapter = new MyAdapter(this, jsonArray);
-                     recycle.setAdapter(mAdapter);
-
-                     mLayoutManager = new LinearLayoutManager(this);
-                     recycle.setLayoutManager(mLayoutManager);
                  },
 
                  error ->  VolleyLog.d("Error: " + error.getMessage())
@@ -129,5 +104,60 @@ public class HomeScreen extends AppCompatActivity {
 
         //adding request to queue - Jae Swanepoel
         AppController.getInstance().addToRequestQueue(json_arr_req);
+    }
+
+    /*
+     * Accepts the JSONArray populated with posts,
+     * creates a new JSONArray with formatted posts,
+     * constructs the RecyclerView to set up infinite scroll.
+     *
+     * - Jae Swanepoel
+     */
+    private void populate(JSONArray arr) {
+
+        /*
+         * RecyclerView that takes a JSONArray of posts from server
+         * Posts are put into ViewHolder objects to be displayed on HomeScreen
+         * - Ethan Still
+         */
+        RecyclerView recycle;
+        recycle = findViewById(R.id.recycle);
+        RecyclerView.LayoutManager mLayoutManager;
+
+        /*
+         * Setting a jsonArray equal to the JSONArray response from the server
+         * MyAdapter is an adapter class that manages the information from jsonArray
+         * RecyclerView recycle is set to the adapter
+         * request is then added to the queue
+         * - Ethan Still
+         */
+
+        JSONArray jsonArray = new JSONArray();
+        JSONObject temp;
+
+        for (int i = 0; i < arr.length(); i++) {
+
+            temp = new JSONObject();
+
+            try {
+                //basically getting the title from the JSON Object
+                temp.put("title",
+                        arr.getJSONObject(arr.length() - i - 1).get("title").toString());
+
+                temp.put("message",
+                        arr.getJSONObject(arr.length() - i - 1).get("message").toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            jsonArray.put(temp);
+        }
+
+        //inserting the new JSONArray into the adapter.
+        MyAdapter mAdapter = new MyAdapter(this, jsonArray);
+        recycle.setAdapter(mAdapter);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        recycle.setLayoutManager(mLayoutManager);
     }
 }

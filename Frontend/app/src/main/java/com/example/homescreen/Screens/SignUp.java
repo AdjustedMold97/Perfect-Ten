@@ -160,7 +160,6 @@ public class SignUp extends AppCompatActivity {
                                 AppController.setUsername(username);
                                 startActivity(new Intent(view.getContext(), LoginScreen.class));
 
-
                             }
 
                             else {

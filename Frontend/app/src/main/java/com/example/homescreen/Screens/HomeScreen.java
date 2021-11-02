@@ -45,6 +45,10 @@ public class HomeScreen extends AppCompatActivity {
         //TODO ethan- interface these somehow to make more efficient
 
 //TODO use <include or <merge to get interface into homeScreen
+
+
+
+
         /*
          * these three buttons make up the bottom tab buttons they go on each screen
          * they include Home, Settings, and Friends and reroute the user to that page form anywhere in the app

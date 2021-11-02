@@ -8,6 +8,7 @@ import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.mockito.MockitoAnnotations;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -15,14 +16,14 @@ import org.mockito.Mock;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.example.Main;
 import com.example.Users.*;
 
 @SpringBootTest
 class MainTests {
-	/*
 	@Test
 	void contextLoads() {
-	} */
+	}
 
 	/*
 	@Test
@@ -38,7 +39,7 @@ class MainTests {
 
 	@InjectMocks
 	UserController userController;
-
+	/*
 	@Test
 	public void getUserByIdTest() {
 		UserRepository userRepository = mock(UserRepository.class);
@@ -50,6 +51,6 @@ class MainTests {
 		assertEquals("Bob", user.getUsername());
 		assertEquals("bob@gmail.com", user.getEmail());
 		assertEquals("password1", user.getPassword());
-	}
+	} */
 
 } 

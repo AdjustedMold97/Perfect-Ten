@@ -21,4 +21,11 @@ public class Const {
     public static final String USER_FIELD = "username";
     public static final String PASS_FIELD = "password";
 
+    /***************************** ERROR MESSAGES **************************************/
+
+    public static final String GENERIC_ERROR = "error1";
+    public static final String USER_ERROR = "error2";
+    public static final String EMAIL_ERROR = "error3";
+    public static final String PASSWORD_ERROR = "error4";
+
 }

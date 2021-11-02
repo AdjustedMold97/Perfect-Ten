@@ -14,6 +14,9 @@
         android:theme="@style/Theme.HomeScreen"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Screens.AddFriendScreen"
+            android:exported="false" />
+        <activity
             android:name=".Screens.ProfileView"
             android:exported="false" />
         <activity
@@ -39,7 +42,7 @@
             android:exported="true" />
         <activity
             android:name=".Screens.HomeScreen"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity android:name=".net_utils.Error" />
         <activity android:name=".net_utils.LoginFail" />
     </application>

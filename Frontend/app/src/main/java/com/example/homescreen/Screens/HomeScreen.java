@@ -1,4 +1,4 @@
-package com.example.homescreen;
+package com.example.homescreen.Screens;
 
 import static com.example.homescreen.net_utils.Const.POST_LIST_URL;
 
@@ -18,6 +18,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.homescreen.Adapters.MyAdapter;
+import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 
 public class HomeScreen extends AppCompatActivity {
@@ -37,16 +39,22 @@ public class HomeScreen extends AppCompatActivity {
 
 //========================================
         //TODO ethan- interface these somehow to make more efficient
+
+//TODO use <include or <merge to get interface into homeScreen
+
+
+
+
         /*
          * these three buttons make up the bottom tab buttons they go on each screen
          * they include Home, Settings, and Friends and reroute the user to that page form anywhere in the app
          * - Ethan Still
          */
         Button friend = findViewById(R.id.friends_Button_home);
-        friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(),FriendsScreen.class)));
+        friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
 
         Button settings = findViewById(R.id.settings_Button_home);
-        settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SettingsScreen.class)));
+        settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(), SettingsScreen.class)));
 
         Button home = findViewById(R.id.home_Button_home);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
@@ -61,7 +69,7 @@ public class HomeScreen extends AppCompatActivity {
         toLogin.setOnClickListener(view -> {
 
             AppController.setUsername(null);
-            startActivity(new Intent(view.getContext(),LoginScreen.class));
+            startActivity(new Intent(view.getContext(), LoginScreen.class));
         });
 
         /*
@@ -69,7 +77,7 @@ public class HomeScreen extends AppCompatActivity {
          * - Ethan Still
          */
         Button post_button = findViewById(R.id.post_create_Button);
-        post_button.setOnClickListener(view -> startActivity(new Intent(view.getContext(),PostCreation.class)));
+        post_button.setOnClickListener(view -> startActivity(new Intent(view.getContext(), PostCreation.class)));
     }
 
     /*

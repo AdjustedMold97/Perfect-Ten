@@ -1,4 +1,4 @@
-package com.example.homescreen;
+package com.example.homescreen.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,8 +12,11 @@ import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.homescreen.R;
+import com.example.homescreen.Screens.LoginScreen;
 import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.Const;
+import com.example.homescreen.net_utils.Error;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +37,7 @@ public class SignUp extends AppCompatActivity {
          * -Ethan Still
          */
         Button toLogin = findViewById(R.id.to_login_button);
-        toLogin.setOnClickListener(view -> startActivity(new Intent((view.getContext()),LoginScreen.class)));
+        toLogin.setOnClickListener(view -> startActivity(new Intent((view.getContext()), LoginScreen.class)));
 
         /*
          * Still not sure what an AtomicReference is.

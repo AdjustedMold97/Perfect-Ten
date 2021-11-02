@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FriendsScreen">
+    tools:context=".Screens.FriendsScreen">
 
     <TextView
         android:id="@+id/textView2"
@@ -56,8 +56,8 @@
         android:id="@+id/Bob_profile_Button"
         android:layout_width="114dp"
         android:layout_height="94dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -70,5 +70,14 @@
         android:text="Bob"
         app:layout_constraintStart_toStartOf="@+id/Bob_profile_Button"
         app:layout_constraintTop_toTopOf="@+id/Bob_profile_Button" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/friendsRecycle"
+        android:layout_width="409dp"
+        android:layout_height="463dp"
+        app:layout_constraintBottom_toTopOf="@+id/friends_Button_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

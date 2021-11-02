@@ -32,11 +32,7 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        /*
-         * Retrieves posts and populates the HomeScreen.
-         *
-         * - Jae Swanepoel
-         */
+        //Retrieves posts and populates the HomeScreen. - Jae Swanepoel
         getPosts();
 
 //========================================
@@ -118,13 +114,15 @@ public class HomeScreen extends AppCompatActivity {
     private void populate(JSONArray arr) {
 
         /*
-         * Setting a jsonArray equal to the JSONArray response from the server
-         * MyAdapter is an adapter class that manages the information from jsonArray
-         * RecyclerView recycle is set to the adapter
-         * request is then added to the queue
-         * - Ethan Still
+         * Taking the original posts array and creating
+         * a new array in reverse order. This is done iteratively.
+         * This is necessary for posts to arrive from newest (top) to oldest (bottom).
+         *
+         * jsonArray - the array used in the RecyclerView
+         * temp      - JSONObject used in for loop operations
+         *
+         * - Jae Swanepoel
          */
-
         JSONArray jsonArray = new JSONArray();
         JSONObject temp;
 
@@ -133,10 +131,11 @@ public class HomeScreen extends AppCompatActivity {
             temp = new JSONObject();
 
             try {
-                //basically getting the title from the JSON Object
+                //getting the title from the JSONObject
                 temp.put(TITLE_TAG,
                         arr.getJSONObject(arr.length() - i - 1).get(TITLE_TAG).toString());
 
+                //getting the message from the JSONObject
                 temp.put(MESSAGE_TAG,
                         arr.getJSONObject(arr.length() - i - 1).get(MESSAGE_TAG).toString());
 
@@ -144,6 +143,7 @@ public class HomeScreen extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+            //inserting the formatted JSONObject into the array
             jsonArray.put(temp);
         }
 
@@ -155,6 +155,13 @@ public class HomeScreen extends AppCompatActivity {
         RecyclerView recycle;
         recycle = findViewById(R.id.recycle);
         RecyclerView.LayoutManager mLayoutManager;
+
+        /*
+         * MyAdapter is an adapter class that manages the information from jsonArray
+         * RecyclerView recycle is set to the adapter
+         * request is then added to the queue
+         * - Ethan Still
+         */
 
         //inserting the new JSONArray into the adapter.
         MyAdapter mAdapter = new MyAdapter(this, jsonArray);

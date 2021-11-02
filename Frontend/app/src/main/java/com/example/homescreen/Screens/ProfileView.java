@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.homescreen.R;
@@ -25,6 +26,11 @@ import java.util.Map;
  * written by Jae Swanepoel
  */
 public class ProfileView extends AppCompatActivity {
+
+    private static final String RESPONSE_TAG = "HTTP Response ";
+    private static final String ERROR_RESPONSE_TAG = "Error ";
+
+    boolean areFriends;
 
     /*
      * We reference these objects in multiple
@@ -51,7 +57,14 @@ public class ProfileView extends AppCompatActivity {
 
         //Rigging the "Add Friend" Button
         addFriendButton = findViewById(R.id.add_friend_Button);
-        addFriendButton.setOnClickListener(view -> addFriend());
+        addFriendButton.setOnClickListener(view -> {
+
+            if (areFriends)
+                removeFriend();
+
+            else
+                addFriend();
+        });
 
         //Rigging the "Block" Button
         blockButton = findViewById(R.id.block_Button);
@@ -67,6 +80,47 @@ public class ProfileView extends AppCompatActivity {
 
         //populating the post TextViews
         fetchPostData();
+
+        areFriends = false;
+
+        /*
+         * Finding out if we are friends with this user
+         * (finding out if this user is in our friends list)
+         *
+         * if yes, the Button should say "Remove Friend"
+         * if no, then the Button will say "Add Friend"
+         *
+         * - Jae Swanepoel
+         */
+        JsonArrayRequest json_arr_req = new JsonArrayRequest(
+                Const.FRIEND_LIST_URL_1 + AppController.getUsername() + Const.FRIEND_LIST_URL_2,
+
+                response -> {
+
+                    Log.d(RESPONSE_TAG, response.toString());
+
+                    for (int i = 0; i < response.length(); i++) {
+
+                        try {
+                            if (response.get(i).toString().equals(AppController.getTargetUser())) {
+
+                                areFriends = true;
+                                addFriendButton.setText("Remove Friend");
+                                break;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    if (!areFriends)
+                        addFriendButton.setText("Add Friend");
+                },
+
+                error -> VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage())
+        );
+
+        AppController.getInstance().addToRequestQueue(json_arr_req);
     }
 
     /*
@@ -95,8 +149,11 @@ public class ProfileView extends AppCompatActivity {
                             Log.d("Server response ", response.toString());
 
                             //Changing text on addFriendButton upon successful request
-                            if (response.get("message").equals(Const.SUCCESS_MSG))
+                            if (response.get("message").equals(Const.SUCCESS_MSG)) {
+
+                                areFriends = true;
                                 addFriendButton.setText("Remove Friend");
+                            }
 
                             else {
                                 //TODO set up failure response
@@ -132,7 +189,7 @@ public class ProfileView extends AppCompatActivity {
                     try {
 
                         //logging the response
-                        Log.d("Response", response.toString());
+                        Log.d("Response ", response.toString());
 
                         //populating TextViews with post data
                         JSONObject temp = response.getJSONObject(response.length() - 1);
@@ -195,5 +252,43 @@ public class ProfileView extends AppCompatActivity {
 
         //Adding the Request to the Queue
         AppController.getInstance().addToRequestQueue(blockRequest);
+    }
+
+    /*
+     * Method for removing someone from your Friends list.
+     *
+     * - Jae Swanepoel
+     */
+    private void removeFriend() {
+
+        JSONObject user = new JSONObject();
+        try {
+            user.put("user", AppController.getTargetUser());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest json_arr_req = new JsonObjectRequest(Request.Method.PUT,
+                Const.REMOVE_FRIEND_URL_1 + AppController.getUsername() + Const.REMOVE_FRIEND_URL_2, user,
+
+                response -> {
+
+                    Log.d("Server Response ", response.toString());
+
+                    try {
+                        if (response.get("message").equals(Const.SUCCESS_MSG)) {
+
+                            areFriends = false;
+                            addFriendButton.setText("Add Friend");
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+
+                error -> VolleyLog.d("Error ", error.getMessage()));
+
+        AppController.getInstance().addToRequestQueue(json_arr_req);
     }
 }

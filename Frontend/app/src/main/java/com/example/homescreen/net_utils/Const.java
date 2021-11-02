@@ -14,6 +14,8 @@ public class Const {
     public static final String ADD_FRIEND_URL_2 = "/friends/new";
     public static final String FRIEND_LIST_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
     public static final String FRIEND_LIST_URL_2 = "/friends/list/usernames";
+    public static final String REMOVE_FRIEND_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
+    public static final String REMOVE_FRIEND_URL_2 = "/friends/remove";
 
     /*********************************** JSON *****************************************/
 

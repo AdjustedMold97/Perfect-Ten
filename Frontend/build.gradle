@@ -4,16 +4,24 @@ buildscript {
         google()
         mavenCentral()
 
-
-
     }
     dependencies {
+        /*
+         * Previous classPaths that still might be relevant to fix CI/CD
+         * previous classpath, changed for android runner
+         * classpath 'com.android.tools.build:gradle:4.0.2'
+         * classpath "com.android.tools.build:gradle:7.0.2"
+         * - Ethan Still
+         */
 
-        //previous classpath, changed for android runner
-        //classpath "com.android.tools.build:gradle:7.0.2"
         classpath 'com.android.tools.build:gradle:7.0.3'
-        //classpath 'com.android.tools.build:gradle:4.0.2'
-
+//
+//        // Required -- JUnit 4 framework
+//        testImplementation 'junit:junit:4.12'
+//        // Optional -- Robolectric environment
+//        testImplementation 'androidx.test:core:1.4.0'
+//        // Optional -- Mockito framework
+//        testImplementation 'org.mockito:mockito-core:1.10.19'
 
 
 
@@ -24,7 +32,7 @@ buildscript {
 //
 //        // Mockito for unit tests
 //        testImplementation 'org.robolectric:robolectric:4.3.1'
-//        testImplementation 'androic.test:core1.4.0'
+//        testImplementation 'android.test:core1.4.0'
 //
 //        //Mockito for Android tests
 //        androidTestImplementaiton 'org.mockito:mockito-android:2.7.22'

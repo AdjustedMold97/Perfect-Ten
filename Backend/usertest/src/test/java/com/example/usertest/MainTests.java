@@ -6,12 +6,15 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.*;
 
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.mockito.MockitoAnnotations;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -19,38 +22,46 @@ import java.util.ArrayList;
 import com.example.Main;
 import com.example.Users.*;
 
-@SpringBootTest
+@SpringBootTest(classes = MainTests.class)
 class MainTests {
-	@Test
-	void contextLoads() {
-	}
 
-	/*
-	@Test
-	public void addFriendTest() {
-		User bob = mock(User.class);
-		User tom = mock(User.class);
-
-		List<User> bobFriends = new ArrayList<>();
-		bobFriends.add(tom);
-		when(bob.getFriends()).thenReturn(bobFriends);
-
-	} */
+	@Mock
+	private UserRepository userRepository;
 
 	@InjectMocks
 	UserController userController;
-	/*
+
 	@Test
-	public void getUserByIdTest() {
-		UserRepository userRepository = mock(UserRepository.class);
+	void initMocks() {
+		userRepository = mock(UserRepository.class);
+	}
 
-		when(userRepository.findById(1)).thenReturn(new User("Bob", "bob@gmail.com", "password1"));
+	@Test
+	public void getUserByUsernameTest() {
+		User user = new User("Tony", "tony@gmail.com", "password1");
+		User user2 = new User("James", "james@gmail.com", "password2");
 
-		User user = userController.getUserById(1);
+		when(userRepository.findByUsername("Tony")).thenReturn(user);
+		when(userRepository.findByUsername("James")).thenReturn(user2);
 
-		assertEquals("Bob", user.getUsername());
-		assertEquals("bob@gmail.com", user.getEmail());
-		assertEquals("password1", user.getPassword());
-	} */
+		assertEquals(userController.getUserByUsername("Tony"), user);
+		assertEquals(userController.getUserByUsername("James"), user2);
+	}
+
+	@Test
+	public void createUserTest() {
+		User user = new User("TestUser", "test@gmail.com", "testpassword");
+
+		when(userRepository.findByUsername("TestUser")).thenReturn(null);
+
+		assertEquals(userController.createUser(user), "{\"message\":\"success\"}");
+	}
+
+	@Test
+	public void createUserTestNull() {
+		User user = new User("", "", "");
+
+		assertEquals(userController.createUser(user), "{\"message\":\"error2\"}");
+	}
 
 } 

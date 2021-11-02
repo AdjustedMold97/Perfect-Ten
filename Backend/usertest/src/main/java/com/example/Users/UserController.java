@@ -51,6 +51,7 @@ public class UserController {
     
     // Returns User associated with a username
     @GetMapping(path = "/user/{user}")
+    public
     User getUserByUsername(@PathVariable String user) {
     	return userRepository.findByUsername(user);
     }
@@ -70,6 +71,7 @@ public class UserController {
 
     // Creates a new User and stores it in database (signup)
     @PostMapping(path = "/user/new")
+    public
     String createUser(@RequestBody User user) {
         // If RequestBody is null, return failure
         if (user == null) {

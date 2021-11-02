@@ -26,9 +26,10 @@ public class UserController {
 
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"error1\"}";
-    private String usernameFail = "{\"message\":\"error2\"}";;
-    private String emailFail = "{\"message\":\"error3\"}";;
-    private String passFail = "{\"message\":\"error4\"}";;
+    private String usernameFail = "{\"message\":\"error2\"}";
+    private String emailFail = "{\"message\":\"error3\"}";
+    private String passFail = "{\"message\":\"error4\"}";
+    private String frenFail = "{\"message\":\"error5\"}";
     
     // Checks username and password with Users in UserRepository, returns success or failure
     @PostMapping(path = "/login")
@@ -171,12 +172,12 @@ public class UserController {
 
         // If requested usernames are the same, return failure
         if (user1.equals(user2)) {
-            return failure;
+            return usernameFail;
         }
 
         // If the two Users are already friends, return failure
         if (firstUser.isFriendsWith(secondUser)) {
-            return failure;
+            return frenFail;
         }
 
         // Add users to each other's friends list and return success

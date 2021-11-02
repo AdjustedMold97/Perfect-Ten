@@ -27,10 +27,23 @@ import java.util.Map;
  */
 public class ProfileView extends AppCompatActivity {
 
+    /*
+     * Constants used mostly in JSON Requests.
+     *
+     * - Jae Swanepoel
+     */
     private static final String RESPONSE_TAG = "HTTP Response ";
     private static final String ERROR_RESPONSE_TAG = "Error ";
 
+    /*
+     * Maintains whether or not our user and the
+     * Target User are friends. This allows us to set
+     * the appropriate text to the add/remove button.
+     *
+     * - Jae Swanepoel
+     */
     boolean areFriends;
+    boolean isBlocked;
 
     /*
      * We reference these objects in multiple
@@ -59,68 +72,45 @@ public class ProfileView extends AppCompatActivity {
         addFriendButton = findViewById(R.id.add_friend_Button);
         addFriendButton.setOnClickListener(view -> {
 
+            //if we are already friends, remove friend.
             if (areFriends)
                 removeFriend();
 
+            //if we aren't friends, add the friend.
             else
                 addFriend();
         });
 
         //Rigging the "Block" Button
         blockButton = findViewById(R.id.block_Button);
-        blockButton.setOnClickListener(view -> block());
+        blockButton.setOnClickListener(view -> {
+
+            if (isBlocked)
+                unblock();
+
+            else
+                block();
+        });
 
         //Setting the username TextView
         TextView username = findViewById(R.id.username_TextView_profile);
         username.setText(AppController.getTargetUser());
 
         //Setting up post TextViews
+        //TODO remove this and replace with infinite scroll
         postTitleTextView = findViewById(R.id.title_placeholder);
         postBodyTextView = findViewById(R.id.body_placeholder);
 
         //populating the post TextViews
         fetchPostData();
 
+        //by default, we assume we are not friends
+        //until we can prove it otherwise.
         areFriends = false;
+        isBlocked = false;
 
-        /*
-         * Finding out if we are friends with this user
-         * (finding out if this user is in our friends list)
-         *
-         * if yes, the Button should say "Remove Friend"
-         * if no, then the Button will say "Add Friend"
-         *
-         * - Jae Swanepoel
-         */
-        JsonArrayRequest json_arr_req = new JsonArrayRequest(
-                Const.FRIEND_LIST_URL_1 + AppController.getUsername() + Const.FRIEND_LIST_URL_2,
-
-                response -> {
-
-                    Log.d(RESPONSE_TAG, response.toString());
-
-                    for (int i = 0; i < response.length(); i++) {
-
-                        try {
-                            if (response.get(i).toString().equals(AppController.getTargetUser())) {
-
-                                areFriends = true;
-                                addFriendButton.setText("Remove Friend");
-                                break;
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    if (!areFriends)
-                        addFriendButton.setText("Add Friend");
-                },
-
-                error -> VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage())
-        );
-
-        AppController.getInstance().addToRequestQueue(json_arr_req);
+        checkFriendStatus();
+        checkBlockedStatus();
     }
 
     /*
@@ -148,7 +138,9 @@ public class ProfileView extends AppCompatActivity {
 
                             Log.d("Server response ", response.toString());
 
-                            //Changing text on addFriendButton upon successful request
+                            //Changing text on addFriendButton and
+                            // settings areFriends to true
+                            // upon successful request
                             if (response.get("message").equals(Const.SUCCESS_MSG)) {
 
                                 areFriends = true;
@@ -220,25 +212,27 @@ public class ProfileView extends AppCompatActivity {
 
         //Compiling data for the JSON Request
         Map<String, String> fields = new HashMap<>();
-        fields.put("user", AppController.getUsername());
-        fields.put("target", AppController.getTargetUser());
+        fields.put("user", AppController.getTargetUser());
 
         //Instantiating the JSON Object using the complied data
         JSONObject info = new JSONObject(fields);
 
         //Instantiating the JsonObjectRequest
-        JsonObjectRequest blockRequest = new JsonObjectRequest(Request.Method.GET, /*TODO FIND URL*/ "TODO", info,
+        JsonObjectRequest blockRequest = new JsonObjectRequest(Request.Method.POST,
+                Const.BLOCK_USER_URL_1 + AppController.getUsername() + Const.BLOCK_USER_URL_2, info,
 
                 response -> {
+
+                    Log.d("Server Response ", response.toString());
 
                     try {
 
                         //Changing text on addFriendButton upon successful request
-                        if (response.get("message").equals(Const.SUCCESS_MSG))
+                        if (response.get("message").equals(Const.SUCCESS_MSG)) {
+
+                            isBlocked = true;
                             blockButton.setText("Unblock");
 
-                        else {
-                            //TODO set up failure response
                         }
 
                     } catch (JSONException e) {
@@ -246,12 +240,56 @@ public class ProfileView extends AppCompatActivity {
                     }
                 },
 
-                error -> {
-                    //TODO set up error response
-                });
+                error -> VolleyLog.d("Error ", error.getMessage())
+        );
 
         //Adding the Request to the Queue
         AppController.getInstance().addToRequestQueue(blockRequest);
+    }
+
+    /*
+     * Code for unblocking a user
+     *
+     * - Jae Swanepoel
+     */
+    private void unblock() {
+
+        //Compiling data for the JSON Request
+        Map<String, String> fields = new HashMap<>();
+        fields.put("user", AppController.getTargetUser());
+
+        //Instantiating the JSON Object using the complied data
+        JSONObject info = new JSONObject(fields);
+
+        //Instantiating the JsonObjectRequest
+        JsonObjectRequest blockRequest = new JsonObjectRequest(Request.Method.PUT,
+                Const.UNBLOCK_USER_URL_1 + AppController.getUsername() + Const.UNBLOCK_USER_URL_2, info,
+
+                response -> {
+
+                    Log.d("Server Response ", response.toString());
+
+                    try {
+
+                        //Changing text on blockButton upon successful request
+                        if (response.get("message").equals(Const.SUCCESS_MSG)) {
+
+                            isBlocked = false;
+                            blockButton.setText("Block");
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+
+                error -> VolleyLog.d("Error ", error.getMessage())
+        );
+
+        //Adding the Request to the Queue
+        AppController.getInstance().addToRequestQueue(blockRequest);
+
     }
 
     /*
@@ -276,6 +314,13 @@ public class ProfileView extends AppCompatActivity {
                     Log.d("Server Response ", response.toString());
 
                     try {
+
+                        /*
+                         * if successful, we
+                         *
+                         * set areFriends to false
+                         * set the Button text to "Add Friend".
+                         */
                         if (response.get("message").equals(Const.SUCCESS_MSG)) {
 
                             areFriends = false;
@@ -290,5 +335,106 @@ public class ProfileView extends AppCompatActivity {
                 error -> VolleyLog.d("Error ", error.getMessage()));
 
         AppController.getInstance().addToRequestQueue(json_arr_req);
+    }
+
+    /*
+     * Finding out if we are friends with this user
+     * (finding out if this user is in our friends list)
+     *
+     * if yes, the Button should say "Remove Friend"
+     * if no, then the Button will say "Add Friend"
+     *
+     * - Jae Swanepoel
+     */
+    private void checkFriendStatus() {
+
+        JsonArrayRequest json_arr_req = new JsonArrayRequest(
+                Const.FRIEND_LIST_URL_1 + AppController.getUsername() + Const.FRIEND_LIST_URL_2,
+
+                response -> {
+
+                    Log.d(RESPONSE_TAG, response.toString());
+
+                    /*
+                     * iterating through the friends list
+                     * to see if we can find the target user
+                     */
+                    for (int i = 0; i < response.length(); i++) {
+
+                        try {
+
+                            /*
+                             * if we find the target user, we
+                             *
+                             * set areFriends to true, showing we are friends
+                             * change the text on the Button to "Remove Friend"
+                             */
+                            if (response.get(i).toString().equals(AppController.getTargetUser())) {
+
+                                areFriends = true;
+                                addFriendButton.setText("Remove Friend");
+                                break;
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+
+                error -> VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage())
+        );
+
+        AppController.getInstance().addToRequestQueue(json_arr_req);
+    }
+
+    /*
+     * Checks if the user is blocked
+     * called during onCreate
+     *
+     * - Jae Swanepoel
+     */
+    private void checkBlockedStatus() {
+
+        JsonArrayRequest blocked_list_req = new JsonArrayRequest(
+                Const.BLOCKED_LIST_URL_1 + AppController.getUsername() + Const.BLOCKED_LIST_URL_2,
+
+                response -> {
+
+                    Log.d(RESPONSE_TAG, response.toString());
+
+                    /*
+                     * iterating through the blocked list
+                     * to see if we can find the target user
+                     */
+                    for (int i = 0; i < response.length(); i++) {
+
+                        try {
+
+                            /*
+                             * if we find the target user, we
+                             *
+                             * set isBlocked to true, showing the user is blocked
+                             * change the text on the Button to "Unblock"
+                             */
+                            if (response.get(i).toString().equals(AppController.getTargetUser())) {
+
+                                isBlocked = true;
+                                blockButton.setText("Unblock");
+                                break;
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+
+                error -> VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage())
+        );
+
+        AppController.getInstance().addToRequestQueue(blocked_list_req);
     }
 }

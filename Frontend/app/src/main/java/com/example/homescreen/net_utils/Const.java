@@ -16,6 +16,12 @@ public class Const {
     public static final String FRIEND_LIST_URL_2 = "/friends/list/usernames";
     public static final String REMOVE_FRIEND_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
     public static final String REMOVE_FRIEND_URL_2 = "/friends/remove";
+    public static final String BLOCK_USER_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
+    public static final String BLOCK_USER_URL_2 = "/blocked/new";
+    public static final String UNBLOCK_USER_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
+    public static final String UNBLOCK_USER_URL_2 = "/blocked/remove";
+    public static final String BLOCKED_LIST_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
+    public static final String BLOCKED_LIST_URL_2 = "/blocked/list/usernames";
 
     /*********************************** JSON *****************************************/
 

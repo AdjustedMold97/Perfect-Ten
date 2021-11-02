@@ -122,7 +122,4 @@ import org.json.JSONObject;
                 friendObjectImg = itemView.findViewById(R.id.friendImg);
             }
         }
-
-
-
 }

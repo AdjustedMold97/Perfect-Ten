@@ -67,12 +67,12 @@ import org.json.JSONObject;
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             try {
 
-                JSONObject temp;
-                temp = (JSONObject) mtest.get(position);
+//                JSONObject temp;
+//                temp = (JSONObject) mtest.get(position);
 
                 //TODO get mappings go here
-                holder.friendObjectName.setText(temp.get("title").toString());
-                holder.friendObjectDesc.setText(temp.get("message").toString());
+                holder.friendObjectName.setText(mtest.get(position).toString());
+               // holder.friendObjectDesc.setText(temp.get("message").toString());
                 //TODO holder.friendObjectImg.
 
 

@@ -1,9 +1,11 @@
 package com.example.homescreen.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homescreen.R;
+import com.example.homescreen.Screens.ProfileView;
+import com.example.homescreen.app.AppController;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,8 +76,18 @@ import org.json.JSONObject;
 
                 //TODO get mappings go here
                 holder.friendObjectName.setText(mtest.get(position).toString());
-               // holder.friendObjectDesc.setText(temp.get("message").toString());
+                //holder.friendObjectDesc.setText(temp.get("message").toString());
+
                 //TODO holder.friendObjectImg.
+
+                holder.friendObjectImg.setOnClickListener(view -> {
+                    AppController.setTargetUser(holder.friendObjectName.getText().toString());
+                    mContext.startActivity(new Intent(view.getContext(), ProfileView.class));
+                });
+                holder.friendObjectName.setOnClickListener(view -> {
+                    AppController.setTargetUser(holder.friendObjectName.getText().toString());
+                    mContext.startActivity(new Intent(view.getContext(), ProfileView.class));
+                });
 
 
             }
@@ -118,7 +132,7 @@ import org.json.JSONObject;
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 friendObjectName = itemView.findViewById(R.id.friendName);
-                friendObjectDesc = itemView.findViewById(R.id.friendDescription);
+                friendObjectDesc = itemView.findViewById(R.id.friendDesc);
                 friendObjectImg = itemView.findViewById(R.id.friendImg);
             }
         }

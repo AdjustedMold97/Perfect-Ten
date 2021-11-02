@@ -37,7 +37,7 @@ autoDeploy:
     - sudo systemctl start system-web-demo
 
 android-build: #this is another job
-  image: gjandres/android-ci:latest      # this is a directive to DOCKER
+  image: javiersantos/android-ci:latest      # this is a directive to DOCKER
   stage: androidtry
   tags:
    - android_tag         #this is LINK to the docker runner on the remote-server        

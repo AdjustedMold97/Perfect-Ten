@@ -178,17 +178,17 @@ public class SignUp extends AppCompatActivity {
                                         error_msg = "Something went wrong...";
                                         break;
 
-                                    case "error2":
+                                    case Const.USER_ERROR:
                                         //username taken
                                         error_msg = "This username is taken. Try another one!";
                                         break;
 
-                                    case "error3":
+                                    case Const.EMAIL_ERROR:
                                         //email invalid
                                         error_msg = "This email is invalid.";
                                         break;
 
-                                    case "error4":
+                                    case Const.PASSWORD_ERROR:
                                         //password invalid
                                         error_msg = "This password is invalid.";
                                         break;
@@ -196,16 +196,6 @@ public class SignUp extends AppCompatActivity {
 
                                 errorView.setText(error_msg);
                                 errorView.setVisibility(View.VISIBLE);
-
-//                            /*
-//                             * if a failed response is received
-//                             * should only ever happen if the username is already taken
-//                             * -Ethan Still
-//                             */
-//                            else {
-//                                taken.set(findViewById(R.id.taken));
-//                                taken.get().setVisibility(View.VISIBLE);
-//>>>>>>> 31-scroll-view-set-up
                             }
 
 

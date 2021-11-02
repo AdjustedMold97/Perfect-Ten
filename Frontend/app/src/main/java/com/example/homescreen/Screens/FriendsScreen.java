@@ -44,6 +44,10 @@ public class FriendsScreen extends AppCompatActivity {
         Button home = findViewById(R.id.home_Button_home);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
 
+        //Rigging "Add Friend" Button
+        Button addFriend = findViewById(R.id.add_friend_screen_Button);
+        addFriend.setOnClickListener(view -> startActivity(new Intent(view.getContext(), AddFriendScreen.class)));
+
         /*
          * For now, clicking on the ImageButton will
          * set the target user to "Bob" and direct you to

@@ -1,7 +1,6 @@
 package com.example.homescreen;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.toolbox.JsonObjectRequest;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.util.List;
+import java.util.Locale;
 
 
 /*
@@ -36,8 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     /*
      * Constructor for MyAdapter
      * Context sets a context to use for the inflater
-     * JSONArray test[] is the array input used in OnBindViewHolder to fill the text for post title and body
-     * test[] is converted to a string array
+     * JSONArray test is the array input used in OnBindViewHolder to fill the text for post title and body
      * - Ethan Still
      */
     public MyAdapter(Context context, JSONArray test){
@@ -71,11 +66,39 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     /*
      * OnBind sets the values for each ViewHolder object that will be displayed on the screen
      * Values set are based on the position of the JSONArray[]
+     * - Ethan Still
      */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         try {
-            holder.postObjectTitle.setText(mtest.get(position).toString());
+
+//            String[] titles = new String[response.length()];
+//                     String[] bodies = new String [response.length()];
+//
+//                     for (int i = 0; i < response.length(); i++) {
+//
+//                         temp = new JSONObject();
+//
+//                         try {
+//                             temp.put("title", response.getJSONObject(i).get("title"));
+//                             titles[i] = response.getJSONObject(i).get("title").toString();
+//
+//                         } catch (JSONException e) {
+//                             e.printStackTrace();
+//                         }
+//
+//                         jsonArray.put(temp);
+//                     }
+
+            JSONObject temp;
+            temp = (JSONObject) mtest.get(position);
+//            temp.get("title").toString();
+//            temp.get("message").toString();
+            holder.postObjectTitle.setText(temp.get("title").toString());
+            holder.postObjectBody.setText(temp.get("message").toString());
+
+//            holder.postObjectTitle.setText(mtest.get(position).toString());
+//            holder.postObjectBody.setText(mtest.get(position).toString());
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -94,13 +117,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView postObjectTitle;
-        //TextView postObjectBody;
+        TextView postObjectBody;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             postObjectTitle = itemView.findViewById(R.id.postObjectTitle);
-            ///postObjectBody = itemView.findViewById(R.id.postObjectBody);
+            postObjectBody = itemView.findViewById(R.id.postObjectBody);
         }
     }
 

@@ -38,6 +38,7 @@ public class HomeScreen extends AppCompatActivity {
         getPosts();
 
 //========================================
+        //TODO ethan- interface these somehow to make more efficient
         /*
          * these three buttons make up the bottom tab buttons they go on each screen
          * they include Home, Settings, and Friends and reroute the user to that page form anywhere in the app
@@ -113,21 +114,31 @@ public class HomeScreen extends AppCompatActivity {
                      JSONArray jsonArray = new JSONArray();
                      JSONObject temp;
 
-                     String[] titles = new String[response.length()];
+                     jsonArray = response;
 
-                     for (int i = 0; i < response.length(); i++) {
 
-                         temp = new JSONObject();
+//                     String[] titles = new String[response.length()];
+//                     String[] bodies = new String [response.length()];
+//
+//                     for (int i = 0; i < response.length(); i++) {
+//
+//                         temp = new JSONObject();
+//
+//                         try {
+//                             temp.put("title", response.getJSONObject(i).get("title"));
+//                             titles[i] = response.getJSONObject(i).get("title").toString();
+//
+//                         } catch (JSONException e) {
+//                             e.printStackTrace();
+//                         }
+//
+//                         jsonArray.put(temp);
+//                     }
 
-                         try {
-                             temp.put("title", response.getJSONObject(i).get("title"));
-                             titles[i] = response.getJSONObject(i).get("title").toString();
-                         } catch (JSONException e) {
-                             e.printStackTrace();
-                         }
 
-                         jsonArray.put(temp);
-                     }
+
+
+
 
                      //inserting the new JSONArray into the adapter.
                      MyAdapter mAdapter = new MyAdapter(this, jsonArray);

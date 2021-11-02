@@ -19,7 +19,7 @@ buildscript {
 
 
         //TODO add mockito
-//        testImplementation "org.mockito:mockito-core:2.7.7."
+//        testImplementation "org.mockito:mockito-core:2.7.7"
 //        //testImplementation "org.mockito:mockito-core:3.+"
 //
 //        // Mockito for unit tests

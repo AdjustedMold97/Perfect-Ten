@@ -1,4 +1,4 @@
-package com.example.homescreen;
+package com.example.homescreen.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.Const;
 
@@ -44,9 +45,9 @@ public class ProfileView extends AppCompatActivity {
         Button friends = findViewById(R.id.friends_Button_profile);
         Button settings = findViewById(R.id.settings_Button_profile);
 
-        home.setOnClickListener(view -> startActivity(new Intent(view.getContext(),HomeScreen.class)));
-        friends.setOnClickListener(view -> startActivity(new Intent(view.getContext(),FriendsScreen.class)));
-        settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SettingsScreen.class)));
+        home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
+        friends.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
+        settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(), SettingsScreen.class)));
 
         //Rigging the "Add Friend" Button
         addFriendButton = findViewById(R.id.add_friend_Button);

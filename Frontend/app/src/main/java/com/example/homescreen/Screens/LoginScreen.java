@@ -1,4 +1,4 @@
-package com.example.homescreen;
+package com.example.homescreen.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 
 import org.json.JSONException;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.example.homescreen.net_utils.Const;
+import com.example.homescreen.net_utils.Error;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -144,7 +146,7 @@ public class LoginScreen extends AppCompatActivity {
                         //Code for errors - Jae Swanepoel
                         error -> {
                             VolleyLog.d("Error: "+ error.getMessage());
-                            startActivity(new Intent(LoginScreen.this,Error.class));
+                            startActivity(new Intent(LoginScreen.this, Error.class));
                         }
                 );
 

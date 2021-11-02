@@ -14,16 +14,16 @@
         android:theme="@style/Theme.HomeScreen"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ProfileView"
+            android:name=".Screens.ProfileView"
             android:exported="false" />
         <activity
-            android:name=".SignUp"
+            android:name=".Screens.SignUp"
             android:exported="true" />
         <activity
-            android:name=".PostCreation"
+            android:name=".Screens.PostCreation"
             android:exported="true" />
         <activity
-            android:name=".LoginScreen"
+            android:name=".Screens.LoginScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,16 +32,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsScreen"
+            android:name=".Screens.SettingsScreen"
             android:exported="true" />
         <activity
-            android:name=".FriendsScreen"
+            android:name=".Screens.FriendsScreen"
             android:exported="true" />
         <activity
-            android:name=".HomeScreen"
+            android:name=".Screens.HomeScreen"
             android:exported="true"></activity>
-        <activity android:name=".Error" />
-        <activity android:name=".LoginFail" />
+        <activity android:name=".net_utils.Error" />
+        <activity android:name=".net_utils.LoginFail" />
     </application>
 
 </manifest>

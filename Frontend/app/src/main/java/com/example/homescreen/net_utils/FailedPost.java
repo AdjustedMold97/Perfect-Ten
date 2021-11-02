@@ -7,7 +7,7 @@ import android.util.DisplayMetrics;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.homescreen.PostCreation;
+import com.example.homescreen.Screens.PostCreation;
 import com.example.homescreen.R;
 
 public class FailedPost extends Activity {

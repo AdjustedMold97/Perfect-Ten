@@ -1,4 +1,4 @@
-package com.example.homescreen;
+package com.example.homescreen.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.android.volley.Request;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 
 import org.json.JSONException;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.example.homescreen.net_utils.Const;
+import com.example.homescreen.net_utils.Error;
 import com.example.homescreen.net_utils.FailedPost;
 
 public class PostCreation extends AppCompatActivity {
@@ -148,7 +150,7 @@ public class PostCreation extends AppCompatActivity {
                              * check Error.java for the code to the pop up screen
                              * - Ethan Still
                              */
-                            startActivity(new Intent(PostCreation.this,Error.class));
+                            startActivity(new Intent(PostCreation.this, Error.class));
                         });
 
                 //Adding to RequestQueue - Jae Swanepoel

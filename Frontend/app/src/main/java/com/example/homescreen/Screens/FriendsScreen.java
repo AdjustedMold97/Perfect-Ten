@@ -1,25 +1,14 @@
-package com.example.homescreen;
-
-import static com.example.homescreen.net_utils.Const.POST_LIST_URL;
+package com.example.homescreen.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class FriendsScreen extends AppCompatActivity {
 
@@ -37,7 +26,7 @@ public class FriendsScreen extends AppCompatActivity {
         friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(),FriendsScreen.class)));
 
         Button settings = findViewById(R.id.settings_Button_home);
-        settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SettingsScreen.class)));
+        settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(), SettingsScreen.class)));
 
         Button home = findViewById(R.id.home_Button_home);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));

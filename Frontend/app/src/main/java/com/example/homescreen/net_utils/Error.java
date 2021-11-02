@@ -1,4 +1,4 @@
-package com.example.homescreen;
+package com.example.homescreen.net_utils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,20 +6,21 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-public class LoginFail extends Activity {
+import com.example.homescreen.Screens.LoginScreen;
+import com.example.homescreen.R;
+
+public class Error extends Activity {
 
     /*
-     * pop up window class to display login failure
+     * pop up window class to display errors
      * - Ethan Still
      */
     protected void onCreate(Bundle savedInstancesState) {
         super.onCreate(savedInstancesState);
 
         setContentView(R.layout.errorwindow);
-        TextView error_Box = findViewById(R.id.textView7);
-        error_Box.setText("Username or Password are incorrect");
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -34,7 +35,7 @@ public class LoginFail extends Activity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(view.getContext(),LoginScreen.class));
+                startActivity(new Intent(view.getContext(), LoginScreen.class));
 
             }
         });

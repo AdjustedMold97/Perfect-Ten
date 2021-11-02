@@ -171,7 +171,7 @@ public class UserController {
         }
 
         // If requested usernames are the same, return failure
-        if (user1.equals(user2)) {
+        if (user1.equals(json.get("user").textValue())) {
             return usernameFail;
         }
 

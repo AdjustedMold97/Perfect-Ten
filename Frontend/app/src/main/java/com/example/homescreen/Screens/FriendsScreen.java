@@ -36,14 +36,14 @@ public class FriendsScreen extends AppCompatActivity {
 
         //Rigging the Universal Buttons
         Button friend = findViewById(R.id.friends_Button_home);
-        friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(),FriendsScreen.class)));
+        friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
 
         Button settings = findViewById(R.id.settings_Button_home);
         settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(), SettingsScreen.class)));
 
         Button home = findViewById(R.id.home_Button_home);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
-
+    }
         /*
          * For now, clicking on the ImageButton will
          * set the target user to "Bob" and direct you to
@@ -51,13 +51,6 @@ public class FriendsScreen extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-        ImageButton bob = findViewById(R.id.Bob_profile_Button);
-        bob.setOnClickListener(view -> {
-            AppController.setTargetUser("Bob");
-            startActivity(new Intent(view.getContext(), ProfileView.class));
-        });
-    }
-
     private void getFriends() {
 
         JsonArrayRequest json_arr_req = new JsonArrayRequest(
@@ -76,6 +69,14 @@ public class FriendsScreen extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(json_arr_req);
     }
 
+    /*
+     * recycle is assigned an Adapter mAdapter that is of type FriendsAdapter
+     * the adapter has three types of data tracked
+     * Two textViews friendName and friendDesc
+     * One ImageButton friendImg
+     * The adapter uses friend_object.xml
+     * - Ethan Still
+     */
     private void populate(JSONArray arr) {
 
         RecyclerView recycle;

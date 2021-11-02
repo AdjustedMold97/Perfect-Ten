@@ -25,5 +25,4 @@ public class universalBar extends AppCompatActivity {
         Button home = findViewById(R.id.home_Button);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
     }
-
 }

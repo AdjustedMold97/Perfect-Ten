@@ -22,7 +22,9 @@ import com.example.homescreen.app.AppController;
 
 public class HomeScreen extends AppCompatActivity {
 
-    final static String RESPONSE_TAG = "JSON Response: ";
+    final static String RESPONSE_TAG = "JSON Response ";
+    final static String TITLE_TAG = "title";
+    final static String MESSAGE_TAG = "message";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class HomeScreen extends AppCompatActivity {
         getPosts();
 
 //========================================
+        //TODO ethan- interface these somehow to make more efficient
         /*
          * these three buttons make up the bottom tab buttons they go on each screen
          * they include Home, Settings, and Friends and reroute the user to that page form anywhere in the app
@@ -92,49 +95,10 @@ public class HomeScreen extends AppCompatActivity {
 
                  response -> {
 
-                     Log.d(RESPONSE_TAG, response.toString());
+                    //logging JSON response and calling populate()
+                    Log.d(RESPONSE_TAG, response.toString());
+                    populate(response);
 
-                     /*
-                      * RecyclerView that takes a JSONArray of posts from server
-                      * Posts are put into ViewHolder objects to be displayed on HomeScreen
-                      * - Ethan Still
-                      */
-                     RecyclerView recycle;
-                     recycle = findViewById(R.id.recycle);
-                     RecyclerView.LayoutManager mLayoutManager;
-
-                     /*
-                      * For now, the only info we need from the post objects
-                      * are the title, so here, we iteratively create a JSONArray
-                      * of JSONObjects that have only titles.
-                      *
-                      * - Jae Swanepoel
-                      */
-                     JSONArray jsonArray = new JSONArray();
-                     JSONObject temp;
-
-                     String[] titles = new String[response.length()];
-
-                     for (int i = 0; i < response.length(); i++) {
-
-                         temp = new JSONObject();
-
-                         try {
-                             temp.put("title", response.getJSONObject(i).get("title"));
-                             titles[i] = response.getJSONObject(i).get("title").toString();
-                         } catch (JSONException e) {
-                             e.printStackTrace();
-                         }
-
-                         jsonArray.put(temp);
-                     }
-
-                     //inserting the new JSONArray into the adapter.
-                     MyAdapter mAdapter = new MyAdapter(this, jsonArray);
-                     recycle.setAdapter(mAdapter);
-
-                     mLayoutManager = new LinearLayoutManager(this);
-                     recycle.setLayoutManager(mLayoutManager);
                  },
 
                  error ->  VolleyLog.d("Error: " + error.getMessage())
@@ -142,5 +106,61 @@ public class HomeScreen extends AppCompatActivity {
 
         //adding request to queue - Jae Swanepoel
         AppController.getInstance().addToRequestQueue(json_arr_req);
+    }
+
+    /*
+     * Accepts the JSONArray populated with posts,
+     * creates a new JSONArray with formatted posts,
+     * constructs the RecyclerView to set up infinite scroll.
+     *
+     * - Jae Swanepoel
+     */
+    private void populate(JSONArray arr) {
+
+        /*
+         * Setting a jsonArray equal to the JSONArray response from the server
+         * MyAdapter is an adapter class that manages the information from jsonArray
+         * RecyclerView recycle is set to the adapter
+         * request is then added to the queue
+         * - Ethan Still
+         */
+
+        JSONArray jsonArray = new JSONArray();
+        JSONObject temp;
+
+        for (int i = 0; i < arr.length(); i++) {
+
+            temp = new JSONObject();
+
+            try {
+                //basically getting the title from the JSON Object
+                temp.put(TITLE_TAG,
+                        arr.getJSONObject(arr.length() - i - 1).get(TITLE_TAG).toString());
+
+                temp.put(MESSAGE_TAG,
+                        arr.getJSONObject(arr.length() - i - 1).get(MESSAGE_TAG).toString());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            jsonArray.put(temp);
+        }
+
+        /*
+         * RecyclerView that takes a JSONArray of posts from server
+         * Posts are put into ViewHolder objects to be displayed on HomeScreen
+         * - Ethan Still
+         */
+        RecyclerView recycle;
+        recycle = findViewById(R.id.recycle);
+        RecyclerView.LayoutManager mLayoutManager;
+
+        //inserting the new JSONArray into the adapter.
+        MyAdapter mAdapter = new MyAdapter(this, jsonArray);
+        recycle.setAdapter(mAdapter);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        recycle.setLayoutManager(mLayoutManager);
     }
 }

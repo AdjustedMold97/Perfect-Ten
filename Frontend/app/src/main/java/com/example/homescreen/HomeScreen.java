@@ -22,7 +22,9 @@ import com.example.homescreen.app.AppController;
 
 public class HomeScreen extends AppCompatActivity {
 
-    final static String RESPONSE_TAG = "JSON Response: ";
+    final static String RESPONSE_TAG = "JSON Response ";
+    final static String TITLE_TAG = "title";
+    final static String MESSAGE_TAG = "message";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,15 +118,6 @@ public class HomeScreen extends AppCompatActivity {
     private void populate(JSONArray arr) {
 
         /*
-         * RecyclerView that takes a JSONArray of posts from server
-         * Posts are put into ViewHolder objects to be displayed on HomeScreen
-         * - Ethan Still
-         */
-        RecyclerView recycle;
-        recycle = findViewById(R.id.recycle);
-        RecyclerView.LayoutManager mLayoutManager;
-
-        /*
          * Setting a jsonArray equal to the JSONArray response from the server
          * MyAdapter is an adapter class that manages the information from jsonArray
          * RecyclerView recycle is set to the adapter
@@ -141,17 +134,27 @@ public class HomeScreen extends AppCompatActivity {
 
             try {
                 //basically getting the title from the JSON Object
-                temp.put("title",
-                        arr.getJSONObject(arr.length() - i - 1).get("title").toString());
+                temp.put(TITLE_TAG,
+                        arr.getJSONObject(arr.length() - i - 1).get(TITLE_TAG).toString());
 
-                temp.put("message",
-                        arr.getJSONObject(arr.length() - i - 1).get("message").toString());
+                temp.put(MESSAGE_TAG,
+                        arr.getJSONObject(arr.length() - i - 1).get(MESSAGE_TAG).toString());
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
             jsonArray.put(temp);
         }
+
+        /*
+         * RecyclerView that takes a JSONArray of posts from server
+         * Posts are put into ViewHolder objects to be displayed on HomeScreen
+         * - Ethan Still
+         */
+        RecyclerView recycle;
+        recycle = findViewById(R.id.recycle);
+        RecyclerView.LayoutManager mLayoutManager;
 
         //inserting the new JSONArray into the adapter.
         MyAdapter mAdapter = new MyAdapter(this, jsonArray);

@@ -73,16 +73,22 @@ class MainTests {
 		User user = new User("user1", "user1@gmail.com", "password1");
 		User user2 = new User("user2", "user2@gmail.com", "password2");
 
-		userRepository.save(user);
-		userRepository.save(user2);
+		when(userRepository.findByUsername("user1")).thenReturn(user);
+		when(userRepository.findByUsername("user2")).thenReturn(user2);
 
 		ObjectMapper mapper = new ObjectMapper();
 
 		ObjectNode obn = mapper.createObjectNode();
 		obn.set("user", mapper.convertValue(user2.getUsername(), JsonNode.class));
-		System.out.println(obn);
+		
+		// Check that users are not friends before addFriend function is called
+		assertEquals(false, user.isFriendsWith(user2));
+		assertEquals(false, user2.isFriendsWith(user));
 
+		// Call addFriend and make sure success is returned
 		assertEquals("{\"message\":\"success\"}", userController.addFriend(user.getUsername(), obn));
+
+		// Check that users are friends after addFriend function is called
 		assertEquals(true, user.isFriendsWith(user2));
 		assertEquals(true, user2.isFriendsWith(user));
 	}

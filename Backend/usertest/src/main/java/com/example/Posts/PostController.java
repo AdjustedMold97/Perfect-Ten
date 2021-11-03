@@ -25,17 +25,17 @@ public class PostController {
     private String passFail = "{\"message\":\"error4\"}";;
 
     @GetMapping(path = "/posts/list")
-    List<Post> getAllPosts(){
+    public List<Post> getAllPosts(){
         return postRepository.findAll();
     }
 
     @GetMapping(path = "/posts/{id}")
-    Post getPostById( @PathVariable int id){
+    public Post getPostById( @PathVariable int id){
         return postRepository.findById(id);
     }
 
     @PostMapping(path = "/posts/new/{username}")
-    String createPost(@RequestBody Post post, @PathVariable String username){
+    public String createPost(@RequestBody Post post, @PathVariable String username){
         if (post == null || userRepository.findByUsername(username) == null)
             return usernameFail;
         // User user = userRepository.findByUsername(username);
@@ -47,7 +47,7 @@ public class PostController {
     }
     
     @PostMapping(path = "/posts/new/comment/{username}")
-    String createComment(@RequestBody int id, @RequestBody String message, @PathVariable String username) {
+    public String createComment(@RequestBody int id, @RequestBody String message, @PathVariable String username) {
     	if (userRepository.findByUsername(username) == null)
             return usernameFail;
     	if(postRepository.findById(id) == null) 
@@ -57,7 +57,7 @@ public class PostController {
     }
     
     @GetMapping(path = "/posts/{id}/{index}")
-    String getCommentById( @PathVariable int id, @PathVariable int index){
+    public String getCommentById( @PathVariable int id, @PathVariable int index){
         return postRepository.findById(id).getComment(index);
     }
 
@@ -68,7 +68,7 @@ public class PostController {
     //}
     
     @PutMapping("/posts/{id}")
-    Post updatePost(@PathVariable int id, @RequestBody Post request){
+    public Post updatePost(@PathVariable int id, @RequestBody Post request){
         Post post = postRepository.findById(id);
         if(post == null)
             return null;
@@ -77,7 +77,7 @@ public class PostController {
     } 
     
     @DeleteMapping(path = "/posts/rm/{id}")
-    String deletePost(@PathVariable long id){
+    public String deletePost(@PathVariable long id){
     	postRepository.deleteById(id);
     	return success;
     }

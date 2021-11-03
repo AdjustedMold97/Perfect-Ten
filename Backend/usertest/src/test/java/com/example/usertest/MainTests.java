@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import com.example.Main;
 import com.example.Users.*;
+import com.example.Posts.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -161,5 +162,67 @@ class MainTests {
 		// Check that getFriendUsernamesByUsername returns correct list of usernames
 		assertEquals(friendsOfUser1, userController.getFriendUsernamesByUsername("user1"));
 	}
+	
+	@Mock
+	private PostRepository postRepository;
+	
+	@InjectMocks
+	PostController postController;
+	
+	@Test
+	void initMocks2() {
+		postRepository = mock(PostRepository.class);
+	}
 
+	@Test
+	public void createPostTest() {
+		User user = new User("TestUser", "test@gmail.com", "testpassword");
+		Post post = new Post("TestMessage", "TestTitle", user);
+
+		when(userRepository.findByUsername("TestUser")).thenReturn(user);
+
+		assertEquals("{\"message\":\"success\"}", postController.createPost(post, user.getUsername()));
+	}
+	
+	@Test
+	public void getPostTest() {
+		User user = new User("TestUser", "test@gmail.com", "testpassword");
+		Post post1 = new Post("TestMessage1", "TestTitle1", user);
+		Post post2 = new Post("TestMessage2", "TestTitle2", user);
+		
+		when(postRepository.findById(1)).thenReturn(post1);
+		when(postRepository.findById(2)).thenReturn(post2);
+		
+		assertEquals(post1, postController.getPostById(1));
+		assertEquals(post2, postController.getPostById(2));
+	}
+	
+	@Test
+	public void getCommentTest() {
+		User user = new User("TestUser", "test@gmail.com", "testpassword");
+		Post post1 = new Post("TestMessage1", "TestTitle1", user);
+		Post post2 = new Post("TestMessage2", "TestTitle2", user);
+		post1.addComment("TestComment", user);
+		
+		when(postRepository.findById(1)).thenReturn(post1);
+		when(postRepository.findById(2)).thenReturn(post2);
+		
+		assertEquals(post1.getComment(0), postController.getCommentById(1,0));
+		assertEquals("{\"message\":\"error1\"}", postController.getCommentById(1,1));
+		assertEquals("{\"message\":\"error1\"}", postController.getCommentById(2,0));
+	}
+	
+	@Test
+	public void CreateCommentTest() {
+		User user = new User("TestUser", "test@gmail.com", "testpassword");
+		Post post1 = new Post("TestMessage1", "TestTitle1", user);
+		Post post2 = new Post("TestMessage2", "TestTitle2", user);
+		post1.addComment("TestComment", user);
+		
+		when(userRepository.findByUsername("TestUser")).thenReturn(user);
+		when(postRepository.findById(1)).thenReturn(post1);
+		when(postRepository.findById(2)).thenReturn(post2);
+		
+		assertEquals("{\"message\":\"success\"}", postController.createComment(1, "Test", "TestUser"));
+	}
 } 

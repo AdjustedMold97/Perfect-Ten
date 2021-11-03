@@ -46,12 +46,13 @@ public class UserController {
     
     // Returns list of posts for a specific user's username
     @GetMapping(path = "user/{user}/posts/list")
-    List<Post> getPostsByusername(@PathVariable String user){
+    List<Post> getPostsByUsername(@PathVariable String user){
     	return userRepository.findByUsername(user).getPosts();
     }
     
     // Returns User associated with a username
     @GetMapping(path = "/user/{user}")
+    public
     User getUserByUsername(@PathVariable String user) {
     	return userRepository.findByUsername(user);
     }
@@ -64,12 +65,14 @@ public class UserController {
 
     // Returns User associated with a user ID
     @GetMapping(path = "/user/id/{id}")
+    public
     User getUserById(@PathVariable int id) {
         return userRepository.findById(id);
     }
 
     // Creates a new User and stores it in database (signup)
     @PostMapping(path = "/user/new")
+    public
     String createUser(@RequestBody User user) {
         // If RequestBody is null, return failure
         if (user == null) {
@@ -161,6 +164,7 @@ public class UserController {
 
     // Adds user2 to user1's friends list and vice versa
     @PostMapping(path = "/user/{user1}/friends/new")
+    public
     String addFriend(@PathVariable String user1, @RequestBody ObjectNode json) {
         User firstUser = userRepository.findByUsername(user1);
         User secondUser = userRepository.findByUsername(json.get("user").textValue());

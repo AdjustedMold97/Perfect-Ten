@@ -102,8 +102,8 @@ class MainTests {
 		ObjectMapper mapper = new ObjectMapper();
 
 		ObjectNode obn = mapper.createObjectNode();
-		obn.set("user", mapper.convertValue(user.getUsername(), JsonNode.class));
-		obn.set("password", mapper.convertValue(user.getUsername(), JsonNode.class));
+		obn.set("username", mapper.convertValue(user.getUsername(), JsonNode.class));
+		obn.set("password", mapper.convertValue(user.getPassword(), JsonNode.class));
 
 		when(userRepository.findByUsername("test123")).thenReturn(user);
 		assertEquals("{\"message\":\"success\"}", userController.login(obn));

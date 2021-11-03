@@ -33,6 +33,7 @@ public class UserController {
     
     // Checks username and password with Users in UserRepository, returns success or failure
     @PostMapping(path = "/login")
+    public
     String login(@RequestBody ObjectNode json) {
         // If username is null, return failure
         if(userRepository.findByUsername(json.get("username").textValue()) == null)

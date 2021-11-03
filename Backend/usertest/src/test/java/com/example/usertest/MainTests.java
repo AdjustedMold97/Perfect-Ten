@@ -93,4 +93,20 @@ class MainTests {
 		assertEquals(true, user2.isFriendsWith(user));
 	}
 
+	@Test
+	public void loginTest() {
+		User user = new User("test123", "test123@gmail.com", "testpassword123");
+
+		userController.createUser(user);
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		ObjectNode obn = mapper.createObjectNode();
+		obn.set("user", mapper.convertValue(user.getUsername(), JsonNode.class));
+		obn.set("password", mapper.convertValue(user.getUsername(), JsonNode.class));
+
+		when(userRepository.findByUsername("test123")).thenReturn(user);
+		assertEquals("{\"message\":\"success\"}", userController.login(obn));
+	}
+
 } 

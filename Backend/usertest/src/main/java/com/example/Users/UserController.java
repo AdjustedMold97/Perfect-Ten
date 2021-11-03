@@ -215,9 +215,9 @@ public class UserController {
 
     // Removes a friend from a User's friends list
     @PutMapping(path = "/user/{user1}/friends/remove")
-    String removeFriend(@PathVariable String user1, @RequestBody String user2) {
+    String removeFriend(@PathVariable String user1, @RequestBody ObjectNode json) {
         User firstUser = userRepository.findByUsername(user1);
-        User secondUser = userRepository.findByUsername(user2);
+        User secondUser = userRepository.findByUsername(json.get("user").textValue());
 
         // If either User is not found in database, return failure
         if (firstUser == null || secondUser == null) {
@@ -225,7 +225,7 @@ public class UserController {
         }  
 
         // If both usernames are the same, return failure
-        if (user1.equals(user2)) {
+        if (user1.equals(json.get("user").textValue())) {
             return failure;
         } 
 
@@ -266,9 +266,9 @@ public class UserController {
 
     // Adds user2 to user1's blocked list
     @PostMapping(path = "/user/{user1}/blocked/new")
-    String blockUser(@PathVariable String user1, @RequestBody String user2) {
+    String blockUser(@PathVariable String user1, @RequestBody ObjectNode json) {
         User firstUser = userRepository.findByUsername(user1);
-        User secondUser = userRepository.findByUsername(user2);
+        User secondUser = userRepository.findByUsername(json.get("user").textValue());
 
         // If either User is not found in databse, return failure
         if (firstUser == null || secondUser == null) {
@@ -276,7 +276,7 @@ public class UserController {
         }
 
         // If both usernames are the same, return failure
-        if(user1.equals(user2)) {
+        if(user1.equals(json.get("user").textValue())) {
             return failure;
         }
 
@@ -293,9 +293,9 @@ public class UserController {
 
     // Removes user2 from user1's blocked list
     @PutMapping(path = "/user/{user1}/blocked/remove")
-    String unblockUser(@PathVariable String user1, @RequestBody String user2) {
+    String unblockUser(@PathVariable String user1, @RequestBody ObjectNode json) {
         User firstUser = userRepository.findByUsername(user1);
-        User secondUser = userRepository.findByUsername(user2);
+        User secondUser = userRepository.findByUsername(json.get("user").textValue());
 
         // If either User is not found in database, return failure
         if (firstUser == null || secondUser == null) {
@@ -303,7 +303,7 @@ public class UserController {
         }
 
         // If requested usernames are identical, return failure
-        if (user1.equals(user2)) {
+        if (user1.equals(json.get("user").textValue())) {
             return failure;
         }
 

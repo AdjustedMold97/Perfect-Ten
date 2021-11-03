@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.*;
 
 import org.aspectj.lang.annotation.Before;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,9 @@ import java.util.ArrayList;
 
 import com.example.Main;
 import com.example.Users.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @SpringBootTest(classes = MainTests.class)
 class MainTests {
@@ -44,8 +48,8 @@ class MainTests {
 		when(userRepository.findByUsername("Tony")).thenReturn(user);
 		when(userRepository.findByUsername("James")).thenReturn(user2);
 
-		assertEquals(userController.getUserByUsername("Tony"), user);
-		assertEquals(userController.getUserByUsername("James"), user2);
+		assertEquals(user, userController.getUserByUsername("Tony"));
+		assertEquals(user2, userController.getUserByUsername("James"));
 	}
 
 	@Test
@@ -54,14 +58,32 @@ class MainTests {
 
 		when(userRepository.findByUsername("TestUser")).thenReturn(null);
 
-		assertEquals(userController.createUser(user), "{\"message\":\"success\"}");
+		assertEquals("{\"message\":\"success\"}", userController.createUser(user));
 	}
 
 	@Test
 	public void createUserTestNull() {
 		User user = new User("", "", "");
 
-		assertEquals(userController.createUser(user), "{\"message\":\"error2\"}");
+		assertEquals("{\"message\":\"error2\"}", userController.createUser(user));
+	}
+
+	@Test
+	public void addFriendTest() {
+		User user = new User("user1", "user1@gmail.com", "password1");
+		User user2 = new User("user2", "user2@gmail.com", "password2");
+
+		userRepository.save(user);
+		userRepository.save(user2);
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		ObjectNode obn = mapper.createObjectNode();
+		obn.set("user", mapper.convertValue(user2.getUsername(), JsonNode.class));
+
+		assertEquals("{\"message\":\"success\"}", userController.addFriend(user.getUsername(), obn));
+		assertEquals(true, user.isFriendsWith(user2));
+		assertEquals(true, user2.isFriendsWith(user));
 	}
 
 } 

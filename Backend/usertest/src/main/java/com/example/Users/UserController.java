@@ -163,9 +163,10 @@ public class UserController {
 
     // Adds user2 to user1's friends list and vice versa
     @PostMapping(path = "/user/{user1}/friends/new")
-    String addFriend(@PathVariable String user1, @RequestBody String user2) {
+    public
+    String addFriend(@PathVariable String user1, @RequestBody ObjectNode json) {
         User firstUser = userRepository.findByUsername(user1);
-        User secondUser = userRepository.findByUsername(user2);
+        User secondUser = userRepository.findByUsername(json.get("user").textValue());
 
         // If either User is not found in database, return failure
         if (firstUser == null || secondUser == null) {
@@ -173,7 +174,7 @@ public class UserController {
         }
 
         // If requested usernames are the same, return failure
-        if (user1.equals(user2)) {
+        if (user1.equals(json.get("user").textValue())) {
             return failure;
         }
 

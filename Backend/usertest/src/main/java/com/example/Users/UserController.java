@@ -203,6 +203,7 @@ public class UserController {
 
     // Return's a User's friends list as a List of Strings (usernames)
     @GetMapping(path = "/user/{user}/friends/list/usernames")
+    public
     List<String> getFriendUsernamesByUsername(@PathVariable String user) {
         List<String> usernames = new ArrayList<>();
         List<User> friends = userRepository.findByUsername(user).getFriends();

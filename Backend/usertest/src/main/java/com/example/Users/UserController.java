@@ -33,8 +33,7 @@ public class UserController {
     
     // Checks username and password with Users in UserRepository, returns success or failure
     @PostMapping(path = "/login")
-    public
-    String login(@RequestBody ObjectNode json) {
+    public String login(@RequestBody ObjectNode json) {
         // If username is null, return failure
         if(userRepository.findByUsername(json.get("username").textValue()) == null)
     		return usernameFail;
@@ -47,7 +46,7 @@ public class UserController {
     
     // Returns list of posts for a specific user's username
     @GetMapping(path = "user/{user}/posts/list")
-    List<Post> getPostsByUsername(@PathVariable String user){
+    public List<Post> getPostsByUsername(@PathVariable String user){
     	return userRepository.findByUsername(user).getPosts();
     }
     
@@ -60,21 +59,19 @@ public class UserController {
     
     // Returns list of all Users in database
     @GetMapping(path = "/user/list")
-    List<User> getAllUsers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     // Returns User associated with a user ID
     @GetMapping(path = "/user/id/{id}")
-    public
-    User getUserById(@PathVariable int id) {
+    public User getUserById(@PathVariable int id) {
         return userRepository.findById(id);
     }
 
     // Creates a new User and stores it in database (signup)
     @PostMapping(path = "/user/new")
-    public
-    String createUser(@RequestBody User user) {
+    public String createUser(@RequestBody User user) {
         // If RequestBody is null, return failure
         if (user == null) {
             return failure;
@@ -102,7 +99,7 @@ public class UserController {
 
     // Updates existing user with new attributes
     @PutMapping(path = "/user/{id}")
-    User updateUser(@PathVariable int id, @RequestBody User request) {
+    public User updateUser(@PathVariable int id, @RequestBody User request) {
         User user = userRepository.findById(id);
         // If requested user is not in database, return null
         if (user == null) {
@@ -125,7 +122,7 @@ public class UserController {
 
     // Assigns post to user
     @PutMapping(path = "/user/{user}/posts/{postId}")
-    String assignPostToUser(@PathVariable String user, @PathVariable int postId) {
+    public String assignPostToUser(@PathVariable String user, @PathVariable int postId) {
         User temp = userRepository.findByUsername(user);
         Post post = null; 
         if (temp == null || post == null) {
@@ -139,7 +136,7 @@ public class UserController {
     
     // Assigns post to user with user ID
     @PutMapping(path = "/user/id/{user}/posts/{postId}")
-    String assignPostToUserID(@PathVariable int user, @PathVariable int postId) {
+    public String assignPostToUserID(@PathVariable int user, @PathVariable int postId) {
         User temp = userRepository.findById(user);
         Post post = null; 
         if (temp == null || post == null) {
@@ -153,7 +150,7 @@ public class UserController {
 
     // Deletes user from database
     @DeleteMapping(path = "/user/rm/{id}")
-    String deleteUser(@PathVariable int id) {
+    public String deleteUser(@PathVariable int id) {
         // If User is not found in database, return failure
         if (userRepository.findById(id) == null) {
             return failure;
@@ -165,8 +162,7 @@ public class UserController {
 
     // Adds user2 to user1's friends list and vice versa
     @PostMapping(path = "/user/{user1}/friends/new")
-    public
-    String addFriend(@PathVariable String user1, @RequestBody ObjectNode json) {
+    public String addFriend(@PathVariable String user1, @RequestBody ObjectNode json) {
         User firstUser = userRepository.findByUsername(user1);
         User secondUser = userRepository.findByUsername(json.get("user").textValue());
 
@@ -197,14 +193,13 @@ public class UserController {
 
     // Returns a User's friends list as a List of Users
     @GetMapping(path = "/user/{user}/friends/list")
-    List<User> getFriendsByUsername(@PathVariable String user) {
+    public List<User> getFriendsByUsername(@PathVariable String user) {
         return userRepository.findByUsername(user).getFriends();
     }
 
     // Return's a User's friends list as a List of Strings (usernames)
     @GetMapping(path = "/user/{user}/friends/list/usernames")
-    public
-    List<String> getFriendUsernamesByUsername(@PathVariable String user) {
+    public List<String> getFriendUsernamesByUsername(@PathVariable String user) {
         List<String> usernames = new ArrayList<>();
         List<User> friends = userRepository.findByUsername(user).getFriends();
         
@@ -218,7 +213,7 @@ public class UserController {
 
     // Removes a friend from a User's friends list
     @PutMapping(path = "/user/{user1}/friends/remove")
-    String removeFriend(@PathVariable String user1, @RequestBody ObjectNode json) {
+    public String removeFriend(@PathVariable String user1, @RequestBody ObjectNode json) {
         User firstUser = userRepository.findByUsername(user1);
         User secondUser = userRepository.findByUsername(json.get("user").textValue());
 
@@ -249,13 +244,13 @@ public class UserController {
 
     // Returns a User's list of blocked Users
     @GetMapping(path = "/user/{user}/blocked/list")
-    List<User> getBlockedUsersByUsername(@PathVariable String user) {
+    public List<User> getBlockedUsersByUsername(@PathVariable String user) {
         return userRepository.findByUsername(user).getBlockedUsers();
     }
 
     // Returns a User's list of blocked Users as a list of Strings (usernames)
     @GetMapping(path = "/user/{user}/blocked/list/usernames")
-    List<String> getBlockedUsernamesByUsername(@PathVariable String user) {
+    public List<String> getBlockedUsernamesByUsername(@PathVariable String user) {
         List<String> usernames = new ArrayList<>();
         List<User> blocked = userRepository.findByUsername(user).getBlockedUsers();
 
@@ -269,7 +264,7 @@ public class UserController {
 
     // Adds user2 to user1's blocked list
     @PostMapping(path = "/user/{user1}/blocked/new")
-    String blockUser(@PathVariable String user1, @RequestBody ObjectNode json) {
+    public String blockUser(@PathVariable String user1, @RequestBody ObjectNode json) {
         User firstUser = userRepository.findByUsername(user1);
         User secondUser = userRepository.findByUsername(json.get("user").textValue());
 
@@ -296,7 +291,7 @@ public class UserController {
 
     // Removes user2 from user1's blocked list
     @PutMapping(path = "/user/{user1}/blocked/remove")
-    String unblockUser(@PathVariable String user1, @RequestBody ObjectNode json) {
+    public String unblockUser(@PathVariable String user1, @RequestBody ObjectNode json) {
         User firstUser = userRepository.findByUsername(user1);
         User secondUser = userRepository.findByUsername(json.get("user").textValue());
 

@@ -61,11 +61,11 @@ public class PostController {
         return postRepository.findById(id).getComment(index);
     }
 
-    //@DeleteMapping(path = "/posts/rm/{id}/{index}")
-    //String deleteComment(@PathVariable long id, @PathVariable int index){
-    //	postRepository.findById(id).delComment(index);
-    //	return success;
-    //}
+    @DeleteMapping(path = "/posts/rm/{id}/{index}")
+    public String deleteComment(@PathVariable int id, @PathVariable int index){
+    	postRepository.findById(id).delComment(index);
+    	return success;
+    }
     
     @PutMapping("/posts/{id}")
     public Post updatePost(@PathVariable int id, @RequestBody Post request){

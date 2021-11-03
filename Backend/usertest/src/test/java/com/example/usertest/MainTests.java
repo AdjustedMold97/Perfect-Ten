@@ -80,6 +80,7 @@ class MainTests {
 
 		ObjectNode obn = mapper.createObjectNode();
 		obn.set("user", mapper.convertValue(user2.getUsername(), JsonNode.class));
+		System.out.println(obn);
 
 		assertEquals("{\"message\":\"success\"}", userController.addFriend(user.getUsername(), obn));
 		assertEquals(true, user.isFriendsWith(user2));

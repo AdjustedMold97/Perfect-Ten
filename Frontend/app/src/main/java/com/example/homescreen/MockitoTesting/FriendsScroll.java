@@ -7,6 +7,6 @@ public class FriendsScroll {
     public static void Main(String[] args) {
 
 
-        List mockedlist = new Mock();
+        //List mockedlist = new Mock();
     }
 }

@@ -14,7 +14,7 @@ buildscript {
          * - Ethan Still
          */
 
-        classpath 'com.android.tools.build:gradle:7.0.3'
+        classpath 'com.android.tools.build:gradle:4.2.0'
 //
 //        // Required -- JUnit 4 framework
 //        testImplementation 'junit:junit:4.12'

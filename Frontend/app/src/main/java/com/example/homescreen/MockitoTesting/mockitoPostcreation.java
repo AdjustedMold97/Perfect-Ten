@@ -19,8 +19,8 @@ package com.example.homescreen.MockitoTesting;
 //import org.mockito.stubbing.OngoingStubbing;
 //import org.testng.annotations.Test;
 
-public class mockitoPostcreation {
-
+//public class mockitoPostcreation {
+//
 //    private PostCreation post;
 //
 //    @Mock
@@ -41,5 +41,5 @@ public class mockitoPostcreation {
 //        assertEquals(String.valueOf(mockedBody.getText()),String.valueOf(mockedTitle.getText()));
 //
 //    }
-
-}
+//
+//}

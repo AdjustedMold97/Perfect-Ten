@@ -312,7 +312,7 @@ public class UserController {
     }
 
     // Removes user2 from user1's blocked list
-
+    @ApiOperation(value = "Removes user from blocked list", response = String.class)
     @PutMapping(path = "/user/{user1}/blocked/remove")
     public String unblockUser(@PathVariable String user1, @RequestBody ObjectNode json) {
         User firstUser = userRepository.findByUsername(user1);

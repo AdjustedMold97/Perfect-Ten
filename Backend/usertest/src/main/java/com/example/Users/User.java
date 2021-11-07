@@ -169,7 +169,7 @@ public class User {
 
     /**
      * Gets User's list of posts
-     * @return List<Post> representing posts created by User
+     * @return List representing posts created by User
      */
     public List<Post> getPosts() {
         return posts;
@@ -193,7 +193,7 @@ public class User {
 
     /**
      * Gets User's friends list
-     * @return List<User> representing users that User is friends with
+     * @return List representing users that User is friends with
      */
     public List<User> getFriends() {
         return friends;
@@ -234,7 +234,7 @@ public class User {
 
     /**
      * Gets User's blocked list
-     * @return List<User> representing users that User is blocking
+     * @return List representing users that User is blocking
      */
     public List<User> getBlockedUsers() {
         return blockedUsers;

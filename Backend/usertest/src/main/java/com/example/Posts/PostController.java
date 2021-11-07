@@ -13,6 +13,7 @@ import com.example.Users.*;
 
 import io.swagger.annotations.*;
 
+@Api(value = "PostController", description = "Rest API is related to post entity")
 @RestController
 public class PostController {
 

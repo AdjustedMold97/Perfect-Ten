@@ -14,7 +14,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.*;
 
 import com.example.Users.*;
-
+/**
+ * @author john Barmen
+ */
 @Entity
 public class Post {
 
@@ -40,21 +42,38 @@ public class Post {
     private User user;
 
      // =============================== Constructors ================================== //
-
+    /**
+     * creates an empty post
+     */
     public Post(){
 
     }
     
+    /**
+     * Makes a post with message and title set to the params 
+     * @param message
+     * @param title
+     */
     public Post(String message, String title) {
         this.message = message;
         this.title = title;
     }
     
+    /**
+     * creates a post with message of the message param
+     * @param message
+     */
     public Post(String message) {
     	this.message = message;
     	title = "default";
     }
 
+    /**
+     * the most useful constructor that makes a post with message, title and user set to the prams
+     * @param message
+     * @param title
+     * @param user
+     */
     public Post(String message, String title, User user) {
         this.message = message;
         this.title = title;
@@ -64,39 +83,75 @@ public class Post {
 
     // =============================== Getters and Setters for each field ================================== //
 
-
+    /**
+     * gets ID
+     * @return id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * sets id to input id
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * gets the message
+     * @return message
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * sets the message to input message
+     * @param message
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     * sets title to input title
+     * @param title
+     */
     public void setTitle(String title) {
     	this.title = title;
     }
     
+    /**
+     * gets the title
+     * @return title
+     */
     public String getTitle() {
     	return title;
     }
 
+    /**
+     * gets the user
+     * @return user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * sets the user to input user
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * gets a comment stored at input index
+     * @param id
+     * @return comment
+     */
     public String getComment(int id) {
     	if(id >= comments.size()) {
     		return "{\"message\":\"error1\"}";
@@ -112,12 +167,21 @@ public class Post {
     	}
     }
     
+    /**
+     * deletes a comment stored at input index
+     * @param id
+     */
     public void delComment(int id) {
     	if(id < comments.size()) {
     		comments.remove(id);
     	}
     }
     
+    /**
+     * creates a new comment with message m and user u
+     * @param m
+     * @param u
+     */
     public void addComment(String m, User u) {
     	comments.add(new Comment(m,u));
     }

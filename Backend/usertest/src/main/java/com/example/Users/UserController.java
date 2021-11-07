@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 import com.example.Posts.Post;
 import com.example.Posts.PostRepository;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.mysql.cj.jdbc.IterateBlock;
 
 @Api(value = "UserController", description = "REST APIs related to User Entity")
 @RestController
@@ -35,6 +37,7 @@ public class UserController {
     private String frenFail = "{\"message\":\"error5\"}";
     
     // Checks username and password with Users in UserRepository, returns success or failure
+    @ApiOperation(value = "Compare username and password to Users in UserRepository, returns success or failure", response = String.class)
     @PostMapping(path = "/login")
     public String login(@RequestBody ObjectNode json) {
         // If username is null, return failure
@@ -48,12 +51,14 @@ public class UserController {
     } 
     
     // Returns list of posts for a specific user's username
+    @ApiOperation(value = "Get a user's list of posts by their username", response = Iterable.class)
     @GetMapping(path = "user/{user}/posts/list")
     public List<Post> getPostsByUsername(@PathVariable String user){
     	return userRepository.findByUsername(user).getPosts();
     }
     
     // Returns User associated with a username
+    @ApiOperation(value = "Get all of a user's information by their username", response = User.class)
     @GetMapping(path = "/user/{user}")
     public
     User getUserByUsername(@PathVariable String user) {
@@ -61,18 +66,21 @@ public class UserController {
     }
     
     // Returns list of all Users in database
+    @ApiOperation(value = "Get all users in the database", response = List.class)
     @GetMapping(path = "/user/list")
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     // Returns User associated with a user ID
+    @ApiOperation(value = "Get all of a user's information by their id", response = User.class)
     @GetMapping(path = "/user/id/{id}")
     public User getUserById(@PathVariable int id) {
         return userRepository.findById(id);
     }
 
     // Creates a new User and stores it in database (signup)
+    @ApiOperation(value = "Saves a new user to the database for signup, returns success or failure", response = String.class)
     @PostMapping(path = "/user/new")
     public String createUser(@RequestBody User user) {
         // If RequestBody is null, return failure
@@ -101,6 +109,7 @@ public class UserController {
     }
 
     // Updates existing user with new attributes
+    @ApiOperation(value = "Updates existing user with new attribute values", response = User.class)
     @PutMapping(path = "/user/{id}")
     public User updateUser(@PathVariable int id, @RequestBody User request) {
         User user = userRepository.findById(id);
@@ -124,6 +133,7 @@ public class UserController {
     }
 
     // Assigns post to user
+    @ApiOperation(value = "Adds existing post to a user's post list, returns success or failure", response = String.class)
     @PutMapping(path = "/user/{user}/posts/{postId}")
     public String assignPostToUser(@PathVariable String user, @PathVariable int postId) {
         User temp = userRepository.findByUsername(user);
@@ -138,6 +148,7 @@ public class UserController {
     }
     
     // Assigns post to user with user ID
+    @ApiOperation(value = "Assigns existing post to user by ID, returns success or failure", response = String.class)
     @PutMapping(path = "/user/id/{user}/posts/{postId}")
     public String assignPostToUserID(@PathVariable int user, @PathVariable int postId) {
         User temp = userRepository.findById(user);
@@ -152,6 +163,7 @@ public class UserController {
     }
 
     // Deletes user from database
+    @ApiOperation(value = "Deletes user from database, returns success or failure", response = String.class)
     @DeleteMapping(path = "/user/rm/{id}")
     public String deleteUser(@PathVariable int id) {
         // If User is not found in database, return failure
@@ -164,6 +176,7 @@ public class UserController {
     }
 
     // Adds user2 to user1's friends list and vice versa
+    @ApiOperation(value = "Creates friendship between two users, returns success or failure", response = String.class)
     @PostMapping(path = "/user/{user1}/friends/new")
     public String addFriend(@PathVariable String user1, @RequestBody ObjectNode json) {
         User firstUser = userRepository.findByUsername(user1);
@@ -195,12 +208,14 @@ public class UserController {
     }
 
     // Returns a User's friends list as a List of Users
+    @ApiOperation(value = "Get a user's friends list as a list of users", response = Iterable.class)
     @GetMapping(path = "/user/{user}/friends/list")
     public List<User> getFriendsByUsername(@PathVariable String user) {
         return userRepository.findByUsername(user).getFriends();
     }
 
     // Return's a User's friends list as a List of Strings (usernames)
+    @ApiOperation(value = "Get a user's friends list as a list of usernames", response = Iterable.class)
     @GetMapping(path = "/user/{user}/friends/list/usernames")
     public List<String> getFriendUsernamesByUsername(@PathVariable String user) {
         List<String> usernames = new ArrayList<>();
@@ -215,6 +230,7 @@ public class UserController {
     }
 
     // Removes a friend from a User's friends list
+    @ApiOperation(value = "Removes friendship between users, returns success or failure", response = String.class)
     @PutMapping(path = "/user/{user1}/friends/remove")
     public String removeFriend(@PathVariable String user1, @RequestBody ObjectNode json) {
         User firstUser = userRepository.findByUsername(user1);
@@ -246,12 +262,14 @@ public class UserController {
     }
 
     // Returns a User's list of blocked Users
+    @ApiOperation(value = "Get a user's blocked list of usernames", response = Iterable.class)
     @GetMapping(path = "/user/{user}/blocked/list")
     public List<User> getBlockedUsersByUsername(@PathVariable String user) {
         return userRepository.findByUsername(user).getBlockedUsers();
     }
 
     // Returns a User's list of blocked Users as a list of Strings (usernames)
+    @ApiOperation(value = "Get a user's blocked list of users", response = Iterable.class)
     @GetMapping(path = "/user/{user}/blocked/list/usernames")
     public List<String> getBlockedUsernamesByUsername(@PathVariable String user) {
         List<String> usernames = new ArrayList<>();
@@ -266,6 +284,7 @@ public class UserController {
     }
 
     // Adds user2 to user1's blocked list
+    @ApiOperation(value = "Blocks a user, returns success or failure", response = String.class)
     @PostMapping(path = "/user/{user1}/blocked/new")
     public String blockUser(@PathVariable String user1, @RequestBody ObjectNode json) {
         User firstUser = userRepository.findByUsername(user1);
@@ -293,6 +312,7 @@ public class UserController {
     }
 
     // Removes user2 from user1's blocked list
+
     @PutMapping(path = "/user/{user1}/blocked/remove")
     public String unblockUser(@PathVariable String user1, @RequestBody ObjectNode json) {
         User firstUser = userRepository.findByUsername(user1);

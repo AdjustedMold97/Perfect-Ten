@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.annotations.*;
+
 import com.example.Users.*;
 
 @Entity
@@ -18,17 +20,23 @@ public class Post {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @ApiModelProperty(notes = "ID",name="id",required=true,value="id")
     private int id;
+    @ApiModelProperty(notes = "Message",name="message",required=true,value="message")
     private String message;
+    @ApiModelProperty(notes = "Title",name="title",required=true,value="title")
     private String title;
+    @ApiModelProperty(notes = "Username assosiated with the post",name="uname",required=true,value="username")
     private String uname;
     
     @JsonIgnore
+    @ApiModelProperty(notes = "List of comments assosiated with the post",name="comments",required=true,value="comments")
     private ArrayList<Comment> comments = new ArrayList<Comment>();
     
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
+    @ApiModelProperty(notes = "User assosiated with the post",name="user",required=true,value="user")
     private User user;
 
      // =============================== Constructors ================================== //

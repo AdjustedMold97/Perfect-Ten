@@ -21,12 +21,27 @@ import com.example.homescreen.net_utils.Const;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * An activity where a user can enter a specific username
+ * to add a "target user" to their friends list.
+ *
+ * Currently, no search function exists, so a username
+ * must be known in advance in order to add a user to
+ * one's friends list.
+ *
+ * @author Jae Swanepoel
+ */
 public class AddFriendScreen extends AppCompatActivity {
 
     Button submit;
     TextView responseView;
     EditText username;
 
+    /**
+     * Initializes the views in the activity.
+     *
+     * @param savedInstanceState default argument
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,11 +59,11 @@ public class AddFriendScreen extends AppCompatActivity {
         back.setOnClickListener(view -> startActivity(new Intent(view.getContext(),FriendsScreen.class)));
     }
 
-    /*
+    /**
      * Code for the "Add Friend" Button.
      * Creates a JSON Request and adds it to the RequestQueue.
-     * upon a successful Request, the text is changed from
-     * "Add Friend" to "Remove Friend".
+     * upon a successful Request, the user receives a prompt
+     * that the request succeeded.
      */
     private void addFriend() {
 

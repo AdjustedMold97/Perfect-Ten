@@ -8,8 +8,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.homescreen.R;
 
+/**
+ * UniversalBar holds buttons to send a user to HomeScreen, Settings, and FriendsScreen
+ * The bar is placed at the bottom of screens within the app
+ * Provides access to the three screens from any page with UniversalBar
+ * @author Ethan Still
+ */
 public class universalBar extends AppCompatActivity {
 
+    /**
+     * OnCreate sets the buttons in UniversalBar to the activities they need to send to
+     *
+     * @param savedInstanceState
+     *
+     * @author Ethan Still
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

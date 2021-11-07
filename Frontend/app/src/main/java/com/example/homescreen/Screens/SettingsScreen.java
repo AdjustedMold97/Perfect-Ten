@@ -8,6 +8,11 @@ import android.widget.Button;
 
 import com.example.homescreen.R;
 
+/**
+ * Activity where a user can edit app settings
+ * Has not been implemented yet
+ * @author Ethan Still
+ */
 public class SettingsScreen extends AppCompatActivity {
 
     @Override

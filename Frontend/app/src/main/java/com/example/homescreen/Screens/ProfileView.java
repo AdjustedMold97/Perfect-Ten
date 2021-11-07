@@ -22,8 +22,21 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
- * written by Jae Swanepoel
+/**
+ *
+ * The ProfileView allows the client to view a user's profile.
+ * There are three main functions in this class.
+ *
+ * The first is viewing a user's post history. This is done
+ * through an implementation of an infinite scroll.
+ *
+ * Second, a user can change their friendship status to
+ * the user being viewed.
+ *
+ * Third, a user can change the blocked status of the
+ * user being viewed.
+ *
+ * @author  Jae Swanepoel
  */
 public class ProfileView extends AppCompatActivity {
 
@@ -54,6 +67,15 @@ public class ProfileView extends AppCompatActivity {
     TextView postTitleTextView;
     TextView postBodyTextView;
 
+    /**
+     *
+     * Initializes the views found in the activity,
+     * populates the page with the user's post history,
+     * and checks the viewed user's friend and blocked status
+     * to correctly label the addFriendButton and blockButton.
+     *
+     * @param savedInstanceState default argument
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +135,7 @@ public class ProfileView extends AppCompatActivity {
         checkBlockedStatus();
     }
 
-    /*
+    /**
      * Code for the "Add Friend" Button.
      * Creates a JSON Request and adds it to the RequestQueue.
      * upon a successful Request, the text is changed from
@@ -164,7 +186,7 @@ public class ProfileView extends AppCompatActivity {
             AppController.getInstance().addToRequestQueue(addFriendRequest);
     }
 
-    /*
+    /**
      * Code for populating the post TextViews.
      * Creates a JSON Request and adds it to the RequestQueue.
      * upon a successful Request, the TextViews are populated.
@@ -202,7 +224,7 @@ public class ProfileView extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(userPostRequest);
     }
 
-    /*
+    /**
      * Code for the "Block" Button.
      * Creates a JSON Request and adds it to the RequestQueue.
      * Upon a successful Request, the Button's text is changed
@@ -247,10 +269,11 @@ public class ProfileView extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(blockRequest);
     }
 
-    /*
-     * Code for unblocking a user
-     *
-     * - Jae Swanepoel
+    /**
+     * Code for unblocking a user.
+     * Upon a successful response message,
+     * the text on blockButton is changed from
+     * "Unblock" to "Block".
      */
     private void unblock() {
 
@@ -292,10 +315,11 @@ public class ProfileView extends AppCompatActivity {
 
     }
 
-    /*
-     * Method for removing someone from your Friends list.
-     *
-     * - Jae Swanepoel
+    /**
+     * Code for removing someone from your Friends list.
+     * Creates a JSON Request and adds it to the Request Queue.
+     * Upon a success response, changes the text on addFriendButton
+     * from "Remove Friend" to "Add Friend".
      */
     private void removeFriend() {
 
@@ -337,14 +361,12 @@ public class ProfileView extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(json_arr_req);
     }
 
-    /*
+    /**
      * Finding out if we are friends with this user
      * (finding out if this user is in our friends list)
      *
-     * if yes, the Button should say "Remove Friend"
-     * if no, then the Button will say "Add Friend"
-     *
-     * - Jae Swanepoel
+     * if yes, then addFriendButton will say "Remove Friend"
+     * if no, then addFriendButton will say "Add Friend"
      */
     private void checkFriendStatus() {
 
@@ -389,11 +411,10 @@ public class ProfileView extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(json_arr_req);
     }
 
-    /*
-     * Checks if the user is blocked
-     * called during onCreate
-     *
-     * - Jae Swanepoel
+    /**
+     * Checks if the user is blocked.
+     * If yes, the text on blockButton will read "Unblock".
+     * If no, the text on blockButton will read "Block".
      */
     private void checkBlockedStatus() {
 

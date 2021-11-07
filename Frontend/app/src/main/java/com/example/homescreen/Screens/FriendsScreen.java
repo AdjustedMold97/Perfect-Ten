@@ -20,11 +20,29 @@ import com.example.homescreen.net_utils.Const;
 
 import org.json.JSONArray;
 
+/**
+ * The FriendsScreen allows a user to browse the list of
+ * users on their friends list.
+ *
+ * When a user's profile picture is
+ * selected, the client will be redirected to that user's
+ * profile page.
+ *
+ * The addFriend Button redirects the client to the AddFriendScreen activity.
+ *
+ * @author Jae Swanepoel
+ */
 public class FriendsScreen extends AppCompatActivity {
 
     final static String RESPONSE_TAG = "Friends List ";
     final static String ERROR_RESPONSE_TAG = "Error ";
 
+    /**
+     * Initializes the views in the activity
+     * and calls getFriends() to populate the friends list.
+     *
+     * @param savedInstanceState default argument
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,12 +66,13 @@ public class FriendsScreen extends AppCompatActivity {
         Button addFriend = findViewById(R.id.add_friend_screen_Button);
         addFriend.setOnClickListener(view -> startActivity(new Intent(view.getContext(), AddFriendScreen.class)));
     }
-        /*
-         * For now, clicking on the ImageButton will
-         * set the target user to "Bob" and direct you to
-         * the profile page.
+        /**
+         * Creates a JSON Request and adds it to the Request Queue.
+         * Upon a successful response, a call is made to populate()
+         * in order to populate the infinite scroll
+         * with the user's friends list.
          *
-         * - Jae Swanepoel
+         * @author Jae Swanepoel
          */
     private void getFriends() {
 
@@ -73,13 +92,14 @@ public class FriendsScreen extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(json_arr_req);
     }
 
-    /*
+    /**
      * recycle is assigned an Adapter mAdapter that is of type FriendsAdapter
      * the adapter has three types of data tracked
      * Two textViews friendName and friendDesc
      * One ImageButton friendImg
      * The adapter uses friend_object.xml
-     * - Ethan Still
+     *
+     * @author Ethan Still
      */
     private void populate(JSONArray arr) {
 

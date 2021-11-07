@@ -22,6 +22,11 @@ import com.example.homescreen.Adapters.MyAdapter;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 
+/**
+ * The main activity in Perfect Ten.
+ * A user is directed here immediately after logging in.
+ * At the bottom of the screen,
+ */
 public class HomeScreen extends AppCompatActivity {
 
     final static String RESPONSE_TAG = "JSON Response ";

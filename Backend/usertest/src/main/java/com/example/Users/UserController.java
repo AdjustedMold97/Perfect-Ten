@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+
 import com.example.Posts.Post;
 import com.example.Posts.PostRepository;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+@Api(value = "UserController", description = "REST APIs related to User Entity")
 @RestController
 public class UserController {
     @Autowired

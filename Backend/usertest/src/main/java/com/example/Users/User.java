@@ -16,21 +16,32 @@ import javax.persistence.OneToMany;
 import com.example.Posts.Post;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 public class User {
+    @ApiModelProperty(notes = "ID of the User", name = "id", required = true)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @ApiModelProperty(notes = "Username of the User", name = "username", required = true)
     private String username;
+
+    @ApiModelProperty(notes = "Email of the User", name = "email", required = true)
     private String email;
+
+    @ApiModelProperty(notes = "Password of the User", name = "password", required = true)
     private String password;
 
+    @ApiModelProperty(notes = "Posts list of the User", name = "posts", required = true)
     @OneToMany(
     		fetch = FetchType.LAZY
     		)
-    
     private List<Post> posts;
 
+    @ApiModelProperty(notes = "Friends list of the User", name = "friends", required = true)
     @ManyToMany
     @JoinTable(name="friends_with", 
     joinColumns={@JoinColumn(name="user_id")},
@@ -38,6 +49,7 @@ public class User {
     @JsonIgnore
     private List<User> friends;
 
+    @ApiModelProperty(notes = "Blocked list of the User", name = "blockedUsers", required = true)
     @ManyToMany
     private List<User> blockedUsers;
 

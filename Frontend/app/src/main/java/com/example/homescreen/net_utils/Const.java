@@ -1,8 +1,17 @@
 package com.example.homescreen.net_utils;
 
+/**
+ * Class responsible for storing many of the
+ * constants used throughout our code.
+ *
+ * This includes urls, common responses,
+ * and tags.
+ *
+ * @author Jae Swanepoel
+ */
 public class Const {
 
-    /*********************************** URLs *****************************************/
+    //========================================= URLs ===============================================
 
     public static final String POSTING_URL = "http://coms-309-060.cs.iastate.edu:8080/posts/new/";
     public static final String LOGIN_URL = "http://coms-309-060.cs.iastate.edu:8080/login";
@@ -23,7 +32,7 @@ public class Const {
     public static final String BLOCKED_LIST_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
     public static final String BLOCKED_LIST_URL_2 = "/blocked/list/usernames";
 
-    /*********************************** JSON *****************************************/
+    //======================================== JSON ================================================
 
     public static final String SUCCESS_MSG = "success";
     public static final String USER_FIELD = "username";
@@ -31,7 +40,7 @@ public class Const {
     public static final String RESPONSE_TAG = "Server Response ";
     public static final String ERROR_RESPONSE_TAG = "Error Response ";
 
-    /***************************** ERROR MESSAGES **************************************/
+    //===================================== ERROR MESSAGES =========================================
 
     public static final String GENERIC_ERROR = "error1";
     public static final String USER_ERROR = "error2";

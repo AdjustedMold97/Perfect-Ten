@@ -35,7 +35,7 @@ public class LoginScreen extends AppCompatActivity {
 
     /**
      * Sets up the buttons for loginScreen
-     * @param savedInstanceState
+     * @param savedInstanceState default argument
      * @author Ethan Still
      * @author Jae Swanepoel
      */
@@ -96,7 +96,7 @@ public class LoginScreen extends AppCompatActivity {
              * The server checks whether a user exists with the given username and password
              * Server then sends back a response based on if the user exists
              * Request is added to queue
-             * @param view
+             * @param view default argument
              * @author Jae Swanepoel
              */
             @Override

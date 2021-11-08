@@ -78,7 +78,7 @@ public class PerfectTenRequester {
                     public void onResponse(JSONArray response) {
 
                         Log.d(Const.RESPONSE_TAG, response.toString());
-                        callback.onSuccess(response);
+                    //    callback.onSuccess(response);
                         out[0] = response;
 
                     }

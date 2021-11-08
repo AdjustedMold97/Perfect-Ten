@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.android.volley.Request;
+import com.android.volley.Response;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -72,11 +73,15 @@ public class PerfectTenRequester {
         JsonArrayRequest friendsListReq = new JsonArrayRequest(
                 Const.FRIEND_LIST_URL_1 + AppController.getUsername() + Const.FRIEND_LIST_URL_2,
 
-                response -> {
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
 
-                    Log.d(Const.RESPONSE_TAG, response.toString());
-                    out[0] = response;
+                        Log.d(Const.RESPONSE_TAG, response.toString());
+                        callback.onSuccess(response);
+                        out[0] = response;
 
+                    }
                 },
 
                 error -> VolleyLog.d(Const.ERROR_RESPONSE_TAG, error.getMessage())
@@ -93,3 +98,4 @@ public class PerfectTenRequester {
         return null;
     }
 }
+

@@ -20,11 +20,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-    /*
+    /**
      * Adapter class to be used by Friends recycler view with setAdapter()
      * Adapter used to create MyViewHolder objects which hold the data for objects requested from server
-     * ViewHolder uses a base post_object.xml structure to create objects
-     * - Ethan Still
+     * ViewHolder uses a base friend_object.xml structure to create objects
+     * @author Ethan Still
      */
     public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.MyViewHolder> {
 
@@ -32,11 +32,13 @@ import org.json.JSONObject;
         JSONArray mtest;
 
 
-        /*
+        /**
          * Constructor for FriendsAdapter
          * Context sets a context to use for the inflater
-         * JSONArray test is the array input used in OnBindViewHolder to fill the text for post title and body
-         * - Ethan Still
+         * JSONArray test is the array input used in OnBindViewHolder to fill the text for friend name. description, and pfp
+         * @param context
+         * @param test - JSONArray from the server
+         * @ author Ethan Still
          */
         public FriendsAdapter(Context context, JSONArray test){
 
@@ -45,11 +47,13 @@ import org.json.JSONObject;
 
         }
 
-        /*
+        /**
          * MyViewHolder holds an instance of friend_object.xml
          * friend_object has two textViews friendName and friendDescription and one ImageView friendImg
          * onCreate creates a new instance of base friend_object to be filled with information
-         * - Ethan Still
+         * @param parent
+         * @param viewType
+         * @author Ethan Still
          */
         @NonNull
         @Override
@@ -60,12 +64,14 @@ import org.json.JSONObject;
             return  myViewHolder;
         }
 
-        /*
+        /**
          * OnBind sets the values for each ViewHolder object that will be displayed on the screen
          * JSONObject temp is a object to hold the position in mtest JSONArray
          * TODO need mappings for jsonObject of Users
          * The "title", "message", "pfp" are pulled from the JSONObject temp
-         * - Ethan Still
+         * @param holder
+         * @param position -position in JSONArray
+         * @author Ethan Still
          */
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
@@ -96,27 +102,23 @@ import org.json.JSONObject;
             }
         }
 
-        @Override
-        public int getItemViewType(int position) {
-            return super.getItemViewType(position);
-        }
-
-        /*
-         * getItemCount returns the length of mtest JSONArray
-         * - Ethan Still
+        /**
+         * getItemCount returns the length of the JSONArray
+         * @return mtest.length()
+         * @author Ethan Still
          */
         @Override
         public int getItemCount() {
             return mtest.length();
         }
 
-        /*
+        /**
          * MyViewHolder has two textViews and one ImageView
-         * TODO waiting for mappings
+         * TODO waiting for mapping for pfp
          * friendObjectName will contain instances of "title" text from JSONObjects
          * friendObjectDesc will contain instances of "message" text from JSONObjects
          * friendObjectImg will contain instances of "pfp" text from JSONObjects
-         * - Ethan Still
+         * @author Ethan Still
          */
         public class MyViewHolder extends RecyclerView.ViewHolder {
             TextView friendObjectName;
@@ -124,10 +126,11 @@ import org.json.JSONObject;
             ImageView friendObjectImg;
 
 
-            /*
+            /**
              * ID's for friendName, friendDescription, and friendImg
              * Can be found in friend_object.xml
-             * - Ethan Still
+             * @param itemView
+             * @author Ethan Still
              */
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);

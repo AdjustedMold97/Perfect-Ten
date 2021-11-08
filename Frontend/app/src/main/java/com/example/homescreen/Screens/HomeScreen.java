@@ -33,6 +33,13 @@ public class HomeScreen extends AppCompatActivity {
     final static String TITLE_TAG = "title";
     final static String MESSAGE_TAG = "message";
 
+
+    /**
+     * Calls getPosts() method onCreate to populate the homeScreen view with postObjects
+     * Buttons to loginScreen and postCreation are also set up here
+     * @param savedInstanceState
+     * -Jae Swanepoel
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -42,7 +49,8 @@ public class HomeScreen extends AppCompatActivity {
         //Retrieves posts and populates the HomeScreen. - Jae Swanepoel
         getPosts();
 
-//========================================
+
+        //========================================
         //TODO ethan- interface these somehow to make more efficient
 
 //TODO use <include or <merge to get interface into homeScreen
@@ -85,7 +93,7 @@ public class HomeScreen extends AppCompatActivity {
         post_button.setOnClickListener(view -> startActivity(new Intent(view.getContext(), PostCreation.class)));
     }
 
-    /*
+    /**
      * Retrieves post data from the server and
      * displays it in an infinite scroll.
      *
@@ -117,11 +125,11 @@ public class HomeScreen extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(json_arr_req);
     }
 
-    /*
+    /**
      * Accepts the JSONArray populated with posts,
      * creates a new JSONArray with formatted posts,
      * constructs the RecyclerView to set up infinite scroll.
-     *
+     * @param arr - the JSONArray used
      * - Jae Swanepoel
      */
     private void populate(JSONArray arr) {

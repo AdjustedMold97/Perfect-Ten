@@ -25,8 +25,20 @@ import java.util.Map;
 import com.example.homescreen.net_utils.Const;
 import com.example.homescreen.net_utils.Error;
 
+/**
+ * Screen showed on start up of the app when logged out
+ * Allows users to login to their profile with username and password
+ * @author Ethan Still
+ */
 public class LoginScreen extends AppCompatActivity {
 
+
+    /**
+     * Sets up the buttons for loginScreen
+     * @param savedInstanceState
+     * @author Ethan Still
+     * @author Jae Swanepoel
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -78,6 +90,15 @@ public class LoginScreen extends AppCompatActivity {
             String password;
             JSONObject login_info;
 
+
+            /**
+             * onClick sends a request to the server with a username and password
+             * The server checks whether a user exists with the given username and password
+             * Server then sends back a response based on if the user exists
+             * Request is added to queue
+             * @param view
+             * @author Jae Swanepoel
+             */
             @Override
             public void onClick(View view) {
 
@@ -90,6 +111,7 @@ public class LoginScreen extends AppCompatActivity {
                 username = String.valueOf(username_input.getText());
                 password = String.valueOf(password_input.getText());
 
+                //TODO get rid of chuck soonish
                 /*
                  * Backdoor for testing when server is down.
                  *

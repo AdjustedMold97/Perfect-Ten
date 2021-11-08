@@ -16,11 +16,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-/*
+/**
  * Adapter class to be used by recycler view with setAdapter()
  * Adapter used to create MyViewHolder objects which hold the data for objects requested from server
  * ViewHolder uses a base post_object.xml structure to create objects
- * - Ethan Still
+ * @author Ethan Still
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
@@ -28,11 +28,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     JSONArray mtest;
 
 
-    /*
+    /**
      * Constructor for MyAdapter
      * Context sets a context to use for the inflater
      * JSONArray test is the array input used in OnBindViewHolder to fill the text for post title and body
-     * - Ethan Still
+     * @param context
+     * @param test -JSONArray requested from server
+     * @author Ethan Still
      */
     public MyAdapter(Context context, JSONArray test){
 
@@ -41,11 +43,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     }
 
-    /*
+    /**
      * MyViewHolder holds an instance of post_object.xml
      * post_object has two textViews postObjectTitle and postObjectBody
      * onCreate creates a new instance of base post_object to be filled with information
-     * - Ethan Still
+     * @param parent
+     * @param viewType
+     * @author Ethan Still
      */
     @NonNull
     @Override
@@ -56,11 +60,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return  myViewHolder;
     }
 
-    /*
+    /**
      * OnBind sets the values for each ViewHolder object that will be displayed on the screen
      * JSONObject temp is a object to hold the position in mtest JSONArray
      * The "title" and "message" are pulled from the JSONObject temp
-     * - Ethan Still
+     * @param holder
+     * @param position - position in JSONArray
+     * @author Ethan Still
      */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
@@ -79,35 +85,32 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
-    }
-
-    /*
-     * getItemCount returns the length of mtest JSONArray
-     * - Ethan Still
+    /**
+     * getItemCount returns the length of the JSONArray
+     * @return mtest.length()
+     * @author Ethan Still
      */
     @Override
     public int getItemCount() {
         return mtest.length();
     }
 
-    /*
+    /**
      * MyViewHolder has two textViews
      * postObjectTitle will contain instances of "title" text from JSONObjects
      * postObjectBody will contain instances of "message" text from JSONObjects
-     * - Ethan Still
+     * @author Ethan Still
      */
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView postObjectTitle;
         TextView postObjectBody;
 
 
-        /*
+        /**
          * ID's for postObjectTitle and postObjectBody
          * Can be found in post_object.xml
-         * - Ethan Still
+         * @param itemView
+         * @author Ethan Still
          */
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

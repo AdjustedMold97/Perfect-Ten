@@ -28,12 +28,23 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * SignUp allows users to create a new user
  * The user is added to the database of users
+ *
+ * Submit button sends request to server
+ * toLogin button sets activity to homeScreen
+ *
+ * Errors are handled based on whether a user can be made with the specified inputs
+ * Specified inputs include: name, password, and email
+ * Errors will be thrown if:
+ * -A field is left blank
+ * -The username is taken
+ * -The password is invalid
+ * -The email is invalid
  * @author Jae Swanepoel
  */
 public class SignUp extends AppCompatActivity {
 
     /**
-     * onCreate
+     * onCreate sets up the buttons listed above and prepares the editText fields
      * @param savedInstanceState
      * @author Jae Swanepoel
      */

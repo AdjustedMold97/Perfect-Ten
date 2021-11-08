@@ -28,6 +28,8 @@ public class Const {
     public static final String SUCCESS_MSG = "success";
     public static final String USER_FIELD = "username";
     public static final String PASS_FIELD = "password";
+    public static final String RESPONSE_TAG = "Server Response ";
+    public static final String ERROR_RESPONSE_TAG = "Error Response ";
 
     /***************************** ERROR MESSAGES **************************************/
 

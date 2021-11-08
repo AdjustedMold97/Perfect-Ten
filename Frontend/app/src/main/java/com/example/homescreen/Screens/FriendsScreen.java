@@ -17,6 +17,7 @@ import com.example.homescreen.Adapters.FriendsAdapter;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.Const;
+import com.example.homescreen.net_utils.PerfectTenRequester;
 
 import org.json.JSONArray;
 
@@ -50,7 +51,11 @@ public class FriendsScreen extends AppCompatActivity {
         setContentView(R.layout.activity_friends_screen);
 
         //populating the friends list
-        getFriends();
+        //getFriends();
+
+        PerfectTenRequester req = new PerfectTenRequester();
+
+        populate(req.getFriendsList());
 
         //Rigging the Universal Buttons
         Button friend = findViewById(R.id.friends_Button_home);

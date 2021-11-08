@@ -10,11 +10,19 @@ import android.widget.Button;
 import com.example.homescreen.Screens.LoginScreen;
 import com.example.homescreen.R;
 
+/**
+ * Error class is popped up on screen when a request to server fails
+ * @author Ethan Still
+ */
+
 public class Error extends Activity {
 
-    /*
-     * pop up window class to display errors
-     * - Ethan Still
+    /**
+     * pop up window to display errors
+     * Sets the dimensions for the pop up windows size
+     * Sets up back button to previous window
+     * @param savedInstancesState
+     * @Author Ethan Still
      */
     protected void onCreate(Bundle savedInstancesState) {
         super.onCreate(savedInstancesState);

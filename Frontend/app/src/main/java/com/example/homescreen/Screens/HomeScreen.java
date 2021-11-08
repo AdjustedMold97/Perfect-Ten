@@ -143,7 +143,7 @@ public class HomeScreen extends AppCompatActivity {
      * Accepts the JSONArray populated with posts,
      * creates a new JSONArray with formatted posts,
      * constructs the RecyclerView to set up infinite scroll.
-     * 
+     *
      * @param arr - the JSONArray used
      * @author Jae Swanepoel
      */

@@ -25,6 +25,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * 
+ */
 public class SignUp extends AppCompatActivity {
 
     @Override

@@ -25,8 +25,24 @@ import com.example.homescreen.net_utils.Const;
 import com.example.homescreen.net_utils.Error;
 import com.example.homescreen.net_utils.FailedPost;
 
+/**
+ * PostCreation allows a user to create a post object
+ * post object is sent to the server
+ * server adds the object to an Array of posts
+ * updated array is sent back to the client
+ * @author Ethan Still
+ * @author Jae Swanepoel
+ */
 public class PostCreation extends AppCompatActivity {
 
+
+    /**
+     * OnCreate sets up the buttons that change screens
+     * Also sets up OnClick(View view) which creates the post object
+     * @param savedInstanceState
+     * @author Ethan Still
+     * @author Jae Swanepoel
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -85,6 +101,13 @@ public class PostCreation extends AppCompatActivity {
             JSONObject post;
             JsonObjectRequest json_obj_req;
 
+            /**
+             * onClick sends a username and password as a JSONObject to the server
+             * Object is addded to database
+             * Posts on front end are updated with the new data
+             * @param view
+             * @author Jae Swanepoel
+             */
             @Override // server request onClick
             public void onClick(View view) {
 
@@ -150,6 +173,8 @@ public class PostCreation extends AppCompatActivity {
                              * check Error.java for the code to the pop up screen
                              * - Ethan Still
                              */
+                            //TODO make an error class with a constructors
+                            // that can be filled in with needed data to post right kind of error
                             startActivity(new Intent(PostCreation.this, Error.class));
                         });
 

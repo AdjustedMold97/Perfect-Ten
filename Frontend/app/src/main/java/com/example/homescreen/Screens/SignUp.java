@@ -26,10 +26,17 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * 
+ * SignUp allows users to create a new user
+ * The user is added to the database of users
+ * @author Jae Swanepoel
  */
 public class SignUp extends AppCompatActivity {
 
+    /**
+     * onCreate
+     * @param savedInstanceState
+     * @author Jae Swanepoel
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

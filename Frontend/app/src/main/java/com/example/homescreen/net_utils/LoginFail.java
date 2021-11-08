@@ -11,11 +11,17 @@ import android.widget.TextView;
 import com.example.homescreen.Screens.LoginScreen;
 import com.example.homescreen.R;
 
+/**
+ * LoginFail pops onto screen when there is an error receiving login information from the server
+ * @author Ethan Still
+ */
 public class LoginFail extends Activity {
 
-    /*
-     * pop up window class to display login failure
-     * - Ethan Still
+    /**
+     * pop up window to display login failure
+     * Sets the dimensions of the pop up screen
+     * @param savedInstancesState
+     * @author Ethan Still
      */
     protected void onCreate(Bundle savedInstancesState) {
         super.onCreate(savedInstancesState);

@@ -10,13 +10,18 @@ import android.widget.TextView;
 import com.example.homescreen.Screens.PostCreation;
 import com.example.homescreen.R;
 
+/**
+ * FailedPost screen pops up on screen when a post is not formatted correctly
+ * @author Ethan Still
+ */
 public class FailedPost extends Activity {
 
 
-    /*
-     * pop up window class to display postCreation failure
+    /**
+     * pop up window to display postCreation failure
      * theoretically this screen should never show up because data should always be formatted correctly
-     * - Ethan Still
+     * @param savedInstancesState
+     * @author Ethan Still
      */
     protected void onCreate(Bundle savedInstancesState) {
 

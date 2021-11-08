@@ -24,8 +24,22 @@ import com.example.homescreen.app.AppController;
 
 /**
  * The main activity in Perfect Ten.
+ *
  * A user is directed here immediately after logging in.
- * At the bottom of the screen,
+ *
+ * The friend Button redirects the user to the Friends Screen
+ * The settings Button redirects the user to the Settings Screen
+ * The home Button refreshes the Home Page
+ *
+ * The toLogin Button redirects the user to the Login Screen
+ * and sets the global username variable to null.
+ *
+ * The post_button Button redirects the user to
+ * the Post Creation Activity.
+ *
+ * In the center is an infinite scroll populated with
+ * a feed of all of the Perfect Ten posts, sorted
+ * from newest to oldest.
  */
 public class HomeScreen extends AppCompatActivity {
 
@@ -97,7 +111,7 @@ public class HomeScreen extends AppCompatActivity {
      * Retrieves post data from the server and
      * displays it in an infinite scroll.
      *
-     * - Jae Swanepoel
+     * @author Jae Swanepoel
      */
     private void getPosts() {
 
@@ -129,8 +143,9 @@ public class HomeScreen extends AppCompatActivity {
      * Accepts the JSONArray populated with posts,
      * creates a new JSONArray with formatted posts,
      * constructs the RecyclerView to set up infinite scroll.
+     * 
      * @param arr - the JSONArray used
-     * - Jae Swanepoel
+     * @author Jae Swanepoel
      */
     private void populate(JSONArray arr) {
 

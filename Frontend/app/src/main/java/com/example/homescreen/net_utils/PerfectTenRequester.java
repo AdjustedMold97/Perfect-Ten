@@ -11,7 +11,6 @@ import com.example.homescreen.app.AppController;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.Ignore;
 
 /**
  * A class used to send out various HTTP Requests

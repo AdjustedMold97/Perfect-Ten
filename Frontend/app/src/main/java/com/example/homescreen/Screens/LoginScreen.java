@@ -11,11 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +26,8 @@ import java.util.Map;
 
 import com.example.homescreen.net_utils.Const;
 import com.example.homescreen.net_utils.Error;
+import com.example.homescreen.net_utils.PerfectTenRequester;
+import com.example.homescreen.net_utils.VolleyCallback;
 
 /**
  * Screen showed on start up of the app when logged out
@@ -32,6 +36,9 @@ import com.example.homescreen.net_utils.Error;
  */
 public class LoginScreen extends AppCompatActivity {
 
+    //necessary to declare these here for scope
+    PerfectTenRequester requester;
+    TextView login_fail;
 
     /**
      * Sets up the buttons for loginScreen
@@ -44,6 +51,9 @@ public class LoginScreen extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+
+        //instantiating the requester
+        requester = new PerfectTenRequester();
 
         /*
          * final constants for use throughout code
@@ -60,15 +70,13 @@ public class LoginScreen extends AppCompatActivity {
         Button signUp = findViewById(R.id.SignUp);
         signUp.setOnClickListener(view -> startActivity(new Intent((view.getContext()), SignUp.class)));
 
-
-
         /*
          * Text inputs for username and password.
          * - Jae Swanepoel
          */
         EditText username_input = findViewById(R.id.editTextName);
         EditText password_input = findViewById(R.id.editTextPassword);
-        TextView login_fail = findViewById(R.id.login_fail_textView);
+        login_fail = findViewById(R.id.login_fail_textView);
 
 
         /*
@@ -111,72 +119,67 @@ public class LoginScreen extends AppCompatActivity {
                 username = String.valueOf(username_input.getText());
                 password = String.valueOf(password_input.getText());
 
-                //TODO get rid of chuck soonish
-                /*
-                 * Backdoor for testing when server is down.
-                 *
-                 * -Jae Swanepoel
-                 */
-                if (username.equals("Chuck") && password.equals("1")) {
-
-                    AppController.setUsername("Chuck");
-                    startActivity(new Intent(view.getContext(), HomeScreen.class));
-                    return;
-
-                }
-
                 Map<String, String> params = new HashMap<>();
                 params.put(Const.USER_FIELD, username);
-                params.put(Const.PASS_FIELD, password);
+                params.put(Const.PASSWORD_FIELD, password);
 
                 login_info = new JSONObject(params);
 
-                /*
-                 * Creating the Request to add to the RequestQueue
-                 * - Jae Swanepoel
-                 */
-                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Const.LOGIN_URL, login_info,
-
-                        //Code for successful responses - Jae Swanepoel
-                        response -> {
-
-                            //logging response
-                            Log.d(TAG_JSON_OBJ, response.toString());
-
-                            try {
-                                if (response.get(MSG_FIELD_NAME).equals(Const.SUCCESS_MSG)) {
-
-                                    AppController.setUsername(username);
-                                    startActivity(new Intent(view.getContext(), HomeScreen.class));
-                                }
-
-                                else {
-                                    /*
-                                     * - if a correct object is returned but "success" is fail then a pop up screen, LoginFail.java pops up
-                                     * - Ethan Still
-                                     */
-                                    login_fail.setVisibility(View.VISIBLE);
-
-                                }
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        },
-
-
-                        //Code for errors - Jae Swanepoel
-                        error -> {
-                            VolleyLog.d("Error: "+ error.getMessage());
-                            startActivity(new Intent(LoginScreen.this, Error.class));
-                        }
-                );
-
-                //adding request to RequestQueue
-                AppController.getInstance().addToRequestQueue(jsonObjReq);
+                onResume(login_info, view);
             }
         });
-
     }
 
+    /**
+     * Calls login() from the requester.
+     *
+     * @param login_info The object being passed for the request.
+     * @param view It's necessary to pass this in order to change screens.
+     * @author Jae Swanepoel
+     */
+    public void onResume(JSONObject login_info, View view) {
+        super.onResume();
+
+        requester.login(login_info, new VolleyCallback() {
+
+            @Override
+            public void onSuccess(JSONArray response) {
+                // do nothing
+                //basically unreachable code
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                try {
+
+                    if (response.get(Const.MESSAGE_FIELD).equals(Const.SUCCESS_MSG)) {
+
+                        AppController.setUsername(login_info.get(Const.USERNAME_FIELD).toString());
+                        startActivity(new Intent(view.getContext(), HomeScreen.class));
+
+                    }
+
+                    else {
+
+                        /*
+                         * - if a correct object is returned but "success" is fail then a pop up screen, LoginFail.java pops up
+                         * - Ethan Still
+                         */
+                        login_fail.setVisibility(View.VISIBLE);
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                //TODO
+            }
+        });
+    }
 }

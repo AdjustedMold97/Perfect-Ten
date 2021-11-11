@@ -23,9 +23,7 @@ import org.json.JSONObject;
  */
 public class PerfectTenRequester {
 
-    public String addFriend(String targetUser) throws InterruptedException {
-
-        final String[] output = new String[1];
+    public void addFriend(String targetUser, final VolleyCallback callback) throws InterruptedException {
 
         //Instantiating the JSONObject and populating it
         JSONObject info = new JSONObject();
@@ -41,20 +39,9 @@ public class PerfectTenRequester {
 
                 response -> {
 
-                    try {
+                    Log.d("Server response ", response.toString());
+                    callback.onSuccess(response);
 
-                        Log.d("Server response ", response.toString());
-
-                        //Changing text on addFriendButton upon successful request
-                        if (response.get("message").equals(Const.SUCCESS_MSG))
-                            output[0] = Const.SUCCESS_MSG;
-
-                        else
-                            output[0] = getErrorMessage(response.get("message").toString());
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                 },
 
                 error -> VolleyLog.d("Error ", error.getMessage())
@@ -62,40 +49,85 @@ public class PerfectTenRequester {
 
         //Adding the Request to the Queue
         AppController.getInstance().addToRequestQueue(addFriendRequest);
-
-        return output[0];
     }
 
-    public JSONArray getFriendsList() {
-
-        final JSONArray[] out = new JSONArray[1];
+    /**
+     * Retrieves the friends list of the user
+     * as determined by the global "username" variable.
+     *
+     * @param callback The VolleyCallback being used for activities.
+     * @author Jae Swanepoel
+     */
+    public void getFriendsList(final VolleyCallback callback) {
 
         JsonArrayRequest friendsListReq = new JsonArrayRequest(
                 Const.FRIEND_LIST_URL_1 + AppController.getUsername() + Const.FRIEND_LIST_URL_2,
 
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
+                response -> {
 
-                        Log.d(Const.RESPONSE_TAG, response.toString());
-                    //    callback.onSuccess(response);
-                        out[0] = response;
+                    Log.d(Const.RESPONSE_TAG, response.toString());
+                    callback.onSuccess(response);
 
-                    }
                 },
 
                 error -> VolleyLog.d(Const.ERROR_RESPONSE_TAG, error.getMessage())
         );
 
         AppController.getInstance().addToRequestQueue(friendsListReq);
-
-        return out[0];
     }
 
-    private String getErrorMessage(String errCode) {
+    /**
+     *
+     * @param login_info
+     * @param callback
+     * @author Jae Swanepoel
+     */
+    public void login(JSONObject login_info, final VolleyCallback callback) {
 
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, Const.LOGIN_URL, login_info,
 
-        return null;
+                response -> {
+
+                    Log.d(Const.RESPONSE_TAG, response.toString());
+                    callback.onSuccess(response);
+
+                },
+
+                error -> {
+
+                    VolleyLog.d(Const.ERROR_RESPONSE_TAG, error.toString());
+                    callback.onError(error);
+
+                });
+
+        AppController.getInstance().addToRequestQueue(req);
+    }
+
+    /**
+     *
+     * @param signup_info
+     * @param callback
+     * @author Jae Swanepoel
+     */
+    public void signUp(JSONObject signup_info, final VolleyCallback callback) {
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, Const.SIGN_UP_URL, signup_info,
+
+                response -> {
+
+                    Log.d(Const.RESPONSE_TAG, response.toString());
+                    callback.onSuccess(response);
+
+                },
+
+                error -> {
+
+                    VolleyLog.d(Const.ERROR_RESPONSE_TAG, error.toString());
+                    callback.onError(error);
+
+                });
+
+        AppController.getInstance().addToRequestQueue(req);
     }
 }
 

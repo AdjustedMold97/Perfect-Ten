@@ -4,26 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.VolleyError;
 import com.example.homescreen.R;
-import com.example.homescreen.Screens.LoginScreen;
-import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.Const;
-import com.example.homescreen.net_utils.Error;
+import com.example.homescreen.net_utils.PerfectTenRequester;
+import com.example.homescreen.net_utils.VolleyCallback;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * SignUp allows users to create a new user
@@ -43,15 +40,21 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class SignUp extends AppCompatActivity {
 
+    PerfectTenRequester requester;
+    TextView errorView;
+
     /**
      * onCreate sets up the buttons listed above and prepares the editText fields
-     * @param savedInstanceState
+     * @param savedInstanceState default argument
      * @author Jae Swanepoel
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        requester = new PerfectTenRequester();
 
         /*
          * Button to login screen
@@ -60,32 +63,13 @@ public class SignUp extends AppCompatActivity {
         Button toLogin = findViewById(R.id.to_login_button);
         toLogin.setOnClickListener(view -> startActivity(new Intent((view.getContext()), LoginScreen.class)));
 
-        /*
-         * Still not sure what an AtomicReference is.
-         * It seems to make things work, though, so we use them.
-         * - Jae Swanepoel
-         */
-        AtomicReference<TextView> taken = new AtomicReference<>(findViewById(R.id.taken));
-
-        /*
-         * constants for use throughout code
-         *
-         * - Jae Swanepoel
-         */
-        final String TAG_JSON_OBJ ="Sign-Up Information";
-        final String SUCCESS_MSG = "success";
-        final String MSG_FIELD_NAME = "message";
-        final String USER_FIELD_JSON = "username";
-        final String PASS_FIELD_JSON = "password";
-        final String EMAIL_FIELD_JSON = "email";
-
         EditText name_input = findViewById(R.id.editTextName);
         EditText pass_input = findViewById(R.id.editTextPassword);
         EditText email_input = findViewById(R.id.editTextEmail);
 
         Button submit = findViewById(R.id.Submit);
 
-        TextView errorView = findViewById(R.id.error_view);
+        errorView = findViewById(R.id.error_view);
         TextView enter_user = findViewById(R.id.enter_user);
         TextView enter_pass = findViewById(R.id.enter_pass);
         TextView enter_email = findViewById(R.id.enter_email);
@@ -95,23 +79,10 @@ public class SignUp extends AppCompatActivity {
         enter_email.setVisibility(View.INVISIBLE);
 
         submit.setOnClickListener(view -> {
-            /*
-             * <username> stores the entered username
-             * <password> stores the entered password
-             * <email> stores entered email
-             * <signup_info> stores the username and password inputs
-             *              in a JSONObject
-             *
-             * - Jae Swanepoel
-             */
-            String username;
-            String password;
-            String email;
-            JSONObject signup_info;
 
-            username = String.valueOf(name_input.getText());
-            password = String.valueOf(pass_input.getText());
-            email = String.valueOf(email_input.getText());
+            String username = String.valueOf(name_input.getText());
+            String password = String.valueOf(pass_input.getText());
+            String email = String.valueOf(email_input.getText());
 
             /*
              * if any of the entered fields are empty or null,
@@ -156,77 +127,82 @@ public class SignUp extends AppCompatActivity {
                 return;
 
             Map<String, String> params = new HashMap<>();
-            params.put(USER_FIELD_JSON, username);
-            params.put(PASS_FIELD_JSON, password);
-            params.put(EMAIL_FIELD_JSON, email);
+            params.put(Const.USERNAME_FIELD, username);
+            params.put(Const.PASSWORD_FIELD, password);
+            params.put(Const.EMAIL_FIELD, email);
 
-            signup_info = new JSONObject(params);
+            JSONObject signup_info = new JSONObject(params);
 
-            JsonObjectRequest json_obj_req = new JsonObjectRequest(Request.Method.POST, Const.SIGN_UP_URL, signup_info,
+            onResume(signup_info, view);
+        });
+    }
 
-                    response -> {
+    /**
+     *
+     * @param signup_info JSON Object passed to request
+     * @param view necessary for switching screens
+     * @author Jae Swanepoel
+     */
+    public void onResume(JSONObject signup_info, View view) {
+        super.onResume();
 
-                        //log the response
-                        Log.d(TAG_JSON_OBJ, response.toString());
+        requester.signUp(signup_info, new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONArray response) {
 
-                        try {
+            }
 
-                            /*
-                             * Upon a successful response message, redirect to the login
-                             * screen and set global username
-                             */
+            @Override
+            public void onSuccess(JSONObject response) {
 
-                            if (response.get(MSG_FIELD_NAME).equals(SUCCESS_MSG)) {
+                try {
 
-                                AppController.setUsername(username);
-                                startActivity(new Intent(view.getContext(), LoginScreen.class));
+                    if (response.get(Const.MESSAGE_FIELD).equals(Const.SUCCESS_MSG))
+                        startActivity(new Intent(view.getContext(), LoginScreen.class));
 
-                            }
+                    else {
 
-                            else {
+                        String error_msg;
 
-                                //hoping this cast will cut it
-                                String response_msg = (String) response.get((MSG_FIELD_NAME));
-                                String error_msg;
+                        //TODO standardize errors across classes
+                        switch(response.get((Const.MESSAGE_FIELD)).toString()) {
 
-                                //TODO
-                                //standardize errors across classes
-                                switch(response_msg) {
+                            default:
+                                //generic error
+                                error_msg = "Something went wrong...";
+                                break;
 
-                                    default:
-                                        //generic error
-                                        error_msg = "Something went wrong...";
-                                        break;
+                            case Const.USER_ERROR:
+                                //username taken
+                                error_msg = "This username is taken. Try another one!";
+                                break;
 
-                                    case Const.USER_ERROR:
-                                        //username taken
-                                        error_msg = "This username is taken. Try another one!";
-                                        break;
+                            case Const.EMAIL_ERROR:
+                                //email invalid
+                                error_msg = "This email is invalid.";
+                                break;
 
-                                    case Const.EMAIL_ERROR:
-                                        //email invalid
-                                        error_msg = "This email is invalid.";
-                                        break;
-
-                                    case Const.PASSWORD_ERROR:
-                                        //password invalid
-                                        error_msg = "This password is invalid.";
-                                        break;
-                                }
-
-                                errorView.setText(error_msg);
-                                errorView.setVisibility(View.VISIBLE);
-                            }
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            case Const.PASSWORD_ERROR:
+                                //password invalid
+                                error_msg = "This password is invalid.";
+                                break;
                         }
-                    },
 
-                    error -> startActivity(new Intent(view.getContext(), Error.class)));
+                        errorView.setText(error_msg);
+                        errorView.setVisibility(View.VISIBLE);
+                    }
 
-            AppController.getInstance().addToRequestQueue(json_obj_req);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
         });
     }
 }

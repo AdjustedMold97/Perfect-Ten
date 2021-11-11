@@ -155,5 +155,26 @@ public class PerfectTenRequester {
 
         AppController.getInstance().addToRequestQueue(req);
     }
+
+    public void createPost(JSONObject post_data, final VolleyCallback callback) {
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, Const.POSTING_URL + AppController.getUsername(), post_data,
+
+                response -> {
+
+                    Log.d(Const.RESPONSE_TAG, response.toString());
+                    callback.onSuccess(response);
+
+                },
+
+                error -> {
+
+                    VolleyLog.d(Const.ERROR_RESPONSE_TAG, error.toString());
+                    callback.onError(error);
+
+                });
+
+        AppController.getInstance().addToRequestQueue(req);
+    }
 }
 

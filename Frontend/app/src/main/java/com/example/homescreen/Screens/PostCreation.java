@@ -59,14 +59,9 @@ public class PostCreation extends AppCompatActivity {
          * - Ethan Still
          */
         Button backBtn = findViewById(R.id.post_back_Button);
-
         backBtn.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
 
-        /*
-         * button to post the textField to home - sends a request to server
-         * - Ethan
-         */
-        Button submitBtn = findViewById(R.id.post_submit_Button);
+
 
         /*
          * <postTextBox> input field for the post's message
@@ -77,7 +72,11 @@ public class PostCreation extends AppCompatActivity {
         EditText bodyEditText = findViewById(R.id.post_body_EditText);
         EditText titleEditText = findViewById(R.id.post_title_EditText);
 
-        //onClickListener for submit button - Jae Swanepoel
+        /*
+         * button to post the textField to home - sends a request to server
+         * - Ethan
+         */
+        Button submitBtn = findViewById(R.id.post_submit_Button);
         submitBtn.setOnClickListener(new View.OnClickListener() {
 
             /**
@@ -144,7 +143,6 @@ public class PostCreation extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override

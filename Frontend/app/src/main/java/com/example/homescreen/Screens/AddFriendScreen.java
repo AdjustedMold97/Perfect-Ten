@@ -5,19 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.VolleyError;
 import com.example.homescreen.R;
-import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.Const;
+import com.example.homescreen.net_utils.PerfectTenRequester;
+import com.example.homescreen.net_utils.VolleyCallback;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,6 +36,12 @@ public class AddFriendScreen extends AppCompatActivity {
     TextView responseView;
     EditText username;
 
+    PerfectTenRequester requester;
+    String targetUser;
+
+    private final String SUCCESS_TEXT = "Friend Added! Success!";
+    private final String USER_ERROR_TEXT = "User not found.";
+
     /**
      * Initializes the views in the activity.
      *
@@ -48,8 +53,7 @@ public class AddFriendScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend_screen);
 
-        submit = findViewById(R.id.add_friend_submit_Button);
-        submit.setOnClickListener(view -> addFriend());
+        requester = new PerfectTenRequester();
 
         responseView = findViewById(R.id.add_friend_response_TextView);
 
@@ -57,63 +61,61 @@ public class AddFriendScreen extends AppCompatActivity {
 
         Button back = findViewById(R.id.add_friend_back_Button);
         back.setOnClickListener(view -> startActivity(new Intent(view.getContext(),FriendsScreen.class)));
+
+        submit = findViewById(R.id.add_friend_submit_Button);
+        submit.setOnClickListener(view -> {
+
+            targetUser = username.getText().toString();
+            onResume();
+
+        });
     }
 
     /**
-     * Code for the "Add Friend" Button.
-     * Creates a JSON Request and adds it to the RequestQueue.
-     * upon a successful Request, the user receives a prompt
-     * that the request succeeded.
+     * @author Jae Swanepoel
      */
-    private void addFriend() {
+    public void onResume() {
+        super.onResume();
 
-        //Instantiating the JSONObject and populating it
-        JSONObject info = new JSONObject();
-        try {
-            info.put("user", username.getText().toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        requester.addFriend(targetUser, new VolleyCallback() {
 
-        //Instantiating the JsonObjectRequest
-        JsonObjectRequest addFriendRequest = new JsonObjectRequest(Request.Method.POST,
-                Const.ADD_FRIEND_URL_1 + AppController.getUsername() + Const.ADD_FRIEND_URL_2, info,
+            @Override
+            public void onSuccess(JSONArray response) {
+                //unreachable code
+            }
 
-                response -> {
+            @Override
+            public void onSuccess(JSONObject response) {
 
-                    try {
+                try {
+                    //Changing text on addFriendButton upon successful request
+                    if (response.get(Const.MESSAGE_FIELD).equals(Const.SUCCESS_MSG)) {
 
-                        Log.d("Server response ", response.toString());
+                        responseView.setText(SUCCESS_TEXT);
+                        responseView.setTextColor(Color.GREEN);
 
-                        //Changing text on addFriendButton upon successful request
-                        if (response.get("message").equals(Const.SUCCESS_MSG)) {
+                    } else {
 
-                            responseView.setText("Friend Added! Success!");
-                            responseView.setTextColor(Color.GREEN);
-                        }
+                        responseView.setTextColor(Color.RED);
 
-                        else {
+                        if (response.get(Const.MESSAGE_FIELD).equals(Const.GENERIC_ERROR))
+                            responseView.setText(Const.GENERIC_ERROR_TEXT);
 
-                            responseView.setTextColor(Color.RED);
-
-                            if (response.get("message").equals(Const.GENERIC_ERROR))
-                                responseView.setText("Something went wrong...");
-
-                            else if (response.get("message").equals(Const.USER_ERROR))
-                                responseView.setText("User not found.");
-                        }
-
-                        responseView.setVisibility(View.VISIBLE);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        else if (response.get(Const.MESSAGE_FIELD).equals(Const.USER_ERROR))
+                            responseView.setText(USER_ERROR_TEXT);
                     }
-                },
 
-                error -> VolleyLog.d("Error ", error.getMessage())
-        );
+                    responseView.setVisibility(View.VISIBLE);
 
-        //Adding the Request to the Queue
-        AppController.getInstance().addToRequestQueue(addFriendRequest);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                //TODO
+            }
+        });
     }
 }

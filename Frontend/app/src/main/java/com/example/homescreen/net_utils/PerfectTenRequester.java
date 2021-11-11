@@ -1,17 +1,13 @@
 package com.example.homescreen.net_utils;
 
-import android.graphics.Color;
 import android.util.Log;
-import android.view.View;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.homescreen.app.AppController;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,7 +19,7 @@ import org.json.JSONObject;
  */
 public class PerfectTenRequester {
 
-    public void addFriend(String targetUser, final VolleyCallback callback) throws InterruptedException {
+    public void addFriend(String targetUser, final VolleyCallback callback) {
 
         //Instantiating the JSONObject and populating it
         JSONObject info = new JSONObject();
@@ -44,7 +40,12 @@ public class PerfectTenRequester {
 
                 },
 
-                error -> VolleyLog.d("Error ", error.getMessage())
+                error -> {
+
+                    VolleyLog.d(Const.ERROR_RESPONSE_TAG, error.toString());
+                    callback.onError(error);
+
+                }
         );
 
         //Adding the Request to the Queue
@@ -177,4 +178,3 @@ public class PerfectTenRequester {
         AppController.getInstance().addToRequestQueue(req);
     }
 }
-

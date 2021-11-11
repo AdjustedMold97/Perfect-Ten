@@ -137,6 +137,7 @@ public class SignUp extends AppCompatActivity {
         });
     }
 
+    //TODO test this
     /**
      *
      * @param signup_info JSON Object passed to request

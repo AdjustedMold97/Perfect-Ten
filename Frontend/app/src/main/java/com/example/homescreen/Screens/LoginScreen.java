@@ -120,7 +120,7 @@ public class LoginScreen extends AppCompatActivity {
                 password = String.valueOf(password_input.getText());
 
                 Map<String, String> params = new HashMap<>();
-                params.put(Const.USER_FIELD, username);
+                params.put(Const.USERNAME_FIELD, username);
                 params.put(Const.PASSWORD_FIELD, password);
 
                 login_info = new JSONObject(params);

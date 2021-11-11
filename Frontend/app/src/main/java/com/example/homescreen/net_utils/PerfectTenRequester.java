@@ -129,5 +129,31 @@ public class PerfectTenRequester {
 
         AppController.getInstance().addToRequestQueue(req);
     }
+
+    /**
+     *
+     * @param callback
+     * @author Jae Swanepoel
+     */
+    public void getAllPosts(final VolleyCallback callback) {
+
+        JsonArrayRequest req = new JsonArrayRequest(Const.POST_LIST_URL,
+
+                response -> {
+
+                    Log.d(Const.RESPONSE_TAG, response.toString());
+                    callback.onSuccess(response);
+
+                },
+
+                error -> {
+
+                    VolleyLog.d(Const.ERROR_RESPONSE_TAG, error.toString());
+                    callback.onError(error);
+
+                });
+
+        AppController.getInstance().addToRequestQueue(req);
+    }
 }
 

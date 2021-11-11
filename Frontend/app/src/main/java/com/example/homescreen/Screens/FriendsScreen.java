@@ -8,9 +8,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.example.homescreen.Adapters.FriendsAdapter;
 import com.example.homescreen.R;
+import com.example.homescreen.app.AppController;
+import com.example.homescreen.net_utils.Const;
 import com.example.homescreen.net_utils.PerfectTenRequester;
 import com.example.homescreen.net_utils.VolleyCallback;
 
@@ -45,8 +48,6 @@ public class FriendsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_screen);
 
-        requester = new PerfectTenRequester();
-
         //retrieving friends list
         onResume();
 
@@ -74,25 +75,27 @@ public class FriendsScreen extends AppCompatActivity {
     public void onResume() {
         super.onResume();
 
-        requester.getFriendsList(new VolleyCallback() {
-            @Override
-            public void onSuccess(JSONArray response) {
+        requester = new PerfectTenRequester(Const.FRIEND_LIST_URL_1 + AppController.getUsername() + Const.FRIEND_LIST_URL_2,
+                new VolleyCallback() {
+                    @Override
+                    public void onSuccess(JSONArray response) {
 
-                populate(response);
+                        populate(response);
 
-            }
+                    }
 
-            @Override
-            public void onSuccess(JSONObject response) {
+                    @Override
+                    public void onSuccess(JSONObject response) {
+                        //unreachable code
+                    }
 
-            }
+                    @Override
+                    public void onError(VolleyError error) {
+                        //TODO
+                    }
+                });
 
-            @Override
-            public void onError(VolleyError error) {
-
-            }
-        });
-
+        requester.request();
     }
 
     /**

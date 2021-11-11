@@ -10,8 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.example.homescreen.R;
+import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.Const;
 import com.example.homescreen.net_utils.PerfectTenRequester;
 import com.example.homescreen.net_utils.VolleyCallback;
@@ -53,7 +55,7 @@ public class AddFriendScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend_screen);
 
-        requester = new PerfectTenRequester();
+        //requester = new PerfectTenRequester();
 
         responseView = findViewById(R.id.add_friend_response_TextView);
 
@@ -77,45 +79,55 @@ public class AddFriendScreen extends AppCompatActivity {
     public void onResume() {
         super.onResume();
 
-        requester.addFriend(targetUser, new VolleyCallback() {
+        JSONObject info = new JSONObject();
+        try {
+            info.put("user", targetUser);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-            @Override
-            public void onSuccess(JSONArray response) {
-                //unreachable code
-            }
+        requester = new PerfectTenRequester(Request.Method.POST, Const.ADD_FRIEND_URL_1 + AppController.getUsername() + Const.ADD_FRIEND_URL_2, info,
+                new VolleyCallback() {
 
-            @Override
-            public void onSuccess(JSONObject response) {
-
-                try {
-                    //Changing text on addFriendButton upon successful request
-                    if (response.get(Const.MESSAGE_FIELD).equals(Const.SUCCESS_MSG)) {
-
-                        responseView.setText(SUCCESS_TEXT);
-                        responseView.setTextColor(Color.GREEN);
-
-                    } else {
-
-                        responseView.setTextColor(Color.RED);
-
-                        if (response.get(Const.MESSAGE_FIELD).equals(Const.GENERIC_ERROR))
-                            responseView.setText(Const.GENERIC_ERROR_TEXT);
-
-                        else if (response.get(Const.MESSAGE_FIELD).equals(Const.USER_ERROR))
-                            responseView.setText(USER_ERROR_TEXT);
+                    @Override
+                    public void onSuccess(JSONArray response) {
+                        //unreachable code
                     }
 
-                    responseView.setVisibility(View.VISIBLE);
+                    @Override
+                    public void onSuccess(JSONObject response) {
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+                        try {
+                            //Changing text on addFriendButton upon successful request
+                            if (response.get(Const.MESSAGE_FIELD).equals(Const.SUCCESS_MSG)) {
 
-            @Override
-            public void onError(VolleyError error) {
-                //TODO
-            }
-        });
+                                responseView.setText(SUCCESS_TEXT);
+                                responseView.setTextColor(Color.GREEN);
+
+                            } else {
+
+                                responseView.setTextColor(Color.RED);
+
+                                if (response.get(Const.MESSAGE_FIELD).equals(Const.GENERIC_ERROR))
+                                    responseView.setText(Const.GENERIC_ERROR_TEXT);
+
+                                else if (response.get(Const.MESSAGE_FIELD).equals(Const.USER_ERROR))
+                                    responseView.setText(USER_ERROR_TEXT);
+                            }
+
+                            responseView.setVisibility(View.VISIBLE);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        //TODO
+                    }
+                });
+
+        requester.request();
     }
 }

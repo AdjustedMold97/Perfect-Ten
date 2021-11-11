@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.example.homescreen.R;
 
@@ -22,6 +23,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.homescreen.app.AppController;
+import com.example.homescreen.net_utils.Const;
 import com.example.homescreen.net_utils.FailedPost;
 import com.example.homescreen.net_utils.PerfectTenRequester;
 import com.example.homescreen.net_utils.VolleyCallback;
@@ -52,7 +55,7 @@ public class PostCreation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_creation);
 
-        requester = new PerfectTenRequester();
+        //requester = new PerfectTenRequester();
 
         /*
          * back button to leave post creation window
@@ -60,8 +63,6 @@ public class PostCreation extends AppCompatActivity {
          */
         Button backBtn = findViewById(R.id.post_back_Button);
         backBtn.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
-
-
 
         /*
          * <postTextBox> input field for the post's message
@@ -121,34 +122,37 @@ public class PostCreation extends AppCompatActivity {
     public void onResume(View view) {
         super.onResume();
 
-        requester.createPost(post_data, new VolleyCallback() {
+        requester = new PerfectTenRequester(Request.Method.POST, Const.POSTING_URL + AppController.getUsername(), post_data,
+                new VolleyCallback() {
 
-            @Override
-            public void onSuccess(JSONArray response) {
-                //unreachable code
-            }
-
-            @Override
-            public void onSuccess(JSONObject response) {
-
-                try {
-
-                    if (response.get(MESSAGE_FIELD).equals(SUCCESS_MSG))
-                        startActivity(new Intent(view.getContext(), HomeScreen.class));
-
-                    else {
-                        startActivity(new Intent(PostCreation.this, FailedPost.class));
-
+                    @Override
+                    public void onSuccess(JSONArray response) {
+                        //unreachable code
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
 
-            @Override
-            public void onError(VolleyError error) {
-                //TODO
-            }
-        });
+                    @Override
+                    public void onSuccess(JSONObject response) {
+
+                        try {
+
+                            if (response.get(MESSAGE_FIELD).equals(SUCCESS_MSG))
+                                startActivity(new Intent(view.getContext(), HomeScreen.class));
+
+                            else {
+                                startActivity(new Intent(PostCreation.this, FailedPost.class));
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        //TODO
+                    }
+                });
+
+        requester.request();
     }
 }

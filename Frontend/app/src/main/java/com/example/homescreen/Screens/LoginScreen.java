@@ -52,9 +52,6 @@ public class LoginScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
-        //instantiating the requester
-        requester = new PerfectTenRequester();
-
         /*
          * final constants for use throughout code
          *
@@ -140,7 +137,7 @@ public class LoginScreen extends AppCompatActivity {
     public void onResume(JSONObject login_info, View view) {
         super.onResume();
 
-        requester.login(login_info, new VolleyCallback() {
+        requester = new PerfectTenRequester(Const.LOGIN_URL, login_info, new VolleyCallback() {
 
             @Override
             public void onSuccess(JSONArray response) {
@@ -181,5 +178,7 @@ public class LoginScreen extends AppCompatActivity {
                 //TODO
             }
         });
+
+        requester.request();
     }
 }

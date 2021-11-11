@@ -56,8 +56,6 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        requester = new PerfectTenRequester();
-
         //========================================
         //TODO ethan- interface these somehow to make more efficient
 
@@ -176,7 +174,7 @@ public class HomeScreen extends AppCompatActivity {
     public void onResume() {
         super.onResume();
 
-        requester.getAllPosts(new VolleyCallback() {
+        requester = new PerfectTenRequester(Const.POST_LIST_URL, new VolleyCallback() {
 
             @Override
             public void onSuccess(JSONArray response) {
@@ -193,5 +191,7 @@ public class HomeScreen extends AppCompatActivity {
                 //TODO
             }
         });
+
+        requester.request();
     }
 }

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.example.homescreen.R;
 import com.example.homescreen.net_utils.Const;
@@ -53,8 +54,6 @@ public class SignUp extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
-        requester = new PerfectTenRequester();
 
         /*
          * Button to login screen
@@ -147,63 +146,66 @@ public class SignUp extends AppCompatActivity {
     public void onResume(JSONObject signup_info, View view) {
         super.onResume();
 
-        requester.signUp(signup_info, new VolleyCallback() {
-            @Override
-            public void onSuccess(JSONArray response) {
+        requester = new PerfectTenRequester(Request.Method.POST, Const.SIGN_UP_URL, signup_info,
+                new VolleyCallback() {
+                    @Override
+                    public void onSuccess(JSONArray response) {
 
-            }
-
-            @Override
-            public void onSuccess(JSONObject response) {
-
-                try {
-
-                    if (response.get(Const.MESSAGE_FIELD).equals(Const.SUCCESS_MSG))
-                        startActivity(new Intent(view.getContext(), LoginScreen.class));
-
-                    else {
-
-                        String error_msg;
-
-                        //TODO standardize errors across classes
-                        switch(response.get((Const.MESSAGE_FIELD)).toString()) {
-
-                            default:
-                                //generic error
-                                error_msg = "Something went wrong...";
-                                break;
-
-                            case Const.USER_ERROR:
-                                //username taken
-                                error_msg = "This username is taken. Try another one!";
-                                break;
-
-                            case Const.EMAIL_ERROR:
-                                //email invalid
-                                error_msg = "This email is invalid.";
-                                break;
-
-                            case Const.PASSWORD_ERROR:
-                                //password invalid
-                                error_msg = "This password is invalid.";
-                                break;
-                        }
-
-                        errorView.setText(error_msg);
-                        errorView.setVisibility(View.VISIBLE);
                     }
 
+                    @Override
+                    public void onSuccess(JSONObject response) {
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                        try {
 
-            }
+                            if (response.get(Const.MESSAGE_FIELD).equals(Const.SUCCESS_MSG))
+                                startActivity(new Intent(view.getContext(), LoginScreen.class));
 
-            @Override
-            public void onError(VolleyError error) {
+                            else {
 
-            }
-        });
+                                String error_msg;
+
+                                //TODO standardize errors across classes
+                                switch(response.get((Const.MESSAGE_FIELD)).toString()) {
+
+                                    default:
+                                        //generic error
+                                        error_msg = "Something went wrong...";
+                                        break;
+
+                                    case Const.USER_ERROR:
+                                        //username taken
+                                        error_msg = "This username is taken. Try another one!";
+                                        break;
+
+                                    case Const.EMAIL_ERROR:
+                                        //email invalid
+                                        error_msg = "This email is invalid.";
+                                        break;
+
+                                    case Const.PASSWORD_ERROR:
+                                        //password invalid
+                                        error_msg = "This password is invalid.";
+                                        break;
+                                }
+
+                                errorView.setText(error_msg);
+                                errorView.setVisibility(View.VISIBLE);
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+
+                    }
+                });
+
+        requester.request();
     }
 }

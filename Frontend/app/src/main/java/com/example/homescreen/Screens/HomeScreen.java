@@ -1,18 +1,14 @@
 package com.example.homescreen.Screens;
 
-import static com.example.homescreen.net_utils.Const.POST_LIST_URL;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.VolleyError;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +17,9 @@ import org.json.JSONObject;
 import com.example.homescreen.Adapters.MyAdapter;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
+import com.example.homescreen.net_utils.Const;
+import com.example.homescreen.net_utils.PerfectTenRequester;
+import com.example.homescreen.net_utils.VolleyCallback;
 
 /**
  * The main activity in Perfect Ten.
@@ -43,13 +42,10 @@ import com.example.homescreen.app.AppController;
  */
 public class HomeScreen extends AppCompatActivity {
 
-    final static String RESPONSE_TAG = "JSON Response ";
-    final static String TITLE_TAG = "title";
-    final static String MESSAGE_TAG = "message";
-
+    PerfectTenRequester requester;
 
     /**
-     * Calls getPosts() method onCreate to populate the homeScreen view with postObjects
+     * Calls onResume() method onCreate to populate the homeScreen view with postObjects
      * Buttons to loginScreen and postCreation are also set up here
      * @param savedInstanceState
      * -Jae Swanepoel
@@ -59,10 +55,6 @@ public class HomeScreen extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-
-        //Retrieves posts and populates the HomeScreen. - Jae Swanepoel
-        getPosts();
-
 
         //========================================
         //TODO ethan- interface these somehow to make more efficient
@@ -94,7 +86,6 @@ public class HomeScreen extends AppCompatActivity {
         Button toLogin = findViewById(R.id.sign_out_Button);
 
         toLogin.setOnClickListener(view -> {
-
             AppController.setUsername(null);
             startActivity(new Intent(view.getContext(), LoginScreen.class));
         });
@@ -105,38 +96,8 @@ public class HomeScreen extends AppCompatActivity {
          */
         Button post_button = findViewById(R.id.post_create_Button);
         post_button.setOnClickListener(view -> startActivity(new Intent(view.getContext(), PostCreation.class)));
-    }
 
-    /**
-     * Retrieves post data from the server and
-     * displays it in an infinite scroll.
-     *
-     * @author Jae Swanepoel
-     */
-    private void getPosts() {
-
-        System.out.println("Getting posts");
-
-        /*
-         * The volley request that will retrieve our data.
-         * Requires a URL pulled from the Const class.
-         */
-        JsonArrayRequest json_arr_req = new JsonArrayRequest(POST_LIST_URL,
-
-
-                 response -> {
-
-                    //logging JSON response and calling populate()
-                    Log.d(RESPONSE_TAG, response.toString());
-                    populate(response);
-
-                 },
-
-                 error ->  VolleyLog.d("Error: " + error.getMessage())
-         );
-
-        //adding request to queue - Jae Swanepoel
-        AppController.getInstance().addToRequestQueue(json_arr_req);
+        onResume();
     }
 
     /**
@@ -168,12 +129,12 @@ public class HomeScreen extends AppCompatActivity {
 
             try {
                 //getting the title from the JSONObject
-                temp.put(TITLE_TAG,
-                        arr.getJSONObject(arr.length() - i - 1).get(TITLE_TAG).toString());
+                temp.put(Const.TITLE_FIELD,
+                        arr.getJSONObject(arr.length() - i - 1).get(Const.TITLE_FIELD).toString());
 
                 //getting the message from the JSONObject
-                temp.put(MESSAGE_TAG,
-                        arr.getJSONObject(arr.length() - i - 1).get(MESSAGE_TAG).toString());
+                temp.put(Const.MESSAGE_FIELD,
+                        arr.getJSONObject(arr.length() - i - 1).get(Const.MESSAGE_FIELD).toString());
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -205,5 +166,32 @@ public class HomeScreen extends AppCompatActivity {
 
         mLayoutManager = new LinearLayoutManager(this);
         recycle.setLayoutManager(mLayoutManager);
+    }
+
+    /**
+     * @author Jae Swanepoel
+     */
+    public void onResume() {
+        super.onResume();
+
+        requester = new PerfectTenRequester(Const.POST_LIST_URL, new VolleyCallback() {
+
+            @Override
+            public void onSuccess(JSONArray response) {
+                populate(response);
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+                //unreachable
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                //TODO
+            }
+        });
+
+        requester.request();
     }
 }

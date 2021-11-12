@@ -1,5 +1,18 @@
 package com.example.homescreen.net_utils;
 
-public interface VolleyCallback {
-    void onSuccess(String result);
+import com.android.volley.VolleyError;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+/**
+ * Allows activities to execute some code
+ * inside of a Volley Request body.
+ *
+ * @author Jae Swanepoel
+ */
+public interface VolleyCallback{
+    void onSuccess(JSONArray response);
+    void onSuccess(JSONObject response);
+    void onError(VolleyError error);
 }

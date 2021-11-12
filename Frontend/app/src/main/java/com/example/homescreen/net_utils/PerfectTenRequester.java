@@ -1,8 +1,6 @@
 package com.example.homescreen.net_utils;
 
-import android.graphics.Color;
 import android.util.Log;
-import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -12,7 +10,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.homescreen.app.AppController;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -23,79 +20,96 @@ import org.json.JSONObject;
  */
 public class PerfectTenRequester {
 
-    public String addFriend(String targetUser) throws InterruptedException {
+    private int requestMethod;
+    private final String url;
+    private JSONObject requestObj;
+    private JSONArray requestArr;
+    private final VolleyCallback callback;
+    private final boolean arrayReq;
+    private final boolean usesMethod;
 
-        final String[] output = new String[1];
+    public PerfectTenRequester (int requestMethod, String url, JSONObject requestBody, VolleyCallback callback) {
 
-        //Instantiating the JSONObject and populating it
-        JSONObject info = new JSONObject();
-        try {
-            info.put("user", targetUser);
-        } catch (JSONException e) {
-            e.printStackTrace();
+        this.requestMethod = requestMethod;
+        this.url = url;
+        this.requestObj = requestBody;
+        this.callback = callback;
+        arrayReq = false;
+        usesMethod = true;
+
+    }
+
+    public PerfectTenRequester (String url, JSONObject requestObj, VolleyCallback callback) {
+
+        this.url = url;
+        this.requestObj = requestObj;
+        this.callback = callback;
+        arrayReq = false;
+        usesMethod = false;
+
+    }
+
+    public PerfectTenRequester (int requestMethod, String url, JSONArray requestArr, VolleyCallback callback) {
+
+        this.requestMethod = requestMethod;
+        this.url = url;
+        this.requestArr = requestArr;
+        this.callback = callback;
+        arrayReq = true;
+        usesMethod = true;
+
+    }
+
+    public PerfectTenRequester (String url, VolleyCallback callback) {
+
+        this.url = url;
+        this.callback = callback;
+        arrayReq = true;
+        usesMethod = false;
+
+    }
+
+    public void request() {
+
+        Request req;
+
+        Response.Listener objResponse = response -> {
+
+            Log.d(Const.RESPONSE_TAG, response.toString());
+            callback.onSuccess((JSONObject) response);
+
+        };
+
+        Response.Listener arrResponse = response -> {
+
+            Log.d(Const.RESPONSE_TAG, response.toString());
+            callback.onSuccess((JSONArray) response);
+
+        };
+
+        Response.ErrorListener errResponse = error -> {
+
+            VolleyLog.d(Const.ERROR_RESPONSE_TAG, error.toString());
+            callback.onError(error);
+
+        };
+
+        if (arrayReq) {
+
+            if (usesMethod)
+                req = new JsonArrayRequest(requestMethod, url, requestArr, arrResponse, errResponse);
+
+            else
+                req = new JsonArrayRequest(url, arrResponse, errResponse);
+        } else {
+
+            if (usesMethod)
+                req = new JsonObjectRequest(requestMethod, url, requestObj, objResponse, errResponse);
+
+            else
+                req = new JsonObjectRequest(url, requestObj, objResponse, errResponse);
         }
 
-        //Instantiating the JsonObjectRequest
-        JsonObjectRequest addFriendRequest = new JsonObjectRequest(Request.Method.POST,
-                Const.ADD_FRIEND_URL_1 + AppController.getUsername() + Const.ADD_FRIEND_URL_2, info,
-
-                response -> {
-
-                    try {
-
-                        Log.d("Server response ", response.toString());
-
-                        //Changing text on addFriendButton upon successful request
-                        if (response.get("message").equals(Const.SUCCESS_MSG))
-                            output[0] = Const.SUCCESS_MSG;
-
-                        else
-                            output[0] = getErrorMessage(response.get("message").toString());
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                },
-
-                error -> VolleyLog.d("Error ", error.getMessage())
-        );
-
-        //Adding the Request to the Queue
-        AppController.getInstance().addToRequestQueue(addFriendRequest);
-
-        return output[0];
-    }
-
-    public JSONArray getFriendsList() {
-
-        final JSONArray[] out = new JSONArray[1];
-
-        JsonArrayRequest friendsListReq = new JsonArrayRequest(
-                Const.FRIEND_LIST_URL_1 + AppController.getUsername() + Const.FRIEND_LIST_URL_2,
-
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-
-                        Log.d(Const.RESPONSE_TAG, response.toString());
-                    //    callback.onSuccess(response);
-                        out[0] = response;
-
-                    }
-                },
-
-                error -> VolleyLog.d(Const.ERROR_RESPONSE_TAG, error.getMessage())
-        );
-
-        AppController.getInstance().addToRequestQueue(friendsListReq);
-
-        return out[0];
-    }
-
-    private String getErrorMessage(String errCode) {
-
-
-        return null;
+        AppController.getInstance().addToRequestQueue(req);
     }
 }
-

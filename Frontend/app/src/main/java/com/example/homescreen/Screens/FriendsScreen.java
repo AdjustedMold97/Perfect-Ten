@@ -6,20 +6,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.ImageButton;
 
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.example.homescreen.Adapters.FriendsAdapter;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.Const;
 import com.example.homescreen.net_utils.PerfectTenRequester;
+import com.example.homescreen.net_utils.VolleyCallback;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * The FriendsScreen allows a user to browse the list of
@@ -35,8 +34,7 @@ import org.json.JSONArray;
  */
 public class FriendsScreen extends AppCompatActivity {
 
-    final static String RESPONSE_TAG = "Friends List ";
-    final static String ERROR_RESPONSE_TAG = "Error ";
+    private PerfectTenRequester requester;
 
     /**
      * Initializes the views in the activity
@@ -50,12 +48,8 @@ public class FriendsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_screen);
 
-        //populating the friends list
-        //getFriends();
-
-        PerfectTenRequester req = new PerfectTenRequester();
-
-        populate(req.getFriendsList());
+        //retrieving friends list
+        onResume();
 
         //Rigging the Universal Buttons
         Button friend = findViewById(R.id.friends_Button_home);
@@ -71,30 +65,37 @@ public class FriendsScreen extends AppCompatActivity {
         Button addFriend = findViewById(R.id.add_friend_screen_Button);
         addFriend.setOnClickListener(view -> startActivity(new Intent(view.getContext(), AddFriendScreen.class)));
     }
-        /**
-         * Creates a JSON Request and adds it to the Request Queue.
-         * Upon a successful response, a call is made to populate()
-         * in order to populate the infinite scroll
-         * with the user's friends list.
-         *
-         * @author Jae Swanepoel
-         */
-    private void getFriends() {
 
-        JsonArrayRequest json_arr_req = new JsonArrayRequest(
-                Const.FRIEND_LIST_URL_1 + AppController.getUsername() + Const.FRIEND_LIST_URL_2,
+    /**
+     * Retrieving the friends list and populating
+     * the infinite scroll.
+     *
+     * @author Jae Swanepoel
+     */
+    public void onResume() {
+        super.onResume();
 
-                response -> {
+        requester = new PerfectTenRequester(Const.FRIEND_LIST_URL_1 + AppController.getUsername() + Const.FRIEND_LIST_URL_2,
+                new VolleyCallback() {
+                    @Override
+                    public void onSuccess(JSONArray response) {
 
-                    Log.d(RESPONSE_TAG, response.toString());
-                    populate(response);
+                        populate(response);
 
-                },
+                    }
 
-                error -> VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage())
-        );
+                    @Override
+                    public void onSuccess(JSONObject response) {
+                        //unreachable code
+                    }
 
-        AppController.getInstance().addToRequestQueue(json_arr_req);
+                    @Override
+                    public void onError(VolleyError error) {
+                        //TODO
+                    }
+                });
+
+        requester.request();
     }
 
     /**

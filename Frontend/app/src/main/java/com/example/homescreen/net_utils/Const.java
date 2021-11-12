@@ -35,8 +35,6 @@ public class Const {
     //======================================== JSON ================================================
 
     public static final String SUCCESS_MSG = "success";
-    public static final String USER_FIELD = "username";
-    public static final String PASS_FIELD = "password";
     public static final String RESPONSE_TAG = "Server Response ";
     public static final String ERROR_RESPONSE_TAG = "Error Response ";
 
@@ -46,5 +44,14 @@ public class Const {
     public static final String USER_ERROR = "error2";
     public static final String EMAIL_ERROR = "error3";
     public static final String PASSWORD_ERROR = "error4";
+    public static final String GENERIC_ERROR_TEXT = "Something went wrong...";
+
+    //===================================== FIELDS =================================================
+
+    public static final String MESSAGE_FIELD = "message";
+    public static final String PASSWORD_FIELD = "password";
+    public static final String EMAIL_FIELD = "email";
+    public static final String USERNAME_FIELD = "username";
+    public static final String TITLE_FIELD = "title";
 
 }

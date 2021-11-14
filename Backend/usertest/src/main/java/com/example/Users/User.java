@@ -273,5 +273,3 @@ public class User {
         return blockedUsers.contains(blockedUser);
     }
 }
-
-// Test comment

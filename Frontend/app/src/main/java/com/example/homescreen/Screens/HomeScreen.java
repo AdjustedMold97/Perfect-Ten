@@ -43,6 +43,7 @@ import com.example.homescreen.net_utils.VolleyCallback;
 public class HomeScreen extends AppCompatActivity {
 
     PerfectTenRequester requester;
+    String[] blockedUsers;
 
     /**
      * Calls onResume() method onCreate to populate the homeScreen view with postObjects
@@ -56,13 +57,13 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        //========================================
+        //=======================================================================================================
         //TODO ethan- interface these somehow to make more efficient
 
-//TODO use <include or <merge to get interface into homeScreen
+        //TODO use <include or <merge to get interface into homeScreen
 
 
-//TODO interface a back button Ethan
+        //TODO interface a back button Ethan
 
         /*
          * these three buttons make up the bottom tab buttons they go on each screen
@@ -77,7 +78,7 @@ public class HomeScreen extends AppCompatActivity {
 
         Button home = findViewById(R.id.home_Button_home);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
-//===========================================
+        //======================================================================================================
 
         /*
          * signs the user out, back to the login screen
@@ -97,6 +98,9 @@ public class HomeScreen extends AppCompatActivity {
         Button post_button = findViewById(R.id.post_create_Button);
         post_button.setOnClickListener(view -> startActivity(new Intent(view.getContext(), PostCreation.class)));
 
+        //getting blocked users
+        getBlockedUsers();
+        //getting posts
         onResume();
     }
 
@@ -123,9 +127,29 @@ public class HomeScreen extends AppCompatActivity {
         JSONArray jsonArray = new JSONArray();
         JSONObject temp;
 
+        reverseLoop:
         for (int i = 0; i < arr.length(); i++) {
 
             temp = new JSONObject();
+
+            /*
+             * If a user's post is blocked,
+             * we'll take that post out of
+             * the displayed posts.
+             *
+             * - Jae Swanepoel
+             */
+            try {
+                for (String blockedUser : blockedUsers) {
+
+                    if (blockedUser.equals(temp.get("uname")))
+                        continue reverseLoop;
+
+                }
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+            }
 
             try {
                 //getting the title from the JSONObject
@@ -169,28 +193,66 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     /**
+     * Retrieves the list of all posts from
+     * the Perfect Ten server and calls
+     * the populate method.
+     *
      * @author Jae Swanepoel
      */
     public void onResume() {
         super.onResume();
 
         requester = new PerfectTenRequester(Const.POST_LIST_URL, new VolleyCallback() {
-
             @Override
             public void onSuccess(JSONArray response) {
                 populate(response);
             }
 
             @Override
-            public void onSuccess(JSONObject response) {
-                //unreachable
-            }
+            public void onSuccess(JSONObject response) {}
 
             @Override
-            public void onError(VolleyError error) {
-                //TODO
-            }
+            public void onError(VolleyError error) {/*TODO*/}
         });
+
+        requester.request();
+    }
+
+    /**
+     * Retrieves a list of users
+     * that have been blocked by the
+     * signed-in user.
+     *
+     * @author Jae Swanepoel
+     */
+    public void getBlockedUsers() {
+        super.onResume();
+
+        requester = new PerfectTenRequester(Const.BLOCKED_LIST_URL_1 + AppController.getUsername() + Const.BLOCKED_LIST_URL_2,
+                new VolleyCallback() {
+                    @Override
+                    public void onSuccess(JSONArray response) {
+
+                        blockedUsers = new String[response.length()];
+
+                        try {
+                            for (int i = 0; i < response.length(); i++)
+                                blockedUsers[i] = response.get(i).toString();
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onSuccess(JSONObject response) { /* do nothing */ }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        //TODO
+                    }
+                });
 
         requester.request();
     }

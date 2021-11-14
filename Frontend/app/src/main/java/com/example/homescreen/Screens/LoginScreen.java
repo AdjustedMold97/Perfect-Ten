@@ -48,14 +48,6 @@ public class LoginScreen extends AppCompatActivity {
         setContentView(R.layout.activity_login_screen);
 
         /*
-         * final constants for use throughout code
-         *
-         * - Jae Swanepoel
-         */
-        final String TAG_JSON_OBJ ="Login Information";
-        final String MSG_FIELD_NAME = "message";
-
-        /*
          * Button to sign up screen
          * -Ethan Still
          */
@@ -117,7 +109,7 @@ public class LoginScreen extends AppCompatActivity {
 
                 login_info = new JSONObject(params);
 
-                onResume(login_info, view);
+                login(login_info, view);
             }
         });
     }
@@ -129,16 +121,13 @@ public class LoginScreen extends AppCompatActivity {
      * @param view It's necessary to pass this in order to change screens.
      * @author Jae Swanepoel
      */
-    public void onResume(JSONObject login_info, View view) {
+    private void login(JSONObject login_info, View view) {
         super.onResume();
 
         requester = new PerfectTenRequester(Const.LOGIN_URL, login_info, new VolleyCallback() {
 
             @Override
-            public void onSuccess(JSONArray response) {
-                // do nothing
-                //basically unreachable code
-            }
+            public void onSuccess(JSONArray response) {/* unreachable */}
 
             @Override
             public void onSuccess(JSONObject response) {

@@ -48,7 +48,7 @@ public class FriendsScreen extends AppCompatActivity {
         setContentView(R.layout.activity_friends_screen);
 
         //retrieving friends list
-        onResume();
+        getFriends();
 
         //Rigging the Universal Buttons
         Button friend = findViewById(R.id.friends_Button_home);
@@ -71,22 +71,16 @@ public class FriendsScreen extends AppCompatActivity {
      *
      * @author Jae Swanepoel
      */
-    public void onResume() {
+    private void getFriends() {
         super.onResume();
 
         requester = new PerfectTenRequester(Const.FRIEND_LIST_URL_1 + AppController.getUsername() + Const.FRIEND_LIST_URL_2,
                 new VolleyCallback() {
                     @Override
-                    public void onSuccess(JSONArray response) {
-
-                        populate(response);
-
-                    }
+                    public void onSuccess(JSONArray response) { populate(response); }
 
                     @Override
-                    public void onSuccess(JSONObject response) {
-                        //unreachable code
-                    }
+                    public void onSuccess(JSONObject response) {/* unreachable */ }
 
                     @Override
                     public void onError(VolleyError error) {

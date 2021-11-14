@@ -163,10 +163,7 @@ public class ProfileView extends AppCompatActivity {
 
                                 areFriends = true;
                                 addFriendButton.setText("Remove Friend");
-                            }
-
-                            else {
-                                //TODO set up failure response
+                                
                             }
 
                         } catch (JSONException e) {

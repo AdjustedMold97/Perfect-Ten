@@ -101,7 +101,7 @@ public class HomeScreen extends AppCompatActivity {
         //getting blocked users
         getBlockedUsers();
         //getting posts
-        onResume();
+        getPosts();
     }
 
     /**
@@ -132,26 +132,23 @@ public class HomeScreen extends AppCompatActivity {
 
             temp = new JSONObject();
 
-            /*
-             * If a user's post is blocked,
-             * we'll take that post out of
-             * the displayed posts.
-             *
-             * - Jae Swanepoel
-             */
+
+
             try {
+
+                /*
+                 * If a user's post is blocked,
+                 * we'll take that post out of
+                 * the displayed posts.
+                 *
+                 * - Jae Swanepoel
+                 */
                 for (String blockedUser : blockedUsers) {
 
                     if (blockedUser.equals(temp.get(Const.POST_USER_KEY)))
                         continue reverseLoop;
-
                 }
-            }
-            catch (JSONException e) {
-                e.printStackTrace();
-            }
 
-            try {
                 //getting the title from the JSONObject
                 temp.put(Const.TITLE_KEY,
                         arr.getJSONObject(arr.length() - i - 1).get(Const.TITLE_KEY).toString());
@@ -160,9 +157,7 @@ public class HomeScreen extends AppCompatActivity {
                 temp.put(Const.MESSAGE_KEY,
                         arr.getJSONObject(arr.length() - i - 1).get(Const.MESSAGE_KEY).toString());
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) { e.printStackTrace(); }
 
             //inserting the formatted JSONObject into the array
             jsonArray.put(temp);
@@ -199,7 +194,7 @@ public class HomeScreen extends AppCompatActivity {
      *
      * @author Jae Swanepoel
      */
-    public void onResume() {
+    private void getPosts() {
         super.onResume();
 
         requester = new PerfectTenRequester(Const.POST_LIST_URL, new VolleyCallback() {
@@ -209,23 +204,23 @@ public class HomeScreen extends AppCompatActivity {
             }
 
             @Override
-            public void onSuccess(JSONObject response) {}
+            public void onSuccess(JSONObject response) {/* unreachable */}
 
             @Override
-            public void onError(VolleyError error) {/*TODO*/}
+            public void onError(VolleyError error) {/* TODO */}
         });
 
         requester.request();
     }
 
     /**
-     * Retrieves a list of users
+     * Retrieves the list of users
      * that have been blocked by the
      * signed-in user.
      *
      * @author Jae Swanepoel
      */
-    public void getBlockedUsers() {
+    private void getBlockedUsers() {
         super.onResume();
 
         requester = new PerfectTenRequester(Const.BLOCKED_LIST_URL_1 + AppController.getUsername() + Const.BLOCKED_LIST_URL_2,
@@ -239,10 +234,7 @@ public class HomeScreen extends AppCompatActivity {
                             for (int i = 0; i < response.length(); i++)
                                 blockedUsers[i] = response.get(i).toString();
                         }
-                        catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
+                        catch (JSONException e) { e.printStackTrace(); }
                     }
 
                     @Override

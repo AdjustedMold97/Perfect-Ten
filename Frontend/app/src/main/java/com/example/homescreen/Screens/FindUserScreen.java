@@ -53,8 +53,6 @@ public class FindUserScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_user_screen);
 
-        //requester = new PerfectTenRequester();
-
         responseView = findViewById(R.id.add_friend_response_TextView);
 
         username = findViewById(R.id.editTextUsername);
@@ -66,7 +64,7 @@ public class FindUserScreen extends AppCompatActivity {
         submit.setOnClickListener(view -> {
 
             targetUser = username.getText().toString();
-            onResume(view);
+            findUser(view);
 
         });
     }
@@ -80,7 +78,7 @@ public class FindUserScreen extends AppCompatActivity {
      * @param  view Passed in order to switch screens.
      * @author Jae Swanepoel
      */
-    public void onResume(View view) {
+    private void findUser(View view) {
         super.onResume();
 
         requester = new PerfectTenRequester(Const.USER_LIST_URL,
@@ -108,14 +106,11 @@ public class FindUserScreen extends AppCompatActivity {
                             responseView.setTextColor(Color.RED);
                             responseView.setText(USER_ERROR_TEXT);
                         }
-                        catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
+                        catch (JSONException e) { e.printStackTrace(); }
                     }
 
                     @Override
-                    public void onSuccess(JSONObject response) {/* do nothing */}
+                    public void onSuccess(JSONObject response) {/* unreachable */}
 
                     @Override
                     public void onError(VolleyError error) { /*TODO*/ }

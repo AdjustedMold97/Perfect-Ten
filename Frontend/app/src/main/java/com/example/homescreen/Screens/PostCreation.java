@@ -109,7 +109,7 @@ public class PostCreation extends AppCompatActivity {
 
                 post_data = new JSONObject(params);
 
-                onResume(view);
+                submit(view);
             }
         });
     }
@@ -119,16 +119,14 @@ public class PostCreation extends AppCompatActivity {
      * @param view necessary for switching screens.
      * @author Jae Swanepoel
      */
-    public void onResume(View view) {
+    private void submit(View view) {
         super.onResume();
 
         requester = new PerfectTenRequester(Request.Method.POST, Const.POSTING_URL + AppController.getUsername(), post_data,
                 new VolleyCallback() {
 
                     @Override
-                    public void onSuccess(JSONArray response) {
-                        //unreachable code
-                    }
+                    public void onSuccess(JSONArray response) {/* unreachable */}
 
                     @Override
                     public void onSuccess(JSONObject response) {
@@ -138,10 +136,9 @@ public class PostCreation extends AppCompatActivity {
                             if (response.get(MESSAGE_KEY).equals(SUCCESS_MSG))
                                 startActivity(new Intent(view.getContext(), HomeScreen.class));
 
-                            else {
+                            else
                                 startActivity(new Intent(PostCreation.this, FailedPost.class));
 
-                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -150,8 +147,7 @@ public class PostCreation extends AppCompatActivity {
                     @Override
                     public void onError(VolleyError error) {
                         //TODO
-                    }
-                });
+                    }});
 
         requester.request();
     }

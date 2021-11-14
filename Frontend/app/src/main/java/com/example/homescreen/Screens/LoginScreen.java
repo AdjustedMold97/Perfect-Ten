@@ -4,16 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.Request;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 
@@ -25,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.example.homescreen.net_utils.Const;
-import com.example.homescreen.net_utils.Error;
 import com.example.homescreen.net_utils.PerfectTenRequester;
 import com.example.homescreen.net_utils.VolleyCallback;
 
@@ -117,8 +112,8 @@ public class LoginScreen extends AppCompatActivity {
                 password = String.valueOf(password_input.getText());
 
                 Map<String, String> params = new HashMap<>();
-                params.put(Const.USERNAME_FIELD, username);
-                params.put(Const.PASSWORD_FIELD, password);
+                params.put(Const.USERNAME_KEY, username);
+                params.put(Const.PASSWORD_KEY, password);
 
                 login_info = new JSONObject(params);
 
@@ -150,9 +145,9 @@ public class LoginScreen extends AppCompatActivity {
 
                 try {
 
-                    if (response.get(Const.MESSAGE_FIELD).equals(Const.SUCCESS_MSG)) {
+                    if (response.get(Const.MESSAGE_KEY).equals(Const.SUCCESS_MSG)) {
 
-                        AppController.setUsername(login_info.get(Const.USERNAME_FIELD).toString());
+                        AppController.setUsername(login_info.get(Const.USERNAME_KEY).toString());
                         startActivity(new Intent(view.getContext(), HomeScreen.class));
 
                     }

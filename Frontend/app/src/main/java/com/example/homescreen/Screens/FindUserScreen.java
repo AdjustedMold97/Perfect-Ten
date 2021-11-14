@@ -32,7 +32,7 @@ import org.json.JSONObject;
  *
  * @author Jae Swanepoel
  */
-public class AddFriendScreen extends AppCompatActivity {
+public class FindUserScreen extends AppCompatActivity {
 
     Button submit;
     TextView responseView;
@@ -68,64 +68,48 @@ public class AddFriendScreen extends AppCompatActivity {
         submit.setOnClickListener(view -> {
 
             targetUser = username.getText().toString();
-            onResume();
+            onResume(view);
 
         });
     }
 
     /**
+     * Called when the user presses the submit button.
+     *
      * @author Jae Swanepoel
      */
-    public void onResume() {
+    public void onResume(View view) {
         super.onResume();
 
-        JSONObject info = new JSONObject();
-        try {
-            info.put("user", targetUser);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        requester = new PerfectTenRequester(Request.Method.POST, Const.ADD_FRIEND_URL_1 + AppController.getUsername() + Const.ADD_FRIEND_URL_2, info,
+        requester = new PerfectTenRequester(Const.USER_LIST_URL,
                 new VolleyCallback() {
 
                     @Override
                     public void onSuccess(JSONArray response) {
-                        //unreachable code
-                    }
-
-                    @Override
-                    public void onSuccess(JSONObject response) {
 
                         try {
-                            //Changing text on addFriendButton upon successful request
-                            if (response.get(Const.MESSAGE_FIELD).equals(Const.SUCCESS_MSG)) {
+                            for (int i = 0; i < response.length(); i++) {
 
-                                responseView.setText(SUCCESS_TEXT);
-                                responseView.setTextColor(Color.GREEN);
+                                if (response.getJSONObject(i).get("username").equals(targetUser)) {
 
-                            } else {
+                                    AppController.setTargetUser(targetUser);
+                                    startActivity(new Intent(view.getContext(), ProfileView.class));
 
-                                responseView.setTextColor(Color.RED);
+                                }
 
-                                if (response.get(Const.MESSAGE_FIELD).equals(Const.GENERIC_ERROR))
-                                    responseView.setText(Const.GENERIC_ERROR_TEXT);
-
-                                else if (response.get(Const.MESSAGE_FIELD).equals(Const.USER_ERROR))
-                                    responseView.setText(USER_ERROR_TEXT);
                             }
-
-                            responseView.setVisibility(View.VISIBLE);
-
-                        } catch (JSONException e) {
+                        }
+                        catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                     }
 
                     @Override
-                    public void onError(VolleyError error) {
-                        //TODO
-                    }
+                    public void onSuccess(JSONObject response) {/* do nothing */}
+
+                    @Override
+                    public void onError(VolleyError error) { /*TODO*/ }
                 });
 
         requester.request();

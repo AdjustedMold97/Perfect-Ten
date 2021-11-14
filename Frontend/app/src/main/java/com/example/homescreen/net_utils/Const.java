@@ -31,6 +31,7 @@ public class Const {
     public static final String UNBLOCK_USER_URL_2 = "/blocked/remove";
     public static final String BLOCKED_LIST_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
     public static final String BLOCKED_LIST_URL_2 = "/blocked/list/usernames";
+    public static final String USER_LIST_URL = "http://coms-309-060.cs.iastate.edu:8080/user/list";
 
     //======================================== JSON ================================================
 
@@ -46,12 +47,13 @@ public class Const {
     public static final String PASSWORD_ERROR = "error4";
     public static final String GENERIC_ERROR_TEXT = "Something went wrong...";
 
-    //===================================== FIELDS =================================================
+    //===================================== KEYS =================================================
 
-    public static final String MESSAGE_FIELD = "message";
-    public static final String PASSWORD_FIELD = "password";
-    public static final String EMAIL_FIELD = "email";
-    public static final String USERNAME_FIELD = "username";
-    public static final String TITLE_FIELD = "title";
+    public static final String MESSAGE_KEY = "message";
+    public static final String PASSWORD_KEY = "password";
+    public static final String EMAIL_KEY = "email";
+    public static final String USERNAME_KEY = "username";
+    public static final String TITLE_KEY = "title";
+    public static final String POST_USER_KEY = "uname";
 
 }

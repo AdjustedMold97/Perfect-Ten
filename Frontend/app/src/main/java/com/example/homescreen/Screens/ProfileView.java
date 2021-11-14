@@ -250,7 +250,7 @@ public class ProfileView extends AppCompatActivity {
                         try {
 
                             //Changing text on addFriendButton upon successful request
-                            if (response.get(Const.MESSAGE_FIELD).equals(Const.SUCCESS_MSG)) {
+                            if (response.get(Const.MESSAGE_KEY).equals(Const.SUCCESS_MSG)) {
 
                                 isBlocked = true;
                                 blockButton.setText("Unblock");
@@ -300,7 +300,7 @@ public class ProfileView extends AppCompatActivity {
                         try {
 
                             //Changing text on blockButton upon successful request
-                            if (response.get(Const.MESSAGE_FIELD).equals(Const.SUCCESS_MSG)) {
+                            if (response.get(Const.MESSAGE_KEY).equals(Const.SUCCESS_MSG)) {
 
                                 isBlocked = false;
                                 blockButton.setText("Block");
@@ -349,7 +349,7 @@ public class ProfileView extends AppCompatActivity {
                     public void onSuccess(JSONObject response) {
 
                         try {
-                            if (response.get(Const.MESSAGE_FIELD).equals(Const.SUCCESS_MSG)) {
+                            if (response.get(Const.MESSAGE_KEY).equals(Const.SUCCESS_MSG)) {
 
                                 areFriends = false;
                                 addFriendButton.setText("Add Friend");

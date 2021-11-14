@@ -126,9 +126,9 @@ public class SignUp extends AppCompatActivity {
                 return;
 
             Map<String, String> params = new HashMap<>();
-            params.put(Const.USERNAME_FIELD, username);
-            params.put(Const.PASSWORD_FIELD, password);
-            params.put(Const.EMAIL_FIELD, email);
+            params.put(Const.USERNAME_KEY, username);
+            params.put(Const.PASSWORD_KEY, password);
+            params.put(Const.EMAIL_KEY, email);
 
             JSONObject signup_info = new JSONObject(params);
 
@@ -158,7 +158,7 @@ public class SignUp extends AppCompatActivity {
 
                         try {
 
-                            if (response.get(Const.MESSAGE_FIELD).equals(Const.SUCCESS_MSG))
+                            if (response.get(Const.MESSAGE_KEY).equals(Const.SUCCESS_MSG))
                                 startActivity(new Intent(view.getContext(), LoginScreen.class));
 
                             else {
@@ -166,7 +166,7 @@ public class SignUp extends AppCompatActivity {
                                 String error_msg;
 
                                 //TODO standardize errors across classes
-                                switch(response.get((Const.MESSAGE_FIELD)).toString()) {
+                                switch(response.get((Const.MESSAGE_KEY)).toString()) {
 
                                     default:
                                         //generic error

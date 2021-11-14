@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.example.homescreen.Adapters.FriendsAdapter;
 import com.example.homescreen.R;
@@ -63,7 +62,7 @@ public class FriendsScreen extends AppCompatActivity {
 
         //Rigging "Add Friend" Button
         Button addFriend = findViewById(R.id.add_friend_screen_Button);
-        addFriend.setOnClickListener(view -> startActivity(new Intent(view.getContext(), AddFriendScreen.class)));
+        addFriend.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FindUserScreen.class)));
     }
 
     /**

@@ -142,7 +142,7 @@ public class HomeScreen extends AppCompatActivity {
             try {
                 for (String blockedUser : blockedUsers) {
 
-                    if (blockedUser.equals(temp.get("uname")))
+                    if (blockedUser.equals(temp.get(Const.POST_USER_KEY)))
                         continue reverseLoop;
 
                 }
@@ -153,12 +153,12 @@ public class HomeScreen extends AppCompatActivity {
 
             try {
                 //getting the title from the JSONObject
-                temp.put(Const.TITLE_FIELD,
-                        arr.getJSONObject(arr.length() - i - 1).get(Const.TITLE_FIELD).toString());
+                temp.put(Const.TITLE_KEY,
+                        arr.getJSONObject(arr.length() - i - 1).get(Const.TITLE_KEY).toString());
 
                 //getting the message from the JSONObject
-                temp.put(Const.MESSAGE_FIELD,
-                        arr.getJSONObject(arr.length() - i - 1).get(Const.MESSAGE_FIELD).toString());
+                temp.put(Const.MESSAGE_KEY,
+                        arr.getJSONObject(arr.length() - i - 1).get(Const.MESSAGE_KEY).toString());
 
             } catch (JSONException e) {
                 e.printStackTrace();

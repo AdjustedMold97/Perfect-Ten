@@ -1,9 +1,8 @@
 package com.example.homescreen.Screens;
 
-import static com.example.homescreen.net_utils.Const.MESSAGE_FIELD;
+import static com.example.homescreen.net_utils.Const.MESSAGE_KEY;
 import static com.example.homescreen.net_utils.Const.SUCCESS_MSG;
-import static com.example.homescreen.net_utils.Const.TITLE_FIELD;
-import static com.example.homescreen.net_utils.Const.USERNAME_FIELD;
+import static com.example.homescreen.net_utils.Const.TITLE_KEY;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -105,8 +104,8 @@ public class PostCreation extends AppCompatActivity {
                  * - Jae Swanepoel
                  */
                 Map<String, String> params = new HashMap<>();
-                params.put(TITLE_FIELD, postTitle);
-                params.put(MESSAGE_FIELD, postText);
+                params.put(TITLE_KEY, postTitle);
+                params.put(MESSAGE_KEY, postText);
 
                 post_data = new JSONObject(params);
 
@@ -136,7 +135,7 @@ public class PostCreation extends AppCompatActivity {
 
                         try {
 
-                            if (response.get(MESSAGE_FIELD).equals(SUCCESS_MSG))
+                            if (response.get(MESSAGE_KEY).equals(SUCCESS_MSG))
                                 startActivity(new Intent(view.getContext(), HomeScreen.class));
 
                             else {

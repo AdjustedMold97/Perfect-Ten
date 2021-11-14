@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
@@ -41,7 +40,6 @@ public class FindUserScreen extends AppCompatActivity {
     PerfectTenRequester requester;
     String targetUser;
 
-    private final String SUCCESS_TEXT = "Friend Added! Success!";
     private final String USER_ERROR_TEXT = "User not found.";
 
     /**
@@ -53,7 +51,7 @@ public class FindUserScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_friend_screen);
+        setContentView(R.layout.activity_find_user_screen);
 
         //requester = new PerfectTenRequester();
 
@@ -75,7 +73,11 @@ public class FindUserScreen extends AppCompatActivity {
 
     /**
      * Called when the user presses the submit button.
+     * Retrieves the list of all PerfectTen users from the server.
+     * If the entered user exists, we redirect to that user's
+     * profile page.
      *
+     * @param  view Passed in order to switch screens.
      * @author Jae Swanepoel
      */
     public void onResume(View view) {
@@ -98,6 +100,13 @@ public class FindUserScreen extends AppCompatActivity {
                                 }
 
                             }
+
+                            /*
+                             * If we make it through the loop without escaping,
+                             * the user does not exist.
+                             */
+                            responseView.setTextColor(Color.RED);
+                            responseView.setText(USER_ERROR_TEXT);
                         }
                         catch (JSONException e) {
                             e.printStackTrace();

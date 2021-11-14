@@ -148,6 +148,14 @@ public class Post {
         uname = user.getUsername();
     }
 
+    public String getUname() {
+    	return uname;
+    }
+    
+    public void setUnamen(String uname) {
+    	this.uname= uname;
+    }
+    
     /**
      * gets a comment stored at input index
      * @param id

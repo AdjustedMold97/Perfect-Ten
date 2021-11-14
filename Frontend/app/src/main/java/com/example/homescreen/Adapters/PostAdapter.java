@@ -22,7 +22,7 @@ import org.json.JSONObject;
  * ViewHolder uses a base post_object.xml structure to create objects
  * @author Ethan Still
  */
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
 
     Context mContext;
     JSONArray mtest;
@@ -36,7 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
      * @param test -JSONArray requested from server
      * @author Ethan Still
      */
-    public MyAdapter(Context context, JSONArray test){
+    public PostAdapter(Context context, JSONArray test){
 
         mContext = context;
         mtest = test;

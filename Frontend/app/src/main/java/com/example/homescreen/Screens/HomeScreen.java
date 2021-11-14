@@ -14,7 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.homescreen.Adapters.MyAdapter;
+import com.example.homescreen.Adapters.PostAdapter;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.Const;
@@ -161,7 +161,7 @@ public class HomeScreen extends AppCompatActivity {
          */
 
         //inserting the new JSONArray into the adapter.
-        MyAdapter mAdapter = new MyAdapter(this, jsonArray);
+        PostAdapter mAdapter = new PostAdapter(this, jsonArray);
         recycle.setAdapter(mAdapter);
 
         mLayoutManager = new LinearLayoutManager(this);

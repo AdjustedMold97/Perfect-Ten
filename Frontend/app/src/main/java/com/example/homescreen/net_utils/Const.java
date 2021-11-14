@@ -53,5 +53,6 @@ public class Const {
     public static final String EMAIL_FIELD = "email";
     public static final String USERNAME_FIELD = "username";
     public static final String TITLE_FIELD = "title";
+    public static final String POST_ID_KEY = "id";
 
 }

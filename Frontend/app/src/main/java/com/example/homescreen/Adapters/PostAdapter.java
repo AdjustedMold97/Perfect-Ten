@@ -1,15 +1,22 @@
 package com.example.homescreen.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homescreen.R;
+import com.example.homescreen.Screens.FriendsScreen;
+import com.example.homescreen.Screens.PostCreation;
+import com.example.homescreen.net_utils.Const;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -78,6 +85,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             holder.postObjectTitle.setText(temp.get("title").toString());
             holder.postObjectBody.setText(temp.get("message").toString());
 
+            holder.postObjectTitle.setOnClickListener(view -> );
+
+            holder.postObjectBody.setOnClickListener(view -> 
+                    startActivity(new Intent(view.getContext(), PostCreation.class)));
 
         }
         catch (JSONException e) {
@@ -104,6 +115,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView postObjectTitle;
         TextView postObjectBody;
+        Button comments;
 
 
         /**
@@ -116,6 +128,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             super(itemView);
             postObjectTitle = itemView.findViewById(R.id.postObjectTitle);
             postObjectBody = itemView.findViewById(R.id.postObjectBody);
+
         }
     }
 

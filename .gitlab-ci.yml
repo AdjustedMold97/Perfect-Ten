@@ -8,6 +8,9 @@ stages:
 
 maven-build:   #this is a JOB
   stage: mavenbuild
+  only: 
+    changes:
+      - Backend/**/*
   tags:
     - springboot_tag  # this is LINK to the shell runner on the remote-server 
   script:
@@ -16,6 +19,9 @@ maven-build:   #this is a JOB
 
 maven-test:
   stage: maventest
+  only: 
+    changes:
+      - Backend/**/*
   tags:
     - springboot_tag
   script:
@@ -27,6 +33,9 @@ maven-test:
 
 autoDeploy:
   stage: mavenDeploy  #do make a stage with same name!
+  only: 
+    changes:
+      - Backend/**/*
   tags:
    - springboot_tag
   script:
@@ -39,6 +48,9 @@ autoDeploy:
 android-build: #this is another job
   image: javiersantos/android-ci:latest      # this is a directive to DOCKER
   stage: androidtry
+  only: 
+    changes:
+      - Frontend/**/*
   tags:
    - android_tag         #this is LINK to the docker runner on the remote-server        
   before_script:
@@ -54,6 +66,9 @@ android-build: #this is another job
 android-test:
   image: javiersantos/android-ci:latest
   stage: androidtest
+  only: 
+    changes:
+      - Frontend/**/*
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - chmod +x ./Frontend/gradlew

@@ -8,6 +8,9 @@ stages:
 
 maven-build:   #this is a JOB
   stage: mavenbuild
+  only: 
+    changes:
+      - Backend /**/*
   tags:
     - springboot_tag  # this is LINK to the shell runner on the remote-server 
   script:
@@ -16,6 +19,9 @@ maven-build:   #this is a JOB
 
 maven-test:
   stage: maventest
+  only: 
+    changes:
+      - Backend /**/*
   tags:
     - springboot_tag
   script:
@@ -27,6 +33,9 @@ maven-test:
 
 autoDeploy:
   stage: mavenDeploy  #do make a stage with same name!
+  only: 
+    changes:
+      - Backend /**/*
   tags:
    - springboot_tag
   script:

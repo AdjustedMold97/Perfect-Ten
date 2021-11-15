@@ -93,6 +93,22 @@ public class UserController {
     }
 
     /**
+     * Returns list of all usernames in database
+     * @return List representing usernames of all Users in database
+     */
+    @ApiOperation(value = "Get usernames of all users in the database", response = List.class)
+    @GetMapping(path = "/user/list/usernames")
+    public List<String> getAllUsernames() {
+        List<User> users = userRepository.findAll();
+        List<String> usernames = new ArrayList<>();
+        for (int i = 0; i < users.size(); i++) {
+            usernames.add(users.get(i).getUsername());
+        }
+
+        return usernames;
+    }
+
+    /**
      * Returns User associated with a user ID
      * @param id ID of User
      * @return User associated with id

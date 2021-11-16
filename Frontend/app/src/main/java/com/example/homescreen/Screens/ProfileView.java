@@ -40,6 +40,11 @@ import java.util.Map;
  */
 public class ProfileView extends AppCompatActivity {
 
+    private final String ADD_FRIEND_TEXT = "Add Friend";
+    private final String REMOVE_FRIEND_TEXT = "Remove Friend";
+    private final String BLOCK_TEXT = "Block";
+    private final String UNBLOCK_TEXT = "Unblock";
+
     PerfectTenRequester requester;
 
     /*
@@ -162,7 +167,7 @@ public class ProfileView extends AppCompatActivity {
                             if (response.get("message").equals(Const.SUCCESS_MSG)) {
 
                                 areFriends = true;
-                                addFriendButton.setText("Remove Friend");
+                                addFriendButton.setText(REMOVE_FRIEND_TEXT);
                                 
                             }
 
@@ -250,7 +255,7 @@ public class ProfileView extends AppCompatActivity {
                             if (response.get(Const.MESSAGE_KEY).equals(Const.SUCCESS_MSG)) {
 
                                 isBlocked = true;
-                                blockButton.setText("Unblock");
+                                blockButton.setText(UNBLOCK_TEXT);
 
                             }
 
@@ -300,7 +305,7 @@ public class ProfileView extends AppCompatActivity {
                             if (response.get(Const.MESSAGE_KEY).equals(Const.SUCCESS_MSG)) {
 
                                 isBlocked = false;
-                                blockButton.setText("Block");
+                                blockButton.setText(BLOCK_TEXT);
 
                             }
 
@@ -349,7 +354,7 @@ public class ProfileView extends AppCompatActivity {
                             if (response.get(Const.MESSAGE_KEY).equals(Const.SUCCESS_MSG)) {
 
                                 areFriends = false;
-                                addFriendButton.setText("Add Friend");
+                                addFriendButton.setText(ADD_FRIEND_TEXT);
 
                             }
                         } catch (JSONException e) {
@@ -395,7 +400,7 @@ public class ProfileView extends AppCompatActivity {
                                 if (response.get(i).toString().equals(AppController.getTargetUser())) {
 
                                     areFriends = true;
-                                    addFriendButton.setText("Remove Friend");
+                                    addFriendButton.setText(REMOVE_FRIEND_TEXT);
                                     break;
 
                                 }
@@ -447,7 +452,7 @@ public class ProfileView extends AppCompatActivity {
                                 if (response.get(i).toString().equals(AppController.getTargetUser())) {
 
                                     isBlocked = true;
-                                    blockButton.setText("Unblock");
+                                    blockButton.setText(UNBLOCK_TEXT);
                                     break;
 
                                 }

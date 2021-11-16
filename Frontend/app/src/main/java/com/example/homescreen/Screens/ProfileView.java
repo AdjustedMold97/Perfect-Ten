@@ -79,10 +79,12 @@ public class ProfileView extends AppCompatActivity {
         Button home = findViewById(R.id.home_Button_profile);
         Button friends = findViewById(R.id.friends_Button_profile);
         Button settings = findViewById(R.id.settings_Button_profile);
+        Button dms = findViewById(R.id.dms_Button);
 
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
         friends.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
         settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(), SettingsScreen.class)));
+        dms.setOnClickListener(view -> startActivity(new Intent(view.getContext(), DMsScreen.class)));
 
         //Rigging the "Add Friend" Button
         addFriendButton = findViewById(R.id.add_friend_Button);

@@ -31,7 +31,7 @@ public class Const {
     public static final String UNBLOCK_USER_URL_2 = "/blocked/remove";
     public static final String BLOCKED_LIST_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
     public static final String BLOCKED_LIST_URL_2 = "/blocked/list/usernames";
-    public static final String USER_LIST_URL = "http://coms-309-060.cs.iastate.edu:8080/user/list";
+    public static final String USER_LIST_URL = "http://coms-309-060.cs.iastate.edu:8080/users/list/usernames";
 
     //======================================== JSON ================================================
 

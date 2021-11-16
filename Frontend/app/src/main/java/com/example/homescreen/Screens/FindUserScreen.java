@@ -90,7 +90,7 @@ public class FindUserScreen extends AppCompatActivity {
                         try {
                             for (int i = 0; i < response.length(); i++) {
 
-                                if (response.getJSONObject(i).get("username").equals(targetUser)) {
+                                if (response.getJSONObject(i).get(Const.USERNAME_KEY).equals(targetUser)) {
 
                                     AppController.setTargetUser(targetUser);
                                     startActivity(new Intent(view.getContext(), ProfileView.class));

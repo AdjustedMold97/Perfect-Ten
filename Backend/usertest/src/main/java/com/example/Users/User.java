@@ -66,6 +66,7 @@ public class User {
     /**
      * Privilege level of User. Either base user, moderator, or admin
      */
+    @ApiModelProperty(notes = "Privilege level of the User", name="pLevel", required = true)
     private PrivilegeLevel pLevel;
 
     /**

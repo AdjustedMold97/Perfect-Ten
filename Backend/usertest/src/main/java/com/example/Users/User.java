@@ -70,6 +70,12 @@ public class User {
     private PrivilegeLevel pLevel;
 
     /**
+     * Notification preferences of User. If True, User will receieve notifications
+     */
+    @ApiModelProperty(notes = "Notification preferences of the User", name = "notifications", required = true)
+    private Boolean notifications;
+
+    /**
      * List of posts created by User
      */
     @ApiModelProperty(notes = "Posts list of the User", name = "posts", required = true)
@@ -100,6 +106,7 @@ public class User {
 
     /**
      * Creates a new User with associated username, email, and password. Lists are initially empty.
+     * By default, notifications are turned on.
      * @param username Username of User
      * @param email Email of User
      * @param password Password of User
@@ -109,13 +116,15 @@ public class User {
         this.email = email;
         this.password = password;
         pLevel = PrivilegeLevel.USER;
+        notifications = true;
         posts = new ArrayList<>();
         friends = new ArrayList<>();
         blockedUsers = new ArrayList<>();
     }
 
     /**
-     * Creates a new User with associated usernmae, email, password, and pLevel. Lists are initially empty.
+     * Creates a new User with associated usernmae, email, password, and pLevel. 
+     * Lists are initially empty. By default, notifications are turned on.
      * @param username Username of User
      * @param email Email of User
      * @param password Password of User
@@ -126,6 +135,7 @@ public class User {
         this.email = email;
         this.password = password;
         pLevel = this.pLevel;
+        notifications = true;
         posts = new ArrayList<>();
         friends = new ArrayList<>();
         blockedUsers = new ArrayList<>();
@@ -220,6 +230,22 @@ public class User {
      */
     public void setPLevel(PrivilegeLevel pLevel) {
         this.pLevel = pLevel;
+    }
+
+    /**
+     * Gets User's notification preferences
+     * @return True if User wants to receive notifications, false otherwise
+     */
+    public Boolean getNotificationPref() {
+        return notifications;
+    }
+
+    /**
+     * Sets User's notifications preferences to notifications
+     * @param notifications Updated notification preferences of User
+     */
+    public void setNotificationPref(Boolean notifications) {
+        this.notifications = notifications;
     }
 
     /**

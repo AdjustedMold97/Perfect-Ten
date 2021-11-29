@@ -460,9 +460,9 @@ public class UserController {
     public String setUserProfilePic(@PathVariable String user, @RequestBody MultipartFile profilePic) throws Exception {
         User requestedUser = userRepository.findByUsername(user);
         
-        /* if (profilePic == null) {
+        if (profilePic == null) {
             return failure;
-        } */
+        } 
         
         requestedUser.setExtension(profilePic.getOriginalFilename());
 

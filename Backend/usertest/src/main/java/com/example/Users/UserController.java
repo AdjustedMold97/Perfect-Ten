@@ -484,7 +484,7 @@ public class UserController {
      */
     @ApiOperation(value = "Retrieves filename and extension of profile picture", response = String.class)
     @GetMapping(path = "/user/{user}/extension")
-    public String getUserExtension(@RequestParam String user) {
+    public String getUserExtension(@PathVariable String user) {
         User requestedUser = userRepository.findByUsername(user);
 
         return requestedUser.getExtension();

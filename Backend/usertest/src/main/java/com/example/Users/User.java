@@ -27,6 +27,17 @@ import io.swagger.annotations.ApiModelProperty;
 public class User {
 
     /**
+     * Enumeration of User privilege levels. Base Users can create posts, send DMs, and add friends.
+     * Moderators can do everything users can as well as delete posts and ban users. 
+     * Admins can do everything moderators can as well as promote a base user to moderator status.
+     */
+    public static enum PrivilegeLevel {
+        USER,
+        MODERATOR,
+        ADMIN
+    }
+
+    /**
      * Each User has a unique ID
      */
     @ApiModelProperty(notes = "ID of the User", name = "id", required = true)
@@ -51,6 +62,18 @@ public class User {
      */
     @ApiModelProperty(notes = "Password of the User", name = "password", required = true)
     private String password;
+
+    /**
+     * Privilege level of User. Either base user, moderator, or admin
+     */
+    @ApiModelProperty(notes = "Privilege level of the User", name="pLevel", required = true)
+    private PrivilegeLevel pLevel;
+
+    /**
+     * Notification preferences of User. If True, User will receieve notifications
+     */
+    @ApiModelProperty(notes = "Notification preferences of the User", name = "notifications", required = true)
+    private Boolean notifications;
 
     /**
      * List of posts created by User
@@ -79,8 +102,11 @@ public class User {
     @ManyToMany
     private List<User> blockedUsers;
 
+    // ======================== Constructors =====================================
+
     /**
      * Creates a new User with associated username, email, and password. Lists are initially empty.
+     * By default, notifications are turned on.
      * @param username Username of User
      * @param email Email of User
      * @param password Password of User
@@ -89,6 +115,27 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+        pLevel = PrivilegeLevel.USER;
+        notifications = true;
+        posts = new ArrayList<>();
+        friends = new ArrayList<>();
+        blockedUsers = new ArrayList<>();
+    }
+
+    /**
+     * Creates a new User with associated usernmae, email, password, and pLevel. 
+     * Lists are initially empty. By default, notifications are turned on.
+     * @param username Username of User
+     * @param email Email of User
+     * @param password Password of User
+     * @param pLevel Privilege level of User. Can be USER, MODERATOR, or ADMIN
+     */
+    public User(String username, String email, String password, PrivilegeLevel pLevel) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        pLevel = this.pLevel;
+        notifications = true;
         posts = new ArrayList<>();
         friends = new ArrayList<>();
         blockedUsers = new ArrayList<>();
@@ -102,6 +149,8 @@ public class User {
         friends = new ArrayList<>();
         blockedUsers = new ArrayList<>();
     }
+
+    // ========================== Accessors and Mutators ==============================
 
     /**
      * Gets User's ID
@@ -165,6 +214,38 @@ public class User {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * Gets User's privilege level
+     * @return USER, MODERATOR, or ADMIN
+     */
+    public PrivilegeLevel getPLevel() {
+        return pLevel;
+    }
+
+    /**
+     * Sets User's privilege level to pLevel
+     * @param pLevel New pLevel, either USER, MODERATOR, or ADMIN
+     */
+    public void setPLevel(PrivilegeLevel pLevel) {
+        this.pLevel = pLevel;
+    }
+
+    /**
+     * Gets User's notification preferences
+     * @return True if User wants to receive notifications, false otherwise
+     */
+    public Boolean getNotificationPref() {
+        return notifications;
+    }
+
+    /**
+     * Sets User's notifications preferences to notifications
+     * @param notifications Updated notification preferences of User
+     */
+    public void setNotificationPref(Boolean notifications) {
+        this.notifications = notifications;
     }
 
     /**

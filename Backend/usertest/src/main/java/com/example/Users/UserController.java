@@ -475,7 +475,18 @@ public class UserController {
         userRepository.save(requestedUser);
 
         return success;
+    }
 
-        
+    /**
+     * Retrieves filename and extension of User's profile picture
+     * @param user Username of user
+     * @return String representing filename and extension of profile picture
+     */
+    @ApiOperation(value = "Retrieves filename and extension of profile picture", response = String.class)
+    @GetMapping(path = "/user/{user}/extension")
+    public String getUserExtension(@RequestParam String user) {
+        User requestedUser = userRepository.findByUsername(user);
+
+        return requestedUser.getExtension();
     }
 }

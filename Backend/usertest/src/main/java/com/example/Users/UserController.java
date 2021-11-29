@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -445,10 +446,15 @@ public class UserController {
      * @param user Username of User
      * @return Blob representing profile picture
      */
-    @ApiOperation(value = "Retrieves profile picture", response = String.class)
+    @ApiOperation(value = "Retrieves profile picture", response = Blob.class)
     @GetMapping(path = "/user/{user}/pic")
     public Blob getUserProfilePic(@PathVariable String user) {
         return userRepository.findByUsername(user).getProfilePic();
     }
 
+    @ApiOperation(value = "Updates user's profile picture", response = String.class)
+    @PutMapping(path = "/user/{user}/pic/new")
+    public String setUserProfilePic(@PathVariable String user, @RequestParam("pic") MultipartFile profilePic) {
+        return failure;
+    }
 }

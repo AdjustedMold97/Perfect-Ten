@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
@@ -18,6 +19,7 @@ import io.swagger.annotations.ApiOperation;
 import com.example.Posts.Post;
 import com.example.Posts.PostRepository;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.mysql.cj.jdbc.Blob;
 import com.mysql.cj.jdbc.IterateBlock;
 
 /**
@@ -437,4 +439,16 @@ public class UserController {
         userRepository.save(firstUser);
         return success;
     }
+
+    /**
+     * Retrieves user's profile picture
+     * @param user Username of User
+     * @return Blob representing profile picture
+     */
+    @ApiOperation(value = "Retrieves profile picture", response = String.class)
+    @GetMapping(path = "/user/{user}/pic")
+    public Blob getUserProfilePic(@PathVariable String user) {
+        return userRepository.findByUsername(user).getProfilePic();
+    }
+
 }

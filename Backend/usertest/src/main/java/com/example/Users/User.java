@@ -9,12 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.example.Posts.Post;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mysql.cj.jdbc.Blob;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
@@ -101,6 +103,20 @@ public class User {
     @ApiModelProperty(notes = "Blocked list of the User", name = "blockedUsers", required = true)
     @ManyToMany
     private List<User> blockedUsers;
+
+    /**
+     * String representing filename and extension of profile picture
+     */
+    @ApiModelProperty(notes = "Filename and extension of profile picture", name = "extension", required = false)
+    private String extension;
+
+    /**
+     * Profile picture of User stored as Binary Large Object
+     */
+    @ApiModelProperty(notes = "Profile picture of the User", name = "profilePic", required = false)
+    @JsonIgnore
+    @Lob
+    private Blob profilePic;
 
     // ======================== Constructors =====================================
 
@@ -352,5 +368,37 @@ public class User {
      */
     public Boolean isBlocking(User blockedUser) {
         return blockedUsers.contains(blockedUser);
+    }
+
+    /**
+     * Gets extension of User's profile picture
+     * @return String representing extension of profile picture
+     */
+    public String getExtension() {
+        return extension;
+    }
+    
+    /**
+     * Sets User's profile picture extension to extension
+     * @param extension New filename + extension of profile picture
+     */
+    public void setExtension(String extension) {
+        this.extension = extension;
+    }
+
+    /**
+     * Gets profile picture of User
+     * @return Binary Large Object (Blob) representing User's profile picture
+     */
+    public Blob getProfilePic() {
+        return profilePic;
+    }
+
+    /**
+     * Sets User's profile picture to profilePic
+     * @param profilePic Blob representing User's new profile picture
+     */
+    public void setProfilePic(Blob profilePic) {
+        this.profilePic = profilePic;
     }
 }

@@ -1,4 +1,6 @@
 package com.example.Posts;
+import java.time.LocalDateTime;
+
 import com.example.Users.*;
 
 import io.swagger.annotations.*;
@@ -11,6 +13,8 @@ public class Comment {
 	private String mess;
 	@ApiModelProperty(notes = "User",name="user",required=true,value="user")
 	private User user;
+	@ApiModelProperty(notes = "time",name="time",required=true,value="time")
+	private LocalDateTime time;
 	
 	/**
 	 * Creates a new comment with message m and user u
@@ -20,6 +24,7 @@ public class Comment {
 	public Comment(String m, User u) {
 		mess = m;
 		user = u;
+		this.setTime();
 	}
 	
 	/**
@@ -38,6 +43,20 @@ public class Comment {
 		mess = m;
 	}
 	
+	/**
+	 * sets time
+	 */
+	public void setTime() {
+		time = LocalDateTime.now();
+	}
+	
+	/**
+	 * used to veiw time of a comment
+	 * @return
+	 */
+	public String getTime() {
+		return time.toString();
+	}
 	/**
 	 * gets the user
 	 * @return

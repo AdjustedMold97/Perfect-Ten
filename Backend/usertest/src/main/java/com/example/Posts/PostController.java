@@ -65,6 +65,7 @@ public class PostController {
             return usernameFail;
         // User user = userRepository.findByUsername(username);
         post.setUser(userRepository.findByUsername(username));
+        post.setTime();
         postRepository.save(post);
         userRepository.findByUsername(username).addPost(post);
         userRepository.save(userRepository.findByUsername(username));

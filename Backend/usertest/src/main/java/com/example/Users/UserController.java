@@ -468,11 +468,15 @@ public class UserController {
 
         userRepository.save(requestedUser);
 
-        byte[] file = profilePic.getBytes();
-        SerialBlob blob = new SerialBlob(file);
-        Blob image = blob;
-        requestedUser.setProfilePic(image);
-        userRepository.save(requestedUser);
+        try { 
+            byte[] file = profilePic.getBytes();
+            SerialBlob blob = new SerialBlob(file);
+            Blob image = blob;
+            requestedUser.setProfilePic(image);
+            userRepository.save(requestedUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return success;
     }

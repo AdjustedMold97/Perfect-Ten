@@ -85,7 +85,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             holder.postObjectTitle.setText(temp.get("title").toString());
             holder.postObjectBody.setText(temp.get("message").toString());
 
-            holder.postObjectTitle.setOnClickListener(view -> );
+            //holder.postObjectTitle.setOnClickListener(view -> );
 
             holder.postObjectBody.setOnClickListener(view -> 
                     startActivity(new Intent(view.getContext(), PostCreation.class)));
@@ -115,7 +115,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView postObjectTitle;
         TextView postObjectBody;
-        Button comments;
+        
 
 
         /**

@@ -457,7 +457,7 @@ public class UserController {
 
     @ApiOperation(value = "Updates user's profile picture", response = String.class)
     @PutMapping(path = "/user/{user}/pic/new")
-    public String setUserProfilePic(@PathVariable String user, @RequestParam("pic") MultipartFile profilePic) throws Exception {
+    public String setUserProfilePic(@PathVariable String user, @RequestBody MultipartFile profilePic) throws Exception {
         User requestedUser = userRepository.findByUsername(user);
         
         if (profilePic == null) {

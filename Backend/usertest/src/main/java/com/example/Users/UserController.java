@@ -454,7 +454,7 @@ public class UserController {
         return success;
     }  
 
-    @GetMapping(path = "/users/{user}/pic")
+    @GetMapping(path = "/user/{user}/pic")
     public ResponseEntity<Resource> getUserProfilePic(@PathVariable String user) throws IOException, SQLException {
         User requestedUser = userRepository.findByUsername(user);
 

@@ -2,6 +2,7 @@ package com.example.Users;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Blob;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +17,7 @@ import javax.persistence.OneToMany;
 
 import com.example.Posts.Post;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mysql.cj.jdbc.Blob;
+//import com.mysql.cj.jdbc.Blob;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;

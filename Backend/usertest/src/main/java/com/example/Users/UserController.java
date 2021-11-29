@@ -3,6 +3,8 @@ package com.example.Users;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.rowset.serial.SerialBlob;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +22,8 @@ import io.swagger.annotations.ApiOperation;
 import com.example.Posts.Post;
 import com.example.Posts.PostRepository;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.mysql.cj.jdbc.Blob;
+import java.sql.Blob;
+// import com.mysql.cj.jdbc.Blob;
 import com.mysql.cj.jdbc.IterateBlock;
 
 /**
@@ -454,7 +457,25 @@ public class UserController {
 
     @ApiOperation(value = "Updates user's profile picture", response = String.class)
     @PutMapping(path = "/user/{user}/pic/new")
-    public String setUserProfilePic(@PathVariable String user, @RequestParam("pic") MultipartFile profilePic) {
-        return failure;
+    public String setUserProfilePic(@PathVariable String user, @RequestParam("pic") MultipartFile profilePic) throws Exception {
+        User requestedUser = userRepository.findByUsername(user);
+        
+        if (profilePic == null) {
+            return failure;
+        }
+        
+        requestedUser.setExtension(profilePic.getOriginalFilename());
+
+        userRepository.save(requestedUser);
+
+        byte[] file = profilePic.getBytes();
+        SerialBlob blob = new SerialBlob(file);
+        Blob image = blob;
+        requestedUser.setProfilePic(image);
+        userRepository.save(requestedUser);
+
+        return success;
+
+        
     }
 }

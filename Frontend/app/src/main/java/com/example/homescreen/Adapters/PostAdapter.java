@@ -87,8 +87,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
             //holder.postObjectTitle.setOnClickListener(view -> );
 
-            holder.postObjectBody.setOnClickListener(view -> 
-                    startActivity(new Intent(view.getContext(), PostCreation.class)));
+//            holder.postObjectBody.setOnClickListener(view ->
+//                    startActivity(new Intent(view.getContext(), PostCreation.class)));
 
         }
         catch (JSONException e) {

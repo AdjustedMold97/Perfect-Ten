@@ -6,6 +6,11 @@ import java.util.List;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +27,12 @@ import io.swagger.annotations.ApiOperation;
 import com.example.Posts.Post;
 import com.example.Posts.PostRepository;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import java.io.IOError;
+import java.io.IOException;
 import java.sql.Blob;
+import java.sql.SQLException;
+
 // import com.mysql.cj.jdbc.Blob;
 import com.mysql.cj.jdbc.IterateBlock;
 
@@ -442,6 +452,31 @@ public class UserController {
         firstUser.removeBlockedUser(secondUser);
         userRepository.save(firstUser);
         return success;
+    }  
+
+    @GetMapping(path = "/users/{user}/pic")
+    public ResponseEntity<Resource> getUserProfilePic(@PathVariable String user) throws IOException, SQLException {
+        User requestedUser = userRepository.findByUsername(user);
+
+        if (requestedUser == null || requestedUser.getProfilePic() == null) {
+            return null;
+        }
+
+        HttpHeaders header = new HttpHeaders();
+        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + requestedUser.getExtension());
+        header.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        header.add("Pragma", "no-cache");
+        header.add("Expires", "0");
+
+        int blobLength = (int)requestedUser.getProfilePic().length();
+        byte[] byteArray = requestedUser.getProfilePic().getBytes(1, blobLength);
+        ByteArrayResource data = new ByteArrayResource(byteArray);
+
+        return ResponseEntity.ok()
+                .headers(header)
+                .contentLength(blobLength)
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .body(data);
     }
 
     /**
@@ -450,8 +485,8 @@ public class UserController {
      * @return Blob representing profile picture
      */
     @ApiOperation(value = "Retrieves profile picture", response = Blob.class)
-    @GetMapping(path = "/user/{user}/pic")
-    public Blob getUserProfilePic(@PathVariable String user) {
+    @GetMapping(path = "/user/{user}/pic/blob")
+    public Blob getUserProfilePicBlob(@PathVariable String user) {
         return userRepository.findByUsername(user).getProfilePic();
     }
 
@@ -460,7 +495,7 @@ public class UserController {
     public String setUserProfilePic(@PathVariable String user, @RequestBody MultipartFile profilePic) throws Exception {
         User requestedUser = userRepository.findByUsername(user);
         
-        if (profilePic == null) {
+        if (requestedUser == null || profilePic == null) {
             return failure;
         } 
         

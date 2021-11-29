@@ -1,5 +1,6 @@
 package com.example.Posts;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import javax.persistence.Entity;
@@ -30,6 +31,8 @@ public class Post {
     private String title;
     @ApiModelProperty(notes = "Username assosiated with the post",name="uname",required=true,value="username")
     private String uname;
+    @ApiModelProperty(notes = "time assosiated with the post",name="time",required=true,value="time")
+    private LocalDateTime time;
     
     @JsonIgnore
     @ApiModelProperty(notes = "List of comments assosiated with the post",name="comments",required=true,value="comments")
@@ -148,14 +151,36 @@ public class Post {
         uname = user.getUsername();
     }
 
+    /**
+     * returns the assosiated uname
+     * @return
+     */
     public String getUname() {
     	return uname;
     }
     
-    public void setUnamen(String uname) {
+    /**
+     * sets uname to the input value
+     * @param uname
+     */
+    public void setUname(String uname) {
     	this.uname= uname;
     }
     
+    /**
+     * returns the time assosiated with the post
+     * @return
+     */
+    public String getTime() {
+    	return time.toString();
+    }
+    
+    /**
+     * sets the time of the post
+     */
+    public void setTime() {
+    	time = LocalDateTime.now();
+    }
     /**
      * gets a comment stored at input index
      * @param id
@@ -171,6 +196,8 @@ public class Post {
     		temp = temp.concat(comments.get(id).getUser().getUsername());
     		temp = temp.concat(",\"message\":\"");
     		temp = temp.concat(comments.get(id).getMessage());
+    		temp = temp.concat(",\"time\":\"");
+    		temp = temp.concat(comments.get(id).getTime());
     		temp = temp.concat("\"}");
     		return temp;
     	}

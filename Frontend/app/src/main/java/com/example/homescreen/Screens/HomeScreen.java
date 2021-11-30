@@ -131,8 +131,6 @@ public class HomeScreen extends AppCompatActivity {
 
             temp = new JSONObject();
 
-
-
             try {
 
                 /*

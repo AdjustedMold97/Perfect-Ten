@@ -164,6 +164,10 @@ public class AppController extends Application {
         targetUser = _targetUser;
     }
 
+    /*
+     * Global variables for passing post data
+     * into the PostView class
+     */
     static private String postTitle;
     static private String postBody;
 

@@ -201,9 +201,21 @@ public class ProfileView extends AppCompatActivity {
                     @Override
                     public void onSuccess(JSONArray response) {
 
+                        JSONArray postsArr = new JSONArray();
+
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+
+                                    postsArr.put(response.getJSONObject(response.length() - i - 1));
+
+                            }
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                         RecyclerView.LayoutManager mLayoutManager;
 
-                        MyAdapter postsAdapter = new MyAdapter(temp, response);
+                        MyAdapter postsAdapter = new MyAdapter(temp, postsArr);
                         recycler.setAdapter(postsAdapter);
 
                         mLayoutManager = new LinearLayoutManager(temp);

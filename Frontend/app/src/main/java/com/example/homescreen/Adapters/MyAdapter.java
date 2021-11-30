@@ -1,5 +1,6 @@
 package com.example.homescreen.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,6 +78,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
             holder.postObjectTitle.setText(temp.get("title").toString());
             holder.postObjectBody.setText(temp.get("message").toString());
+
+            holder.postObjectTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    //TODO ????
+
+                }
+            });
 
 
         }

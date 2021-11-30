@@ -14,6 +14,9 @@
         android:theme="@style/Theme.HomeScreen"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Screens.PostView"
+            android:exported="false" />
+        <activity
             android:name=".Screens.FindUserScreen"
             android:exported="false" />
         <activity

@@ -37,11 +37,4 @@ public class PostView extends AppCompatActivity {
 
         //TODO comments
     }
-
-    public PostView (String title, String body, Context context) {
-
-        startActivity(new Intent(context, this.getClass()));
-        setUpTextPost(title, body);
-
-    }
 }

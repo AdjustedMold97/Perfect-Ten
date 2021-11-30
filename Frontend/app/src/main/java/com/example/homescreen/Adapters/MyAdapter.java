@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homescreen.R;
+import com.example.homescreen.Screens.PostView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -78,6 +79,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
             holder.postObjectTitle.setText(temp.get("title").toString());
             holder.postObjectBody.setText(temp.get("message").toString());
+
+            holder.postObjectTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    //TODO
+
+                }
+            });
 
         }
         catch (JSONException e) {

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.homescreen.R;
+import com.example.homescreen.app.AppController;
 
 /**
  * @author Jae Swanepoel
@@ -19,21 +20,17 @@ public class PostView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_view);
+
+        setUpTextPost();
     }
 
-    /**
-     *
-     *
-     * @param title
-     * @param body
-     */
-    private void setUpTextPost(String title, String body) {
+    private void setUpTextPost() {
 
         TextView titleView = findViewById(R.id.post_view_title);
         TextView bodyView = findViewById(R.id.post_view_body);
 
-        titleView.setText(title);
-        bodyView.setText(body);
+        titleView.setText(AppController.getPostTitle());
+        bodyView.setText(AppController.getPostBody());
 
         //TODO comments
     }

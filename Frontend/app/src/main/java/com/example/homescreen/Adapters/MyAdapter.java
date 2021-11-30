@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.homescreen.R;
 import com.example.homescreen.Screens.PostView;
 import com.example.homescreen.Screens.ProfileView;
+import com.example.homescreen.app.AppController;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -88,6 +89,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             holder.postObjectTitle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    AppController.setPostTitle(title);
+                    AppController.setPostBody(body);
 
                     mContext.startActivity(new Intent(mContext, PostView.class));
 

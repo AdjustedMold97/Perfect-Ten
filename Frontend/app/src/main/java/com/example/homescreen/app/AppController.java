@@ -163,4 +163,13 @@ public class AppController extends Application {
     static public void setTargetUser(String _targetUser) {
         targetUser = _targetUser;
     }
+
+    static private String postTitle;
+    static private String postBody;
+
+    static public String getPostTitle() { return postTitle; }
+    static public String getPostBody() {return postBody; }
+
+    public static void setPostTitle(String _postTitle) { postTitle = _postTitle; }
+    public static void setPostBody(String _postBody) { postBody = _postBody; }
 }

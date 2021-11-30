@@ -1,7 +1,10 @@
 package com.example.homescreen.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -9,6 +12,7 @@ import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
+import com.example.homescreen.Adapters.MyAdapter;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.Const;
@@ -63,8 +67,7 @@ public class ProfileView extends AppCompatActivity {
      */
     Button addFriendButton;
     Button blockButton;
-    TextView postTitleTextView;
-    TextView postBodyTextView;
+    RecyclerView recycler;
 
     /**
      *
@@ -117,10 +120,8 @@ public class ProfileView extends AppCompatActivity {
         TextView username = findViewById(R.id.username_TextView_profile);
         username.setText(AppController.getTargetUser());
 
-        //Setting up post TextViews
-        //TODO remove this and replace with infinite scroll
-        postTitleTextView = findViewById(R.id.title_placeholder);
-        postBodyTextView = findViewById(R.id.body_placeholder);
+        //Initializing RecyclerView
+        recycler = findViewById(R.id.PV_Posts_Recycler);
 
         //populating the post TextViews
         fetchPostData();
@@ -193,21 +194,20 @@ public class ProfileView extends AppCompatActivity {
     private void fetchPostData() {
         super.onResume();
 
+        Context temp = this;
+
         requester = new PerfectTenRequester(Const.USER_POST_URL_1 + AppController.getTargetUser() + Const.USER_POST_URL_2,
                 new VolleyCallback() {
                     @Override
                     public void onSuccess(JSONArray response) {
-                        try {
 
-                            //populating TextViews with post data
-                            JSONObject temp = response.getJSONObject(response.length() - 1);
+                        RecyclerView.LayoutManager mLayoutManager;
 
-                            postTitleTextView.setText(temp.get("title").toString());
-                            postBodyTextView.setText(temp.get("message").toString());
+                        MyAdapter postsAdapter = new MyAdapter(temp, response);
+                        recycler.setAdapter(postsAdapter);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        mLayoutManager = new LinearLayoutManager(temp);
+                        recycler.setLayoutManager(mLayoutManager);
                     }
 
                     @Override

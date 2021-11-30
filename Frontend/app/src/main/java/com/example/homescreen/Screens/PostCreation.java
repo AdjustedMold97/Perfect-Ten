@@ -116,6 +116,7 @@ public class PostCreation extends AppCompatActivity {
 
     /**
      *
+     *
      * @param view necessary for switching screens.
      * @author Jae Swanepoel
      */

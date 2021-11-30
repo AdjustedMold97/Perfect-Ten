@@ -165,15 +165,11 @@ public class AppController extends Application {
     }
 
     /*
-     * Global variables for passing post data
-     * into the PostView class
+     * Used to retrieve post information
+     * for the PostView
      */
-    static private String postTitle;
-    static private String postBody;
+    private static int postID;
 
-    static public String getPostTitle() { return postTitle; }
-    static public String getPostBody() {return postBody; }
-
-    public static void setPostTitle(String _postTitle) { postTitle = _postTitle; }
-    public static void setPostBody(String _postBody) { postBody = _postBody; }
+    public static int getPostID() { return postID; }
+    public static void setPostID(int _postID) { postID = _postID; }
 }

@@ -32,6 +32,7 @@ public class Const {
     public static final String BLOCKED_LIST_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
     public static final String BLOCKED_LIST_URL_2 = "/blocked/list/usernames";
     public static final String USER_LIST_URL = "http://coms-309-060.cs.iastate.edu:8080/users/list/usernames";
+    public static final String GET_POST_URL = "http://coms-309-060.cs.iastate.edu:8080/posts/";
 
     //======================================== JSON ================================================
 
@@ -55,5 +56,6 @@ public class Const {
     public static final String USERNAME_KEY = "username";
     public static final String TITLE_KEY = "title";
     public static final String POST_USER_KEY = "uname";
+    public static final String ID_KEY = "id";
 
 }

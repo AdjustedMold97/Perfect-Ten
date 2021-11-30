@@ -77,11 +77,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         try {
 
-            JSONObject temp;
-            temp = (JSONObject) mtest.get(position);
+            JSONObject temp = (JSONObject) mtest.get(position);
 
             String title = temp.get("title").toString();
             String body = temp.get("message").toString();
+            int id = Integer.parseInt(temp.get("id").toString());
 
             holder.postObjectTitle.setText(title);
             holder.postObjectBody.setText(body);
@@ -90,9 +90,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 @Override
                 public void onClick(View view) {
 
-                    AppController.setPostTitle(title);
-                    AppController.setPostBody(body);
 
+                    AppController.setPostID(id);
                     mContext.startActivity(new Intent(mContext, PostView.class));
 
                 }

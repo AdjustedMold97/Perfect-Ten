@@ -44,6 +44,7 @@ public class HomeScreen extends AppCompatActivity {
 
     PerfectTenRequester requester;
     String[] blockedUsers;
+    JSONArray responseArr;
 
     /**
      * Calls onResume() method onCreate to populate the homeScreen view with postObjects
@@ -97,21 +98,18 @@ public class HomeScreen extends AppCompatActivity {
         Button post_button = findViewById(R.id.post_create_Button);
         post_button.setOnClickListener(view -> startActivity(new Intent(view.getContext(), PostCreation.class)));
 
-        //getting blocked users
-        getBlockedUsers();
         //getting posts
         getPosts();
     }
 
     /**
-     * Accepts the JSONArray populated with posts,
+     * Uses the local JSONArray populated with posts,
      * creates a new JSONArray with formatted posts,
      * constructs the RecyclerView to set up infinite scroll.
      *
-     * @param arr - the JSONArray used
      * @author Jae Swanepoel
      */
-    private void populate(JSONArray arr) {
+    private void populate() {
 
         /*
          * Taking the original posts array and creating
@@ -127,7 +125,7 @@ public class HomeScreen extends AppCompatActivity {
         JSONObject temp;
 
         reverseLoop:
-        for (int i = 0; i < arr.length(); i++) {
+        for (int i = 0; i < responseArr.length(); i++) {
 
             temp = new JSONObject();
 
@@ -146,13 +144,17 @@ public class HomeScreen extends AppCompatActivity {
                         continue reverseLoop;
                 }
 
+
                 //getting the title from the JSONObject
                 temp.put(Const.TITLE_KEY,
-                        arr.getJSONObject(arr.length() - i - 1).get(Const.TITLE_KEY).toString());
+                        responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.TITLE_KEY).toString());
 
                 //getting the message from the JSONObject
                 temp.put(Const.MESSAGE_KEY,
-                        arr.getJSONObject(arr.length() - i - 1).get(Const.MESSAGE_KEY).toString());
+                        responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.MESSAGE_KEY).toString());
+
+                temp.put(Const.ID_KEY,
+                        responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.ID_KEY).toString());
 
             } catch (JSONException e) { e.printStackTrace(); }
 
@@ -197,7 +199,8 @@ public class HomeScreen extends AppCompatActivity {
         requester = new PerfectTenRequester(Const.POST_LIST_URL, new VolleyCallback() {
             @Override
             public void onSuccess(JSONArray response) {
-                populate(response);
+                responseArr = response;
+                getBlockedUsers();
             }
 
             @Override
@@ -232,6 +235,8 @@ public class HomeScreen extends AppCompatActivity {
                                 blockedUsers[i] = response.get(i).toString();
                         }
                         catch (JSONException e) { e.printStackTrace(); }
+
+                        populate();
                     }
 
                     @Override

@@ -55,5 +55,6 @@ public class Const {
     public static final String USERNAME_KEY = "username";
     public static final String TITLE_KEY = "title";
     public static final String POST_USER_KEY = "uname";
+    public static final String POST_ID_KEY = "id";
 
 }

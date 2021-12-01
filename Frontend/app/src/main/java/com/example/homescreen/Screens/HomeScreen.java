@@ -6,15 +6,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.android.volley.VolleyError;
 
+import org.jetbrains.annotations.TestOnly;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.homescreen.Adapters.MyAdapter;
+import com.example.homescreen.Adapters.PostAdapter;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.Const;
@@ -90,6 +92,14 @@ public class HomeScreen extends AppCompatActivity {
             AppController.setUsername(null);
             startActivity(new Intent(view.getContext(), LoginScreen.class));
         });
+
+
+
+
+
+
+
+
 
         /*
          * - button sends to post creation screen onClick
@@ -180,7 +190,7 @@ public class HomeScreen extends AppCompatActivity {
          */
 
         //inserting the new JSONArray into the adapter.
-        MyAdapter mAdapter = new MyAdapter(this, jsonArray);
+        PostAdapter mAdapter = new PostAdapter(this, jsonArray);
         recycle.setAdapter(mAdapter);
 
         mLayoutManager = new LinearLayoutManager(this);

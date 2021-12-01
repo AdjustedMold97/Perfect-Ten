@@ -2,15 +2,22 @@ package com.example.homescreen.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homescreen.R;
+import com.example.homescreen.Screens.FriendsScreen;
+import com.example.homescreen.Screens.PostCreation;
+import com.example.homescreen.net_utils.Const;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +30,7 @@ import org.json.JSONObject;
  * ViewHolder uses a base post_object.xml structure to create objects
  * @author Ethan Still
  */
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
 
     Context mContext;
     JSONArray mtest;
@@ -37,7 +44,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
      * @param test -JSONArray requested from server
      * @author Ethan Still
      */
-    public MyAdapter(Context context, JSONArray test){
+    public PostAdapter(Context context, JSONArray test){
 
         mContext = context;
         mtest = test;
@@ -78,7 +85,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
             holder.postObjectTitle.setText(temp.get("title").toString());
             holder.postObjectBody.setText(temp.get("message").toString());
-
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -104,6 +110,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView postObjectTitle;
         TextView postObjectBody;
+        
 
 
         /**
@@ -116,6 +123,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             super(itemView);
             postObjectTitle = itemView.findViewById(R.id.postObjectTitle);
             postObjectBody = itemView.findViewById(R.id.postObjectBody);
+
         }
     }
 

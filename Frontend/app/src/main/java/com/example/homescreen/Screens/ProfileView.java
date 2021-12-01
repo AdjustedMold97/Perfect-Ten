@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
-import com.example.homescreen.Adapters.MyAdapter;
+import com.example.homescreen.Adapters.PostAdapter;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.Const;
@@ -215,7 +215,7 @@ public class ProfileView extends AppCompatActivity {
 
                         RecyclerView.LayoutManager mLayoutManager;
 
-                        MyAdapter postsAdapter = new MyAdapter(temp, postsArr);
+                        PostAdapter postsAdapter = new PostAdapter(temp, postsArr);
                         recycler.setAdapter(postsAdapter);
 
                         mLayoutManager = new LinearLayoutManager(temp);

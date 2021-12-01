@@ -1,6 +1,7 @@
 package com.example.homescreen.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.example.homescreen.Adapters.MyAdapter;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.Const;
@@ -26,6 +28,13 @@ import org.json.JSONObject;
  * @author Jae Swanepoel
  */
 public class PostView extends AppCompatActivity {
+
+    TextView titleView;
+    TextView bodyView;
+
+    RecyclerView comments;
+    RecyclerView.LayoutManager mLayoutManager;
+    MyAdapter adapter;
 
     JSONObject post;
 
@@ -48,13 +57,15 @@ public class PostView extends AppCompatActivity {
         Button submit = findViewById(R.id.submit_comment_Button);
         submit.setOnClickListener(view -> submitComment(commentText.getText().toString()));
 
+        titleView = findViewById(R.id.post_view_title);
+        bodyView = findViewById(R.id.post_view_body);
+
+        comments = findViewById(R.id.comments_Recycler);
+
         getPost();
     }
 
     private void setUpTextPost() {
-
-        TextView titleView = findViewById(R.id.post_view_title);
-        TextView bodyView = findViewById(R.id.post_view_body);
 
         try {
             titleView.setText(post.get("title").toString());
@@ -63,7 +74,7 @@ public class PostView extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //TODO comments
+        getComments();
     }
 
     private void getPost() {
@@ -92,6 +103,12 @@ public class PostView extends AppCompatActivity {
     }
 
     private void submitComment(String comment) {
+
+        //TODO
+
+    }
+
+    private void getComments() {
 
         //TODO
 

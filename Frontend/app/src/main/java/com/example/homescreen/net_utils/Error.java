@@ -40,13 +40,8 @@ public class Error extends Activity {
 
         Button back = findViewById(R.id.errorCancel);
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), LoginScreen.class));
 
-            }
-        });
+
 
     }
 }

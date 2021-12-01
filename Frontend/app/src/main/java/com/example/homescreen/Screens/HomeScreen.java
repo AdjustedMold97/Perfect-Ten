@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.android.volley.VolleyError;
 
+import org.jetbrains.annotations.TestOnly;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,6 +91,22 @@ public class HomeScreen extends AppCompatActivity {
             AppController.setUsername(null);
             startActivity(new Intent(view.getContext(), LoginScreen.class));
         });
+
+//        //TODO remove this test
+//        Button testPop = findViewById(R.id.pop);
+//        testPop.setOnClickListener(view -> startActivity(new Intent(HomeScreen.this, Error.class)));
+        Button testPop = (Button) findViewById(R.id.pop);
+        testPop.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeScreen.this,Error.class));
+            }
+        });
+
+
+
+
 
         /*
          * - button sends to post creation screen onClick

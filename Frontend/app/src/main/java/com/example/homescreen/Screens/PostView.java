@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,6 +27,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
+ * The code for the pop-up PostView.
+ *
  * @author Jae Swanepoel
  */
 public class PostView extends AppCompatActivity {
@@ -44,14 +47,14 @@ public class PostView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_view);
 
-        //configuring post for popout
+        //configuring post for popout - Ethan
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width),(int)(height*.6));
+        getWindow().setLayout(width, (int) (height*.6));
 
         EditText commentText = findViewById(R.id.comment_EditText);
 
@@ -90,6 +93,16 @@ public class PostView extends AppCompatActivity {
             @Override
             public void onSuccess(JSONObject response) {
                 post = response;
+                try {
+
+                    //true if post is a text post
+                    if (!(post.get(MESSAGE_KEY).equals(null)))
+                        setUpTextPost();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 setUpTextPost();
             }
 
@@ -104,8 +117,9 @@ public class PostView extends AppCompatActivity {
     }
 
     /**
+     * Submits a comment using PerfectTenRequester.
      *
-     * @param comment
+     * @param comment The comment content
      */
     private void submitComment(String comment) {
 
@@ -129,6 +143,9 @@ public class PostView extends AppCompatActivity {
 
             @Override
             public void onSuccess(JSONObject response) {
+
+                Log.d("Result ", "Comment added successfully.");
+                getComments();
 
             }
 

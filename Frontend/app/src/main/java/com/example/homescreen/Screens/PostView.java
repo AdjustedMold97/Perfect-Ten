@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -40,6 +42,11 @@ public class PostView extends AppCompatActivity {
         int height = dm.heightPixels;
 
         getWindow().setLayout((int)(width*.8),(int)(height*.6));
+
+        EditText commentText = findViewById(R.id.comment_EditText);
+
+        Button submit = findViewById(R.id.submit_comment_Button);
+        submit.setOnClickListener(view -> submitComment(commentText.getText().toString()));
 
         getPost();
     }
@@ -82,5 +89,11 @@ public class PostView extends AppCompatActivity {
         });
 
         requester.request();
+    }
+
+    private void submitComment(String comment) {
+
+        //TODO
+
     }
 }

@@ -61,10 +61,7 @@ public class HomeScreen extends AppCompatActivity {
 
         //=======================================================================================================
         //TODO ethan- interface these somehow to make more efficient
-
         //TODO use <include or <merge to get interface into homeScreen
-
-
         //TODO interface a back button Ethan
 
         /*

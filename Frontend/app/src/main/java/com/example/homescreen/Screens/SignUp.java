@@ -136,7 +136,6 @@ public class SignUp extends AppCompatActivity {
         });
     }
 
-    //TODO test this
     /**
      *
      * @param signup_info JSON Object passed to request
@@ -148,9 +147,10 @@ public class SignUp extends AppCompatActivity {
 
         requester = new PerfectTenRequester(Request.Method.POST, Const.SIGN_UP_URL, signup_info,
                 new VolleyCallback() {
+
                     @Override
                     public void onSuccess(JSONArray response) {
-
+                        //unreachable
                     }
 
                     @Override
@@ -202,7 +202,7 @@ public class SignUp extends AppCompatActivity {
 
                     @Override
                     public void onError(VolleyError error) {
-
+                        //TODO
                     }
                 });
 

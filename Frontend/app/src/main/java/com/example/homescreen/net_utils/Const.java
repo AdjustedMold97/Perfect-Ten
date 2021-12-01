@@ -40,6 +40,7 @@ public class Const {
     public static final String SUCCESS_MSG = "success";
     public static final String RESPONSE_TAG = "Server Response ";
     public static final String ERROR_RESPONSE_TAG = "Error Response ";
+    public static final String RESULT_TAG = "Result ";
 
     //===================================== ERROR MESSAGES =========================================
 

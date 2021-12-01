@@ -3,6 +3,7 @@ package com.example.homescreen.Screens;
 import static com.example.homescreen.net_utils.Const.CREATE_COMMENT_URL;
 import static com.example.homescreen.net_utils.Const.ID_KEY;
 import static com.example.homescreen.net_utils.Const.MESSAGE_KEY;
+import static com.example.homescreen.net_utils.Const.RESULT_TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.example.homescreen.Adapters.PostAdapter;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
@@ -33,15 +35,26 @@ import org.json.JSONObject;
  */
 public class PostView extends AppCompatActivity {
 
+    //TextViews for the post
     TextView titleView;
     TextView bodyView;
 
+    //RecyclerView stuff
     RecyclerView comments;
     RecyclerView.LayoutManager mLayoutManager;
     PostAdapter adapter;
 
+    //JSONObject containing the post
     JSONObject post;
 
+    /**
+     * Builds the activity.
+     * Determines the height and width to act like a pop up,
+     * initializes the views,
+     * makes a call to getPosts().
+     *
+     * @param savedInstanceState default argument
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +82,10 @@ public class PostView extends AppCompatActivity {
         getPost();
     }
 
+    /**
+     * Given a text post, we need to
+     * populate the TextViews with the appropriate data.
+     */
     private void setUpTextPost() {
 
         try {
@@ -77,39 +94,38 @@ public class PostView extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        getComments();
     }
 
+    /**
+     * Creates a PerfectTenRequester to perform
+     * a request to the server for a post (JSONObject).
+     * After receiving it, we make a call to
+     * setUpTextPost() and getComments().
+     */
     private void getPost() {
 
         PerfectTenRequester requester = new PerfectTenRequester(Const.GET_POST_URL + AppController.getPostID(), null, new VolleyCallback() {
             @Override
             public void onSuccess(JSONArray response) {
                 //unreachable
-                System.out.println("Received an array");
             }
 
             @Override
             public void onSuccess(JSONObject response) {
+
+                Log.d(RESULT_TAG, "Received a post from the server.");
+
                 post = response;
-                try {
-
-                    //true if post is a text post
-                    if (!(post.get(MESSAGE_KEY).equals(null)))
-                        setUpTextPost();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
                 setUpTextPost();
+                getComments();
             }
 
             @Override
             public void onError(VolleyError error) {
+
                 //TODO
-                System.out.println("ruh roh");
+
             }
         });
 
@@ -159,7 +175,8 @@ public class PostView extends AppCompatActivity {
     }
 
     /**
-     *
+     * Receives all comments and populates
+     * the RecyclerView.
      */
     private void getComments() {
 

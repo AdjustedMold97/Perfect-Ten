@@ -1,23 +1,18 @@
 package com.example.homescreen.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homescreen.R;
-import com.example.homescreen.Screens.FriendsScreen;
-import com.example.homescreen.Screens.PostCreation;
-import com.example.homescreen.net_utils.Const;
+import com.example.homescreen.Screens.PostView;
+import com.example.homescreen.app.AppController;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,7 +29,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
     Context mContext;
     JSONArray mtest;
-
 
     /**
      * Constructor for MyAdapter
@@ -78,13 +72,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
      */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
         try {
 
-            JSONObject temp;
-            temp = (JSONObject) mtest.get(position);
+            JSONObject temp = (JSONObject) mtest.get(position);
 
-            holder.postObjectTitle.setText(temp.get("title").toString());
-            holder.postObjectBody.setText(temp.get("message").toString());
+            String title = temp.get("title").toString();
+            String body = temp.get("message").toString();
+            int id = Integer.parseInt(temp.get("id").toString());
+
+            holder.postObjectTitle.setText(title);
+            holder.postObjectBody.setText(body);
+
+            holder.postObjectTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+                    AppController.setPostID(id);
+                    mContext.startActivity(new Intent(mContext, PostView.class));
+                }
+            });
+
         }
         catch (JSONException e) {
             e.printStackTrace();

@@ -163,4 +163,13 @@ public class AppController extends Application {
     static public void setTargetUser(String _targetUser) {
         targetUser = _targetUser;
     }
+
+    /*
+     * Used to retrieve post information
+     * for the PostView
+     */
+    private static int postID;
+
+    public static int getPostID() { return postID; }
+    public static void setPostID(int _postID) { postID = _postID; }
 }

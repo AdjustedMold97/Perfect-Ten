@@ -39,6 +39,14 @@ public class PerfectTenRequester {
 
     }
 
+    /**
+     * Uses GET if requestObj is null,
+     * uses POST otherwise.
+     *
+     * @param url
+     * @param requestObj
+     * @param callback
+     */
     public PerfectTenRequester (String url, JSONObject requestObj, VolleyCallback callback) {
 
         this.url = url;

@@ -1,13 +1,14 @@
 package com.example.homescreen.Screens;
 
+import static com.example.homescreen.net_utils.Const.CREATE_COMMENT_URL;
+import static com.example.homescreen.net_utils.Const.ID_KEY;
+import static com.example.homescreen.net_utils.Const.MESSAGE_KEY;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -50,7 +51,7 @@ public class PostView extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.8),(int)(height*.6));
+        getWindow().setLayout((int)(width*.8),(int)(height));
 
         EditText commentText = findViewById(R.id.comment_EditText);
 
@@ -102,12 +103,47 @@ public class PostView extends AppCompatActivity {
         requester.request();
     }
 
+    /**
+     *
+     * @param comment
+     */
     private void submitComment(String comment) {
 
-        //TODO
+        JSONObject obj = new JSONObject();
 
+        try {
+
+            obj.put(ID_KEY, AppController.getPostID());
+            obj.put(MESSAGE_KEY, comment);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        PerfectTenRequester requester
+                = new PerfectTenRequester(CREATE_COMMENT_URL, obj, new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONArray response) {
+                //unreachable
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                //TODO
+            }
+        });
+
+        requester.request();
     }
 
+    /**
+     *
+     */
     private void getComments() {
 
         //TODO

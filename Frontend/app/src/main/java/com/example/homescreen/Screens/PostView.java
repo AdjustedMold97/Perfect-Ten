@@ -51,7 +51,7 @@ public class PostView extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.8),(int)(height));
+        getWindow().setLayout((int)(width),(int)(height*.6));
 
         EditText commentText = findViewById(R.id.comment_EditText);
 

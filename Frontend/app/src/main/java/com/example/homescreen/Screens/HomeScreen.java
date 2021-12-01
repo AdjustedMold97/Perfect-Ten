@@ -92,17 +92,9 @@ public class HomeScreen extends AppCompatActivity {
             startActivity(new Intent(view.getContext(), LoginScreen.class));
         });
 
-//        //TODO remove this test
-//        Button testPop = findViewById(R.id.pop);
-//        testPop.setOnClickListener(view -> startActivity(new Intent(HomeScreen.this, Error.class)));
-        Button testPop = (Button) findViewById(R.id.pop);
-        testPop.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(HomeScreen.this,Error.class));
-            }
-        });
+
+
 
 
 

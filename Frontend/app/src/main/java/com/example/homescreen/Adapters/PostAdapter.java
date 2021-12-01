@@ -58,8 +58,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.post_object,parent,false);
-        MyViewHolder myViewHolder = new MyViewHolder(view);
-        return  myViewHolder;
+        return new MyViewHolder(view);
     }
 
     /**
@@ -84,14 +83,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             holder.postObjectTitle.setText(title);
             holder.postObjectBody.setText(body);
 
-            holder.postObjectTitle.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            holder.postObjectTitle.setOnClickListener(view -> {
 
+                AppController.setPostID(id);
+                mContext.startActivity(new Intent(mContext, PostView.class));
 
-                    AppController.setPostID(id);
-                    mContext.startActivity(new Intent(mContext, PostView.class));
-                }
             });
 
         }
@@ -116,11 +112,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
      * postObjectBody will contain instances of "message" text from JSONObjects
      * @author Ethan Still
      */
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+
         TextView postObjectTitle;
         TextView postObjectBody;
-        
-
 
         /**
          * ID's for postObjectTitle and postObjectBody
@@ -135,5 +130,4 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
         }
     }
-
 }

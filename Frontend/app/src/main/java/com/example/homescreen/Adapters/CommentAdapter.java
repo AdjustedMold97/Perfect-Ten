@@ -54,8 +54,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.comment_object, parent,false);
-        MyViewHolder myViewHolder = new MyViewHolder(view);
-        return myViewHolder;
+        return new MyViewHolder(view);
 
     }
 
@@ -97,7 +96,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
      * commentObjectText will contain instances of "text" text from JSONObjects
      * @author Ethan Still
      */
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView commentObjectText;
 

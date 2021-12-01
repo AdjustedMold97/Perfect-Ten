@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.example.homescreen.Adapters.PostAdapter;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;

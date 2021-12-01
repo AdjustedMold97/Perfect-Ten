@@ -157,13 +157,10 @@ public class LoginScreen extends AppCompatActivity {
 
             }
 
-            /*
-             * Pop up screen shows up if the server is not reached
-             * - Ethan Still
-             */
+
             @Override
             public void onError(VolleyError error) {
-                startActivity(new Intent(LoginScreen.this,Error.class));
+                //TODO
             }
         });
 

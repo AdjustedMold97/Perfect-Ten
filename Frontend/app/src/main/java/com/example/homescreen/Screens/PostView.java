@@ -32,7 +32,7 @@ public class PostView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_view);
 
-        //==================
+        //configuring post for popout
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -40,9 +40,6 @@ public class PostView extends AppCompatActivity {
         int height = dm.heightPixels;
 
         getWindow().setLayout((int)(width*.8),(int)(height*.6));
-
-        //======================
-
 
         getPost();
     }

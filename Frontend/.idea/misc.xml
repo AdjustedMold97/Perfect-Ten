@@ -3,43 +3,41 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_add_friend_screen.xml" value="0.39375" />
+        <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_find_user_screen.xml" value="0.5005208333333333" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_friends_screen.xml" value="0.264" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_home_screen.xml" value="0.20425724637681159" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_login_screen.xml" value="0.264" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_post_creation.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_post_view.xml" value="0.4552083333333333" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_profile_view.xml" value="0.264" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_settings_screen.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_sign_up.xml" value="0.4" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_string_request.xml" value="0.2" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/errorwindow.xml" value="0.20208333333333334" />
+        <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/post_plus_comments.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/drawable/textlines.xml" value="0.2703125" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_add_friend_screen.xml" value="0.25407608695652173" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_friends_screen.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_home_screen.xml" value="0.264" />
+        <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_home_screen.xml" value="0.2" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_login_screen.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_post_creation.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_settings_screen.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_sign_up.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_test.xml" value="0.23143115942028986" />
-        <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/comment_object.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/errorwindow.xml" value="0.2" />
-        <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/fragment_universal_bar.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/fragment_universal_tab_bar.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/friend_object.xml" value="0.25407608695652173" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/item_loading.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/post_object.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/post_plus_comments.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/universal_tab_bar.xml" value="0.264" />
+        <entry key="..\:/Users/still/eclipse-workspace/3_rk_3/Frontend/app/src/main/res/layout/universal_tab_bar.xml" value="0.25407608695652173" />
       </map>
     </option>
   </component>
   <component name="JavadocGenerationManager">
-    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/../Documents/Frontend Javadocs/secondcopy" />
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/../Documents/Jae_Swanepoel_javadocs" />
     <option name="OTHER_OPTIONS" value="--ignore-source-errors" />
     <option name="OPTION_INCLUDE_LIBS" value="true" />
     <option name="OPTION_LINK_TO_JDK_DOCS" value="true" />

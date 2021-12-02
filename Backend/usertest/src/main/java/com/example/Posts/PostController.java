@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.Users.*;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import io.swagger.annotations.*;
 
@@ -74,15 +75,17 @@ public class PostController {
     
     /**
      * Make a new comment on a specified comment by id by the specifiyed user
-     * @param id
-     * @param message
+     * @param idAndMessage
      * @param username
      * @return String
      */
     @ApiOperation(value = "Make a new comment on a specified comment by id by the specifiyed user", response = String.class)
     @PostMapping(path = "/posts/new/comment/{username}")
-    public String createComment(@RequestBody int id, @RequestBody String message, @PathVariable String username) {
-    	if (userRepository.findByUsername(username) == null)
+    public String createComment(@RequestBody ObjectNode idAndMessage, @PathVariable String username) {
+    	int id = idAndMessage.get("id").intValue();
+        String message = idAndMessage.get("message").textValue();
+        
+        if (userRepository.findByUsername(username) == null)
             return usernameFail;
     	if(postRepository.findById(id) == null) 
     		return failure;
@@ -133,7 +136,6 @@ public class PostController {
     	postRepository.findById(id).delComment(index);
     	return success;
     }
-    // test comment
     
     /**
      * Updates a post of given ID

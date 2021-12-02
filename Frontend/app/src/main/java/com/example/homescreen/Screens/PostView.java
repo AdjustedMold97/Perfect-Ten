@@ -8,8 +8,10 @@ import static com.example.homescreen.net_utils.Const.MESSAGE_KEY;
 import static com.example.homescreen.net_utils.Const.RESULT_TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -18,7 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.example.homescreen.Adapters.PostAdapter;
+import com.example.homescreen.Adapters.CommentAdapter;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.Const;
@@ -39,11 +41,6 @@ public class PostView extends AppCompatActivity {
     //TextViews for the post
     TextView titleView;
     TextView bodyView;
-
-    //RecyclerView stuff
-    RecyclerView comments;
-    RecyclerView.LayoutManager mLayoutManager;
-    PostAdapter adapter;
 
     //JSONObject containing the post
     JSONObject post;
@@ -77,8 +74,6 @@ public class PostView extends AppCompatActivity {
 
         titleView = findViewById(R.id.post_view_title);
         bodyView = findViewById(R.id.post_view_body);
-
-        comments = findViewById(R.id.comments_Recycler);
 
         getPost();
     }
@@ -181,6 +176,8 @@ public class PostView extends AppCompatActivity {
      */
     private void getComments() {
 
+        Context c = this;
+
         PerfectTenRequester requester
                 = new PerfectTenRequester(COMMENT_LIST_URL_1 + AppController.getPostID() + COMMENT_LIST_URL_2, new VolleyCallback() {
             @Override
@@ -188,6 +185,10 @@ public class PostView extends AppCompatActivity {
 
                 Log.d(RESULT_TAG, "Received the comments array.");
 
+                //TODO for some reason using this code prevents us from clicking on the EditText...
+//                RecyclerView commentRecycler = findViewById(R.id.comments_Recycler);
+//                commentRecycler.setAdapter(new CommentAdapter(c, response));
+//                commentRecycler.setLayoutManager(new LinearLayoutManager(c));
             }
 
             @Override

@@ -1,5 +1,7 @@
 package com.example.homescreen.Screens;
 
+import static com.example.homescreen.net_utils.Const.COMMENT_LIST_URL_1;
+import static com.example.homescreen.net_utils.Const.COMMENT_LIST_URL_2;
 import static com.example.homescreen.net_utils.Const.CREATE_COMMENT_URL;
 import static com.example.homescreen.net_utils.Const.ID_KEY;
 import static com.example.homescreen.net_utils.Const.MESSAGE_KEY;
@@ -142,7 +144,7 @@ public class PostView extends AppCompatActivity {
 
         try {
 
-            obj.put(ID_KEY, AppController.getPostID());
+            obj.put(ID_KEY, String.valueOf(AppController.getPostID()));
             obj.put(MESSAGE_KEY, comment);
 
         } catch (JSONException e) {
@@ -150,7 +152,7 @@ public class PostView extends AppCompatActivity {
         }
 
         PerfectTenRequester requester
-                = new PerfectTenRequester(CREATE_COMMENT_URL, obj, new VolleyCallback() {
+                = new PerfectTenRequester(CREATE_COMMENT_URL + AppController.getUsername(), obj, new VolleyCallback() {
             @Override
             public void onSuccess(JSONArray response) {
                 //unreachable
@@ -179,7 +181,26 @@ public class PostView extends AppCompatActivity {
      */
     private void getComments() {
 
-        //TODO
+        PerfectTenRequester requester
+                = new PerfectTenRequester(COMMENT_LIST_URL_1 + AppController.getPostID() + COMMENT_LIST_URL_2, new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONArray response) {
 
+                Log.d(RESULT_TAG, "Received the comments array.");
+
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+                //unreachable
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
+
+        requester.request();
     }
 }

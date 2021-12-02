@@ -90,7 +90,7 @@ public class FindUserScreen extends AppCompatActivity {
                         try {
                             for (int i = 0; i < response.length(); i++) {
 
-                                if (response.getJSONObject(i).get(Const.USERNAME_KEY).equals(targetUser)) {
+                                if (response.get(i).equals(targetUser)) {
 
                                     AppController.setTargetUser(targetUser);
                                     startActivity(new Intent(view.getContext(), ProfileView.class));
@@ -105,6 +105,7 @@ public class FindUserScreen extends AppCompatActivity {
                              */
                             responseView.setTextColor(Color.RED);
                             responseView.setText(USER_ERROR_TEXT);
+                            responseView.setVisibility(View.VISIBLE);
                         }
                         catch (JSONException e) { e.printStackTrace(); }
                     }

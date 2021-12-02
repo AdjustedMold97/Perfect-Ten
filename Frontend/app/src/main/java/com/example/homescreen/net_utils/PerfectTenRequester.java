@@ -28,6 +28,14 @@ public class PerfectTenRequester {
     private final boolean arrayReq;
     private final boolean usesMethod;
 
+    /**
+     * Used for JsonObjectRequest.
+     *
+     * @param requestMethod
+     * @param url
+     * @param requestBody
+     * @param callback
+     */
     public PerfectTenRequester (int requestMethod, String url, JSONObject requestBody, VolleyCallback callback) {
 
         this.requestMethod = requestMethod;
@@ -40,6 +48,7 @@ public class PerfectTenRequester {
     }
 
     /**
+     * Used for JsonObjectRequest.
      * Uses GET if requestObj is null,
      * uses POST otherwise.
      *
@@ -57,6 +66,14 @@ public class PerfectTenRequester {
 
     }
 
+    /**
+     * Used for JsonArrayRequest.
+     *
+     * @param requestMethod
+     * @param url
+     * @param requestArr
+     * @param callback
+     */
     public PerfectTenRequester (int requestMethod, String url, JSONArray requestArr, VolleyCallback callback) {
 
         this.requestMethod = requestMethod;
@@ -68,6 +85,12 @@ public class PerfectTenRequester {
 
     }
 
+    /**
+     * Used for JsonArrayRequest.
+     *
+     * @param url
+     * @param callback
+     */
     public PerfectTenRequester (String url, VolleyCallback callback) {
 
         this.url = url;
@@ -81,19 +104,9 @@ public class PerfectTenRequester {
 
         Request req;
 
-        Response.Listener objResponse = response -> {
+        Response.Listener objResponse = response -> { callback.onSuccess((JSONObject) response); };
 
-            Log.d(Const.RESPONSE_TAG, response.toString());
-            callback.onSuccess((JSONObject) response);
-
-        };
-
-        Response.Listener arrResponse = response -> {
-
-            Log.d(Const.RESPONSE_TAG, response.toString());
-            callback.onSuccess((JSONArray) response);
-
-        };
+        Response.Listener arrResponse = response -> { callback.onSuccess((JSONArray) response); };
 
         Response.ErrorListener errResponse = error -> {
 

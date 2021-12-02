@@ -6,12 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import com.android.volley.VolleyError;
 
-import org.jetbrains.annotations.TestOnly;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,14 +87,6 @@ public class HomeScreen extends AppCompatActivity {
             AppController.setUsername(null);
             startActivity(new Intent(view.getContext(), LoginScreen.class));
         });
-
-
-
-
-
-
-
-
 
         /*
          * - button sends to post creation screen onClick

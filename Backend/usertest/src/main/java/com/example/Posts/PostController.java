@@ -103,6 +103,25 @@ public class PostController {
     }
 
     /**
+     * Gets all comments by the id of parent post
+     * @param id
+     * @param index
+     * @return String
+     */
+    @ApiOperation(value = "Gets all comments by the id of parent post", response = String.class)
+    @GetMapping(path = "/posts/{id}/all")
+    public String getAllComments( @PathVariable int id){
+    	int index = 0;
+    	String out = "[";
+    	while(!postRepository.findById(id).getComment(index).equals("{\"message\":\"error1\"}")) {
+    		if(index!=0) out = out.concat(",");
+    		out = out.concat(postRepository.findById(id).getComment(index));
+    	}
+    	out = out.concat("]");
+        return out;
+    }
+    
+    /**
      * Deletes a comment by id of parent post and its specific index
      * @param id
      * @param index

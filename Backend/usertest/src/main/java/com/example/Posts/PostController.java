@@ -133,6 +133,7 @@ public class PostController {
     	postRepository.findById(id).delComment(index);
     	return success;
     }
+    // test comment
     
     /**
      * Updates a post of given ID

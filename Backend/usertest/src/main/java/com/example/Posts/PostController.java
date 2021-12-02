@@ -75,16 +75,15 @@ public class PostController {
     
     /**
      * Make a new comment on a specified comment by id by the specifiyed user
-     * @param id
-     * @param message
+     * @param idAndMessage
      * @param username
      * @return String
      */
     @ApiOperation(value = "Make a new comment on a specified comment by id by the specifiyed user", response = String.class)
     @PostMapping(path = "/posts/new/comment/{username}")
     public String createComment(@RequestBody ObjectNode idAndMessage, @PathVariable String username) {
-    	int id = idAndMessage.get("id").asInt();
-        String message = idAndMessage.get("message").asText();
+    	int id = idAndMessage.get("id").intValue();
+        String message = idAndMessage.get("message").textValue();
         
         if (userRepository.findByUsername(username) == null)
             return usernameFail;

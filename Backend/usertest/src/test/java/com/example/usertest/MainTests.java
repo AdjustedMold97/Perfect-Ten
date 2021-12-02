@@ -223,6 +223,12 @@ class MainTests {
 		when(postRepository.findById(1)).thenReturn(post1);
 		when(postRepository.findById(2)).thenReturn(post2);
 		
-		assertEquals("{\"message\":\"success\"}", postController.createComment(1, "Test", "TestUser"));
+		ObjectMapper mapper = new ObjectMapper();
+
+		ObjectNode obn = mapper.createObjectNode();
+		obn.set("id", mapper.convertValue(1, JsonNode.class));
+		obn.set("message", mapper.convertValue("Test", JsonNode.class));
+
+		assertEquals("{\"message\":\"success\"}", postController.createComment(obn, "TestUser"));
 	}
 } 

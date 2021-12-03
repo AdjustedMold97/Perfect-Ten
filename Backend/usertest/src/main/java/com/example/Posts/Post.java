@@ -36,7 +36,7 @@ public class Post {
     private LocalDateTime time;
     
     @ApiModelProperty(notes = "List of comments assosiated with the post",name="comments",required=true,value="comments")
-    private List<Comment> comments = new ArrayList<Comment>();
+    private List<Comment> comments;
     
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -60,6 +60,7 @@ public class Post {
     public Post(String message, String title) {
         this.message = message;
         this.title = title;
+        comments = new ArrayList<Comment>();
     }
     
     /**
@@ -69,6 +70,7 @@ public class Post {
     public Post(String message) {
     	this.message = message;
     	title = "default";
+        comments = new ArrayList<Comment>();
     }
 
     /**
@@ -82,6 +84,7 @@ public class Post {
         this.title = title;
         this.user = user;
         uname = user.getUsername();
+        comments = new ArrayList<Comment>();
     }
 
     // =============================== Getters and Setters for each field ================================== //

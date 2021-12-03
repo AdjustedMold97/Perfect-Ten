@@ -186,9 +186,9 @@ public class Post {
     	time = LocalDateTime.now();
     }
 
-    public List<Comment> getComments() {
+    /* public List<Comment> getComments() {
         return comments;
-    }
+    } */
 
     /**
      * gets a comment stored at input index

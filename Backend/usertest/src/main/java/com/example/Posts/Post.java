@@ -2,6 +2,7 @@ package com.example.Posts;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,7 +36,7 @@ public class Post {
     private LocalDateTime time;
     
     @ApiModelProperty(notes = "List of comments assosiated with the post",name="comments",required=true,value="comments")
-    private ArrayList<Comment> comments = new ArrayList<Comment>();
+    private List<Comment> comments = new ArrayList<Comment>();
     
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -180,6 +181,11 @@ public class Post {
     public void setTime() {
     	time = LocalDateTime.now();
     }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
     /**
      * gets a comment stored at input index
      * @param id

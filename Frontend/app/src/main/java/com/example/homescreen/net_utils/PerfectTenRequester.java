@@ -1,7 +1,5 @@
 package com.example.homescreen.net_utils;
 
-import android.util.Log;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyLog;
@@ -18,6 +16,7 @@ import org.json.JSONObject;
  *
  * @author Jae Swanepoel
  */
+@SuppressWarnings("rawtypes")
 public class PerfectTenRequester {
 
     private int requestMethod;
@@ -31,10 +30,10 @@ public class PerfectTenRequester {
     /**
      * Used for JsonObjectRequest.
      *
-     * @param requestMethod
-     * @param url
-     * @param requestBody
-     * @param callback
+     * @param requestMethod The Request Method to be used
+     * @param url The url being used
+     * @param requestBody The JSONObject being sent to the server
+     * @param callback The VolleyCallback used for handling the response
      */
     public PerfectTenRequester (int requestMethod, String url, JSONObject requestBody, VolleyCallback callback) {
 
@@ -52,9 +51,9 @@ public class PerfectTenRequester {
      * Uses GET if requestObj is null,
      * uses POST otherwise.
      *
-     * @param url
-     * @param requestObj
-     * @param callback
+     * @param url The url being used
+     * @param requestObj The JSONObject being sent to the server
+     * @param callback The VolleyCallback used for handling the response
      */
     public PerfectTenRequester (String url, JSONObject requestObj, VolleyCallback callback) {
 
@@ -69,10 +68,10 @@ public class PerfectTenRequester {
     /**
      * Used for JsonArrayRequest.
      *
-     * @param requestMethod
-     * @param url
-     * @param requestArr
-     * @param callback
+     * @param requestMethod The Request Method to be used
+     * @param url The url being used
+     * @param requestArr The JSONArray being sent to the server
+     * @param callback The VolleyCallback used for handling the response
      */
     public PerfectTenRequester (int requestMethod, String url, JSONArray requestArr, VolleyCallback callback) {
 
@@ -88,8 +87,8 @@ public class PerfectTenRequester {
     /**
      * Used for JsonArrayRequest.
      *
-     * @param url
-     * @param callback
+     * @param url The url being used
+     * @param callback The VolleyCallback used for handling the response
      */
     public PerfectTenRequester (String url, VolleyCallback callback) {
 
@@ -104,9 +103,9 @@ public class PerfectTenRequester {
 
         Request req;
 
-        Response.Listener objResponse = response -> { callback.onSuccess((JSONObject) response); };
+        Response.Listener objResponse = response -> callback.onSuccess((JSONObject) response);
 
-        Response.Listener arrResponse = response -> { callback.onSuccess((JSONArray) response); };
+        Response.Listener arrResponse = response -> callback.onSuccess((JSONArray) response);
 
         Response.ErrorListener errResponse = error -> {
 

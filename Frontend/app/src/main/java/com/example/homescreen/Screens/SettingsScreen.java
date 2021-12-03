@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.homescreen.R;
 
@@ -28,6 +29,20 @@ public class SettingsScreen extends AppCompatActivity {
 
         Button home = findViewById(R.id.home_Button_settings);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
+
+        ImageView profilePic = findViewById(R.id.settings_Profile_Pic);
+        profilePic.setOnClickListener(view -> changeProfilePicture());
+    }
+
+    /**
+     * Function for changing the user's
+     * profile picture.
+     *
+     * @author Jae Swanepoel
+     */
+    private void changeProfilePicture() {
+
+        //TODO
 
     }
 }

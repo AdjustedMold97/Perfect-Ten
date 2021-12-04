@@ -5,8 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.homescreen.R;
+import com.example.homescreen.app.AppController;
 
 /**
  * Activity where a user can edit app settings
@@ -14,6 +19,12 @@ import com.example.homescreen.R;
  * @author Ethan Still
  */
 public class SettingsScreen extends AppCompatActivity {
+
+    ImageView profilePic;
+    EditText usernameEdit;
+    EditText passwordEdit;
+    EditText emailEdit;
+    TextView appliedText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +39,44 @@ public class SettingsScreen extends AppCompatActivity {
 
         Button home = findViewById(R.id.home_Button_settings);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
+
+        profilePic = findViewById(R.id.settings_Profile_Pic);
+        usernameEdit = findViewById(R.id.change_username_EditText);
+        passwordEdit = findViewById(R.id.change_password_EditText);
+        emailEdit = findViewById(R.id.change_email_EditText);
+        appliedText = findViewById(R.id.changes_applied_TextView);
+
+        Button applyButton = findViewById(R.id.apply_Button);
+        applyButton.setOnClickListener(view -> applyChanges());
+
+        ImageButton settingsPfP = findViewById(R.id.settings_Profile_Pic);
+        settingsPfP.setOnClickListener(view -> changePfP());
+
+        setUpSettings();
+    }
+
+    private void setUpSettings() {
+
+        usernameEdit.setHint(AppController.getUsername());
+        /*
+         * TODO
+         *  set profile picture
+         *  set user email
+         */
+
+    }
+
+    //TODO
+    private void applyChanges() {
+
+
+
+    }
+
+    //TODO
+    private void changePfP() {
+
+
 
     }
 }

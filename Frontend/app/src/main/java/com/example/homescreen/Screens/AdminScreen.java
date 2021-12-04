@@ -20,6 +20,11 @@ public class AdminScreen extends AppCompatActivity {
     TextView inputText2;
     EditText inputEdit1;
     EditText inputEdit2;
+    Button submitButton;
+
+    boolean userFlag;
+    boolean postFlag;
+    boolean commentFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,13 @@ public class AdminScreen extends AppCompatActivity {
         inputText2 = findViewById(R.id.admin_input_TextView_2);
         inputEdit1 = findViewById(R.id.admin_input_EditText_1);
         inputEdit2 = findViewById(R.id.admin_input_EditText_2);
+
+        submitButton = findViewById(R.id.admin_submit_Button);
+        submitButton.setOnClickListener(view -> submit());
+
+        userFlag = false;
+        postFlag = false;
+        commentFlag = false;
     }
 
     private void deleteUser() {
@@ -54,6 +66,10 @@ public class AdminScreen extends AppCompatActivity {
         inputText1.setVisibility(View.VISIBLE);
         inputEdit1.setVisibility(View.VISIBLE);
 
+        submitButton.setVisibility(View.VISIBLE);
+
+        userFlag = true;
+
     }
 
     private void deletePost() {
@@ -65,6 +81,10 @@ public class AdminScreen extends AppCompatActivity {
 
         inputText1.setVisibility(View.VISIBLE);
         inputEdit1.setVisibility(View.VISIBLE);
+
+        submitButton.setVisibility(View.VISIBLE);
+
+        postFlag = true;
 
     }
 
@@ -82,6 +102,10 @@ public class AdminScreen extends AppCompatActivity {
         inputText2.setVisibility(View.VISIBLE);
         inputEdit2.setVisibility(View.VISIBLE);
 
+        submitButton.setVisibility(View.VISIBLE);
+
+        commentFlag = true;
+
     }
 
     private void makeButtonsInvisible() {
@@ -89,6 +113,41 @@ public class AdminScreen extends AppCompatActivity {
         deleteUser.setVisibility(View.INVISIBLE);
         deletePost.setVisibility(View.INVISIBLE);
         deleteComment.setVisibility(View.INVISIBLE);
+
+    }
+
+    private void submit() {
+
+        inputText1.setVisibility(View.INVISIBLE);
+        inputText2.setVisibility(View.INVISIBLE);
+        inputEdit1.setVisibility(View.INVISIBLE);
+        inputEdit2.setVisibility(View.INVISIBLE);
+        submitButton.setVisibility(View.INVISIBLE);
+
+        deleteUser.setVisibility(View.VISIBLE);
+        deletePost.setVisibility(View.VISIBLE);
+        deleteComment.setVisibility(View.VISIBLE);
+
+        if (userFlag) {
+
+            //TODO delete flag
+
+            userFlag = false;
+        }
+
+        else if (postFlag) {
+
+            //TODO delete post
+
+            postFlag = false;
+        }
+
+        else if (commentFlag) {
+
+            //TODO delete comment
+
+            commentFlag = false;
+        }
 
     }
 }

@@ -540,7 +540,7 @@ public class UserController {
     public String getUserPrivilegeLevel(@PathVariable String user) {
         User requestedUser = userRepository.findByUsername(user);
 
-        return requestedUser.getPLevelAsString();
+        return requestedUser.getPLevel();
     }
 
 }

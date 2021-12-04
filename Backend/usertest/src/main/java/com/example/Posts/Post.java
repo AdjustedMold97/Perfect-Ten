@@ -83,7 +83,7 @@ public class Post {
      * the most useful constructor that makes a post with message, title and user set to the prams
      * @param message
      * @param title
-     * @param user
+     * @param media
      */
     public Post(String message, String title, Blob media) {
         this.message = message;
@@ -91,6 +91,35 @@ public class Post {
         this.media = media;
     }
 
+    /**
+     * constructor
+     * @param message
+     * @param title
+     * @param user
+     */
+    public Post(String message, String title, User user) {
+    	this.message = message;
+    	this.title = title;
+    	this.user = user;
+    	uname = user.getUsername();
+    }
+    
+    /**
+     * constuctor
+     * @param message
+     * @param title
+     * @param user
+     * @param media
+     */
+    public Post(String message, String title, User user, Blob media) {
+    	this.message = message;
+    	this.title = title;
+    	this.user = user;
+    	this.media = media;
+    	uname = user.getUsername();
+    }
+    
+    
     // =============================== Getters and Setters for each field ================================== //
 
     /**

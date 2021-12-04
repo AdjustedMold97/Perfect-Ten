@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.sql.rowset.serial.SerialBlob;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -36,6 +39,8 @@ public class Post {
     private String uname;
     @ApiModelProperty(notes = "time assosiated with the post",name="time",required=true,value="time")
     private LocalDateTime time;
+    
+    private String extension;
     
     @ApiModelProperty(notes = "picture assosiated with the post",name="media",required=true,value="media")
     @JsonIgnore
@@ -85,10 +90,19 @@ public class Post {
      * @param title
      * @param media
      */
-    public Post(String message, String title, Blob media) {
+    public Post(String message, String title, MultipartFile media) {
         this.message = message;
         this.title = title;
-        this.media = media;
+        
+        this.extension = media.getOriginalFilename();
+        try { 
+            byte[] file = media.getBytes();
+            SerialBlob blob = new SerialBlob(file);
+            Blob image = blob;
+            this.media = image;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -111,12 +125,21 @@ public class Post {
      * @param user
      * @param media
      */
-    public Post(String message, String title, User user, Blob media) {
+    public Post(String message, String title, User user, MultipartFile media) {
     	this.message = message;
     	this.title = title;
     	this.user = user;
-    	this.media = media;
     	uname = user.getUsername();
+    	
+    	 this.extension = media.getOriginalFilename();
+         try { 
+             byte[] file = media.getBytes();
+             SerialBlob blob = new SerialBlob(file);
+             Blob image = blob;
+             this.media = image;
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
     }
     
     
@@ -274,6 +297,16 @@ public class Post {
     public void setMedia(Blob in) {
     	media = in;
     }
+    
+    public String getExtension() {
+    	return extension;
+    }
+    
+    public void setExtension(String in) {
+    	extension = in;
+    }
+    
+    
 }
 
 

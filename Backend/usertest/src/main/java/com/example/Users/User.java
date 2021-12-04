@@ -242,6 +242,14 @@ public class User {
     }
 
     /**
+     * Gets User's privilegel level as String
+     * @return USER, MODERATOR, or ADMIN (String)
+     */
+    public String getPLevelAsString() {
+        return pLevel.toString();
+    }
+
+    /**
      * Sets User's privilege level to pLevel
      * @param pLevel New pLevel, either USER, MODERATOR, or ADMIN
      */

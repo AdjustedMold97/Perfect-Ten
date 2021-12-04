@@ -528,14 +528,19 @@ public class UserController {
         User requestedUser = userRepository.findByUsername(user);
 
         return requestedUser.getExtension();
-    }
+    }  
 
-    @ApiOperation(value = "Retrieves user's privilege level", response = Enum.class)
+    /**
+     * Retrieves privilege level of User as String
+     * @param user Username of user
+     * @return String representing user's privilege level
+     */
+    @ApiOperation(value = "Retrieves user's privilege level", response = String.class)
     @GetMapping(path = "/user/{user}/privilege")
-    public PrivilegeLevel getUserPrivilegeLevel(@PathVariable String user) {
+    public String getUserPrivilegeLevel(@PathVariable String user) {
         User requestedUser = userRepository.findByUsername(user);
 
-        return requestedUser.getPLevel();
+        return requestedUser.getPLevelAsString();
     }
 
 }

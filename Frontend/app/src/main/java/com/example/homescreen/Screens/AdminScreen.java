@@ -36,6 +36,8 @@ public class AdminScreen extends AppCompatActivity {
     boolean postFlag;
     boolean commentFlag;
 
+    VolleyCallback callback;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,33 @@ public class AdminScreen extends AppCompatActivity {
         userFlag = false;
         postFlag = false;
         commentFlag = false;
+
+        callback = new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONArray response) {
+                //unreachable
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                errorText.setText("Success");
+                errorText.setTextColor(Color.GREEN);
+                errorText.setVisibility(View.VISIBLE);
+
+                resetPage();
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+                errorText.setText("Something went wrong...");
+                errorText.setTextColor(Color.RED);
+                errorText.setVisibility(View.VISIBLE);
+
+            }
+        };
     }
 
     private void deleteUser() {
@@ -149,33 +178,7 @@ public class AdminScreen extends AppCompatActivity {
             url += inputEdit1.getText().toString() + "/";
             url += inputEdit2.getText().toString();
 
-            PerfectTenRequester requester
-                    = new PerfectTenRequester(url, null, new VolleyCallback() {
-                @Override
-                public void onSuccess(JSONArray response) {
-                    //unreachable
-                }
-
-                @Override
-                public void onSuccess(JSONObject response) {
-
-                    errorText.setText("Success");
-                    errorText.setTextColor(Color.GREEN);
-                    errorText.setVisibility(View.VISIBLE);
-
-                    resetPage();
-
-                }
-
-                @Override
-                public void onError(VolleyError error) {
-
-                    errorText.setText("Something went wrong...");
-                    errorText.setTextColor(Color.RED);
-                    errorText.setVisibility(View.VISIBLE);
-
-                }
-            });
+            PerfectTenRequester requester = new PerfectTenRequester(url, null, callback);
 
             requester.request();
         }

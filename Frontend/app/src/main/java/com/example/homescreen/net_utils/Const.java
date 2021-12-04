@@ -37,6 +37,10 @@ public class Const {
     public static final String COMMENT_LIST_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/posts/";
     public static final String COMMENT_LIST_URL_2 = "/all";
 
+    public static final String DELETE_USER_URL = "";
+    public static final String DELETE_POST_URL = "";
+    public static final String DELETE_COMMENT_URL = "http://coms-309-060.cs.iastate.edu:8080/posts/rm/";
+
     //======================================== JSON ================================================
 
     public static final String SUCCESS_MSG = "success";

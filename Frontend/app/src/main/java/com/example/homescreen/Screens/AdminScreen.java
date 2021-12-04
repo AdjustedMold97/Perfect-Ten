@@ -1,15 +1,24 @@
 package com.example.homescreen.Screens;
 
+import static com.example.homescreen.net_utils.Const.DELETE_COMMENT_URL;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.example.homescreen.R;
+import com.example.homescreen.net_utils.PerfectTenRequester;
+import com.example.homescreen.net_utils.VolleyCallback;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class AdminScreen extends AppCompatActivity {
 
@@ -21,6 +30,7 @@ public class AdminScreen extends AppCompatActivity {
     EditText inputEdit1;
     EditText inputEdit2;
     Button submitButton;
+    TextView errorText;
 
     boolean userFlag;
     boolean postFlag;
@@ -50,6 +60,8 @@ public class AdminScreen extends AppCompatActivity {
 
         submitButton = findViewById(R.id.admin_submit_Button);
         submitButton.setOnClickListener(view -> submit());
+
+        errorText = findViewById(R.id.admin_Error);
 
         userFlag = false;
         postFlag = false;
@@ -113,10 +125,64 @@ public class AdminScreen extends AppCompatActivity {
         deleteUser.setVisibility(View.INVISIBLE);
         deletePost.setVisibility(View.INVISIBLE);
         deleteComment.setVisibility(View.INVISIBLE);
+        errorText.setVisibility(View.INVISIBLE);
 
     }
 
     private void submit() {
+
+        if (userFlag) {
+
+            //TODO delete flag
+
+        }
+
+        else if (postFlag) {
+
+            //TODO delete post
+
+        }
+
+        else if (commentFlag) {
+
+            String url = DELETE_COMMENT_URL;
+            url += inputEdit1.getText().toString() + "/";
+            url += inputEdit2.getText().toString();
+
+            PerfectTenRequester requester
+                    = new PerfectTenRequester(url, null, new VolleyCallback() {
+                @Override
+                public void onSuccess(JSONArray response) {
+                    //unreachable
+                }
+
+                @Override
+                public void onSuccess(JSONObject response) {
+
+                    errorText.setText("Success");
+                    errorText.setTextColor(Color.GREEN);
+                    errorText.setVisibility(View.VISIBLE);
+
+                    resetPage();
+
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+
+                    errorText.setText("Something went wrong...");
+                    errorText.setTextColor(Color.RED);
+                    errorText.setVisibility(View.VISIBLE);
+
+                }
+            });
+
+            requester.request();
+        }
+
+    }
+
+    private void resetPage() {
 
         inputText1.setVisibility(View.INVISIBLE);
         inputText2.setVisibility(View.INVISIBLE);
@@ -128,26 +194,9 @@ public class AdminScreen extends AppCompatActivity {
         deletePost.setVisibility(View.VISIBLE);
         deleteComment.setVisibility(View.VISIBLE);
 
-        if (userFlag) {
-
-            //TODO delete flag
-
-            userFlag = false;
-        }
-
-        else if (postFlag) {
-
-            //TODO delete post
-
-            postFlag = false;
-        }
-
-        else if (commentFlag) {
-
-            //TODO delete comment
-
-            commentFlag = false;
-        }
+        userFlag = false;
+        postFlag = false;
+        commentFlag = false;
 
     }
 }

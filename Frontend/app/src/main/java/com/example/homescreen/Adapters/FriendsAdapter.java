@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homescreen.R;
+import com.example.homescreen.Screens.DMsScreen;
 import com.example.homescreen.Screens.ProfileView;
 import com.example.homescreen.app.AppController;
 
@@ -96,6 +98,11 @@ import org.json.JSONObject;
                 });
 
 
+                 holder.friendObjectDms.setOnClickListener(view -> {
+                     AppController.setTargetUser(holder.friendObjectName.getText().toString());
+                     mContext.startActivity(new Intent(view.getContext(), DMsScreen.class));
+                 });
+
             }
             catch (JSONException e) {
                 e.printStackTrace();
@@ -124,6 +131,7 @@ import org.json.JSONObject;
             TextView friendObjectName;
             TextView friendObjectDesc;
             ImageView friendObjectImg;
+            Button friendObjectDms;
 
 
             /**
@@ -137,6 +145,7 @@ import org.json.JSONObject;
                 friendObjectName = itemView.findViewById(R.id.friendName);
                 friendObjectDesc = itemView.findViewById(R.id.friendDesc);
                 friendObjectImg = itemView.findViewById(R.id.friendImg);
+                friendObjectDms = itemView.findViewById(R.id.friendDms);
             }
         }
 }

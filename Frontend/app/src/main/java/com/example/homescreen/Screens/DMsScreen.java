@@ -21,6 +21,6 @@ public class DMsScreen extends AppCompatActivity {
         username.setText(AppController.getTargetUser());
 
         Button backBtn = findViewById(R.id.dms_back_Button);
-        backBtn.setOnClickListener(view -> startActivity(new Intent(view.getContext(), ProfileView.class)));
+        backBtn.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
     }
 }

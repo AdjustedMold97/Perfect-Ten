@@ -35,8 +35,9 @@ public class Post {
     @ApiModelProperty(notes = "time assosiated with the post",name="time",required=true,value="time")
     private LocalDateTime time;
     
+    @JsonIgnore
     @ApiModelProperty(notes = "List of comments assosiated with the post",name="comments",required=true,value="comments")
-    private List<Comment> comments = new ArrayList<Comment>();
+    private ArrayList<Comment> comments = new ArrayList<Comment>();
     
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -180,10 +181,6 @@ public class Post {
      */
     public void setTime() {
     	time = LocalDateTime.now();
-    }
-
-    public List<Comment> getComments() {
-        return comments;
     }
 
     /**

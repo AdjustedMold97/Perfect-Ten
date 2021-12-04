@@ -94,6 +94,7 @@ public class FindUserScreen extends AppCompatActivity {
 
                                     AppController.setTargetUser(targetUser);
                                     startActivity(new Intent(view.getContext(), ProfileView.class));
+                                    return;
 
                                 }
 

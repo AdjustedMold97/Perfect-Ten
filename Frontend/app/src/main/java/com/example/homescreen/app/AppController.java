@@ -160,16 +160,21 @@ public class AppController extends Application {
      *
      * @param _targetUser The String being specified for targetUser.
      */
-    static public void setTargetUser(String _targetUser) {
+    static public void setTargetUser (String _targetUser) {
         targetUser = _targetUser;
     }
 
-    /*
+    /**
      * Used to retrieve post information
      * for the PostView
      */
     private static int postID;
 
     public static int getPostID() { return postID; }
-    public static void setPostID(int _postID) { postID = _postID; }
+    public static void setPostID (int _postID) { postID = _postID; }
+
+    public static boolean isAdmin;
+
+    public static void setAdminStatus (boolean _isAdmin) { isAdmin = _isAdmin; }
+    public static boolean getAdminStatus() { return isAdmin; }
 }

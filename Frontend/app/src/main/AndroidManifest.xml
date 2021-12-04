@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.homescreen">
+    package="com.example.homescreen" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,11 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HomeScreen"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".Screens.AdminScreen"
+            android:exported="false" />
         <activity
             android:name=".Screens.PostView"
-            android:theme="@style/AppTheme.CustomTheme"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".Screens.FindUserScreen"
             android:exported="false" />
@@ -31,7 +34,7 @@
             android:exported="true" />
         <activity
             android:name=".Screens.LoginScreen"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

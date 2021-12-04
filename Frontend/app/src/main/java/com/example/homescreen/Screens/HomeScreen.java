@@ -57,6 +57,9 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
+        Button admin = findViewById(R.id.admin_Button);
+        admin.setOnClickListener(view -> startActivity(new Intent(this, AdminScreen.class)));
+
         //=======================================================================================================
         //TODO ethan- interface these somehow to make more efficient
         //TODO use <include or <merge to get interface into homeScreen
@@ -97,6 +100,14 @@ public class HomeScreen extends AppCompatActivity {
 
         //getting posts
         getPosts();
+        getAdminStatus();
+    }
+
+    //TODO
+    private void getAdminStatus() {
+
+
+
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.example.Posts;
 
+import java.sql.Blob;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,6 +36,11 @@ public class Post {
     private String uname;
     @ApiModelProperty(notes = "time assosiated with the post",name="time",required=true,value="time")
     private LocalDateTime time;
+    
+    @ApiModelProperty(notes = "picture assosiated with the post",name="media",required=true,value="media")
+    @JsonIgnore
+    @Lob
+    private Blob media;
     
     @JsonIgnore
     @ApiModelProperty(notes = "List of comments assosiated with the post",name="comments",required=true,value="comments")
@@ -78,11 +85,10 @@ public class Post {
      * @param title
      * @param user
      */
-    public Post(String message, String title, User user) {
+    public Post(String message, String title, Blob media) {
         this.message = message;
         this.title = title;
-        this.user = user;
-        uname = user.getUsername();
+        this.media = media;
     }
 
     // =============================== Getters and Setters for each field ================================== //
@@ -222,6 +228,22 @@ public class Post {
      */
     public void addComment(String m, User u) {
     	comments.add(new Comment(m,u));
+    }
+    
+    /**
+     * returns media assosiated with the post
+     * @return
+     */
+    public Blob getMedia() {
+    	return media;
+    }
+    
+    /**
+     * sets the media assosiated with the post
+     * @param in
+     */
+    public void setMedia(Blob in) {
+    	media = in;
     }
 }
 

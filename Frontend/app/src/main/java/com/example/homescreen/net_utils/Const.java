@@ -37,6 +37,12 @@ public class Const {
     public static final String COMMENT_LIST_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/posts/";
     public static final String COMMENT_LIST_URL_2 = "/all";
 
+    //TODO these
+    public static final String CHANGE_USERNAME_URL = "";
+    public static final String CHANGE_PASSWORD_URL = "";
+    public static final String CHANGE_EMAIL_URL = "";
+    public static final String CHANGE_PFP_URL = "";
+
     //======================================== JSON ================================================
 
     public static final String SUCCESS_MSG = "success";

@@ -149,6 +149,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="16dp"
         android:text="Changes Applied!"
+        android:textAlignment="center"
         android:textColor="#4CAF50"
         app:layout_constraintBottom_toTopOf="@+id/apply_Button"
         app:layout_constraintStart_toStartOf="@+id/apply_Button"

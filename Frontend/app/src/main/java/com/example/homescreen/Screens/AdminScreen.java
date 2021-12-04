@@ -1,6 +1,8 @@
 package com.example.homescreen.Screens;
 
 import static com.example.homescreen.net_utils.Const.DELETE_COMMENT_URL;
+import static com.example.homescreen.net_utils.Const.DELETE_POST_URL;
+import static com.example.homescreen.net_utils.Const.DELETE_USER_URL;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -160,28 +162,21 @@ public class AdminScreen extends AppCompatActivity {
 
     private void submit() {
 
-        if (userFlag) {
+        PerfectTenRequester requester;
+        String url = null;
+        JSONObject requestObj = null;
 
-            //TODO delete flag
+        if (userFlag)
+            url = DELETE_USER_URL;
 
-        }
+        else if (postFlag)
+            url = DELETE_POST_URL;
 
-        else if (postFlag) {
+        else if (commentFlag)
+            url = DELETE_COMMENT_URL + inputEdit1.getText().toString() + "/" + inputEdit2.getText().toString();
 
-            //TODO delete post
-
-        }
-
-        else if (commentFlag) {
-
-            String url = DELETE_COMMENT_URL;
-            url += inputEdit1.getText().toString() + "/";
-            url += inputEdit2.getText().toString();
-
-            PerfectTenRequester requester = new PerfectTenRequester(url, null, callback);
-
-            requester.request();
-        }
+        requester = new PerfectTenRequester(url, requestObj, callback);
+        requester.request();
 
     }
 

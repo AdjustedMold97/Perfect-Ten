@@ -26,6 +26,7 @@ import io.swagger.annotations.ApiOperation;
 
 import com.example.Posts.Post;
 import com.example.Posts.PostRepository;
+import com.example.Users.User.PrivilegeLevel;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.IOError;
@@ -528,4 +529,13 @@ public class UserController {
 
         return requestedUser.getExtension();
     }
+
+    @ApiOperation(value = "Retrieves user's privilege level", response = Enum.class)
+    @GetMapping(path = "/user/{user}/privilege")
+    public PrivilegeLevel getUserPrivilegeLevel(@PathVariable String user) {
+        User requestedUser = userRepository.findByUsername(user);
+
+        return requestedUser.getPLevel();
+    }
+
 }

@@ -85,8 +85,8 @@ public class PostView extends AppCompatActivity {
     private void setUpTextPost() {
 
         try {
-            titleView.setText(post.get("title").toString());
-            bodyView.setText(post.get("message").toString());
+            titleView.setText(post.get(Const.TITLE_KEY).toString());
+            bodyView.setText(post.get(MESSAGE_KEY).toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }

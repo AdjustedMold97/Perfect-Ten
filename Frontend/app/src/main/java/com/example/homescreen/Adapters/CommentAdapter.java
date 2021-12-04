@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.homescreen.R;
+import com.example.homescreen.net_utils.Const;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,7 +74,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
             JSONObject temp;
             temp = (JSONObject) mtest.get(position);
 
-            holder.commentObjectText.setText(temp.get("text").toString());
+            holder.commentObjectUser.setText(temp.get(Const.USER_KEY).toString());
+            holder.commentObjectText.setText(temp.get(Const.MESSAGE_KEY).toString());
 
         }
         catch (JSONException e) {
@@ -99,6 +101,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView commentObjectText;
+        TextView commentObjectUser;
 
         /**
          * ID's for postObjectTitle and postObjectBody
@@ -109,6 +112,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             commentObjectText = itemView.findViewById(R.id.commentObjectText);
+            commentObjectUser = itemView.findViewById(R.id.commentObjectUsername);
 
         }
     }

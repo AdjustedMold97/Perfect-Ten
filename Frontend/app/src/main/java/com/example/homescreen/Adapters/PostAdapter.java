@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.homescreen.R;
 import com.example.homescreen.Screens.PostView;
 import com.example.homescreen.app.AppController;
+import com.example.homescreen.net_utils.Const;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,9 +77,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
             JSONObject temp = (JSONObject) mtest.get(position);
 
-            String title = temp.get("title").toString();
-            String body = temp.get("message").toString();
-            int id = Integer.parseInt(temp.get("id").toString());
+            String title = temp.get(Const.TITLE_KEY).toString();
+            String body = temp.get(Const.MESSAGE_KEY).toString();
+            int id = Integer.parseInt(temp.get(Const.ID_KEY).toString());
 
             holder.postObjectTitle.setText(title);
             holder.postObjectBody.setText(body);

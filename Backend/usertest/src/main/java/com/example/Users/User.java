@@ -34,11 +34,11 @@ public class User {
      * Moderators can do everything users can as well as delete posts and ban users. 
      * Admins can do everything moderators can as well as promote a base user to moderator status.
      */
-    public static enum PrivilegeLevel {
+    /*public static enum PrivilegeLevel {
         USER,
         MODERATOR,
         ADMIN
-    } 
+    }*/
 
     /**
      * Each User has a unique ID
@@ -132,7 +132,7 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-        pLevel = PrivilegeLevel.USER.toString();
+        pLevel = "USER";
         notifications = true;
         posts = new ArrayList<>();
         friends = new ArrayList<>();

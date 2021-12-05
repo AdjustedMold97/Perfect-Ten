@@ -175,7 +175,7 @@ public class UserController {
      * @return success if User is saved, failure otherwise
      */
     @ApiOperation(value = "Saves a new user to the database for signup, returns success or failure", response = String.class)
-    @GetMapping(path = "/user/new")
+    @PostMapping(path = "/user/new")
     public String createUser(@RequestBody ObjectNode json) {
         String username = json.get("username").textValue();
         String email = json.get("email").textValue();

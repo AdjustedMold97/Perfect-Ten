@@ -166,6 +166,9 @@ public class UserController {
 
         // Save new User to database and return success
         userRepository.save(user);
+        user.setNotificationPref(true);
+        user.setPLevel("USER");
+        userRepository.save(user);
         return success;
     }
 

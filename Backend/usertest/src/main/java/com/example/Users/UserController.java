@@ -177,9 +177,9 @@ public class UserController {
     @ApiOperation(value = "Saves a new user to the database for signup, returns success or failure", response = String.class)
     @PostMapping(path = "/user/new")
     public String createUser(@RequestBody ObjectNode json) {
-        String username = json.get("username").textValue().toString();
-        String email = json.get("email").textValue().toString();
-        String password = json.get("password").textValue().toString();
+        String username = json.get("username").asText();
+        String email = json.get("email").asText();
+        String password = json.get("password").asText();
 
         if (username == null || email == null || password == null) {
             return failure;

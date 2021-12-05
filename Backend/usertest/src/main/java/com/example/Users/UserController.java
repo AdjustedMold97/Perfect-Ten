@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiOperation;
 
 import com.example.Posts.Post;
 import com.example.Posts.PostRepository;
-import com.example.Users.User.PrivilegeLevel;
+//import com.example.Users.User.PrivilegeLevel;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.IOError;

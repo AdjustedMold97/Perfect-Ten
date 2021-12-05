@@ -185,7 +185,7 @@ public class UserController {
             return failure;
         }
 
-        User user = new User(username, email, password);
+        User user = new User(json.get("username").textValue(), json.get("email").textValue(), json.get("password").textValue());
 
         // If username field is null or empty or User with that username exists, return failure
         if(user.getUsername() == null || user.getUsername() == "" || userRepository.findByUsername(user.getUsername()) != null) {

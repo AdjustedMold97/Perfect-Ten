@@ -142,7 +142,7 @@ public class UserController {
      * @return success if User is saved, failure otherwise
      */
     @ApiOperation(value = "Saves an existing user to the database for signup, returns success or failure", response = String.class)
-    @PutMapping(path = "/user/store")
+    @PostMapping(path = "/user/store")
     public String storeExistingUser(@RequestBody User user) {
         // If RequestBody is null, return failure
         if (user == null) {
@@ -165,9 +165,6 @@ public class UserController {
         }
 
         // Save new User to database and return success
-        userRepository.save(user);
-        user.setNotificationPref(true);
-        user.setPLevel("USER");
         userRepository.save(user);
         return success;
     }

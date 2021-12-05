@@ -143,7 +143,7 @@ public class UserController {
      */
     @ApiOperation(value = "Saves a new user to the database for signup, returns success or failure", response = String.class)
     @PostMapping(path = "/user/new")
-    public String createUser(@RequestBody User user) {
+    /*public String createUser(@RequestBody User user) {
         // If RequestBody is null, return failure
         if (user == null) {
             return failure;
@@ -165,8 +165,39 @@ public class UserController {
         }
 
         // Save new User to database and return success
-        user.setPLevel("USER");
-        user.setNotificationPref(true);
+        userRepository.save(user);
+        return success;
+    }*/
+
+    public String createUser(@RequestBody ObjectNode json) {
+        // If RequestBody is null, return failure
+        
+        String username = json.get("username").textValue();
+        String email = json.get("email").textValue();
+        String password = json.get("password").textValue();
+
+        if (username == null || email == null || password == null) {
+            return failure;
+        }
+
+        User user = new User(username, email, password);
+
+        // If username field is null or empty or User with that username exists, return failure
+        if(user.getUsername() == null || user.getUsername() == "" || userRepository.findByUsername(user.getUsername()) != null) {
+        	return usernameFail;
+        }
+        
+        // If email field is null or empty, return failure
+        if(user.getEmail() == null || user.getEmail() == "") {
+        	return emailFail;
+        }
+        
+        // If password field is null or empty, return failure
+        if (user.getPassword() == null || user.getPassword() == "") {
+            return passFail;
+        }
+
+        // Save new User to database and return success
         userRepository.save(user);
         return success;
     }

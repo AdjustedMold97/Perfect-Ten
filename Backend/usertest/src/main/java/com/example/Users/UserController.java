@@ -137,13 +137,13 @@ public class UserController {
     }
 
     /**
-     * Creates a new User and stores it in database (signup)
+     * Stores existing user in database (signup)
      * @param user User to be saved in database
      * @return success if User is saved, failure otherwise
      */
-    @ApiOperation(value = "Saves a new user to the database for signup, returns success or failure", response = String.class)
-    @PostMapping(path = "/user/new")
-    /*public String createUser(@RequestBody User user) {
+    @ApiOperation(value = "Saves an existing user to the database for signup, returns success or failure", response = String.class)
+    @PostMapping(path = "/user/store")
+    public String storeExistingUser(@RequestBody User user) {
         // If RequestBody is null, return failure
         if (user == null) {
             return failure;
@@ -167,11 +167,16 @@ public class UserController {
         // Save new User to database and return success
         userRepository.save(user);
         return success;
-    }*/
+    }
 
+    /**
+     * Creates new user and stores it in database (signup)
+     * @param user User to be saved in database
+     * @return success if User is saved, failure otherwise
+     */
+    @ApiOperation(value = "Saves a new user to the database for signup, returns success or failure", response = String.class)
+    @GetMapping(path = "/user/new")
     public String createUser(@RequestBody ObjectNode json) {
-        // If RequestBody is null, return failure
-        
         String username = json.get("username").textValue();
         String email = json.get("email").textValue();
         String password = json.get("password").textValue();

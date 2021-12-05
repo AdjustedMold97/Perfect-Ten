@@ -59,14 +59,14 @@ class MainTests {
 
 		when(userRepository.findByUsername("TestUser")).thenReturn(null);
 
-		assertEquals("{\"message\":\"success\"}", userController.createUser(user));
+		assertEquals("{\"message\":\"success\"}", userController.storeExistingUser(user));
 	}
 
 	@Test
 	public void createUserTestNull() {
 		User user = new User("", "", "");
 
-		assertEquals("{\"message\":\"error2\"}", userController.createUser(user));
+		assertEquals("{\"message\":\"error2\"}", userController.storeExistingUser(user));
 	}
 
 	@Test
@@ -98,7 +98,7 @@ class MainTests {
 	public void loginTest() {
 		User user = new User("test123", "test123@gmail.com", "testpassword123");
 
-		userController.createUser(user);
+		userController.storeExistingUser(user);
 
 		ObjectMapper mapper = new ObjectMapper();
 

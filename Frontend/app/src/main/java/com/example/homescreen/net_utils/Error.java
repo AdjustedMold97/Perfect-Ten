@@ -36,8 +36,10 @@ public class Error extends Activity {
         int height = dm.heightPixels;
 
         getWindow().setLayout((int)(width*.8),(int)(height*.6));
-        
 
+        Button back = findViewById(R.id.errorCancel);
+
+        back.setOnClickListener(view -> finish());
 
     }
 }

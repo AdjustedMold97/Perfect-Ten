@@ -49,10 +49,6 @@ public class Post {
     @Lob
     private Blob media;
     
-    /* @JsonIgnore
-    @ApiModelProperty(notes = "List of comments assosiated with the post",name="comments",required=true,value="comments")
-    private ArrayList<Comment> comments = new ArrayList<Comment>(); */
-    
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
@@ -254,47 +250,6 @@ public class Post {
     public void setTime() {
     	time = LocalDateTime.now();
     }
-
-    /**
-     * gets a comment stored at input index
-     * @param id
-     * @return comment
-     */
-   /*public String getComment(int id) {
-    	if(id >= comments.size()) {
-    		return "{\"message\":\"error1\"}";
-    	}
-    	else {
-    		String temp = new String();
-    		temp = "{\"user\":\"";
-    		temp = temp.concat(comments.get(id).getUser().getUsername());
-    		temp = temp.concat(",\"message\":\"");
-    		temp = temp.concat(comments.get(id).getMessage());
-    		temp = temp.concat(",\"time\":\"");
-    		temp = temp.concat(comments.get(id).getTime());
-    		temp = temp.concat("\"}");
-    		return temp;
-    	}
-    } */
-    
-    /**
-     * deletes a comment stored at input index
-     * @param id
-     */
-   /* public void delComment(int id) {
-    	if(id < comments.size()) {
-    		comments.remove(id);
-    	}
-    } */
-    
-    /**
-     * creates a new comment with message m and user u
-     * @param m
-     * @param u
-     */
-    /*public void addComment(String m, User u) {
-    	comments.add(new Comment(m,u));
-    }*/
     
     /**
      * returns media assosiated with the post

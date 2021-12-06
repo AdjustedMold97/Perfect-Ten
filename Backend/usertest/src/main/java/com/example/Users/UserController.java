@@ -1,6 +1,7 @@
 package com.example.Users;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -29,6 +30,7 @@ import com.example.Posts.PostRepository;
 //import com.example.Users.User.PrivilegeLevel;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOError;
 import java.io.IOException;
 import java.sql.Blob;
@@ -556,19 +558,21 @@ public class UserController {
     }  
 
     @PutMapping(path = "/user/{user}/pic/new")
-    public String setUserProfilePicBytes(@PathVariable String user, @RequestBody byte[] file, @RequestParam String extension) {
+    public String setUserProfilePicBytes(@PathVariable String user, @RequestBody String file, @RequestParam String extension) {
         User requestedUser = userRepository.findByUsername(user);
 
         if (requestedUser == null || file == null || extension == null) {
             return failure;
         }
 
+        byte[] bytes = Base64.getDecoder().decode(file);
+
         requestedUser.setExtension(extension);
 
         userRepository.save(requestedUser);
 
         try {
-            SerialBlob blob = new SerialBlob(file);
+            SerialBlob blob = new SerialBlob(bytes);
             Blob image = blob;
             requestedUser.setProfilePic(image);
             userRepository.save(requestedUser);

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 
@@ -45,6 +46,7 @@ public class HomeScreen extends AppCompatActivity {
     PerfectTenRequester requester;
     String[] blockedUsers;
     JSONArray responseArr;
+    JSONObject privilege;
 
     /**
      * Calls onResume() method onCreate to populate the homeScreen view with postObjects
@@ -59,6 +61,8 @@ public class HomeScreen extends AppCompatActivity {
 
         Button admin = findViewById(R.id.admin_Button);
         admin.setOnClickListener(view -> startActivity(new Intent(this, AdminScreen.class)));
+
+
 
         //=======================================================================================================
         //TODO ethan- interface these somehow to make more efficient
@@ -106,6 +110,25 @@ public class HomeScreen extends AppCompatActivity {
     //TODO
     private void getAdminStatus() {
 
+        requester = new PerfectTenRequester(Const.USER_PRIVILEGE_LEVEL_1 + AppController.getUsername() + Const.USER_PRIVILEGE_LEVEL_2, new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONArray response) {/* unreachable */}
+
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                privilege = response;
+                TextView test = findViewById(R.id.testview);
+                test.setText(privilege.toString());
+
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {/* TODO */}
+        });
+
+        requester.request();
 
 
     }

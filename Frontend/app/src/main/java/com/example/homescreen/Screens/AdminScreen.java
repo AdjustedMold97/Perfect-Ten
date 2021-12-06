@@ -58,9 +58,9 @@ public class AdminScreen extends AppCompatActivity {
         deleteComment.setOnClickListener(view -> deleteComment());
 
         inputText1 = findViewById(R.id.admin_input_TextView_1);
-        inputText2 = findViewById(R.id.admin_input_TextView_2);
+        inputText2 = findViewById(R.id.admin_input_TextView_comment);
         inputEdit1 = findViewById(R.id.admin_input_EditText_1);
-        inputEdit2 = findViewById(R.id.admin_input_EditText_2);
+        inputEdit2 = findViewById(R.id.admin_input_EditText_comment);
 
         submitButton = findViewById(R.id.admin_submit_Button);
         submitButton.setOnClickListener(view -> submit());

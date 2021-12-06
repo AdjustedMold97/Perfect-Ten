@@ -15,6 +15,7 @@
         android:usesCleartextTraffic="true" >
         <activity
             android:name=".Screens.AdminScreen"
+            android:label="Admin"
             android:exported="false" />
         <activity
             android:name=".Screens.PostView"

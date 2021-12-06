@@ -41,6 +41,10 @@ public class Const {
     public static final String DELETE_POST_URL = "";
     public static final String DELETE_COMMENT_URL = "http://coms-309-060.cs.iastate.edu:8080/posts/rm/";
 
+    public static final String USER_PRIVILEGE_LEVEL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
+    public static final String USER_PRIVILEGE_LEVEL_2 = "/privilege";
+
+
     //======================================== JSON ================================================
 
     public static final String SUCCESS_MSG = "success";

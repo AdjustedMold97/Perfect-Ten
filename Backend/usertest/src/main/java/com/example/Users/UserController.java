@@ -530,7 +530,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "Updates user's profile picture", response = String.class)
-    @PutMapping(path = "/user/{user}/pic/new")
+    @PutMapping(path = "/user/{user}/pic/new2")
     public String setUserProfilePic(@PathVariable String user, @RequestBody MultipartFile profilePic) throws Exception {
         User requestedUser = userRepository.findByUsername(user);
         
@@ -544,6 +544,26 @@ public class UserController {
 
         try { 
             byte[] file = profilePic.getBytes();
+            SerialBlob blob = new SerialBlob(file);
+            Blob image = blob;
+            requestedUser.setProfilePic(image);
+            userRepository.save(requestedUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return success;
+    }  
+
+    @PutMapping(path = "/user/{user}/pic/new")
+    public String setUserProfilePicBytes(@PathVariable String user, @RequestBody byte[] file) {
+        User requestedUser = userRepository.findByUsername(user);
+
+        if (requestedUser == null || file == null) {
+            return failure;
+        }
+
+        try {
             SerialBlob blob = new SerialBlob(file);
             Blob image = blob;
             requestedUser.setProfilePic(image);

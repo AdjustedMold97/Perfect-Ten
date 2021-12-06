@@ -565,7 +565,7 @@ public class UserController {
 
         requestedUser.setExtension(extension);
 
-        userRepository.save(extension);
+        userRepository.save(requestedUser);
 
         try {
             SerialBlob blob = new SerialBlob(file);

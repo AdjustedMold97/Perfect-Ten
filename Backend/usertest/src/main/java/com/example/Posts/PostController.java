@@ -134,7 +134,7 @@ public class PostController {
     public String deletePost(@PathVariable int id){
     	if(postRepository.findById(id).getChildren().size() != 0) {
     		int temp = postRepository.findById(id).getChildren().size();
-    		for(int i= temp; i >= 0; i--) {
+    		for(int i= temp - 1; i >= 0; i--) {
     			deletePost(postRepository.findById(id).getChildren().get(i).getId());
     		}
     	}

@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +23,10 @@ import com.example.homescreen.net_utils.VolleyCallback;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /**
  * Activity where a user can edit app settings
  * Has not been implemented yet
@@ -30,7 +34,7 @@ import org.json.JSONObject;
  */
 public class SettingsScreen extends AppCompatActivity {
 
-    ImageView profilePic;
+    ImageView settingsPfP;
     EditText usernameEdit;
     EditText passwordEdit;
     EditText emailEdit;
@@ -50,7 +54,9 @@ public class SettingsScreen extends AppCompatActivity {
         Button home = findViewById(R.id.home_Button_settings);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
 
-        profilePic = findViewById(R.id.settings_Profile_Pic);
+        settingsPfP = findViewById(R.id.settings_Profile_Pic);
+        settingsPfP.setOnClickListener(view -> changePfP());
+
         usernameEdit = findViewById(R.id.change_username_EditText);
         passwordEdit = findViewById(R.id.change_password_EditText);
         emailEdit = findViewById(R.id.change_email_EditText);
@@ -58,9 +64,6 @@ public class SettingsScreen extends AppCompatActivity {
 
         Button applyButton = findViewById(R.id.apply_Button);
         applyButton.setOnClickListener(view -> applyChanges());
-
-        ImageButton settingsPfP = findViewById(R.id.settings_Profile_Pic);
-        settingsPfP.setOnClickListener(view -> changePfP());
 
         setUpSettings();
     }
@@ -129,7 +132,21 @@ public class SettingsScreen extends AppCompatActivity {
     //TODO
     private void changePfP() {
 
+        File f = new File(Environment.DIRECTORY_PICTURES);
 
+        Scanner scnr = null;
+
+        try {
+            scnr = new Scanner(f);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        while (scnr.hasNext()) {
+
+
+
+        }
 
     }
 }

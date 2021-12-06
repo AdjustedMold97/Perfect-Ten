@@ -82,6 +82,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             String title = temp.get(Const.TITLE_KEY).toString();
             String body = temp.get(Const.MESSAGE_KEY).toString();
             String uname = temp.get(Const.POST_USER_KEY).toString();
+            String time = temp.get(Const.TIME_KEY).toString();
 
             int id = Integer.parseInt(temp.get(Const.ID_KEY).toString());
 
@@ -91,6 +92,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             holder.postObjectBody.setText(body);
             holder.postObjectID.setText("ID: " + idstring);
             holder.postObjectUname.setText(uname);
+            holder.postObjectTime.setText(time);
 
             holder.postObjectTitle.setOnClickListener(view -> {
 
@@ -98,6 +100,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                 mContext.startActivity(new Intent(mContext, PostView.class));
 
             });
+
+//            if(AppController.getPrivLevel()>0){
+//                holder.postObjectID.setText(View.VISIBLE);
+//
+//            }
 
         }
         catch (JSONException e) {

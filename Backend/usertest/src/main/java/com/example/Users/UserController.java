@@ -558,16 +558,16 @@ public class UserController {
     }  
 
     @PutMapping(path = "/user/{user}/pic/new")
-    public String setUserProfilePicBytes(@PathVariable String user, @RequestBody String file, @RequestParam String extension) {
+    public String setUserProfilePicBytes(@PathVariable String user, @RequestBody String file) {
         User requestedUser = userRepository.findByUsername(user);
 
-        if (requestedUser == null || file == null || extension == null) {
+        if (requestedUser == null || file == null) {
             return failure;
         }
 
         byte[] bytes = Base64.getDecoder().decode(file);
 
-        requestedUser.setExtension(extension);
+        requestedUser.setExtension(user + "-profile-picture.png");
 
         userRepository.save(requestedUser);
 

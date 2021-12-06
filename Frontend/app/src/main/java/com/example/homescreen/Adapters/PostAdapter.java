@@ -90,6 +90,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
             });
 
+            
+
         }
         catch (JSONException e) {
             e.printStackTrace();

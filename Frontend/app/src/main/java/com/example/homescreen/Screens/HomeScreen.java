@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -46,6 +47,7 @@ public class HomeScreen extends AppCompatActivity {
     PerfectTenRequester requester;
     String[] blockedUsers;
     JSONArray responseArr;
+    int privLevel = 0;
 
     /**
      * Calls onResume() method onCreate to populate the homeScreen view with postObjects
@@ -60,6 +62,7 @@ public class HomeScreen extends AppCompatActivity {
 
         Button admin = findViewById(R.id.admin_Button);
         admin.setOnClickListener(view -> startActivity(new Intent(this, AdminScreen.class)));
+
 
 
 
@@ -103,7 +106,12 @@ public class HomeScreen extends AppCompatActivity {
 
         //getting posts
         getPosts();
-        getAdminStatus();
+        getAdminStatus(); //TODO
+
+        if(AppController.getPrivLevel()>0) {
+            admin.setVisibility(View.VISIBLE);
+
+        }
     }
 
     //TODO
@@ -120,8 +128,12 @@ public class HomeScreen extends AppCompatActivity {
                 TextView test = findViewById(R.id.testview);
 
                 try {
-                    test.setText(response.get("pvalue").toString());
-                } catch (JSONException e) {
+                    //test.setText(response.get("pvalue").toString());
+                    AppController.setPrivLevel(response.getInt("pvalue"));
+
+
+                }
+                catch (JSONException e) {
                     e.printStackTrace();
                 }
 

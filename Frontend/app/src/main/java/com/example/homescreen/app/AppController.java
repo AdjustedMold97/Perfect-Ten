@@ -177,4 +177,12 @@ public class AppController extends Application {
 
     public static void setAdminStatus (boolean _isAdmin) { isAdmin = _isAdmin; }
     public static boolean getAdminStatus() { return isAdmin; }
+
+    /**
+     * Used for the privilege level of a user
+     */
+    public  static  int privLevel;
+
+    public static int getPrivLevel() { return privLevel; }
+    public static void setPrivLevel(int privLev) { privLevel = privLev; }
 }

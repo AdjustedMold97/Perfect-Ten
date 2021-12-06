@@ -80,63 +80,32 @@ public class PostController {
      * @return String
      */
     @ApiOperation(value = "Make a new comment on a specified comment by id by the specifiyed user", response = String.class)
-    @PostMapping(path = "/posts/new/comment/{username}")
-    public String createComment(@RequestBody ObjectNode idAndMessage, @PathVariable String username) {
-    	int id = idAndMessage.get("id").intValue();
-        String message = idAndMessage.get("message").textValue();
-        
-        if (userRepository.findByUsername(username) == null)
+    @PostMapping(path = "/posts/{id}/comment/{username}")
+    public String createComment(@RequestBody Post post, @PathVariable String username, @PathVariable int id) {
+    	if (post == null || userRepository.findByUsername(username) == null)
             return usernameFail;
-    	if(postRepository.findById(id) == null) 
-    		return failure;
-    	postRepository.findById(id).addComment(message, userRepository.findByUsername(username));
-    	return success;
+        // User user = userRepository.findByUsername(username);
+        post.setUser(userRepository.findByUsername(username));
+        post.setTime();
+        postRepository.save(post);
+        userRepository.findByUsername(username).addPost(post);
+        userRepository.save(userRepository.findByUsername(username));
+        postRepository.findById(id).addChild(post);
+        postRepository.save(postRepository.findById(id));
+        return success;
     }
     
     /**
-     * Gets a comment by the id of parent post and its specific index
-     * @param id
-     * @param index
-     * @return String
-     */
-    @ApiOperation(value = "Gets a comment by the id of parent post and its specific index", response = String.class)
-    @GetMapping(path = "/posts/{id}/{index}")
-    public String getCommentById( @PathVariable int id, @PathVariable int index){
-        return postRepository.findById(id).getComment(index);
-    }
-
-    /**
      * Gets all comments by the id of parent post
      * @param id
-     * @param index
      * @return String
      */
     @ApiOperation(value = "Gets all comments by the id of parent post", response = String.class)
     @GetMapping(path = "/posts/{id}/all")
-    public String getAllComments( @PathVariable int id){
-    	int index = 0;
-    	String out = "[";
-    	while(!postRepository.findById(id).getComment(index).equals("{\"message\":\"error1\"}")) {
-    		if(index!=0) out = out.concat(",");
-    		out = out.concat(postRepository.findById(id).getComment(index));
-    	}
-    	out = out.concat("]");
-        return out;
+    public List<Post> getAllComments( @PathVariable int id){
+    	return postRepository.findById(id).getChildren();
     }
-    
-    /**
-     * Deletes a comment by id of parent post and its specific index
-     * @param id
-     * @param index
-     * @return
-     */
-    @ApiOperation(value = "Deletes a comment by id of parent post and its specific index", response = String.class)
-    @DeleteMapping(path = "/posts/rm/{id}/{index}")
-    public String deleteComment(@PathVariable int id, @PathVariable int index){
-    	postRepository.findById(id).delComment(index);
-    	return success;
-    }
-    
+
     /**
      * Updates a post of given ID
      * @param id
@@ -160,8 +129,15 @@ public class PostController {
      */
     @ApiOperation(value = "delete post by given ID", response = String.class)
     @DeleteMapping(path = "/posts/rm/{id}")
-    public String deletePost(@PathVariable long id){
-    	postRepository.deleteById(id);
+    public String deletePost(@PathVariable int id){
+    	if(postRepository.findById(id).getChildren().size() != 0) {
+    		int temp = postRepository.findById(id).getChildren().size();
+    		for(int i= temp; i >= 0; i--) {
+    			deletePost(postRepository.findById(id).getChildren().get(i).getId());
+    		}
+    	}
+    	long newid = (long)id;
+    	postRepository.deleteById(newid);
     	return success;
     }
 }

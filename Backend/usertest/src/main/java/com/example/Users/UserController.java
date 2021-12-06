@@ -556,12 +556,16 @@ public class UserController {
     }  
 
     @PutMapping(path = "/user/{user}/pic/new")
-    public String setUserProfilePicBytes(@PathVariable String user, @RequestBody byte[] file) {
+    public String setUserProfilePicBytes(@PathVariable String user, @RequestBody byte[] file, String extension) {
         User requestedUser = userRepository.findByUsername(user);
 
-        if (requestedUser == null || file == null) {
+        if (requestedUser == null || file == null || extension == null) {
             return failure;
         }
+
+        requestedUser.setExtension(extension);
+
+        userRepository.save(extension);
 
         try {
             SerialBlob blob = new SerialBlob(file);

@@ -162,6 +162,8 @@ public class User {
      * Creates a new User with empty posts, friends, and blocked lists
      */
     public User() {
+    	pLevel = 0;
+        notifications = true;
         posts = new ArrayList<>();
         friends = new ArrayList<>();
         blockedUsers = new ArrayList<>();

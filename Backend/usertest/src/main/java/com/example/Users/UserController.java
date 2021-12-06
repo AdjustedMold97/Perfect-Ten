@@ -172,43 +172,6 @@ public class UserController {
     }
 
     /**
-     * Creates new user and stores it in database (signup)
-     * @param user User to be saved in database
-     * @return success if User is saved, failure otherwise
-     */
-    @ApiOperation(value = "Saves a new user to the database for signup, returns success or failure", response = String.class)
-    @PostMapping(path = "/user/new2")
-    public String createUser(@RequestBody ObjectNode json) {
-        String username = json.get("username").asText();
-        String email = json.get("email").asText();
-        String password = json.get("password").asText();
-
-        if (username == null || email == null || password == null) {
-            return failure;
-        }
-
-        User user = new User(json.get("username").textValue(), json.get("email").textValue(), json.get("password").textValue());
-
-        // If username field is null or empty or User with that username exists, return failure
-        if(user.getUsername() == null || user.getUsername() == "" || userRepository.findByUsername(user.getUsername()) != null) {
-        	return usernameFail;
-        }
-        
-        // If email field is null or empty, return failure
-        if(user.getEmail() == null || user.getEmail() == "") {
-        	return emailFail;
-        }
-        
-        // If password field is null or empty, return failure
-        if (user.getPassword() == null || user.getPassword() == "") {
-            return passFail;
-        }
-
-        userRepository.save(user);
-        return success;
-    }
-
-    /**
      * Updates existing user with new attributes
      * @param id ID of User to be updated
      * @param request New User attributes

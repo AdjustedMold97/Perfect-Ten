@@ -109,7 +109,7 @@ public class PerfectTenRequester {
 
         Response.ErrorListener errResponse = error -> {
 
-            VolleyLog.d(Const.ERROR_RESPONSE_TAG, error.toString());
+            VolleyLog.d(Const.ERROR_RESPONSE_TAG, error.getMessage());
             callback.onError(error);
 
         };

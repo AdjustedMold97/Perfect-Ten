@@ -87,7 +87,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
             holder.postObjectTitle.setText(title);
             holder.postObjectBody.setText(body);
-            holder.postObjectTime.setText(time);
+            //holder.postObjectTime.setText(time);
 
 
 

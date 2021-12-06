@@ -88,4 +88,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_friend_Button" />
 
+    <TextView
+        android:id="@+id/noPosts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="12dp"
+        android:text="This user has no posts :("
+        android:textSize="34sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/PV_Posts_Recycler"
+        app:layout_constraintTop_toBottomOf="@+id/add_friend_Button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

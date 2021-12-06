@@ -204,9 +204,6 @@ public class UserController {
             return passFail;
         }
 
-        // Save new User to database and return success
-        user.setPLevel("USER");
-        user.setNotificationPref(true);
         userRepository.save(user);
         return success;
     }

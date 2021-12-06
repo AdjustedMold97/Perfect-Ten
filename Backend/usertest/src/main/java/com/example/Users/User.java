@@ -67,10 +67,10 @@ public class User {
     private String password;
 
     /**
-     * Privilege level of User. Either base user, moderator, or admin
+     * Privilege level of User. Either base user (0), moderator (1), or admin (2)
      */
     @ApiModelProperty(notes = "Privilege level of the User", name="pLevel", required = true)
-    private String pLevel;
+    private int pLevel;
 
     /**
      * Notification preferences of User. If True, User will receieve notifications
@@ -132,7 +132,7 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-        pLevel = "USER";
+        pLevel = 0;
         notifications = true;
         posts = new ArrayList<>();
         friends = new ArrayList<>();
@@ -147,7 +147,7 @@ public class User {
      * @param password Password of User
      * @param pLevel Privilege level of User. Can be USER, MODERATOR, or ADMIN
      */
-    public User(String username, String email, String password, String pLevel) {
+    public User(String username, String email, String password, int pLevel) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -235,17 +235,17 @@ public class User {
 
     /**
      * Gets User's privilege level
-     * @return USER, MODERATOR, or ADMIN
+     * @return USER (0), MODERATOR (1), or ADMIN (2)
      */
-    public String getPLevel() {
+    public int getPLevel() {
         return pLevel;
     }
 
     /**
      * Sets User's privilege level to pLevel
-     * @param pLevel New pLevel, either USER, MODERATOR, or ADMIN
+     * @param pLevel New pLevel, either USER (0), MODERATOR (1), or ADMIN (2)
      */
-    public void setPLevel(String pLevel) {
+    public void setPLevel(int pLevel) {
         this.pLevel = pLevel;
     }
 

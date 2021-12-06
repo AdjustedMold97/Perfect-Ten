@@ -67,6 +67,7 @@ public class PostController {
         // User user = userRepository.findByUsername(username);
         post.setUser(userRepository.findByUsername(username));
         post.setTime();
+        post.setIsAChild(false);
         postRepository.save(post);
         userRepository.findByUsername(username).addPost(post);
         userRepository.save(userRepository.findByUsername(username));
@@ -87,6 +88,7 @@ public class PostController {
         // User user = userRepository.findByUsername(username);
         post.setUser(userRepository.findByUsername(username));
         post.setTime();
+        post.setIsAChild(true);
         postRepository.save(post);
         userRepository.findByUsername(username).addPost(post);
         userRepository.save(userRepository.findByUsername(username));

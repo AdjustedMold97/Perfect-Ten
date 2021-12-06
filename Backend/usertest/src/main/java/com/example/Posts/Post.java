@@ -63,6 +63,9 @@ public class Post {
     @ApiModelProperty(notes = "Child Posts of this post", name="children", required=true, value="children")
     private List<Post> children;
 
+    @ApiModelProperty(notes = "True if this post is a child of another", name ="isAChild", required = true, value="isAChild")
+    private Boolean isAChild;
+
      // =============================== Constructors ================================== //
     /**
      * creates an empty post
@@ -327,6 +330,14 @@ public class Post {
 
     public void addChild(Post child) {
         children.add(child);
+    }
+
+    public Boolean getIsAChild() {
+        return isAChild;
+    }
+
+    public void setIsAChild(Boolean isAChild) {
+        this.isAChild = isAChild;
     }
     
 }

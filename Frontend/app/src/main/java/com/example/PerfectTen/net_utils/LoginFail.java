@@ -1,4 +1,4 @@
-package com.example.homescreen.net_utils;
+package com.example.PerfectTen.net_utils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.homescreen.Screens.LoginScreen;
-import com.example.homescreen.R;
+import com.example.PerfectTen.Screens.LoginScreen;
+import com.example.PerfectTen.R;
 
 /**
  * LoginFail pops onto screen when there is an error receiving login information from the server
@@ -28,7 +28,7 @@ public class LoginFail extends Activity {
 
         setContentView(R.layout.errorwindow);
         TextView error_Box = findViewById(R.id.textView7);
-        error_Box.setText("Username or Password are incorrect");
+        //error_Box.setText("Username or Password are incorrect");
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 

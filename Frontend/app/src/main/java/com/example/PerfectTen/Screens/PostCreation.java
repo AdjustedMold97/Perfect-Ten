@@ -1,8 +1,8 @@
-package com.example.homescreen.Screens;
+package com.example.PerfectTen.Screens;
 
-import static com.example.homescreen.net_utils.Const.MESSAGE_KEY;
-import static com.example.homescreen.net_utils.Const.SUCCESS_MSG;
-import static com.example.homescreen.net_utils.Const.TITLE_KEY;
+import static com.example.PerfectTen.net_utils.Const.MESSAGE_KEY;
+import static com.example.PerfectTen.net_utils.Const.SUCCESS_MSG;
+import static com.example.PerfectTen.net_utils.Const.TITLE_KEY;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +14,7 @@ import android.widget.EditText;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
-import com.example.homescreen.R;
+import com.example.PerfectTen.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,11 +23,11 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.homescreen.app.AppController;
-import com.example.homescreen.net_utils.Const;
-import com.example.homescreen.net_utils.FailedPost;
-import com.example.homescreen.net_utils.PerfectTenRequester;
-import com.example.homescreen.net_utils.VolleyCallback;
+import com.example.PerfectTen.app.AppController;
+import com.example.PerfectTen.net_utils.Const;
+import com.example.PerfectTen.net_utils.FailedPost;
+import com.example.PerfectTen.net_utils.PerfectTenRequester;
+import com.example.PerfectTen.net_utils.VolleyCallback;
 
 /**
  * PostCreation allows a user to create a post object

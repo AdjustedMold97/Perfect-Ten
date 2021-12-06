@@ -1,4 +1,4 @@
-package com.example.homescreen.Screens;
+package com.example.PerfectTen.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,10 +11,11 @@ import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
-import com.example.homescreen.R;
-import com.example.homescreen.net_utils.Const;
-import com.example.homescreen.net_utils.PerfectTenRequester;
-import com.example.homescreen.net_utils.VolleyCallback;
+import com.example.PerfectTen.R;
+import com.example.PerfectTen.net_utils.Const;
+import com.example.PerfectTen.net_utils.Error;
+import com.example.PerfectTen.net_utils.PerfectTenRequester;
+import com.example.PerfectTen.net_utils.VolleyCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -202,7 +203,7 @@ public class SignUp extends AppCompatActivity {
 
                     @Override
                     public void onError(VolleyError error) {
-                        //TODO
+                        startActivity(new Intent(view.getContext(), Error.class));
                     }
                 });
 

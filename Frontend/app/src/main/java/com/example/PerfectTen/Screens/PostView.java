@@ -1,15 +1,13 @@
-package com.example.homescreen.Screens;
+package com.example.PerfectTen.Screens;
 
-import static com.example.homescreen.net_utils.Const.COMMENT_LIST_URL_1;
-import static com.example.homescreen.net_utils.Const.COMMENT_LIST_URL_2;
-import static com.example.homescreen.net_utils.Const.CREATE_COMMENT_URL;
-import static com.example.homescreen.net_utils.Const.ID_KEY;
-import static com.example.homescreen.net_utils.Const.MESSAGE_KEY;
-import static com.example.homescreen.net_utils.Const.RESULT_TAG;
+import static com.example.PerfectTen.net_utils.Const.COMMENT_LIST_URL_1;
+import static com.example.PerfectTen.net_utils.Const.COMMENT_LIST_URL_2;
+import static com.example.PerfectTen.net_utils.Const.CREATE_COMMENT_URL;
+import static com.example.PerfectTen.net_utils.Const.ID_KEY;
+import static com.example.PerfectTen.net_utils.Const.MESSAGE_KEY;
+import static com.example.PerfectTen.net_utils.Const.RESULT_TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,12 +18,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.example.homescreen.Adapters.CommentAdapter;
-import com.example.homescreen.R;
-import com.example.homescreen.app.AppController;
-import com.example.homescreen.net_utils.Const;
-import com.example.homescreen.net_utils.PerfectTenRequester;
-import com.example.homescreen.net_utils.VolleyCallback;
+import com.example.PerfectTen.R;
+import com.example.PerfectTen.app.AppController;
+import com.example.PerfectTen.net_utils.Const;
+import com.example.PerfectTen.net_utils.PerfectTenRequester;
+import com.example.PerfectTen.net_utils.VolleyCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;

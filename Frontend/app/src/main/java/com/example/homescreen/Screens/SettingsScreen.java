@@ -5,11 +5,13 @@ import static com.example.homescreen.net_utils.Const.CHANGE_PFP_URL_2;
 import static com.example.homescreen.net_utils.Const.ERROR_RESPONSE_TAG;
 import static com.example.homescreen.net_utils.Const.RESPONSE_TAG;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -35,6 +37,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -109,6 +112,7 @@ public class SettingsScreen extends AppCompatActivity {
 
     Bitmap bitmap;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -126,13 +130,13 @@ public class SettingsScreen extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
 
+        //trying this
+        String encodedImage = Base64.getEncoder().encodeToString(byteArray);
+
         JSONObject obj = new JSONObject();
 
         try {
-
-            obj.put("file", bitmap);
-            obj.put("extension", AppController.getUsername() + "ProfilePicture.PNG");
-
+            obj.put("file", encodedImage);
         } catch (JSONException e) {
             e.printStackTrace();
         }

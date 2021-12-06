@@ -198,7 +198,7 @@ class MainTests {
 		assertEquals(post2, postController.getPostById(2));
 	}
 	
-	@Test
+	/* @Test
 	public void getCommentTest() {
 		User user = new User("TestUser", "test@gmail.com", "testpassword");
 		Post post1 = new Post("TestMessage1", "TestTitle1", user);
@@ -211,9 +211,9 @@ class MainTests {
 		assertEquals(post1.getComment(0), postController.getCommentById(1,0));
 		assertEquals("{\"message\":\"error1\"}", postController.getCommentById(1,1));
 		assertEquals("{\"message\":\"error1\"}", postController.getCommentById(2,0));
-	}
+	} */
 	
-	@Test
+	/* @Test
 	public void CreateCommentTest() {
 		User user = new User("TestUser", "test@gmail.com", "testpassword");
 		Post post1 = new Post("TestMessage1", "TestTitle1", user);
@@ -231,7 +231,7 @@ class MainTests {
 		obn.set("message", mapper.convertValue("Test", JsonNode.class));
 
 		assertEquals("{\"message\":\"success\"}", postController.createComment(obn, "TestUser"));
-	}
+	} */
 
 	@Test
 	public void testPicUpload() {

@@ -79,17 +79,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
             String title = temp.get(Const.TITLE_KEY).toString();
             String body = temp.get(Const.MESSAGE_KEY).toString();
+
+            //String uname = temp.get(Const.POST_USER_KEY).toString();
             //String time = temp.get(Const.TIME_KEY).toString();
-            String time = "test";
+            //String time = "test";
+            //String uname = "uname";
+            //System.out.println(time);
 
             int id = Integer.parseInt(temp.get(Const.ID_KEY).toString());
+
+            String idstring = temp.get(Const.ID_KEY).toString();
 
 
             holder.postObjectTitle.setText(title);
             holder.postObjectBody.setText(body);
-            //holder.postObjectTime.setText(time);
-
-
+            holder.postObjectID.setText("ID: " + idstring);
+            //holder.postObjectUname.setText(uname);
+            // holder.postObjectTime.setText(time);
 
             holder.postObjectTitle.setOnClickListener(view -> {
 
@@ -126,8 +132,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
         TextView postObjectTitle;
         TextView postObjectBody;
+        TextView postObjectID;
+        TextView postObjectUname;
         TextView postObjectTime;
-
         /**
          * ID's for postObjectTitle and postObjectBody
          * Can be found in post_object.xml
@@ -138,6 +145,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             super(itemView);
             postObjectTitle = itemView.findViewById(R.id.postObjectTitle);
             postObjectBody = itemView.findViewById(R.id.postObjectBody);
+            postObjectID = itemView.findViewById(R.id.postObjectID);
+            postObjectUname = itemView.findViewById(R.id.postObjectUname);
             postObjectTime = itemView.findViewById(R.id.postObjectTime);
 
         }

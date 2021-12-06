@@ -207,6 +207,7 @@ public class HomeScreen extends AppCompatActivity {
             public void onError(VolleyError error) {/* TODO */}
         });
 
+
         requester.request();
     }
 

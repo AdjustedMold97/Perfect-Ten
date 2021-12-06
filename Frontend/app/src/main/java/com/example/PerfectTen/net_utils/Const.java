@@ -69,5 +69,6 @@ public class Const {
     public static final String ID_KEY = "id";
     public static final String USER_KEY = "user";
     public static final String TIME_KEY = "time";
+    public static final String UNAME_KEY = "uname";
 
 }

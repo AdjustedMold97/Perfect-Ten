@@ -73,29 +73,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
+        JSONObject temp = null;
+
         try {
 
-            JSONObject temp = (JSONObject) mtest.get(position);
+            temp = (JSONObject) mtest.get(position);
 
             String title = temp.get(Const.TITLE_KEY).toString();
             String body = temp.get(Const.MESSAGE_KEY).toString();
-
-            //String uname = temp.get(Const.POST_USER_KEY).toString();
-            //String time = temp.get(Const.TIME_KEY).toString();
-            //String time = "test";
-            //String uname = "uname";
-            //System.out.println(time);
+            String uname = temp.get(Const.POST_USER_KEY).toString();
 
             int id = Integer.parseInt(temp.get(Const.ID_KEY).toString());
 
             String idstring = temp.get(Const.ID_KEY).toString();
 
-
             holder.postObjectTitle.setText(title);
             holder.postObjectBody.setText(body);
             holder.postObjectID.setText("ID: " + idstring);
-            //holder.postObjectUname.setText(uname);
-            // holder.postObjectTime.setText(time);
+            holder.postObjectUname.setText(uname);
 
             holder.postObjectTitle.setOnClickListener(view -> {
 
@@ -109,6 +104,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         }
         catch (JSONException e) {
             e.printStackTrace();
+            System.out.println(temp.toString());
         }
     }
 

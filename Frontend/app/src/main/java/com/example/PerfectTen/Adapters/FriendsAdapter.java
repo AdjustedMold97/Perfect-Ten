@@ -1,26 +1,24 @@
-package com.example.homescreen.Adapters;
+package com.example.PerfectTen.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.homescreen.R;
-import com.example.homescreen.Screens.ProfileView;
-import com.example.homescreen.app.AppController;
+import com.example.PerfectTen.R;
+import com.example.PerfectTen.Screens.ProfileView;
+import com.example.PerfectTen.app.AppController;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-    /**
+/**
      * Adapter class to be used by Friends recycler view with setAdapter()
      * Adapter used to create MyViewHolder objects which hold the data for objects requested from server
      * ViewHolder uses a base friend_object.xml structure to create objects

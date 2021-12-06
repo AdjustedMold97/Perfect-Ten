@@ -1,27 +1,31 @@
-package com.example.homescreen.Screens;
+package com.example.PerfectTen.Screens;
 
-import static com.example.homescreen.net_utils.Const.CHANGE_USERNAME_URL;
+import static com.example.PerfectTen.net_utils.Const.CHANGE_USERNAME_URL;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.example.homescreen.R;
-import com.example.homescreen.app.AppController;
-import com.example.homescreen.net_utils.PerfectTenRequester;
-import com.example.homescreen.net_utils.VolleyCallback;
+import com.example.PerfectTen.R;
+import com.example.PerfectTen.app.AppController;
+import com.example.PerfectTen.net_utils.PerfectTenRequester;
+import com.example.PerfectTen.net_utils.VolleyCallback;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * Activity where a user can edit app settings
@@ -30,7 +34,7 @@ import org.json.JSONObject;
  */
 public class SettingsScreen extends AppCompatActivity {
 
-    ImageView profilePic;
+    ImageView settingsPfP;
     EditText usernameEdit;
     EditText passwordEdit;
     EditText emailEdit;
@@ -41,16 +45,18 @@ public class SettingsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_screen);
 
-        Button friend = findViewById(R.id.friends_Button_settings);
+        Button friend = findViewById(R.id.friends_Button_home);
         friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
 
-        Button settings = findViewById(R.id.settings_Button_settings);
+        Button settings = findViewById(R.id.settings_Button_home);
         settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SettingsScreen.class)));
 
-        Button home = findViewById(R.id.home_Button_settings);
+        Button home = findViewById(R.id.home_Button_home);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
 
-        profilePic = findViewById(R.id.settings_Profile_Pic);
+        settingsPfP = findViewById(R.id.settings_Profile_Pic);
+        settingsPfP.setOnClickListener(view -> changePfP());
+
         usernameEdit = findViewById(R.id.change_username_EditText);
         passwordEdit = findViewById(R.id.change_password_EditText);
         emailEdit = findViewById(R.id.change_email_EditText);
@@ -58,9 +64,6 @@ public class SettingsScreen extends AppCompatActivity {
 
         Button applyButton = findViewById(R.id.apply_Button);
         applyButton.setOnClickListener(view -> applyChanges());
-
-        ImageButton settingsPfP = findViewById(R.id.settings_Profile_Pic);
-        settingsPfP.setOnClickListener(view -> changePfP());
 
         setUpSettings();
     }
@@ -129,7 +132,21 @@ public class SettingsScreen extends AppCompatActivity {
     //TODO
     private void changePfP() {
 
+        File f = new File(Environment.DIRECTORY_PICTURES);
 
+        Scanner scnr = null;
+
+        try {
+            scnr = new Scanner(f);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        while (scnr.hasNext()) {
+
+
+
+        }
 
     }
 }

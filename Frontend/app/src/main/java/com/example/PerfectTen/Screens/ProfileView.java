@@ -1,4 +1,4 @@
-package com.example.homescreen.Screens;
+package com.example.PerfectTen.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,17 +7,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
-import com.example.homescreen.Adapters.PostAdapter;
-import com.example.homescreen.R;
-import com.example.homescreen.app.AppController;
-import com.example.homescreen.net_utils.Const;
-import com.example.homescreen.net_utils.PerfectTenRequester;
-import com.example.homescreen.net_utils.VolleyCallback;
+import com.example.PerfectTen.Adapters.PostAdapter;
+import com.example.PerfectTen.R;
+import com.example.PerfectTen.app.AppController;
+import com.example.PerfectTen.net_utils.Const;
+import com.example.PerfectTen.net_utils.PerfectTenRequester;
+import com.example.PerfectTen.net_utils.VolleyCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,9 +85,9 @@ public class ProfileView extends AppCompatActivity {
         setContentView(R.layout.activity_profile_view);
 
         //Rigging Universal Buttons
-        Button home = findViewById(R.id.home_Button_profile);
-        Button friends = findViewById(R.id.friends_Button_profile);
-        Button settings = findViewById(R.id.settings_Button_profile);
+        Button home = findViewById(R.id.home_Button_home);
+        Button friends = findViewById(R.id.friends_Button_home);
+        Button settings = findViewById(R.id.settings_Button_home);
 
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
         friends.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
@@ -204,10 +205,18 @@ public class ProfileView extends AppCompatActivity {
                         JSONArray postsArr = new JSONArray();
 
                         try {
+
+                            if(response.length() == 0){
+
+                                TextView noPost = findViewById(R.id.noPosts);
+                                noPost.setVisibility(View.VISIBLE);
+                            }
+                            else{
                             for (int i = 0; i < response.length(); i++) {
 
-                                    postsArr.put(response.getJSONObject(response.length() - i - 1));
+                                postsArr.put(response.getJSONObject(response.length() - i - 1));
 
+                            }
                             }
                         }catch (JSONException e) {
                             e.printStackTrace();

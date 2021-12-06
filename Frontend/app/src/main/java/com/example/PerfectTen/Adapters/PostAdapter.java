@@ -79,7 +79,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
             String title = temp.get(Const.TITLE_KEY).toString();
             String body = temp.get(Const.MESSAGE_KEY).toString();
-            String time = temp.get(Const.TIME_KEY).toString();
+            //String time = temp.get(Const.TIME_KEY).toString();
+            String time = "test";
+
             int id = Integer.parseInt(temp.get(Const.ID_KEY).toString());
 
 

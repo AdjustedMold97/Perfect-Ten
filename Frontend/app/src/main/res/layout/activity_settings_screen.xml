@@ -110,6 +110,7 @@
         android:id="@+id/change_email_EditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:hint="New Email"
         app:layout_constraintStart_toStartOf="@+id/change_password_EditText"
         app:layout_constraintTop_toTopOf="@+id/settings_email_textview" />
 
@@ -117,7 +118,7 @@
         android:id="@+id/apply_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="28dp"
         android:text="Apply Changes"
         app:layout_constraintBottom_toTopOf="@+id/friends_Button_home"
         app:layout_constraintStart_toStartOf="@+id/settings_email_textview" />
@@ -127,7 +128,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="40dp"
         android:text="Changes Applied!"
         android:textAlignment="center"
         android:textColor="#4CAF50"

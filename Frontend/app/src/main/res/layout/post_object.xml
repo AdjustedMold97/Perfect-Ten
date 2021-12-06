@@ -36,7 +36,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="24dp"
         android:hint="time"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/postObjectTitle"
         app:layout_constraintTop_toTopOf="@+id/postObjectTitle" />
 

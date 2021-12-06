@@ -79,10 +79,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
             String title = temp.get(Const.TITLE_KEY).toString();
             String body = temp.get(Const.MESSAGE_KEY).toString();
+            String time = temp.get(Const.TIME_KEY).toString();
             int id = Integer.parseInt(temp.get(Const.ID_KEY).toString());
+
 
             holder.postObjectTitle.setText(title);
             holder.postObjectBody.setText(body);
+            holder.postObjectTime.setText(time);
+
+
 
             holder.postObjectTitle.setOnClickListener(view -> {
 
@@ -90,6 +95,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                 mContext.startActivity(new Intent(mContext, PostView.class));
 
             });
+
+
 
         }
         catch (JSONException e) {
@@ -117,6 +124,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
         TextView postObjectTitle;
         TextView postObjectBody;
+        TextView postObjectTime;
 
         /**
          * ID's for postObjectTitle and postObjectBody
@@ -128,6 +136,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             super(itemView);
             postObjectTitle = itemView.findViewById(R.id.postObjectTitle);
             postObjectBody = itemView.findViewById(R.id.postObjectBody);
+            postObjectTime = itemView.findViewById(R.id.postObjectTime);
 
         }
     }

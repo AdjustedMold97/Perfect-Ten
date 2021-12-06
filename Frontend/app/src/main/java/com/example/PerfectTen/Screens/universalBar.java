@@ -1,4 +1,4 @@
-package com.example.homescreen.Screens;
+package com.example.PerfectTen.Screens;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.homescreen.R;
+import com.example.PerfectTen.R;
 
 /**
  * UniversalBar holds buttons to send a user to HomeScreen, Settings, and FriendsScreen

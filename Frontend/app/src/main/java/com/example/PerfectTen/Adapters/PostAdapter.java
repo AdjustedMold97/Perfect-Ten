@@ -1,4 +1,4 @@
-package com.example.homescreen.Adapters;
+package com.example.PerfectTen.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.homescreen.R;
-import com.example.homescreen.Screens.PostView;
-import com.example.homescreen.app.AppController;
-import com.example.homescreen.net_utils.Const;
+import com.example.PerfectTen.R;
+import com.example.PerfectTen.Screens.PostView;
+import com.example.PerfectTen.app.AppController;
+import com.example.PerfectTen.net_utils.Const;
 
 import org.json.JSONArray;
 import org.json.JSONException;

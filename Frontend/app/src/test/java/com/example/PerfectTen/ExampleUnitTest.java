@@ -1,4 +1,4 @@
-package com.example.homescreen;
+package com.example.PerfectTen;
 
 import org.junit.Test;
 

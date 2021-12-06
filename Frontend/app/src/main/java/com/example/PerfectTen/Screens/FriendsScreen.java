@@ -1,4 +1,4 @@
-package com.example.homescreen.Screens;
+package com.example.PerfectTen.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,12 +9,12 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.android.volley.VolleyError;
-import com.example.homescreen.Adapters.FriendsAdapter;
-import com.example.homescreen.R;
-import com.example.homescreen.app.AppController;
-import com.example.homescreen.net_utils.Const;
-import com.example.homescreen.net_utils.PerfectTenRequester;
-import com.example.homescreen.net_utils.VolleyCallback;
+import com.example.PerfectTen.Adapters.FriendsAdapter;
+import com.example.PerfectTen.R;
+import com.example.PerfectTen.app.AppController;
+import com.example.PerfectTen.net_utils.Const;
+import com.example.PerfectTen.net_utils.PerfectTenRequester;
+import com.example.PerfectTen.net_utils.VolleyCallback;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

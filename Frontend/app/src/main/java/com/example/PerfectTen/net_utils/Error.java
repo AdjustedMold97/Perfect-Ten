@@ -1,14 +1,11 @@
-package com.example.homescreen.net_utils;
+package com.example.PerfectTen.net_utils;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.widget.Button;
 
-import com.example.homescreen.Screens.LoginScreen;
-import com.example.homescreen.R;
+import com.example.PerfectTen.R;
 
 /**
  * Error class is popped up on screen when a request to server fails

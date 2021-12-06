@@ -1,4 +1,4 @@
-package com.example.homescreen.app;
+package com.example.PerfectTen.app;
 
 import android.app.Application;
 import android.text.TextUtils;
@@ -6,7 +6,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.example.homescreen.net_utils.LruBitmapCache;
+import com.example.PerfectTen.net_utils.LruBitmapCache;
 
 /**
  * The AppController is responsible for much of

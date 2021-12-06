@@ -1,4 +1,4 @@
-package com.example.homescreen.Screens;
+package com.example.PerfectTen.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,8 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.example.homescreen.R;
-import com.example.homescreen.app.AppController;
+import com.example.PerfectTen.R;
+import com.example.PerfectTen.app.AppController;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,11 +20,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.homescreen.net_utils.Const;
-import com.example.homescreen.net_utils.FailedPost;
-import com.example.homescreen.net_utils.LoginFail;
-import com.example.homescreen.net_utils.PerfectTenRequester;
-import com.example.homescreen.net_utils.VolleyCallback;
+import com.example.PerfectTen.net_utils.Const;
+import com.example.PerfectTen.net_utils.LoginFail;
+import com.example.PerfectTen.net_utils.PerfectTenRequester;
+import com.example.PerfectTen.net_utils.VolleyCallback;
 
 /**
  * Screen showed on start up of the app when logged out

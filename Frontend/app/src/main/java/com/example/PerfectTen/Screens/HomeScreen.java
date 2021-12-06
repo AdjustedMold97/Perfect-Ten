@@ -1,4 +1,4 @@
-package com.example.homescreen.Screens;
+package com.example.PerfectTen.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,12 +14,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.homescreen.Adapters.PostAdapter;
-import com.example.homescreen.R;
-import com.example.homescreen.app.AppController;
-import com.example.homescreen.net_utils.Const;
-import com.example.homescreen.net_utils.PerfectTenRequester;
-import com.example.homescreen.net_utils.VolleyCallback;
+import com.example.PerfectTen.Adapters.PostAdapter;
+import com.example.PerfectTen.R;
+import com.example.PerfectTen.app.AppController;
+import com.example.PerfectTen.net_utils.Const;
+import com.example.PerfectTen.net_utils.PerfectTenRequester;
+import com.example.PerfectTen.net_utils.VolleyCallback;
 
 /**
  * The main activity in Perfect Ten.

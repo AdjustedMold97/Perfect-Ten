@@ -1,4 +1,4 @@
-package com.example.homescreen.net_utils;
+package com.example.PerfectTen.net_utils;
 
 /**
  * Class responsible for storing many of the

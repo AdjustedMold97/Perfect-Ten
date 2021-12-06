@@ -1,4 +1,4 @@
-package com.example.homescreen.net_utils;
+package com.example.PerfectTen.net_utils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.util.DisplayMetrics;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.homescreen.Screens.PostCreation;
-import com.example.homescreen.R;
+import com.example.PerfectTen.Screens.PostCreation;
+import com.example.PerfectTen.R;
 
 /**
  * FailedPost screen pops up on screen when a post is not formatted correctly

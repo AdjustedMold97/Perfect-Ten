@@ -1,6 +1,6 @@
-package com.example.homescreen.Screens;
+package com.example.PerfectTen.Screens;
 
-import static com.example.homescreen.net_utils.Const.CHANGE_USERNAME_URL;
+import static com.example.PerfectTen.net_utils.Const.CHANGE_USERNAME_URL;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,10 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.example.homescreen.R;
-import com.example.homescreen.app.AppController;
-import com.example.homescreen.net_utils.PerfectTenRequester;
-import com.example.homescreen.net_utils.VolleyCallback;
+import com.example.PerfectTen.R;
+import com.example.PerfectTen.app.AppController;
+import com.example.PerfectTen.net_utils.PerfectTenRequester;
+import com.example.PerfectTen.net_utils.VolleyCallback;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,13 +41,13 @@ public class SettingsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_screen);
 
-        Button friend = findViewById(R.id.friends_Button_settings);
+        Button friend = findViewById(R.id.friends_Button_home);
         friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
 
-        Button settings = findViewById(R.id.settings_Button_settings);
+        Button settings = findViewById(R.id.settings_Button_home);
         settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SettingsScreen.class)));
 
-        Button home = findViewById(R.id.home_Button_settings);
+        Button home = findViewById(R.id.home_Button_home);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
 
         profilePic = findViewById(R.id.settings_Profile_Pic);

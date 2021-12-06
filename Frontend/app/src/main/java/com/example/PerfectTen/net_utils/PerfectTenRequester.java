@@ -1,11 +1,11 @@
-package com.example.homescreen.net_utils;
+package com.example.PerfectTen.net_utils;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.homescreen.app.AppController;
+import com.example.PerfectTen.app.AppController;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

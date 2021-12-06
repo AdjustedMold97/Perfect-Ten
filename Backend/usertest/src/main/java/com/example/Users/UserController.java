@@ -142,7 +142,7 @@ public class UserController {
      * @return success if User is saved, failure otherwise
      */
     @ApiOperation(value = "Saves an existing user to the database for signup, returns success or failure", response = String.class)
-    @PostMapping(path = "/user/store")
+    @PostMapping(path = "/user/new")
     public String storeExistingUser(@RequestBody User user) {
         // If RequestBody is null, return failure
         if (user == null) {
@@ -175,7 +175,7 @@ public class UserController {
      * @return success if User is saved, failure otherwise
      */
     @ApiOperation(value = "Saves a new user to the database for signup, returns success or failure", response = String.class)
-    @PostMapping(path = "/user/new")
+    @PostMapping(path = "/user/new2")
     public String createUser(@RequestBody ObjectNode json) {
         String username = json.get("username").asText();
         String email = json.get("email").asText();

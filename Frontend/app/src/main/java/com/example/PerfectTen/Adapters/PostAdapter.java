@@ -99,7 +99,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
             });
 
-
+            System.out.println(temp.toString());
 
         }
         catch (JSONException e) {

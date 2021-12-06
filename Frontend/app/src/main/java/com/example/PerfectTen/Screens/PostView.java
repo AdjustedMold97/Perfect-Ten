@@ -110,6 +110,8 @@ public class PostView extends AppCompatActivity {
 
                 post = response;
 
+                System.out.println(post.toString());
+
                 setUpTextPost();
                 getComments();
             }

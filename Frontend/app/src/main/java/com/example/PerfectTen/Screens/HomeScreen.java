@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import com.android.volley.VolleyError;
@@ -153,6 +154,9 @@ public class HomeScreen extends AppCompatActivity {
                 temp.put(Const.ID_KEY,
                         responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.ID_KEY).toString());
 
+                temp.put(Const.POST_USER_KEY,
+                        responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.POST_USER_KEY).toString());
+
             } catch (JSONException e) { e.printStackTrace(); }
 
             //inserting the formatted JSONObject into the array
@@ -196,8 +200,10 @@ public class HomeScreen extends AppCompatActivity {
         requester = new PerfectTenRequester(Const.POST_LIST_URL, new VolleyCallback() {
             @Override
             public void onSuccess(JSONArray response) {
+
                 responseArr = response;
                 getBlockedUsers();
+
             }
 
             @Override
@@ -206,7 +212,6 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onError(VolleyError error) {/* TODO */}
         });
-
 
         requester.request();
     }

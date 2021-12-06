@@ -602,7 +602,7 @@ public class UserController {
      */
     @ApiOperation(value = "Retrieves user's privilege level", response = String.class)
     @GetMapping(path = "/user/{user}/privilege")
-    public String getUserPrivilegeLevel(@PathVariable String user) {
+    public int getUserPrivilegeLevel(@PathVariable String user) {
         User requestedUser = userRepository.findByUsername(user);
 
         return requestedUser.getPLevel();

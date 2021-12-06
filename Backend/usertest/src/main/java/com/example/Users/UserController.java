@@ -557,7 +557,7 @@ public class UserController {
     }  
 
     @PutMapping(path = "/user/{user}/pic/new")
-    public String setUserProfilePicBytes(@PathVariable String user, @RequestBody String file) {
+    public String setUserProfilePicBytes(@PathVariable String user, @RequestParam String file) {
         User requestedUser = userRepository.findByUsername(user);
 
         if (requestedUser == null || file == null) {

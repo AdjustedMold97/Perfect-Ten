@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -204,10 +205,18 @@ public class ProfileView extends AppCompatActivity {
                         JSONArray postsArr = new JSONArray();
 
                         try {
+
+                            if(response.length() == 0){
+
+                                TextView noPost = findViewById(R.id.noPosts);
+                                noPost.setVisibility(View.VISIBLE);
+                            }
+                            else{
                             for (int i = 0; i < response.length(); i++) {
 
-                                    postsArr.put(response.getJSONObject(response.length() - i - 1));
+                                postsArr.put(response.getJSONObject(response.length() - i - 1));
 
+                            }
                             }
                         }catch (JSONException e) {
                             e.printStackTrace();

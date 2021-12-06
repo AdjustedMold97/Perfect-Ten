@@ -47,8 +47,11 @@
         <activity
             android:name=".Screens.HomeScreen"
             android:exported="true" />
-        <activity android:name=".net_utils.Error" />
-        <activity android:name=".net_utils.LoginFail" />
+        <activity android:name=".net_utils.Error"
+            android:theme="@style/AppTheme.CustomTheme"/>
+
+        <activity android:name=".net_utils.LoginFail"
+            android:theme="@style/AppTheme.CustomTheme"/>
     </application>
 
 </manifest>

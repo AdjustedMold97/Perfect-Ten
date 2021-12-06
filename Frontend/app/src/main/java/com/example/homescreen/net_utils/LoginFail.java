@@ -28,7 +28,7 @@ public class LoginFail extends Activity {
 
         setContentView(R.layout.errorwindow);
         TextView error_Box = findViewById(R.id.textView7);
-        error_Box.setText("Username or Password are incorrect");
+        //error_Box.setText("Username or Password are incorrect");
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 

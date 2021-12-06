@@ -202,7 +202,7 @@ public class SignUp extends AppCompatActivity {
 
                     @Override
                     public void onError(VolleyError error) {
-                        //TODO
+                        startActivity(new Intent(view.getContext(), Error.class));
                     }
                 });
 

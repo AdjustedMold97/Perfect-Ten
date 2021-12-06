@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.example.homescreen.net_utils.Const;
+import com.example.homescreen.net_utils.LoginFail;
 import com.example.homescreen.net_utils.PerfectTenRequester;
 import com.example.homescreen.net_utils.VolleyCallback;
 
@@ -160,7 +161,7 @@ public class LoginScreen extends AppCompatActivity {
 
             @Override
             public void onError(VolleyError error) {
-                //TODO
+                startActivity(new Intent(view.getContext(), LoginFail.class));
             }
         });
 

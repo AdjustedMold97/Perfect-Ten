@@ -132,11 +132,18 @@ public class SettingsScreen extends AppCompatActivity {
         }
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 10, stream);
         byte[] byteArray = stream.toByteArray();
 
-        //trying this
+        try {
+            stream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         @SuppressLint({"NewApi", "LocalSuppress"}) String encodedImage = Base64.getEncoder().encodeToString(byteArray);
+
+        System.out.println(encodedImage);
 
         JSONObject obj = new JSONObject();
 
@@ -146,11 +153,8 @@ public class SettingsScreen extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-
-
         PerfectTenRequester requester
-                = new PerfectTenRequester(Request.Method.PUT, CHANGE_PFP_URL_1 + AppController.getUsername() + CHANGE_PFP_URL_2, obj, new VolleyCallback() {
+                = new PerfectTenRequester(Request.Method.POST, CHANGE_PFP_URL_1 + AppController.getUsername() + CHANGE_PFP_URL_2, obj, new VolleyCallback() {
 
             @Override
             public void onSuccess(JSONArray response) {
@@ -185,5 +189,7 @@ public class SettingsScreen extends AppCompatActivity {
         });
 
         requester.request();
+
+
     }
 }

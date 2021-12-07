@@ -157,6 +157,9 @@ public class HomeScreen extends AppCompatActivity {
                 temp.put(Const.POST_USER_KEY,
                         responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.POST_USER_KEY).toString());
 
+                temp.put(Const.TIME_KEY,
+                        responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.TIME_KEY).toString());
+
             } catch (JSONException e) { e.printStackTrace(); }
 
             //inserting the formatted JSONObject into the array

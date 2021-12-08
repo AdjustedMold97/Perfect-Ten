@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/postObjectBody"
         android:layout_width="231dp"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:hint="body"
         android:textAlignment="center"
@@ -20,7 +20,7 @@
     <TextView
         android:id="@+id/postObjectTitle"
         android:layout_width="231dp"
-        android:layout_height="67dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="title"
         android:textAlignment="center"
@@ -32,35 +32,35 @@
 
     <TextView
         android:id="@+id/postObjectTime"
-        android:layout_width="89dp"
-        android:layout_height="35dp"
+        android:layout_width="80dp"
+        android:layout_height="19dp"
+        android:layout_marginEnd="4dp"
         android:hint="time"
         android:textSize="7sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/postObjectBody"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/postObjectUname"
         android:layout_width="63dp"
         android:layout_height="21dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="8dp"
         android:hint="user"
         android:textSize="16sp"
         android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/postObjectBody"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/postObjectTitle"
+        app:layout_constraintTop_toTopOf="@+id/postObjectTitle" />
 
     <TextView
         android:id="@+id/postObjectID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_width="52dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="8dp"
         android:hint="ID"
         android:textColor="#2196F3"
         android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@+id/postObjectTime"
+        app:layout_constraintStart_toEndOf="@+id/postObjectTitle"
         app:layout_constraintTop_toTopOf="@+id/postObjectTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

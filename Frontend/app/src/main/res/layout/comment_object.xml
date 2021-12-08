@@ -24,4 +24,15 @@
         android:text="username"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/commentObjectID"
+        android:layout_width="70dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="36dp"
+        android:text="ID"
+        android:textColor="#2196F3"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/commentObjectText"
+        app:layout_constraintTop_toTopOf="@+id/commentObjectUsername" />
 </androidx.constraintlayout.widget.ConstraintLayout>

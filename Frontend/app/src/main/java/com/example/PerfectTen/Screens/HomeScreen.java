@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 
 import com.android.volley.VolleyError;
@@ -68,13 +67,13 @@ public class HomeScreen extends AppCompatActivity {
          * they include Home, Settings, and Friends and reroute the user to that page form anywhere in the app
          * - Ethan Still
          */
-        Button friend = findViewById(R.id.friends_Button_home);
+        Button friend = findViewById(R.id.friends_Button_profile);
         friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
 
-        Button settings = findViewById(R.id.settings_Button_home);
+        Button settings = findViewById(R.id.settings_Button_profile);
         settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(), SettingsScreen.class)));
 
-        Button home = findViewById(R.id.home_Button_home);
+        Button home = findViewById(R.id.home_Button_profile);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
         //======================================================================================================
 

@@ -7,7 +7,7 @@
     tools:context=".Screens.SettingsScreen">
 
     <Button
-        android:id="@+id/home_Button_home"
+        android:id="@+id/home_Button_profile"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginStart="28dp"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/friends_Button_home"
+        android:id="@+id/friends_Button_profile"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginBottom="24dp"
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/settings_Button_home"
+        android:id="@+id/settings_Button_profile"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginEnd="28dp"
@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
         android:text="Apply Changes"
-        app:layout_constraintBottom_toTopOf="@+id/friends_Button_home"
+        app:layout_constraintBottom_toTopOf="@+id/friends_Button_profile"
         app:layout_constraintStart_toStartOf="@+id/settings_email_textview" />
 
     <TextView
@@ -133,7 +133,7 @@
         android:textAlignment="center"
         android:textColor="#4CAF50"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/friends_Button_home"
+        app:layout_constraintBottom_toTopOf="@+id/friends_Button_profile"
         app:layout_constraintStart_toEndOf="@+id/apply_Button"
         tools:visibility="invisible" />
 

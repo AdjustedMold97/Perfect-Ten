@@ -16,7 +16,9 @@
         <activity
             android:name="com.example.PerfectTen.Screens.PostView"
             android:theme="@style/AppTheme.CustomTheme"
-            android:label="Post View"
+            android:label="Post View" />
+        <activity
+            android:name=".Screens.DMsScreen"
             android:exported="false" />
         <activity
             android:name="com.example.PerfectTen.Screens.FindUserScreen"

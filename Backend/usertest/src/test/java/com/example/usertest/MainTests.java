@@ -282,7 +282,7 @@ class MainTests {
 		ObjectNode obn = mapper.createObjectNode();
 		obn.set("pLevel", mapper.convertValue("2", JsonNode.class));
 
-		assertEquals("{\"message\":\"success\"}", userController.updateUserPLevel(user.getUsername(), obn))
+		assertEquals("{\"message\":\"success\"}", userController.updateUserPLevel(user.getUsername(), obn));
 	}
 
 	

@@ -1,5 +1,7 @@
 package com.example.PerfectTen.Screens;
 
+import static com.example.PerfectTen.net_utils.Const.GET_USER_URL;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -119,7 +121,7 @@ public class HomeScreen extends AppCompatActivity {
     private void getAdminStatus() {
 
         requester = new PerfectTenRequester
-                (Const.USER_USERNAME + AppController.getUsername(),
+                (GET_USER_URL + AppController.getUsername(),
                         null,
                         new VolleyCallback() {
             @Override

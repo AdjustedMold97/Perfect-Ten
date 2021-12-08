@@ -82,6 +82,7 @@ import org.json.JSONException;
                 //TODO get mappings go here
                 holder.friendObjectName.setText(mtest.get(position).toString());
 
+                //holder.friendObjectImg.setImageBitmap(mtest.get(position).toString());
 
                 //TODO holder.friendObjectImg.
 

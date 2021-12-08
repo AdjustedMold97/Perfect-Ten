@@ -236,6 +236,7 @@ class MainTests {
 		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
 		
 		postController.createComment(post2, user.getUsername(), post1.getId());
+		post1.addChild(post2);
 
 		assertEquals(post2, postController.getAllComments(post1.getId()));
 

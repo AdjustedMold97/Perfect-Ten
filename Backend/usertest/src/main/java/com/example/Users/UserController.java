@@ -196,7 +196,8 @@ public class UserController {
         List<Post> userPosts = user.getPosts();
         List<User> friends = user.getFriends();
         List<User> blockedList = user.getBlockedUsers();
-        deleteUser(id);
+        
+        deleteUser(user.getUsername());
         
         for (User friend: friends) {
             friend.addFriend(request);

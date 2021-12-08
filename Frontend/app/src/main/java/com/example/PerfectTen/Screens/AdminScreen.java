@@ -3,6 +3,7 @@ package com.example.PerfectTen.Screens;
 
 import static com.example.PerfectTen.net_utils.Const.DELETE_POST_URL;
 import static com.example.PerfectTen.net_utils.Const.DELETE_USER_URL;
+import static com.example.PerfectTen.net_utils.Const.GET_USER_URL;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,6 +24,7 @@ import com.example.PerfectTen.net_utils.PerfectTenRequester;
 import com.example.PerfectTen.net_utils.VolleyCallback;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class AdminScreen extends AppCompatActivity {
@@ -39,10 +41,8 @@ public class AdminScreen extends AppCompatActivity {
 
     boolean userFlag;
 
-    String targetUserPriv;
-
     VolleyCallback callback;
-    VolleyCallback callbackPriv;
+    JSONObject obj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,29 +71,6 @@ public class AdminScreen extends AppCompatActivity {
 
         userFlag = false;
 
-        callbackPriv = new VolleyCallback(){
-
-            @Override
-            public void onSuccess(JSONArray response) {
-
-            }
-
-            @Override
-            public void onSuccess(JSONObject response) {
-
-                //targetUserPriv = response.get("plevel");
-
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-
-                resultText.setText("Something went wrong...");
-
-
-            }
-        };
-
         callback = new VolleyCallback() {
 
             @Override
@@ -120,6 +97,8 @@ public class AdminScreen extends AppCompatActivity {
 
             }
         };
+
+        obj = new JSONObject();
     }
 
     private void deleteUser() {
@@ -179,24 +158,74 @@ public class AdminScreen extends AppCompatActivity {
 
         PerfectTenRequester requester;
         String url;
-        JSONObject obj = new JSONObject();
 
         if (userFlag) {
 
-            requester = new PerfectTenRequester(Const.USER_PRIVILEGE_1 + inputEdit.getText().toString() + Const.USER_PRIVILEGE_2,
-                    null,
-                    callbackPriv);
-//           TODO make levels ones not able to delete level 2's
-            //if(AppController.getPrivLevel() > inputEdit.getText().toString().//TODO need privlevel of user){
-
             url = DELETE_USER_URL + inputEdit.getText().toString();
-            //}
+
+            if (AppController.getPrivLevel() < 2) {
+
+                deleteLimited();
+                return;
+
+            }
         }
 
         else
             url = DELETE_POST_URL + inputEdit.getText().toString();
 
         requester = new PerfectTenRequester(Request.Method.DELETE, url, obj, callback);
+        requester.request();
+    }
+
+    private void deleteLimited() {
+
+        String url = GET_USER_URL + inputEdit.getText().toString();
+
+        PerfectTenRequester requester
+                = new PerfectTenRequester(url, null, new VolleyCallback() {
+
+            @Override
+            public void onSuccess(JSONArray response) {
+                //unreachable
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                int plevel = -1;
+
+                try {
+                    plevel = Integer.parseInt(response.get("plevel").toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if (plevel >= 2) {
+
+                    resultText.setText("You don't have permission to delete this user.");
+                    resultText.setVisibility(View.VISIBLE);
+
+                }
+
+                else {
+
+                    String delUrl = DELETE_USER_URL + inputEdit.getText().toString();
+
+                    PerfectTenRequester requester1
+                            = new PerfectTenRequester(Request.Method.DELETE, delUrl, obj, callback);
+
+                    requester1.request();
+                }
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
+        });
+
         requester.request();
     }
 

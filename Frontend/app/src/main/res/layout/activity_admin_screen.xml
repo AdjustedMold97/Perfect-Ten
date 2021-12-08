@@ -92,6 +92,7 @@
         android:layout_marginStart="132dp"
         android:layout_marginTop="148dp"
         android:text="Something went wrong..."
+        android:textAlignment="center"
         android:textColor="#FF0000"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"

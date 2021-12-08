@@ -11,13 +11,13 @@
         android:id="@+id/recycle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/friends_Button_home"
+        app:layout_constraintBottom_toTopOf="@+id/friends_Button_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_create_Button" />
 
     <Button
-        android:id="@+id/home_Button_home"
+        android:id="@+id/home_Button_profile"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginStart="28dp"
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/friends_Button_home"
+        android:id="@+id/friends_Button_profile"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginBottom="24dp"
@@ -37,7 +37,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/settings_Button_home"
+        android:id="@+id/settings_Button_profile"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginEnd="28dp"
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="Sign Out"
-        app:layout_constraintBottom_toTopOf="@+id/settings_Button_home"
+        app:layout_constraintBottom_toTopOf="@+id/settings_Button_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.941"
         app:layout_constraintStart_toStartOf="parent"

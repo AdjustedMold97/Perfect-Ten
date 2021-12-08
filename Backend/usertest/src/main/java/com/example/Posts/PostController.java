@@ -1,6 +1,8 @@
 package com.example.Posts;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -139,7 +141,11 @@ public class PostController {
     		}
     	} */
     	//long newid = (long)id;
-    	postRepository.deleteById(id);
-    	return success;
+
+        int newId = (int) id;
+
+    	//postRepository.deleteById(newId);
+        postRepository.delete(postRepository.findById(newId));
+        return success;
     }
 }

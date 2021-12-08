@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.PerfectTen.R;
 import com.example.PerfectTen.Screens.ProfileView;
 import com.example.PerfectTen.app.AppController;
+import com.example.PerfectTen.Screens.DMsScreen;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,8 +60,7 @@ import org.json.JSONException;
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             View view = inflater.inflate(R.layout.friend_object,parent,false);
-            MyViewHolder myViewHolder = new FriendsAdapter.MyViewHolder(view);
-            return  myViewHolder;
+            return new MyViewHolder(view);
         }
 
         /**
@@ -94,6 +95,11 @@ import org.json.JSONException;
                 });
 
 
+                 holder.friendObjectDms.setOnClickListener(view -> {
+                     AppController.setTargetUser(holder.friendObjectName.getText().toString());
+                     mContext.startActivity(new Intent(view.getContext(), DMsScreen.class));
+                 });
+
             }
             catch (JSONException e) {
                 e.printStackTrace();
@@ -118,10 +124,11 @@ import org.json.JSONException;
          * friendObjectImg will contain instances of "pfp" text from JSONObjects
          * @author Ethan Still
          */
-        public class MyViewHolder extends RecyclerView.ViewHolder {
+        public static class MyViewHolder extends RecyclerView.ViewHolder {
             TextView friendObjectName;
             TextView friendObjectDesc;
             ImageView friendObjectImg;
+            Button friendObjectDms;
 
 
             /**
@@ -135,6 +142,7 @@ import org.json.JSONException;
                 friendObjectName = itemView.findViewById(R.id.friendName);
                 friendObjectDesc = itemView.findViewById(R.id.friendDesc);
                 friendObjectImg = itemView.findViewById(R.id.friendImg);
+                friendObjectDms = itemView.findViewById(R.id.friendDms);
             }
         }
 }

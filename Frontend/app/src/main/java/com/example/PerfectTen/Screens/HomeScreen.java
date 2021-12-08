@@ -132,6 +132,7 @@ public class HomeScreen extends AppCompatActivity {
 
                 try {
 
+                    System.out.println(response.getInt(Const.PLEVEL_KEY));
                     AppController.setPrivLevel(response.getInt(Const.PLEVEL_KEY));
 
                 }

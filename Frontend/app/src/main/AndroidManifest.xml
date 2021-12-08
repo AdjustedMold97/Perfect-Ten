@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.example.PerfectTen.app.AppController"
+        android:name=".app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Perfect Ten"
@@ -14,40 +14,37 @@
         android:theme="@style/Theme.PerfectTen"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.example.PerfectTen.Screens.PostView"
-            android:theme="@style/AppTheme.CustomTheme"
-            android:label="Post View" />
+            android:name=".Screens.PermaDelete"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.PostView"
+            android:label="Post View"
+            android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".Screens.DMsScreen"
             android:exported="false" />
         <activity
-            android:name="com.example.PerfectTen.Screens.FindUserScreen"
-            android:label="Find User"/>
-
-
-
+            android:name=".Screens.FindUserScreen"
+            android:label="Find User" />
         <activity
             android:name=".Screens.AdminScreen"
-            android:label="Admin"
-            android:exported="false" />
-
+            android:exported="false"
+            android:label="Admin" />
         <activity
-            android:name="com.example.PerfectTen.Screens.ProfileView"
-            android:label="Profile View"
-            android:exported="false" />
+            android:name=".Screens.ProfileView"
+            android:exported="false"
+            android:label="Profile View" />
         <activity
-            android:name="com.example.PerfectTen.Screens.SignUp"
-            android:label="Sign Up"
-            android:exported="true" />
+            android:name=".Screens.SignUp"
+            android:exported="true"
+            android:label="Sign Up" />
         <activity
-            android:name="com.example.PerfectTen.Screens.PostCreation"
-            android:label="Make a Post"
-            android:exported="true" />
+            android:name=".Screens.PostCreation"
+            android:exported="true"
+            android:label="Make a Post" />
         <activity
-
-            android:name="com.example.PerfectTen.Screens.LoginScreen"
+            android:name=".Screens.LoginScreen"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -55,22 +52,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.PerfectTen.Screens.SettingsScreen"
-            android:label="Settings"
-            android:exported="true" />
+            android:name=".Screens.SettingsScreen"
+            android:exported="true"
+            android:label="Settings" />
         <activity
-            android:name="com.example.PerfectTen.Screens.FriendsScreen"
-            android:label="Friends"
-            android:exported="true" />
+            android:name=".Screens.FriendsScreen"
+            android:exported="true"
+            android:label="Friends" />
         <activity
-            android:name="com.example.PerfectTen.Screens.HomeScreen"
-            android:label="Home"
-            android:exported="true" />
-        <activity android:name="com.example.PerfectTen.net_utils.Error"
-            android:theme="@style/AppTheme.CustomTheme"/>
-
-        <activity android:name="com.example.PerfectTen.net_utils.LoginFail"
-            android:theme="@style/AppTheme.CustomTheme"/>
+            android:name=".Screens.HomeScreen"
+            android:exported="true"
+            android:label="Home" />
+        <activity
+            android:name=".net_utils.Error"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".net_utils.LoginFail"
+            android:theme="@style/AppTheme.CustomTheme" />
     </application>
 
 </manifest>

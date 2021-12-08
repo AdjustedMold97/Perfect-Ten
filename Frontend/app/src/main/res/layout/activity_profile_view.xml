@@ -110,4 +110,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/admin_bye"
+        android:layout_width="94dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:text="Bye"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dms_Button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,11 +16,14 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.PerfectTen.R;
+import com.example.PerfectTen.net_utils.Const;
 import com.example.PerfectTen.net_utils.PerfectTenRequester;
 import com.example.PerfectTen.net_utils.VolleyCallback;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class AdminScreen extends AppCompatActivity {
 
@@ -168,6 +171,13 @@ public class AdminScreen extends AppCompatActivity {
 
         if (userFlag)
             url = DELETE_USER_URL;
+        requestObj =
+
+                username = String.valueOf(username_input.getText());
+                password = String.valueOf(password_input.getText());
+                
+                Map<String, String> params = new HashMap<>();
+                params.put(Const.USERNAME_KEY, username);
 
         else if (postFlag)
             url = DELETE_POST_URL;

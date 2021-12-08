@@ -1,7 +1,12 @@
 package com.example.Posts;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
+
+import javax.sql.rowset.serial.SerialBlob;
+
+import java.sql.Blob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,9 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.Users.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+//import com.mysql.cj.jdbc.Blob;
 
 import io.swagger.annotations.*;
 
@@ -63,13 +70,28 @@ public class PostController {
      */
     @ApiOperation(value = "Makes a new user by specified user", response = String.class)
     @PostMapping(path = "/posts/new/{username}")
-    public String createPost(@RequestBody Post post, @PathVariable String username){
+    public String createPost(@RequestBody Post post, @PathVariable String username, @RequestParam String file){
         if (post == null || userRepository.findByUsername(username) == null)
             return usernameFail;
         // User user = userRepository.findByUsername(username);
         post.setUser(userRepository.findByUsername(username));
         post.setTime();
         post.setIsAChild(false);
+
+        // Update post's extension and media fields
+        if (file != null) {
+            byte[] bytes = Base64.getDecoder().decode(file);
+
+            try {
+                SerialBlob blob = new SerialBlob(bytes);
+                Blob image = blob;
+                post.setExtension("post" + post.getId() + "-media.png");
+                post.setMedia(image);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         postRepository.save(post);
         userRepository.findByUsername(username).addPost(post);
         userRepository.save(userRepository.findByUsername(username));
@@ -84,7 +106,7 @@ public class PostController {
      */
     @ApiOperation(value = "Make a new comment on a specified comment by id by the specifiyed user", response = String.class)
     @PostMapping(path = "/posts/{id}/comment/{username}")
-    public String createComment(@RequestBody Post post, @PathVariable String username, @PathVariable int id) {
+    public String createComment(@RequestBody Post post, @PathVariable String username, @PathVariable int id, @RequestParam String file) {
     	if (post == null || userRepository.findByUsername(username) == null)
             return usernameFail;
 
@@ -95,6 +117,21 @@ public class PostController {
         post.setUser(userRepository.findByUsername(username));
         post.setTime();
         post.setIsAChild(true);
+
+        // Update comment's extension and media fields
+        if (file != null) {
+            byte[] bytes = Base64.getDecoder().decode(file);
+
+            try {
+                SerialBlob blob = new SerialBlob(bytes);
+                Blob image = blob;
+                post.setExtension("post" + post.getId() + "-media.png");
+                post.setMedia(image);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         postRepository.save(post);
         userRepository.findByUsername(username).addPost(post);
         userRepository.save(userRepository.findByUsername(username));

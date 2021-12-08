@@ -266,9 +266,10 @@ public class UserController {
      * @return success if User is deleted, otherwise failure
      */
     @ApiOperation(value = "Deletes user from database, returns success or failure", response = String.class)
-    @DeleteMapping(path = "/user/rm/{id}")
-    public String deleteUser(@PathVariable int id) {
+    @DeleteMapping(path = "/user/rm/{uname}")
+    public String deleteUser(@PathVariable String uname) {
         // If User is not found in database, return failure
+    	int id = userRepository.findByUsername(uname).getId();
         if (userRepository.findById(id) == null) {
             return failure;
         }

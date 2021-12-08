@@ -33,6 +33,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.util.Base64;
 
 /**
@@ -95,8 +96,7 @@ public class SettingsScreen extends AppCompatActivity {
     }
 
     private static final int PICK_IMAGE = 100;
-    Uri imageUri;
-
+    
     //TODO
     private void changePfP() {
 
@@ -105,6 +105,7 @@ public class SettingsScreen extends AppCompatActivity {
 
     }
 
+    Uri imageUri;
     Bitmap bitmap;
 
     @Override
@@ -123,12 +124,6 @@ public class SettingsScreen extends AppCompatActivity {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
-
-        try {
-            stream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         @SuppressLint({"NewApi", "LocalSuppress"}) String encodedImage = Base64.getEncoder().encodeToString(byteArray);
 
@@ -153,17 +148,6 @@ public class SettingsScreen extends AppCompatActivity {
 
                 Log.d(RESPONSE_TAG, response.toString());
 
-                if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
-
-                    Bitmap resized = Bitmap.createScaledBitmap(bitmap, 200, 200, true);
-                    settingsPfP.setImageBitmap(resized);
-
-                    //clearing memory
-                    bitmap.recycle();
-                    resized.recycle();
-
-                }
-
             }
 
             @Override
@@ -176,5 +160,12 @@ public class SettingsScreen extends AppCompatActivity {
         });
 
         requester.request();
+
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+
+            Bitmap resized = Bitmap.createScaledBitmap(bitmap, 200, 200, true);
+            settingsPfP.setImageBitmap(resized);
+
+        }
     }
 }

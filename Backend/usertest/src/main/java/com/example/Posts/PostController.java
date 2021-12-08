@@ -147,6 +147,15 @@ public class PostController {
         User user = userRepository.findByUsername(postRepository.findById(newId).getUname());
         user.removePost(postRepository.findById(newId));
 
+        if (postRepository.findById(newId).getIsAChild()) {
+            List<Post> otherPosts = postRepository.findAll();
+            for (Post post : otherPosts) {
+                if (post.getChildren().contains(postRepository.findById(newId))) {
+                    post.removeChild(postRepository.findById(newId));
+                }
+            }
+        }
+
         postRepository.deleteById(newId);
         return success;
     }

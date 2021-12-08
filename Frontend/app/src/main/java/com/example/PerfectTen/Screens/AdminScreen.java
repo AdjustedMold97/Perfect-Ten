@@ -31,9 +31,7 @@ public class AdminScreen extends AppCompatActivity {
     Button deletePost;
     Button deleteComment;
     TextView inputText1;
-    TextView inputText2;
     EditText inputEdit1;
-    EditText inputEdit2;
     Button submitButton;
     TextView errorText;
 

@@ -291,6 +291,10 @@ public class User {
         this.posts.add(post);
     }
 
+    public void removePost(Post post) {
+        this.posts.remove(post);
+    }
+
     /**
      * Gets User's friends list
      * @return List representing users that User is friends with

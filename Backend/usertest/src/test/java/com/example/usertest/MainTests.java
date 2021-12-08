@@ -242,10 +242,8 @@ class MainTests {
 		children.add(post2);
 		when(post1.getChildren()).thenReturn(children);
 
-		postController.createCommentWithoutMedia(post2, user.getUsername(), post1.getId());
-
 		assertEquals(children, postController.getAllComments(post1.getId()));
-		
+
 	}
 
 	@Test

@@ -1,6 +1,6 @@
 package com.example.PerfectTen.Screens;
 
-import static com.example.PerfectTen.net_utils.Const.DELETE_COMMENT_URL;
+
 import static com.example.PerfectTen.net_utils.Const.DELETE_POST_URL;
 import static com.example.PerfectTen.net_utils.Const.DELETE_USER_URL;
 
@@ -16,18 +16,15 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.PerfectTen.R;
+import com.example.PerfectTen.net_utils.Const;
 import com.example.PerfectTen.net_utils.PerfectTenRequester;
 import com.example.PerfectTen.net_utils.VolleyCallback;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.util.HashMap;
+import java.util.Map;
 
-//<<<<<<< HEAD
-//import java.util.HashMap;
-//import java.util.Map;
-//
-//=======
-//>>>>>>> 28185ed63ae45d1fcbc12f67be7bd25d7f1a75b4
 public class AdminScreen extends AppCompatActivity {
 
     Button deleteUser;
@@ -64,9 +61,9 @@ public class AdminScreen extends AppCompatActivity {
         deleteComment.setOnClickListener(view -> deleteComment());
 
         inputText1 = findViewById(R.id.admin_input_TextView_1);
-        inputText2 = findViewById(R.id.admin_input_TextView_comment);
+
         inputEdit1 = findViewById(R.id.admin_input_EditText_1);
-        inputEdit2 = findViewById(R.id.admin_input_EditText_comment);
+
 
         submitButton = findViewById(R.id.admin_submit_Button);
         submitButton.setOnClickListener(view -> submit());
@@ -107,6 +104,7 @@ public class AdminScreen extends AppCompatActivity {
 
     private void deleteUser() {
 
+
         makeButtonsInvisible();
 
         inputText1.setText("Enter username:");
@@ -141,15 +139,12 @@ public class AdminScreen extends AppCompatActivity {
 
         makeButtonsInvisible();
 
-        inputText1.setText("Enter Parent Post ID:");
+        inputText1.setText("Enter Post ID:");
         inputEdit1.setHint("Post ID");
-        inputText2.setText("Enter Comment Index:");
-        inputEdit2.setHint("Comment Index");
+
 
         inputText1.setVisibility(View.VISIBLE);
         inputEdit1.setVisibility(View.VISIBLE);
-        inputText2.setVisibility(View.VISIBLE);
-        inputEdit2.setVisibility(View.VISIBLE);
 
         submitButton.setVisibility(View.VISIBLE);
 
@@ -171,48 +166,66 @@ public class AdminScreen extends AppCompatActivity {
         PerfectTenRequester requester;
         String url = null;
         JSONObject requestObj = null;
-        String username;
+        String userID;
+        String ID;
 
-        if (userFlag)
 
-            url = DELETE_USER_URL;
-//<<<<<<< HEAD
-//        username = String.valueOf(inputEdit1.getText());
-//        requestObj
-//
-//
-//                Map<String, String> params = new HashMap<>();
-//                params.put(Const.USERNAME_KEY, username);
-//=======
-      //  requestObj =
+        if (userFlag) {
 
-              //  username = String.valueOf(username_input.getText());
-              //  password = String.valueOf(password_input.getText());
-                
-              //  Map<String, String> params = new HashMap<>();
-               // params.put(Const.USERNAME_KEY, username);
+            userID = String.valueOf(inputEdit1.getText());
+
+
+            //TODO need user specifci ID for url
+            url = DELETE_USER_URL + userID;
+
+           
+
+            Map<String, String> params = new HashMap<>();
+            params.put(Const.ID_KEY, userID);
+
+            requestObj = new JSONObject(params);
+        }
 
         else if (postFlag) {
-//>>>>>>> 28185ed63ae45d1fcbc12f67be7bd25d7f1a75b4
 
-            url = DELETE_POST_URL;
+//TODO find what a delete mapping is
+            ID = String.valueOf(inputEdit1.getText());
+
+            url = DELETE_POST_URL + ID;
+
+
+            Map<String, String> params = new HashMap<>();
+            params.put(Const.ID_KEY, ID);
+
+            requestObj = new JSONObject(params);
+
 
         }
 
-        else if (commentFlag)
-            url = DELETE_COMMENT_URL + inputEdit1.getText().toString() + "/" + inputEdit2.getText().toString();
+        else if (commentFlag) {
 
-        requester = new PerfectTenRequester(url, requestObj, callback);
-        requester.request();
+
+            ID = String.valueOf(inputEdit1.getText());
+
+            url = DELETE_POST_URL + ID;
+
+            Map<String, String> params = new HashMap<>();
+            params.put(Const.ID_KEY, ID);
+
+            requestObj = new JSONObject(params);
+
+        }
+
+            requester = new PerfectTenRequester(url, requestObj, callback);
+            requester.request();
+
 
     }
 
     private void resetPage() {
 
         inputText1.setVisibility(View.INVISIBLE);
-        inputText2.setVisibility(View.INVISIBLE);
         inputEdit1.setVisibility(View.INVISIBLE);
-        inputEdit2.setVisibility(View.INVISIBLE);
         submitButton.setVisibility(View.INVISIBLE);
 
         deleteUser.setVisibility(View.VISIBLE);

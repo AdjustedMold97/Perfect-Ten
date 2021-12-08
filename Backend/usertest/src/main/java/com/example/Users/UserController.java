@@ -264,12 +264,16 @@ public class UserController {
         for (User user: otherUsers) {
             if (user.isFriendsWith(requestedUser)) {
                 user.removeFriend(requestedUser);
+                requestedUser.removeFriend(user);
             }
             if (user.isBlocking(requestedUser)) {
                 user.removeBlockedUser(requestedUser);
             }
+            if (requestedUser.isBlocking(user)) {
+                requestedUser.removeBlockedUser(user);
+            }
         }
-        
+
         userRepository.deleteById(id);
         return success;
     }

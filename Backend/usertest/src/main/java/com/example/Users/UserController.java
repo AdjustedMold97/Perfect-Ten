@@ -187,11 +187,6 @@ public class UserController {
             return null;
         }
         
-        // If new username is the same as old username, return null
-        if(user.getUsername().equals(request.getUsername())) {
-        	return null;
-        }
-        
         // Update attributes and return new user
         List<Post> userPosts = user.getPosts();
         List<User> friends = user.getFriends();
@@ -199,7 +194,11 @@ public class UserController {
         
         deleteUser(user.getUsername());
         
-        for (User friend: friends) {
+        for (Post post : userPosts) {
+            post.setUname(request.getUsername());
+        }
+
+        /* for (User friend: friends) {
             friend.addFriend(request);
             request.addFriend(friend);
         }
@@ -213,12 +212,14 @@ public class UserController {
             if (other.isBlocking(user)) {
                 other.addBlockedUser(request);
             }
-        }
+        } */
 
-        request.setPosts(userPosts);
-        userRepository.save(request);
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+        userRepository.save(user);
         //request.setId(id);
-        return userRepository.findById(request.getId());
+        return userRepository.findById(user.getId());
     }
 
     /**

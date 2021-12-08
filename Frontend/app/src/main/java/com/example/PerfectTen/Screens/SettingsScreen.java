@@ -53,13 +53,18 @@ public class SettingsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_screen);
 
-        Button friend = findViewById(R.id.friends_Button_settings);
+        /*
+         * these three buttons make up the bottom tab buttons they go on each screen
+         * they include Home, Settings, and Friends and reroute the user to that page form anywhere in the app
+         * - Ethan Still
+         */
+        Button friend = findViewById(R.id.friends_Button_profile);
         friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
 
-        Button settings = findViewById(R.id.settings_Button_settings);
-        settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SettingsScreen.class)));
+        Button settings = findViewById(R.id.settings_Button_profile);
+        settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(), SettingsScreen.class)));
 
-        Button home = findViewById(R.id.home_Button_settings);
+        Button home = findViewById(R.id.home_Button_profile);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
 
         settingsPfP = findViewById(R.id.settings_Profile_Pic);

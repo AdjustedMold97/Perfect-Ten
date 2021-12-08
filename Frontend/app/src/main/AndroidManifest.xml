@@ -24,6 +24,10 @@
             android:name=".Screens.DMsScreen"
             android:exported="false" />
         <activity
+            android:name=".Screens.SettingsScreen"
+            android:label="Settings"
+            android:exported="false"/>
+        <activity
             android:name=".Screens.FindUserScreen"
             android:label="Find User" />
         <activity

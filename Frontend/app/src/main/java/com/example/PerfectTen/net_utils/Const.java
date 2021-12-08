@@ -13,12 +13,19 @@ public class Const {
 
     //========================================= URLs ===============================================
 
+    /*
+     * All urls related to sign up
+     */
     public static final String POSTING_URL = "http://coms-309-060.cs.iastate.edu:8080/posts/new/";
     public static final String LOGIN_URL = "http://coms-309-060.cs.iastate.edu:8080/login";
     public static final String POST_LIST_URL = "http://coms-309-060.cs.iastate.edu:8080/posts/list";
     public static final String USER_POST_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
     public static final String USER_POST_URL_2 = "/posts/list";
     public static final String SIGN_UP_URL = "http://coms-309-060.cs.iastate.edu:8080/user/new";
+
+    /*
+     * All urls related to Friends
+     */
     public static final String ADD_FRIEND_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
     public static final String ADD_FRIEND_URL_2 = "/friends/new";
     public static final String FRIEND_LIST_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
@@ -32,20 +39,32 @@ public class Const {
     public static final String BLOCKED_LIST_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
     public static final String BLOCKED_LIST_URL_2 = "/blocked/list/usernames";
     public static final String USER_LIST_URL = "http://coms-309-060.cs.iastate.edu:8080/user/list/usernames";
+
     public static final String GET_POST_URL = "http://coms-309-060.cs.iastate.edu:8080/posts/";
     public static final String CREATE_COMMENT_URL = "http://coms-309-060.cs.iastate.edu:8080/posts/new/comment/";
     public static final String COMMENT_LIST_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/posts/";
     public static final String COMMENT_LIST_URL_2 = "/all";
+
+    /*
+     * All urls related to user settings changes
+     */
     public static final String CHANGE_PFP_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
     public static final String CHANGE_PFP_URL_2 = "/pic/new";
     public static final String GET_PFP_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
     public static final String GET_PFP_URL_2 = "/pic";
     public static final String CHANGE_SETTINGS_URL = "http://coms-309-060.cs.iastate.edu:8080/user/";
+
+    /*
+     * Chat room url
+     */
     public static final String DMS_URL = "http://coms-309-060.cs.iastate.edu:8080/chat/";
+
+    /*
+     * Admin level use only
+     */
     public static final String DELETE_USER_URL = "http://coms-309-060.cs.iastate.edu:8080/user/rm/";
     public static final String DELETE_POST_URL = "http://coms-309-060.cs.iastate.edu:8080/posts/rm/";
     public static final String GET_USER_URL = "http://coms-309-060.cs.iastate.edu:8080/user/";
-
     public static final String USER_PRIVILEGE_NEW_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
     public static final String USER_PRIVILEGE_NEW_2 = "/privilege/new";
 

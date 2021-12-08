@@ -265,6 +265,7 @@ class MainTests {
 		Post post2 = new Post("TestMessage2", "TestTitle2");
 		
 		when(postRepository.findById(post1.getId())).thenReturn(post1);
+		when(postRepository.findById(post2.getId())).thenReturn(post2);
 		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
 
 		postController.createComment(post2, user.getUsername(), post1.getId(), null);

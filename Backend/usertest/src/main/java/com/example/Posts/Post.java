@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -47,15 +49,18 @@ public class Post {
     @Lob
     private Blob media;
     
-    @JsonIgnore
-    @ApiModelProperty(notes = "List of comments assosiated with the post",name="comments",required=true,value="comments")
-    private ArrayList<Comment> comments = new ArrayList<Comment>();
-    
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
     @ApiModelProperty(notes = "User assosiated with the post",name="user",required=true,value="user")
     private User user;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @ApiModelProperty(notes = "Child Posts of this post", name="children", required=true, value="children")
+    private List<Post> children;
+
+    @ApiModelProperty(notes = "True if this post is a child of another", name ="isAChild", required = true, value="isAChild")
+    private Boolean isAChild;
 
      // =============================== Constructors ================================== //
     /**
@@ -73,6 +78,7 @@ public class Post {
     public Post(String message, String title) {
         this.message = message;
         this.title = title;
+        children = new ArrayList<Post>();
     }
     
     /**
@@ -82,6 +88,7 @@ public class Post {
     public Post(String message) {
     	this.message = message;
     	title = "default";
+        children = new ArrayList<Post>();
     }
 
     /**
@@ -93,6 +100,7 @@ public class Post {
     public Post(String message, String title, MultipartFile media) {
         this.message = message;
         this.title = title;
+        children = new ArrayList<Post>();
         
         this.extension = media.getOriginalFilename();
         try { 
@@ -116,6 +124,7 @@ public class Post {
     	this.title = title;
     	this.user = user;
     	uname = user.getUsername();
+        children = new ArrayList<Post>();
     }
     
     /**
@@ -130,6 +139,7 @@ public class Post {
     	this.title = title;
     	this.user = user;
     	uname = user.getUsername();
+        children = new ArrayList<Post>();
     	
     	 this.extension = media.getOriginalFilename();
          try { 
@@ -240,47 +250,6 @@ public class Post {
     public void setTime() {
     	time = LocalDateTime.now();
     }
-
-    /**
-     * gets a comment stored at input index
-     * @param id
-     * @return comment
-     */
-    public String getComment(int id) {
-    	if(id >= comments.size()) {
-    		return "{\"message\":\"error1\"}";
-    	}
-    	else {
-    		String temp = new String();
-    		temp = "{\"user\":\"";
-    		temp = temp.concat(comments.get(id).getUser().getUsername());
-    		temp = temp.concat(",\"message\":\"");
-    		temp = temp.concat(comments.get(id).getMessage());
-    		temp = temp.concat(",\"time\":\"");
-    		temp = temp.concat(comments.get(id).getTime());
-    		temp = temp.concat("\"}");
-    		return temp;
-    	}
-    }
-    
-    /**
-     * deletes a comment stored at input index
-     * @param id
-     */
-    public void delComment(int id) {
-    	if(id < comments.size()) {
-    		comments.remove(id);
-    	}
-    }
-    
-    /**
-     * creates a new comment with message m and user u
-     * @param m
-     * @param u
-     */
-    public void addComment(String m, User u) {
-    	comments.add(new Comment(m,u));
-    }
     
     /**
      * returns media assosiated with the post
@@ -306,6 +275,25 @@ public class Post {
     	extension = in;
     }
     
+    public List<Post> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Post> children) {
+        this.children = children;
+    }
+
+    public void addChild(Post child) {
+        children.add(child);
+    }
+
+    public Boolean getIsAChild() {
+        return isAChild;
+    }
+
+    public void setIsAChild(Boolean isAChild) {
+        this.isAChild = isAChild;
+    }
     
 }
 

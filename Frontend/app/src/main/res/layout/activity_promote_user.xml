@@ -7,7 +7,7 @@
     tools:context=".Screens.PromoteUser">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/promote_text"
         android:layout_width="292dp"
         android:layout_height="143dp"
         android:layout_marginStart="56dp"
@@ -23,7 +23,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:text="0"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/promote_text"
         app:layout_constraintTop_toTopOf="@+id/twoLevel" />
 
     <Button
@@ -32,8 +32,8 @@
         android:layout_height="50dp"
         android:layout_marginTop="120dp"
         android:text="2"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintEnd_toEndOf="@+id/promote_text"
+        app:layout_constraintTop_toBottomOf="@+id/promote_text" />
 
     <Button
         android:id="@+id/oneLevel"
@@ -43,4 +43,14 @@
         android:text="1"
         app:layout_constraintEnd_toStartOf="@+id/twoLevel"
         app:layout_constraintTop_toTopOf="@+id/twoLevel" />
+
+    <Button
+        android:id="@+id/exit_button"
+        android:layout_width="63dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="X"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

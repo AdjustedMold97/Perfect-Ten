@@ -11,7 +11,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.example.PerfectTen.R;
 import com.example.PerfectTen.app.AppController;
@@ -32,6 +34,7 @@ public class PromoteUser extends AppCompatActivity {
     boolean zeroFlag;
     boolean oneFlag;
     boolean twoFlag;
+    String pvalue = "-1";
 
     VolleyCallback callback;
 
@@ -45,97 +48,18 @@ public class PromoteUser extends AppCompatActivity {
         oneFlag = false;
         twoFlag = false;
 
-        callback = new VolleyCallback() {
 
-            @Override
-            public void onSuccess(JSONArray response) {
-                //unreachable
-            }
+        TextView promoteText = findViewById(R.id.promote_text);
 
-            @Override
-            public void onSuccess(JSONObject response) {
+        /*
+         * Button set up
+         * - Ethan Still
+         */
+        Button back = findViewById(R.id.exit_button);
+        back.setOnClickListener(view -> {
+            finish();
 
-//                errorText.setText("Success");
-//                errorText.setTextColor(Color.GREEN);
-//                errorText.setVisibility(View.VISIBLE);
-
-
-
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-
-//                errorText.setText("Something went wrong...");
-//                errorText.setTextColor(Color.RED);
-//                errorText.setVisibility(View.VISIBLE);
-
-            }
-        };
-
-        private void submit() {
-
-            PerfectTenRequester requester;
-            String url = null;
-            JSONObject requestObj = null;
-            String userID;
-            String ID;
-
-
-            if (zeroFlag) {
-
-                //userID = String.valueOf(inputEdit1.getText());
-//
-//
-//                //TODO need user specifci ID for url
-//                url = DELETE_USER_URL + userID;
-//
-//
-//
-//                Map<String, String> params = new HashMap<>();
-//                params.put(Const.ID_KEY, userID);
-//
-//                requestObj = new JSONObject(params);
-            }
-
-            else if (oneFlag) {
-
-
-                //ID = String.valueOf(inputEdit1.getText());
-//
-//                url = DELETE_POST_URL + ID;
-//
-//
-//                Map<String, String> params = new HashMap<>();
-//                params.put(Const.ID_KEY, ID);
-//
-//                requestObj = new JSONObject(params);
-
-
-            }
-
-            else if (twoFlag) {
-
-
-//                ID = String.valueOf(inputEdit1.getText());
-//
-//                url = DELETE_POST_URL + ID;
-//
-//                Map<String, String> params = new HashMap<>();
-//                params.put(Const.ID_KEY, ID);
-//
-//                requestObj = new JSONObject(params);
-
-            }
-
-            requester = new PerfectTenRequester(url, requestObj, callback);
-            requester.request();
-
-
-        }
-        }
-        int privLevel = 0;
-        PerfectTenRequester requester;
+        });
 
         Button zero = findViewById(R.id.zeroLevel);
         Button one = findViewById(R.id.oneLevel);
@@ -146,49 +70,113 @@ public class PromoteUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                zeroFlag = true;
+
+                pvalue = "0";
+                Map<String, String> params = new HashMap<>();
+                params.put(Const.PLEVEL_KEY, pvalue);
+
+                JSONObject requestObj = new JSONObject(params);
+
+                submit(requestObj);
+                reset();
+
+            }
+        });
+
+        one.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                oneFlag = true;
+                pvalue = "1";
+                Map<String, String> params = new HashMap<>();
+                params.put(Const.PLEVEL_KEY, pvalue);
+
+                JSONObject requestObj = new JSONObject(params);
+
+                submit(requestObj);
+                reset();
+
+            }
+        });
+
+        two.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                twoFlag = true;
+                pvalue ="2";
+                Map<String, String> params = new HashMap<>();
+                params.put(Const.PLEVEL_KEY, pvalue);
+
+                JSONObject requestObj = new JSONObject(params);
+
+                submit(requestObj);
+                reset();
 
             }
         });
 
 
+        /**
+         * callback method that changes text on screen based on success or failure of the request
+         * @ author Ethan Still
+         */
+        callback = new VolleyCallback() {
+
+            @Override
+            public void onSuccess(JSONArray response) {
+                //unreachable
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                promoteText.setText("Success, User level changed to " + pvalue);
 
 
+            }
 
-//        String username = AppController.getTargetUser();
-//
-//        requester = new PerfectTenRequester(Const.USER_PRIVILEGE_1 + username + Const.USER_PRIVILEGE_2,
-//                privLevel, new VolleyCallback() {
-//
-//            @Override
-//            public void onSuccess(JSONArray response) {/* unreachable */}
-//
-//            @Override
-//            public void onSuccess(JSONObject response) {
-//
-//                try {
-//
-//
-//                    //TODO
-//
-//
-//                    }
-//
-//
-//                catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//
-//
-//            @Override
-//            public void onError(VolleyError error) {
-//
-//            }
-//        });
-//
-//        requester.request();
+            @Override
+            public void onError(VolleyError error) {
+
+                promoteText.setText("Something went wrong...");
+
+
+            }
+        };
+
+
     }
 
+
+    private void submit(JSONObject promoteObj) {
+
+        PerfectTenRequester requester;
+        String url = "";
+        String username = AppController.getTargetUser();
+
+        url = Const.USER_PRIVILEGE_1 + username + Const.USER_PRIVILEGE_2;
+
+
+        requester = new PerfectTenRequester(url, promoteObj, callback);
+        requester.request();
+
+
+    }
+
+    private void reset(){
+        pvalue = "-1";
+        zeroFlag = false;
+        oneFlag = false;
+        twoFlag = false;
+
+    }
 }
+
+
+
 

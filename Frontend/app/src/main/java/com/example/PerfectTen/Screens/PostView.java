@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -78,7 +79,7 @@ public class PostView extends AppCompatActivity {
         submit.setOnClickListener(view -> submitComment(commentText.getText().toString()));
 
         Button back = findViewById(R.id.back_omment);
-        submit.setOnClickListener(view -> finish());
+        back.setOnClickListener(view -> finish());
 
         titleView = findViewById(R.id.post_view_title);
         bodyView = findViewById(R.id.post_view_body);

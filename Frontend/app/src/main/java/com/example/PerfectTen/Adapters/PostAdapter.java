@@ -101,10 +101,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
             });
 
-//            if(AppController.getPrivLevel()>0){
-//                holder.postObjectID.setText(View.VISIBLE);
-//
-//            }
+
+            if(AppController.getPrivLevel()>0){
+                holder.postObjectID.setVisibility(View.VISIBLE);
+
+            }
+
+
+
 
         }
         catch (JSONException e) {
@@ -135,6 +139,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         TextView postObjectID;
         TextView postObjectUname;
         TextView postObjectTime;
+        Boolean isAChild;
+        JSONArray children;
         /**
          * ID's for postObjectTitle and postObjectBody
          * Can be found in post_object.xml

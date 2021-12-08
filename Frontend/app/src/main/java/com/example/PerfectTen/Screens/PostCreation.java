@@ -70,7 +70,7 @@ public class PostCreation extends AppCompatActivity {
          *
          * - Jae Swanepoel
          */
-        EditText bodyEditText = findViewById(R.id.post_body_EditText);
+        EditText bodyEditText = findViewById(R.id.post_creation_body_editor);
         EditText titleEditText = findViewById(R.id.post_title_EditText);
 
         /*

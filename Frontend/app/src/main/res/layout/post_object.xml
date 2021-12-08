@@ -55,6 +55,7 @@
         android:id="@+id/postObjectID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
         android:hint="ID"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/postObjectTime"

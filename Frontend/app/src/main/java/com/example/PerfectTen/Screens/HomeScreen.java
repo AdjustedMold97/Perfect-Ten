@@ -6,7 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import android.util.Log;
+
+import android.view.View;
+
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 
@@ -45,6 +51,7 @@ public class HomeScreen extends AppCompatActivity {
     PerfectTenRequester requester;
     String[] blockedUsers;
     JSONArray responseArr;
+    Button admin;
 
     /**
      * Calls onResume() method onCreate to populate the homeScreen view with postObjects
@@ -56,6 +63,8 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
+
 
         //=======================================================================================================
         //TODO ethan- interface these somehow to make more efficient
@@ -85,6 +94,7 @@ public class HomeScreen extends AppCompatActivity {
 
         toLogin.setOnClickListener(view -> {
             AppController.setUsername(null);
+            AppController.setPrivLevel(0);
             startActivity(new Intent(view.getContext(), LoginScreen.class));
         });
 
@@ -95,8 +105,50 @@ public class HomeScreen extends AppCompatActivity {
         Button post_button = findViewById(R.id.post_create_Button);
         post_button.setOnClickListener(view -> startActivity(new Intent(view.getContext(), PostCreation.class)));
 
+        admin = findViewById(R.id.admin_Button);
+        admin.setOnClickListener(view -> startActivity(new Intent(this, AdminScreen.class)));
+        admin.setVisibility(View.INVISIBLE);
+
         //getting posts
         getPosts();
+        getAdminStatus();
+
+    }
+
+    //TODO
+    private void getAdminStatus() {
+
+        requester = new PerfectTenRequester
+                (Const.USER_USERNAME + AppController.getUsername(),
+                        null,
+                        new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONArray response) {/* unreachable */}
+
+            @Override
+            public void onSuccess(JSONObject response) {
+
+
+
+                try {
+
+                    AppController.setPrivLevel(response.getInt(Const.PLEVEL_KEY));
+
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if(AppController.getPrivLevel()>0)
+                    admin.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {/* TODO */}
+        });
+
+        requester.request();
     }
 
     /**
@@ -135,11 +187,7 @@ public class HomeScreen extends AppCompatActivity {
                  *
                  * - Jae Swanepoel
                  */
-                for (String blockedUser : blockedUsers) {
 
-                    if (blockedUser.equals(temp.get(Const.POST_USER_KEY)))
-                        continue reverseLoop;
-                }
 
 
                 //getting the title from the JSONObject
@@ -158,6 +206,16 @@ public class HomeScreen extends AppCompatActivity {
 
                 temp.put(Const.TIME_KEY,
                         responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.TIME_KEY).toString());
+
+                for (String blockedUser : blockedUsers) { //TODO this coe is greay, but plz fix it JAe
+
+                    if (blockedUser.equals(temp.get(Const.POST_USER_KEY)))
+                        continue reverseLoop;
+
+                }
+
+                if (temp.get("isAChild").equals("true"))
+                    continue reverseLoop;
 
             } catch (JSONException e) { e.printStackTrace(); }
 

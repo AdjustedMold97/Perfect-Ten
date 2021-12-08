@@ -87,6 +87,10 @@ public class PostController {
     public String createComment(@RequestBody Post post, @PathVariable String username, @PathVariable int id) {
     	if (post == null || userRepository.findByUsername(username) == null)
             return usernameFail;
+
+        if (postRepository.findById(id) == null) {
+            return failure;
+        }
         // User user = userRepository.findByUsername(username);
         post.setUser(userRepository.findByUsername(username));
         post.setTime();
@@ -144,7 +148,19 @@ public class PostController {
 
         int newId = (int) id;
 
-    	postRepository.deleteById(newId);
-    	return success;
+        User user = userRepository.findByUsername(postRepository.findById(newId).getUname());
+        user.removePost(postRepository.findById(newId));
+
+        if (postRepository.findById(newId).getIsAChild()) {
+            List<Post> otherPosts = postRepository.findAll();
+            for (Post post : otherPosts) {
+                if (post.getChildren().contains(postRepository.findById(newId))) {
+                    post.removeChild(postRepository.findById(newId));
+                }
+            }
+        }
+
+        postRepository.deleteById(newId);
+        return success;
     }
 }

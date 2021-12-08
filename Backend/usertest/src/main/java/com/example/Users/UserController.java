@@ -26,6 +26,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import com.example.Posts.Post;
+import com.example.Posts.PostController;
 import com.example.Posts.PostRepository;
 //import com.example.Users.User.PrivilegeLevel;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -252,7 +253,30 @@ public class UserController {
         if (userRepository.findById(id) == null) {
             return failure;
         }
-        // Else, delete user and return success
+
+        User requestedUser = userRepository.findById(id);
+        
+        // Else, delete user's posts, remove them from other's lists and return success
+        List<User> otherUsers = userRepository.findAll();
+        for (User user : otherUsers) {
+            if (user.isFriendsWith(requestedUser)) {
+                user.removeFriend(requestedUser);
+                requestedUser.removeFriend(user);
+            }
+            if (user.isBlocking(requestedUser)) {
+                user.removeBlockedUser(requestedUser);
+            }
+            if (requestedUser.isBlocking(user)) {
+                requestedUser.removeBlockedUser(user);
+            }
+        }
+
+        List<Post> userPosts = requestedUser.getPosts();
+        for (Post post : userPosts) {
+            requestedUser.removePost(post);
+            postRepository.deleteById(post.getId());
+        }
+
         userRepository.deleteById(id);
         return success;
     }

@@ -56,8 +56,7 @@ public class Const {
 
     public static final String USER_USERNAME = "http://coms-309-060.cs.iastate.edu:8080/user/";
 
-
-
+    public static final String DMS_URL = "http://coms-309-060.cs.iastate.edu:8080/chat/";
 
     //======================================== JSON ================================================
 

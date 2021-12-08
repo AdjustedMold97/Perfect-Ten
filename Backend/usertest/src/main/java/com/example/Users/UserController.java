@@ -216,8 +216,8 @@ public class UserController {
 
         request.setPosts(userPosts);
         userRepository.save(request);
-        request.setId(id);
-        return userRepository.findById(id);
+        //request.setId(id);
+        return userRepository.findById(request.getId());
     }
 
     /**

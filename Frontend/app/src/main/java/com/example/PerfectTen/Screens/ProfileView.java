@@ -277,6 +277,7 @@ public class ProfileView extends AppCompatActivity {
                             //Changing text on addFriendButton upon successful request
                             if (response.get(Const.MESSAGE_KEY).equals(Const.SUCCESS_MSG)) {
 
+                                removeFriend();
                                 isBlocked = true;
                                 blockButton.setText(UNBLOCK_TEXT);
 

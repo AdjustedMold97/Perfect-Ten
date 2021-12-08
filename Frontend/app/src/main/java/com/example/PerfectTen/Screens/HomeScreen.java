@@ -215,8 +215,8 @@ public class HomeScreen extends AppCompatActivity {
 
                 }
 
-                if (temp.get("isAChild").equals("true"))
-                    continue reverseLoop;
+               // if (temp.get("isAChild").equals("true"))
+               //     continue reverseLoop;
 
             } catch (JSONException e) { e.printStackTrace(); }
 

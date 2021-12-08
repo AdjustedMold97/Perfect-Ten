@@ -1,9 +1,12 @@
 package com.example.PerfectTen.Screens;
 
+import static com.example.PerfectTen.net_utils.Const.BITMAP_HEIGHT;
+import static com.example.PerfectTen.net_utils.Const.BITMAP_WIDTH;
 import static com.example.PerfectTen.net_utils.Const.CHANGE_PFP_URL_1;
 import static com.example.PerfectTen.net_utils.Const.CHANGE_PFP_URL_2;
 import static com.example.PerfectTen.net_utils.Const.ERROR_RESPONSE_TAG;
-import static com.example.PerfectTen.net_utils.Const.RESPONSE_TAG;
+import static com.example.PerfectTen.net_utils.Const.GET_PFP_URL_1;
+import static com.example.PerfectTen.net_utils.Const.GET_PFP_URL_2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,27 +16,23 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.android.volley.Request;
-import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.example.PerfectTen.R;
 import com.example.PerfectTen.app.AppController;
-import com.example.PerfectTen.net_utils.PerfectTenRequester;
-import com.example.PerfectTen.net_utils.VolleyCallback;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Activity where a user can edit app settings
@@ -47,6 +46,9 @@ public class SettingsScreen extends AppCompatActivity {
     EditText passwordEdit;
     EditText emailEdit;
     TextView appliedText;
+
+    Uri imageUri;
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +83,30 @@ public class SettingsScreen extends AppCompatActivity {
         setUpSettings();
     }
 
+
+
     private void setUpSettings() {
 
         usernameEdit.setHint(AppController.getUsername());
+
+        ImageRequest imgReq = new ImageRequest(GET_PFP_URL_1 + AppController.getUsername() + GET_PFP_URL_2,
+
+                response -> {
+
+                    settingsPfP.setImageBitmap(response);
+
+                },
+
+                BITMAP_WIDTH, BITMAP_HEIGHT, Bitmap.Config.ALPHA_8,
+
+                error -> {
+                    VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage());
+                });
+
+        AppController.getInstance().addToRequestQueue(imgReq);
         /*
          * TODO
-         *  set profile picture
+         *
          *  set user email
          */
 
@@ -109,9 +129,6 @@ public class SettingsScreen extends AppCompatActivity {
 
     }
 
-    Uri imageUri;
-    Bitmap bitmap;
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -125,51 +142,44 @@ public class SettingsScreen extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-
-        @SuppressLint({"NewApi", "LocalSuppress"}) String encodedImage = Base64.getEncoder().encodeToString(byteArray);
-
-        JSONObject obj = new JSONObject();
-
-        try {
-            obj.put("file", encodedImage);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        PerfectTenRequester requester
-                = new PerfectTenRequester(Request.Method.PUT, CHANGE_PFP_URL_1 + AppController.getUsername() + CHANGE_PFP_URL_2, obj, new VolleyCallback() {
-
-            @Override
-            public void onSuccess(JSONArray response) {
-                //unreachable
-            }
-
-            @Override
-            public void onSuccess(JSONObject response) {
-
-                Log.d(RESPONSE_TAG, response.toString());
-
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-
-                VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage());
-                VolleyLog.d("Error String ", error.toString());
-
-            }
-        });
-
-        requester.request();
-
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
 
-            Bitmap resized = Bitmap.createScaledBitmap(bitmap, 200, 200, true);
-            settingsPfP.setImageBitmap(resized);
+            //converting bitmap to byte array
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
 
+            @SuppressLint({"NewApi", "LocalSuppress"})
+            String encodedImage = Base64.getEncoder().encodeToString(byteArray);
+
+            StringRequest strReq = new StringRequest(Request.Method.PUT,
+                    CHANGE_PFP_URL_1 + AppController.getUsername() + CHANGE_PFP_URL_2,
+
+                    response -> {
+
+                        //rescale image and set pfp
+                        Bitmap resized = Bitmap.createScaledBitmap(bitmap, 252, 256, true);
+                        settingsPfP.setImageBitmap(resized);
+
+                    },
+
+                    error -> {
+
+                        VolleyLog.d("Error ", error.getMessage());
+
+                    }) {
+
+                        @Override
+                        protected Map<String, String> getParams() {
+
+                            Map<String, String> params = new HashMap<>();
+                            params.put("file", encodedImage);
+
+                            return params;
+                        }
+            };
+
+            AppController.getInstance().addToRequestQueue(strReq);
         }
     }
 }

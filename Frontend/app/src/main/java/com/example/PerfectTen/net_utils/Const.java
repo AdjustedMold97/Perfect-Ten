@@ -38,13 +38,13 @@ public class Const {
     public static final String COMMENT_LIST_URL_2 = "/all";
     public static final String CHANGE_PFP_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
     public static final String CHANGE_PFP_URL_2 = "/pic/new";
-    public static final String GET_PFP_URL = "";
+    public static final String GET_PFP_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
+    public static final String GET_PFP_URL_2 = "/pic";
 
     //TODO these
     public static final String CHANGE_USERNAME_URL = "";
     public static final String CHANGE_PASSWORD_URL = "";
     public static final String CHANGE_EMAIL_URL = "";
-    public static final String CHANGE_PFP_URL = "";
 
     public static final String DMS_URL = "http://coms-309-060.cs.iastate.edu:8080/chat/";
 
@@ -72,7 +72,7 @@ public class Const {
     public static final String PASSWORD_ERROR = "error4";
     public static final String GENERIC_ERROR_TEXT = "Something went wrong...";
 
-    //===================================== KEYS =================================================
+    //===================================== KEYS ===================================================
 
     public static final String MESSAGE_KEY = "message";
     public static final String PASSWORD_KEY = "password";
@@ -86,5 +86,10 @@ public class Const {
     public static final String PLEVEL_KEY = "plevel";
     public static final String ISACHILD_KEY = "isAChild";
     public static final String CHILDREN = "children";
+
+    //===================================== NUMBERS ================================================
+
+    public static final int BITMAP_WIDTH = 252;
+    public static final int BITMAP_HEIGHT = 256;
 
 }

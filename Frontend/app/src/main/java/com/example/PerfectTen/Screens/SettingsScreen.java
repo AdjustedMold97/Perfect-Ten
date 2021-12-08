@@ -7,6 +7,7 @@ import static com.example.PerfectTen.net_utils.Const.CHANGE_PFP_URL_2;
 import static com.example.PerfectTen.net_utils.Const.ERROR_RESPONSE_TAG;
 import static com.example.PerfectTen.net_utils.Const.GET_PFP_URL_1;
 import static com.example.PerfectTen.net_utils.Const.GET_PFP_URL_2;
+import static com.example.PerfectTen.net_utils.Const.PICK_IMAGE;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -89,25 +90,19 @@ public class SettingsScreen extends AppCompatActivity {
 
         ImageRequest imgReq = new ImageRequest(GET_PFP_URL_1 + AppController.getUsername() + GET_PFP_URL_2,
 
-                response -> {
-
-                    settingsPfP.setImageBitmap(response);
-
-                },
+                response -> settingsPfP.setImageBitmap(response),
 
                 BITMAP_WIDTH, BITMAP_HEIGHT, Bitmap.Config.ALPHA_8,
 
-                error -> {
-                    VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage());
-                });
+                error -> VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage()));
 
         AppController.getInstance().addToRequestQueue(imgReq);
+
         /*
          * TODO
          *
          *  set user email
          */
-
     }
 
     //TODO
@@ -116,8 +111,6 @@ public class SettingsScreen extends AppCompatActivity {
 
 
     }
-
-    private static final int PICK_IMAGE = 100;
     
     //TODO
     private void changePfP() {
@@ -156,7 +149,7 @@ public class SettingsScreen extends AppCompatActivity {
                     response -> {
 
                         //rescale image and set pfp
-                        Bitmap resized = Bitmap.createScaledBitmap(bitmap, 252, 256, true);
+                        Bitmap resized = Bitmap.createScaledBitmap(bitmap, BITMAP_WIDTH, BITMAP_HEIGHT, true);
                         settingsPfP.setImageBitmap(resized);
 
                     },

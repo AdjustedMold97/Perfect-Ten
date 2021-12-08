@@ -87,5 +87,6 @@ public class Const {
 
     public static final int BITMAP_WIDTH = 252;
     public static final int BITMAP_HEIGHT = 256;
+    public static final int PICK_IMAGE = 100;
 
 }

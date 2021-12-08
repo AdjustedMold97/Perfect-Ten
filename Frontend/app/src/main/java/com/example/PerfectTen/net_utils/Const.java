@@ -40,7 +40,6 @@ public class Const {
     public static final String CHANGE_PFP_URL_2 = "/pic/new";
     public static final String GET_PFP_URL = "";
 
-
     //TODO these
     public static final String CHANGE_USERNAME_URL = "";
     public static final String CHANGE_PASSWORD_URL = "";

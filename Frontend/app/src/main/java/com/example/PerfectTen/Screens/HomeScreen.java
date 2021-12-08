@@ -66,13 +66,6 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-
-
-        //=======================================================================================================
-        //TODO ethan- interface these somehow to make more efficient
-        //TODO use <include or <merge to get interface into homeScreen
-        //TODO interface a back button Ethan
-
         /*
          * these three buttons make up the bottom tab buttons they go on each screen
          * they include Home, Settings, and Friends and reroute the user to that page form anywhere in the app
@@ -117,34 +110,26 @@ public class HomeScreen extends AppCompatActivity {
 
     }
 
-    //TODO
     private void getAdminStatus() {
 
         requester = new PerfectTenRequester
-                (GET_USER_URL + AppController.getUsername(),
-                        null,
-                        new VolleyCallback() {
+                (GET_USER_URL + AppController.getUsername(), null, new VolleyCallback() {
+
             @Override
             public void onSuccess(JSONArray response) {/* unreachable */}
 
             @Override
             public void onSuccess(JSONObject response) {
 
-
-
                 try {
-
-                    System.out.println(response.getInt(Const.PLEVEL_KEY));
                     AppController.setPrivLevel(response.getInt(Const.PLEVEL_KEY));
-
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                if(AppController.getPrivLevel()>0)
+                if(AppController.getPrivLevel() > 0)
                     admin.setVisibility(View.VISIBLE);
-
             }
 
             @Override
@@ -191,8 +176,6 @@ public class HomeScreen extends AppCompatActivity {
                  * - Jae Swanepoel
                  */
 
-
-
                 //getting the title from the JSONObject
                 temp.put(Const.TITLE_KEY,
                         responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.TITLE_KEY).toString());
@@ -210,11 +193,9 @@ public class HomeScreen extends AppCompatActivity {
                 temp.put(Const.TIME_KEY,
                         responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.TIME_KEY).toString());
 
-                for (String blockedUser : blockedUsers) { //TODO this coe is greay, but plz fix it JAe
-
+                for (String blockedUser : blockedUsers) {
                     if (blockedUser.equals(temp.get(Const.POST_USER_KEY)))
                         continue reverseLoop;
-
                 }
 
                // if (temp.get("isAChild").equals("true"))

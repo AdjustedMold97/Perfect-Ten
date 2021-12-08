@@ -13,6 +13,7 @@ import static com.example.PerfectTen.net_utils.Const.GET_USER_URL;
 import static com.example.PerfectTen.net_utils.Const.PASSWORD_KEY;
 import static com.example.PerfectTen.net_utils.Const.PICK_IMAGE;
 import static com.example.PerfectTen.net_utils.Const.QUALITY_SETTING;
+import static com.example.PerfectTen.net_utils.Const.RESULT_TAG;
 import static com.example.PerfectTen.net_utils.Const.USERNAME_KEY;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -197,6 +199,8 @@ public class SettingsScreen extends AppCompatActivity {
             public void onSuccess(JSONObject response) {
 
                 appliedText.setVisibility(View.VISIBLE);
+
+                Log.d(RESULT_TAG, "Received User Info.");
 
             }
 

@@ -25,7 +25,8 @@
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".Screens.DMsScreen"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Perfect Ten Chat!"/>
         <activity
             android:name=".Screens.SettingsScreen"
             android:exported="false"

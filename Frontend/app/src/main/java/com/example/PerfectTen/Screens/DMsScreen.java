@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.PerfectTen.R;
@@ -21,6 +22,9 @@ import java.net.URI;
 public class DMsScreen extends AppCompatActivity {
 
     TextView mOutput;
+    EditText mInput;
+    Button send;
+    WebSocketClient mWebSocketClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,11 @@ public class DMsScreen extends AppCompatActivity {
         backBtn.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
 
         mOutput = findViewById(R.id.DMs_Feed_TextView);
+        mInput = findViewById(R.id.dms_Input_Text);
+        send = findViewById(R.id.dms_send_Button);
+        send.setOnClickListener(view -> sendMessage());
+
+        connectWebSocket();
     }
 
     private void connectWebSocket() {
@@ -41,15 +50,13 @@ public class DMsScreen extends AppCompatActivity {
         URI uri;
 
         try {
-
             uri = new URI(DMS_URL);
-
         } catch (Exception e) {
             e.printStackTrace();
             return;
         }
 
-        WebSocketClient mWebSocketClient = new WebSocketClient(uri) {
+        mWebSocketClient = new WebSocketClient(uri) {
 
             @Override
             public void onOpen(ServerHandshake handshakedata) {
@@ -60,8 +67,9 @@ public class DMsScreen extends AppCompatActivity {
             @Override
             public void onMessage(String message) {
                 Log.i("Websocket", "Message Received");
-
-                mOutput.append("\n" + message);
+                mOutput.append("\n"
+                        + AppController.getTargetUser() + ": "
+                        + message);
             }
 
             @Override
@@ -76,5 +84,18 @@ public class DMsScreen extends AppCompatActivity {
         };
 
         mWebSocketClient.connect();
+    }
+
+    private void sendMessage() {
+
+        String message = mInput.getText().toString();
+
+        if (message != null && message.length() > 0) {
+
+            mWebSocketClient.send(message);
+            mOutput.append("\n" + "You: " + message);
+
+        }
+
     }
 }

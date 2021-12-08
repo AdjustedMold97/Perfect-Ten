@@ -252,7 +252,24 @@ public class UserController {
         if (userRepository.findById(id) == null) {
             return failure;
         }
-        // Else, delete user and return success
+
+        User requestedUser = userRepository.findById(id);
+        // Else, delete user's posts, remove them from other's lists and return success
+        List<Post> userPosts = requestedUser.getPosts();
+        for (Post post : userPosts) {
+            postRepository.deleteById(post.getId());
+        }
+
+        List<User> otherUsers = userRepository.findAll();
+        for (User user: otherUsers) {
+            if (user.isFriendsWith(requestedUser)) {
+                user.removeFriend(requestedUser);
+            }
+            if (user.isBlocking(requestedUser)) {
+                user.removeBlockedUser(requestedUser);
+            }
+        }
+        
         userRepository.deleteById(id);
         return success;
     }

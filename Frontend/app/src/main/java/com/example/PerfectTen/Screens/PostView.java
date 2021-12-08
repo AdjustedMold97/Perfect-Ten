@@ -1,8 +1,6 @@
 package com.example.PerfectTen.Screens;
 
 import static com.example.PerfectTen.net_utils.Const.CHILDREN_KEY;
-import static com.example.PerfectTen.net_utils.Const.COMMENT_LIST_URL_1;
-import static com.example.PerfectTen.net_utils.Const.COMMENT_LIST_URL_2;
 import static com.example.PerfectTen.net_utils.Const.CREATE_COMMENT_URL_1;
 import static com.example.PerfectTen.net_utils.Const.CREATE_COMMENT_URL_2;
 import static com.example.PerfectTen.net_utils.Const.MESSAGE_KEY;
@@ -13,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -191,41 +188,6 @@ public class PostView extends AppCompatActivity {
             @Override
             public void onError(VolleyError error) {
                 //TODO
-            }
-        });
-
-        requester.request();
-    }
-
-    /**
-     * Receives all comments and populates
-     * the RecyclerView.
-     */
-    private void getComments() {
-
-        Context c = this;
-
-        PerfectTenRequester requester
-                = new PerfectTenRequester(COMMENT_LIST_URL_1 + AppController.getPostID() + COMMENT_LIST_URL_2, new VolleyCallback() {
-            @Override
-            public void onSuccess(JSONArray response) {
-
-                Log.d(RESULT_TAG, "Received the comments array.");
-
-                //TODO for some reason using this code prevents us from clicking on the EditText...
-//                RecyclerView commentRecycler = findViewById(R.id.comments_Recycler);
-//                commentRecycler.setAdapter(new CommentAdapter(c, response));
-//                commentRecycler.setLayoutManager(new LinearLayoutManager(c));
-            }
-
-            @Override
-            public void onSuccess(JSONObject response) {
-                //unreachable
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-
             }
         });
 

@@ -272,6 +272,19 @@ class MainTests {
 		assertEquals(post3, postController.updatePost(post2.getId(), post3));
 	}
 	
+	public void testUpdatePLevel() {
+		User user = new User("TestUser", "test@email.com", "test123", 0);
+
+		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		ObjectNode obn = mapper.createObjectNode();
+		obn.set("pLevel", mapper.convertValue("2", JsonNode.class));
+
+		assertEquals("{\"message\":\"success\"}", userController.updateUserPLevel(user.getUsername(), obn))
+	}
+
 	
 	
 	

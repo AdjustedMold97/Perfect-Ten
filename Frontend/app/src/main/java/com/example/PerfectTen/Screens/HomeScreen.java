@@ -1,6 +1,7 @@
 package com.example.PerfectTen.Screens;
 
 import static com.example.PerfectTen.net_utils.Const.GET_USER_URL;
+import static com.example.PerfectTen.net_utils.Const.IS_A_CHILD_KEY;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -159,14 +160,14 @@ public class HomeScreen extends AppCompatActivity {
          * - Jae Swanepoel
          */
         JSONArray jsonArray = new JSONArray();
-        JSONObject temp;
+        JSONObject temp = null;
 
         reverseLoop:
         for (int i = 0; i < responseArr.length(); i++) {
-
-            temp = new JSONObject();
-
+            
             try {
+
+                temp = responseArr.getJSONObject(responseArr.length() - i - 1);
 
                 /*
                  * If a user's post is blocked,
@@ -175,31 +176,14 @@ public class HomeScreen extends AppCompatActivity {
                  *
                  * - Jae Swanepoel
                  */
-
-                //getting the title from the JSONObject
-                temp.put(Const.TITLE_KEY,
-                        responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.TITLE_KEY).toString());
-
-                //getting the message from the JSONObject
-                temp.put(Const.MESSAGE_KEY,
-                        responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.MESSAGE_KEY).toString());
-
-                temp.put(Const.ID_KEY,
-                        responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.ID_KEY).toString());
-
-                temp.put(Const.POST_USER_KEY,
-                        responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.POST_USER_KEY).toString());
-
-                temp.put(Const.TIME_KEY,
-                        responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.TIME_KEY).toString());
-
+                
                 for (String blockedUser : blockedUsers) {
                     if (blockedUser.equals(temp.get(Const.POST_USER_KEY)))
                         continue reverseLoop;
                 }
 
-               // if (temp.get("isAChild").equals("true"))
-               //     continue reverseLoop;
+                if (temp.get(IS_A_CHILD_KEY).equals(true))
+                    continue reverseLoop;
 
             } catch (JSONException e) { e.printStackTrace(); }
 

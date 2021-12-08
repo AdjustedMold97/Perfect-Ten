@@ -614,7 +614,7 @@ public class UserController {
         return requestedUser.getPLevel();
     }
 
-    @PutMapping(path = "/user/{user}/privilege")
+    @PutMapping(path = "/user/{user}/privilege/new")
     public String updateUserPLevel(@PathVariable String user, @RequestBody int pLevel) {
         User requestedUser = userRepository.findByUsername(user);
         if (requestedUser == null) {

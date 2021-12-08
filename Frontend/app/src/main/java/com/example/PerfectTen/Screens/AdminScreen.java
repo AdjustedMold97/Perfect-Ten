@@ -14,30 +14,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.example.PerfectTen.R;
-import com.example.PerfectTen.net_utils.Const;
 import com.example.PerfectTen.net_utils.PerfectTenRequester;
 import com.example.PerfectTen.net_utils.VolleyCallback;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AdminScreen extends AppCompatActivity {
 
     Button deleteUser;
     Button deletePost;
     Button deleteComment;
-    TextView inputText1;
-    EditText inputEdit1;
+
+    TextView inputText;
+    EditText inputEdit;
+
     Button submitButton;
-    TextView errorText;
+    TextView resultText;
 
     boolean userFlag;
-    boolean postFlag;
-    boolean commentFlag;
 
     VolleyCallback callback;
 
@@ -58,21 +56,18 @@ public class AdminScreen extends AppCompatActivity {
         deleteComment = findViewById(R.id.delete_commnet_Button);
         deleteComment.setOnClickListener(view -> deleteComment());
 
-        inputText1 = findViewById(R.id.admin_input_TextView_1);
-
-        inputEdit1 = findViewById(R.id.admin_input_EditText_1);
-
+        inputText = findViewById(R.id.admin_input_TextView_1);
+        inputEdit = findViewById(R.id.admin_input_EditText_1);
 
         submitButton = findViewById(R.id.admin_submit_Button);
         submitButton.setOnClickListener(view -> submit());
 
-        errorText = findViewById(R.id.admin_Error);
+        resultText = findViewById(R.id.admin_Error);
 
         userFlag = false;
-        postFlag = false;
-        commentFlag = false;
 
         callback = new VolleyCallback() {
+
             @Override
             public void onSuccess(JSONArray response) {
                 //unreachable
@@ -81,20 +76,19 @@ public class AdminScreen extends AppCompatActivity {
             @Override
             public void onSuccess(JSONObject response) {
 
-                errorText.setText("Success");
-                errorText.setTextColor(Color.GREEN);
-                errorText.setVisibility(View.VISIBLE);
+                resultText.setText("Success");
+                resultText.setTextColor(Color.GREEN);
+                resultText.setVisibility(View.VISIBLE);
 
                 resetPage();
-
             }
 
             @Override
             public void onError(VolleyError error) {
 
-                errorText.setText("Something went wrong...");
-                errorText.setTextColor(Color.RED);
-                errorText.setVisibility(View.VISIBLE);
+                resultText.setText("Something went wrong...");
+                resultText.setTextColor(Color.RED);
+                resultText.setVisibility(View.VISIBLE);
 
             }
         };
@@ -102,14 +96,13 @@ public class AdminScreen extends AppCompatActivity {
 
     private void deleteUser() {
 
-
         makeButtonsInvisible();
 
-        inputText1.setText("Enter username:");
-        inputEdit1.setHint("Username");
+        inputText.setText("Enter username:");
+        inputEdit.setHint("Username");
 
-        inputText1.setVisibility(View.VISIBLE);
-        inputEdit1.setVisibility(View.VISIBLE);
+        inputText.setVisibility(View.VISIBLE);
+        inputEdit.setVisibility(View.VISIBLE);
 
         submitButton.setVisibility(View.VISIBLE);
 
@@ -121,15 +114,13 @@ public class AdminScreen extends AppCompatActivity {
 
         makeButtonsInvisible();
 
-        inputText1.setText("Enter Post ID:");
-        inputEdit1.setHint("Post ID");
+        inputText.setText("Enter Post ID:");
+        inputEdit.setHint("Post ID");
 
-        inputText1.setVisibility(View.VISIBLE);
-        inputEdit1.setVisibility(View.VISIBLE);
+        inputText.setVisibility(View.VISIBLE);
+        inputEdit.setVisibility(View.VISIBLE);
 
         submitButton.setVisibility(View.VISIBLE);
-
-        postFlag = true;
 
     }
 
@@ -137,16 +128,13 @@ public class AdminScreen extends AppCompatActivity {
 
         makeButtonsInvisible();
 
-        inputText1.setText("Enter Post ID:");
-        inputEdit1.setHint("Post ID");
+        inputText.setText("Enter Comment ID:");
+        inputEdit.setHint("Comment ID");
 
-
-        inputText1.setVisibility(View.VISIBLE);
-        inputEdit1.setVisibility(View.VISIBLE);
+        inputText.setVisibility(View.VISIBLE);
+        inputEdit.setVisibility(View.VISIBLE);
 
         submitButton.setVisibility(View.VISIBLE);
-
-        commentFlag = true;
 
     }
 
@@ -155,75 +143,32 @@ public class AdminScreen extends AppCompatActivity {
         deleteUser.setVisibility(View.INVISIBLE);
         deletePost.setVisibility(View.INVISIBLE);
         deleteComment.setVisibility(View.INVISIBLE);
-        errorText.setVisibility(View.INVISIBLE);
+        resultText.setVisibility(View.INVISIBLE);
 
     }
 
     private void submit() {
 
         PerfectTenRequester requester;
-        String url = null;
-        JSONObject requestObj = null;
-        String userID;
-        String ID;
+        String url;
+        JSONObject obj = new JSONObject();
 
+        if (userFlag)
+            url = DELETE_USER_URL + inputEdit.getText().toString();
 
-        if (userFlag) {
+        else
+            url = DELETE_POST_URL + inputEdit.getText().toString();
 
-            userID = String.valueOf(inputEdit1.getText());
-
-
-            //TODO need user specifci ID for url
-            url = DELETE_USER_URL + userID;
-
-
-
-            Map<String, String> params = new HashMap<>();
-            params.put(Const.ID_KEY, userID);
-
-            requestObj = new JSONObject(params);
-        }
-
-        else if (postFlag) {
-
-//TODO find what a delete mapping is
-            ID = String.valueOf(inputEdit1.getText());
-
-            url = DELETE_POST_URL + ID;
-
-
-            Map<String, String> params = new HashMap<>();
-            params.put(Const.ID_KEY, ID);
-
-            requestObj = new JSONObject(params);
-
-
-        }
-
-        else if (commentFlag) {
-
-
-            ID = String.valueOf(inputEdit1.getText());
-
-            url = DELETE_POST_URL + ID;
-
-            Map<String, String> params = new HashMap<>();
-            params.put(Const.ID_KEY, ID);
-
-            requestObj = new JSONObject(params);
-
-        }
-
-            requester = new PerfectTenRequester(url, requestObj, callback);
-            requester.request();
-
-
+        requester = new PerfectTenRequester(Request.Method.DELETE, url, obj, callback);
+        requester.request();
     }
 
     private void resetPage() {
 
-        inputText1.setVisibility(View.INVISIBLE);
-        inputEdit1.setVisibility(View.INVISIBLE);
+        inputEdit.setText("");
+
+        inputText.setVisibility(View.INVISIBLE);
+        inputEdit.setVisibility(View.INVISIBLE);
         submitButton.setVisibility(View.INVISIBLE);
 
         deleteUser.setVisibility(View.VISIBLE);
@@ -231,8 +176,5 @@ public class AdminScreen extends AppCompatActivity {
         deleteComment.setVisibility(View.VISIBLE);
 
         userFlag = false;
-        postFlag = false;
-        commentFlag = false;
-
     }
 }

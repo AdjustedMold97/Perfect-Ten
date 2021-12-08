@@ -196,7 +196,8 @@ public class UserController {
         List<Post> userPosts = user.getPosts();
         List<User> friends = user.getFriends();
         List<User> blockedList = user.getBlockedUsers();
-        deleteUser(id);
+        
+        deleteUser(user.getUsername());
         
         for (User friend: friends) {
             friend.addFriend(request);
@@ -266,9 +267,10 @@ public class UserController {
      * @return success if User is deleted, otherwise failure
      */
     @ApiOperation(value = "Deletes user from database, returns success or failure", response = String.class)
-    @DeleteMapping(path = "/user/rm/{id}")
-    public String deleteUser(@PathVariable int id) {
+    @DeleteMapping(path = "/user/rm/{uname}")
+    public String deleteUser(@PathVariable String uname) {
         // If User is not found in database, return failure
+    	int id = userRepository.findByUsername(uname).getId();
         if (userRepository.findById(id) == null) {
             return failure;
         }
@@ -293,6 +295,15 @@ public class UserController {
         List<Post> userPosts = requestedUser.getPosts();
         for (Post post : userPosts) {
             requestedUser.removePost(post);
+            
+            if (postRepository.findById(post.getId()).getIsAChild()) {
+                List<Post> otherPosts = postRepository.findAll();
+                for (Post other : otherPosts) {
+                    if (other.getChildren().contains(postRepository.findById(post.getId()))) {
+                        other.removeChild(postRepository.findById(post.getId()));
+                    }
+                }
+            }
             postRepository.deleteById(post.getId());
         }
 
@@ -614,15 +625,25 @@ public class UserController {
         return requestedUser.getPLevel();
     }
 
-    @PutMapping(path = "/user/{user}/privilege")
-    public String updateUserPLevel(@PathVariable String user, @RequestBody int pLevel) {
+    @PutMapping(path = "/user/{user}/privilege/new")
+    public String updateUserPLevel(@PathVariable String user, @RequestBody ObjectNode json) {
         User requestedUser = userRepository.findByUsername(user);
+        String input = json.get("pLevel").textValue();
+        if (input == null) {
+        	return failure;
+        }
+        
+        int pLevel = Integer.valueOf(input);
+
+        if (pLevel >= 3 && pLevel <= 0) {
+        	return failure;
+        }
         if (requestedUser == null) {
             return failure;
         }
 
         requestedUser.setPLevel(pLevel);
-
+        userRepository.save(requestedUser);
         return success;
     }
 

@@ -32,9 +32,6 @@ public class DMsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dms_screen);
 
-        TextView username = findViewById(R.id.dms_username_TextView);
-        username.setText(AppController.getTargetUser());
-
         Button backBtn = findViewById(R.id.dms_back_Button);
         backBtn.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
 
@@ -69,9 +66,7 @@ public class DMsScreen extends AppCompatActivity {
             @Override
             public void onMessage(String message) {
                 Log.i("Websocket", "Message Received");
-                mOutput.append("\n"
-                        + AppController.getTargetUser() + ": "
-                        + message);
+                mOutput.append("\n" + message);
             }
 
             @Override
@@ -95,7 +90,7 @@ public class DMsScreen extends AppCompatActivity {
         if (message != null && message.length() > 0) {
 
             mWebSocketClient.send(message);
-            mOutput.append("\n" + "You: " + message);
+            mInput.setText("");
 
         }
 

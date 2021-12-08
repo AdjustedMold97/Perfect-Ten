@@ -121,7 +121,7 @@ public class ProfileView extends AppCompatActivity {
         if(AppController.getPrivLevel() > 1) {
 
             Button changePirvLevel = findViewById(R.id.changePrivLevel);
-            changePirvLevel.setOnClickListener(view -> startActivity(new Intent(view.getContext(), PromoteUser.class)));
+       //     changePirvLevel.setOnClickListener(view -> startActivity(new Intent(view.getContext(), PromoteUser.class)));
             changePirvLevel.setVisibility(View.VISIBLE);
 
         }

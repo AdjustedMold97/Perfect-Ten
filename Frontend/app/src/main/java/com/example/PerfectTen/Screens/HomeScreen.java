@@ -187,11 +187,7 @@ public class HomeScreen extends AppCompatActivity {
                  *
                  * - Jae Swanepoel
                  */
-                for (String blockedUser : blockedUsers) {
 
-                    if (blockedUser.equals(temp.get(Const.POST_USER_KEY)))
-                        continue reverseLoop;
-                }
 
 
                 //getting the title from the JSONObject
@@ -210,6 +206,16 @@ public class HomeScreen extends AppCompatActivity {
 
                 temp.put(Const.TIME_KEY,
                         responseArr.getJSONObject(responseArr.length() - i - 1).get(Const.TIME_KEY).toString());
+
+                for (String blockedUser : blockedUsers) { //TODO this coe is greay, but plz fix it JAe
+
+                    if (blockedUser.equals(temp.get(Const.POST_USER_KEY)))
+                        continue reverseLoop;
+
+                }
+
+                if (temp.get("isAChild").equals("true"))
+                    continue reverseLoop;
 
             } catch (JSONException e) { e.printStackTrace(); }
 

@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_dms_screen.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_find_user_screen.xml" value="0.5005208333333333" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_friends_screen.xml" value="0.264" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_home_screen.xml" value="0.20425724637681159" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_login_screen.xml" value="0.264" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_perma_delete.xml" value="0.190625" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_post_creation.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_post_view.xml" value="0.5" />
         <entry key="..\:/Users/jaesw/OneDrive/Desktop/ISU class content/Fall 2021/COM S 309/Eclipse Workspace/3_rk_3/Frontend/app/src/main/res/layout/activity_profile_view.xml" value="0.264" />

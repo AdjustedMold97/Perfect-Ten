@@ -1,13 +1,12 @@
 package com.example.PerfectTen.Screens;
 
-import static com.example.PerfectTen.net_utils.Const.DELETE_POST_URL;
 import static com.example.PerfectTen.net_utils.Const.DELETE_USER_URL;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,20 +15,17 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.example.PerfectTen.R;
 import com.example.PerfectTen.app.AppController;
-import com.example.PerfectTen.net_utils.Const;
 import com.example.PerfectTen.net_utils.PerfectTenRequester;
 import com.example.PerfectTen.net_utils.VolleyCallback;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class PermaDelete extends AppCompatActivity {
 
     TextView delText;
     VolleyCallback callback;
+    View v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +42,11 @@ public class PermaDelete extends AppCompatActivity {
          */
         no.setOnClickListener(view -> startActivity(new Intent(view.getContext(), ProfileView.class)));
 
+        yes.setOnClickListener(view -> {
 
-        yes.setOnClickListener(new View.OnClickListener() {
+            v = view;
+            submit();
 
-            @Override
-            public void onClick(View view) {
-
-                submit();
-                startActivity(new Intent(view.getContext(), HomeScreen.class));
-                
-            }
         });
 
         callback = new VolleyCallback() {
@@ -67,9 +58,13 @@ public class PermaDelete extends AppCompatActivity {
 
             @Override
             public void onSuccess(JSONObject response) {
+
                 delText.setText("success user deleted you will be returned to home");
+                delText.setVisibility(View.VISIBLE);
                 AppController.setTargetUser(null);
-                //TODO wait 3 seconds and then start main
+
+                Handler handler = new Handler();
+                handler.postDelayed(() -> startActivity(new Intent(v.getContext(), HomeScreen.class)), 2500);
             }
 
             @Override
@@ -77,22 +72,13 @@ public class PermaDelete extends AppCompatActivity {
                 delText.setText("Deletion Failed");
             }
         };
-
-
-
-
     }
     private void submit(){
 
         PerfectTenRequester requester;
-        String url;
         JSONObject obj = new JSONObject();
         String delUser = AppController.getTargetUser();
-
-
-        url = DELETE_USER_URL + delUser;
-
-
+        String url = DELETE_USER_URL + delUser;
 
         requester = new PerfectTenRequester(Request.Method.DELETE, url, obj, callback);
         requester.request();

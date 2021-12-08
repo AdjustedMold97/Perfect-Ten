@@ -72,7 +72,7 @@ public class AdminScreen extends AppCompatActivity {
         userFlag = false;
 
         callbackPriv = new VolleyCallback(){
-            
+
             @Override
             public void onSuccess(JSONArray response) {
 

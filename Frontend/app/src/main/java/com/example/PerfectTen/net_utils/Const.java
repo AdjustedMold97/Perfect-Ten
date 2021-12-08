@@ -49,6 +49,9 @@ public class Const {
     public static final String USER_PRIVILEGE_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
     public static final String USER_PRIVILEGE_2 = "/privilege";
 
+    public static final String USER_PRIVILEGE_NEW_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
+    public static final String USER_PRIVILEGE_NEW_2 = "/privilege/new";
+
     //======================================== JSON ================================================
 
     public static final String SUCCESS_MSG = "success";

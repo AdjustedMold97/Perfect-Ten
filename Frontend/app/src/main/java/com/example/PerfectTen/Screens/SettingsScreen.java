@@ -4,10 +4,16 @@ import static com.example.PerfectTen.net_utils.Const.BITMAP_HEIGHT;
 import static com.example.PerfectTen.net_utils.Const.BITMAP_WIDTH;
 import static com.example.PerfectTen.net_utils.Const.CHANGE_PFP_URL_1;
 import static com.example.PerfectTen.net_utils.Const.CHANGE_PFP_URL_2;
+import static com.example.PerfectTen.net_utils.Const.CHANGE_SETTINGS_URL;
+import static com.example.PerfectTen.net_utils.Const.EMAIL_KEY;
 import static com.example.PerfectTen.net_utils.Const.ERROR_RESPONSE_TAG;
 import static com.example.PerfectTen.net_utils.Const.GET_PFP_URL_1;
 import static com.example.PerfectTen.net_utils.Const.GET_PFP_URL_2;
+import static com.example.PerfectTen.net_utils.Const.GET_USER_URL;
+import static com.example.PerfectTen.net_utils.Const.PASSWORD_KEY;
 import static com.example.PerfectTen.net_utils.Const.PICK_IMAGE;
+import static com.example.PerfectTen.net_utils.Const.QUALITY_SETTING;
+import static com.example.PerfectTen.net_utils.Const.USERNAME_KEY;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,17 +23,25 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.PerfectTen.R;
 import com.example.PerfectTen.app.AppController;
+import com.example.PerfectTen.net_utils.PerfectTenRequester;
+import com.example.PerfectTen.net_utils.VolleyCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -41,6 +55,9 @@ import java.util.Map;
  * @author Ethan Still
  */
 public class SettingsScreen extends AppCompatActivity {
+
+    private String userPassword;
+    private String userEmail;
 
     ImageButton settingsPfP;
     EditText usernameEdit;
@@ -98,21 +115,102 @@ public class SettingsScreen extends AppCompatActivity {
 
         AppController.getInstance().addToRequestQueue(imgReq);
 
-        /*
-         * TODO
-         *
-         *  set user email
-         */
+        getUserInfo();
     }
 
-    //TODO
+    private void getUserInfo() {
+
+        PerfectTenRequester requester
+                = new PerfectTenRequester(GET_USER_URL + AppController.getUsername(), null, new VolleyCallback() {
+
+            @Override
+            public void onSuccess(JSONArray response) {
+                //unreachable
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                try {
+
+                    userPassword = response.get(PASSWORD_KEY).toString();
+                    userEmail = response.get(EMAIL_KEY).toString();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                emailEdit.setHint(userEmail);
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+                VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage());
+
+            }
+        });
+
+        requester.request();
+    }
+
     private void applyChanges() {
 
+        JSONObject user = new JSONObject();
 
+        try {
 
+            if (!(usernameEdit.getText().toString().equals(AppController.getUsername()))
+                    && usernameEdit.getText().toString().length() > 0)
+                user.put(USERNAME_KEY, usernameEdit.getText().toString());
+
+            else
+                user.put(USERNAME_KEY, AppController.getUsername());
+
+            if (!(passwordEdit.getText().toString().equals(userPassword))
+                    && passwordEdit.getText().toString().length() > 0)
+                user.put(PASSWORD_KEY, passwordEdit.getText().toString());
+
+            else
+                user.put(PASSWORD_KEY, userPassword);
+
+            if (!(emailEdit.getText().toString().equals(userEmail))
+                    && emailEdit.getText().toString().length() > 0)
+                user.put(EMAIL_KEY, emailEdit.getText().toString());
+
+            else
+                user.put(EMAIL_KEY, userEmail);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        PerfectTenRequester requester
+                = new PerfectTenRequester(Request.Method.PUT, CHANGE_SETTINGS_URL + AppController.getUsername(), user, new VolleyCallback() {
+
+            @Override
+            public void onSuccess(JSONArray response) {
+                //unreachable
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                appliedText.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+                VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage());
+
+            }
+        });
+
+        requester.request();
     }
-    
-    //TODO
+
     private void changePfP() {
 
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -137,7 +235,7 @@ public class SettingsScreen extends AppCompatActivity {
 
             //converting bitmap to byte array
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            bitmap.compress(Bitmap.CompressFormat.PNG, QUALITY_SETTING, stream);
             byte[] byteArray = stream.toByteArray();
 
             @SuppressLint({"NewApi", "LocalSuppress"})
@@ -152,13 +250,10 @@ public class SettingsScreen extends AppCompatActivity {
                         Bitmap resized = Bitmap.createScaledBitmap(bitmap, BITMAP_WIDTH, BITMAP_HEIGHT, true);
                         settingsPfP.setImageBitmap(resized);
 
+                        appliedText.setVisibility(View.VISIBLE);
                     },
 
-                    error -> {
-
-                        VolleyLog.d("Error ", error.getMessage());
-
-                    }) {
+                    error -> VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage())) {
 
                         @Override
                         protected Map<String, String> getParams() {

@@ -188,17 +188,36 @@ public class UserController {
         }
         
         // If new username is the same as old username, return null
-        if(!user.getUsername().equals(request.getUsername())) {
+        if(user.getUsername().equals(request.getUsername())) {
         	return null;
         }
         
         // Update attributes and return new user
         List<Post> userPosts = user.getPosts();
+        List<User> friends = user.getFriends();
+        List<User> blockedList = user.getBlockedUsers();
         deleteUser(id);
+        
+        for (User friend: friends) {
+            friend.addFriend(request);
+            request.addFriend(friend);
+        }
+
+        for (User blocked : blockedList) {
+            request.addBlockedUser(blocked);
+        }
+
+        List<User> otherUsers = userRepository.findAll();
+        for (User other : otherUsers) {
+            if (other.isBlocking(user)) {
+                other.addBlockedUser(request);
+            }
+        }
+
         request.setPosts(userPosts);
         userRepository.save(request);
-        request.setId(id);
-        return userRepository.findById(id);
+        //request.setId(id);
+        return userRepository.findById(request.getId());
     }
 
     /**
@@ -593,6 +612,18 @@ public class UserController {
         User requestedUser = userRepository.findByUsername(user);
 
         return requestedUser.getPLevel();
+    }
+
+    @PutMapping(path = "/user/{user}/privilege")
+    public String updateUserPLevel(@PathVariable String user, @RequestBody int pLevel) {
+        User requestedUser = userRepository.findByUsername(user);
+        if (requestedUser == null) {
+            return failure;
+        }
+
+        requestedUser.setPLevel(pLevel);
+
+        return success;
     }
 
 }

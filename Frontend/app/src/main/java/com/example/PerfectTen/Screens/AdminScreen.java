@@ -206,6 +206,7 @@ public class AdminScreen extends AppCompatActivity {
                     resultText.setText("You don't have permission to delete this user.");
                     resultText.setVisibility(View.VISIBLE);
 
+                    resetPage();
                 }
 
                 else {

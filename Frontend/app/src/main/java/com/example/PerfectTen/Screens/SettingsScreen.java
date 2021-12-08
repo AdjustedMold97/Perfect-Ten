@@ -10,6 +10,7 @@ import static com.example.PerfectTen.net_utils.Const.ERROR_RESPONSE_TAG;
 import static com.example.PerfectTen.net_utils.Const.GET_PFP_URL_1;
 import static com.example.PerfectTen.net_utils.Const.GET_PFP_URL_2;
 import static com.example.PerfectTen.net_utils.Const.GET_USER_URL;
+import static com.example.PerfectTen.net_utils.Const.ID_KEY;
 import static com.example.PerfectTen.net_utils.Const.PASSWORD_KEY;
 import static com.example.PerfectTen.net_utils.Const.PICK_IMAGE;
 import static com.example.PerfectTen.net_utils.Const.QUALITY_SETTING;
@@ -60,6 +61,7 @@ public class SettingsScreen extends AppCompatActivity {
 
     private String userPassword;
     private String userEmail;
+    private int userID;
 
     ImageButton settingsPfP;
     EditText usernameEdit;
@@ -108,11 +110,8 @@ public class SettingsScreen extends AppCompatActivity {
         usernameEdit.setHint(AppController.getUsername());
 
         ImageRequest imgReq = new ImageRequest(GET_PFP_URL_1 + AppController.getUsername() + GET_PFP_URL_2,
-
                 response -> settingsPfP.setImageBitmap(response),
-
                 BITMAP_WIDTH, BITMAP_HEIGHT, Bitmap.Config.ALPHA_8,
-
                 error -> VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage()));
 
         AppController.getInstance().addToRequestQueue(imgReq);
@@ -137,6 +136,7 @@ public class SettingsScreen extends AppCompatActivity {
 
                     userPassword = response.get(PASSWORD_KEY).toString();
                     userEmail = response.get(EMAIL_KEY).toString();
+                    userID = Integer.parseInt(response.get(ID_KEY).toString());
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -158,27 +158,29 @@ public class SettingsScreen extends AppCompatActivity {
 
     private void applyChanges() {
 
+        String enteredUsername = usernameEdit.getText().toString();
+        String enteredPassword = passwordEdit.getText().toString();
+        String enteredEmail = emailEdit.getText().toString();
+
         JSONObject user = new JSONObject();
+        String url = CHANGE_SETTINGS_URL + userID;
 
         try {
 
-            if (!(usernameEdit.getText().toString().equals(AppController.getUsername()))
-                    && usernameEdit.getText().toString().length() > 0)
-                user.put(USERNAME_KEY, usernameEdit.getText().toString());
+            if (!enteredUsername.equals(AppController.getUsername()) && enteredUsername.length() > 0)
+                user.put(USERNAME_KEY, enteredUsername);
 
             else
                 user.put(USERNAME_KEY, AppController.getUsername());
 
-            if (!(passwordEdit.getText().toString().equals(userPassword))
-                    && passwordEdit.getText().toString().length() > 0)
-                user.put(PASSWORD_KEY, passwordEdit.getText().toString());
+            if (!enteredPassword.equals(userPassword) && enteredPassword.length() > 0)
+                user.put(PASSWORD_KEY, enteredPassword);
 
             else
                 user.put(PASSWORD_KEY, userPassword);
 
-            if (!(emailEdit.getText().toString().equals(userEmail))
-                    && emailEdit.getText().toString().length() > 0)
-                user.put(EMAIL_KEY, emailEdit.getText().toString());
+            if (!enteredEmail.equals(userEmail) && enteredEmail.length() > 0)
+                user.put(EMAIL_KEY, enteredEmail);
 
             else
                 user.put(EMAIL_KEY, userEmail);
@@ -188,7 +190,7 @@ public class SettingsScreen extends AppCompatActivity {
         }
 
         PerfectTenRequester requester
-                = new PerfectTenRequester(Request.Method.PUT, CHANGE_SETTINGS_URL + AppController.getUsername(), user, new VolleyCallback() {
+                = new PerfectTenRequester(Request.Method.PUT, url, user, new VolleyCallback() {
 
             @Override
             public void onSuccess(JSONArray response) {

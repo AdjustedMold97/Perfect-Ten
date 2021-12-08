@@ -246,29 +246,13 @@ class MainTests {
 	}
 
 	@Test
-	public void testDeletePost() {
-		User user = new User("TestUser", "test@gmail.com", "testpassword");
+	public void testUpdatePost() {
 		Post post1 = new Post("TestMessage1", "TestTitle1");
 		Post post2 = new Post("TestMessage2", "TestTitle2");
 		
 		when(postRepository.findById(post1.getId())).thenReturn(post1);
-		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
+		when(postRepository.findById(post1.getId())).thenReturn(post1);
 
-		postController.createComment(post2, user.getUsername(), post1.getId(), null);
-		assertEquals("{\"message\":\"success\"}", postController.deletePost(post1.getId()));
+		assertEquals("{\"message\":\"success\"}", postController.updatePost(post1.getId(), post2));
 	}
-	
-	//@Test
-	//public void testGetAllComments() {
-	//	User user = new User("TestUser", "test@gmail.com", "testpassword");
-	//	Post post1 = new Post("TestMessage1", "TestTitle1");
-	//	Post post2 = new Post("TestMessage2", "TestTitle2");
-		
-	//	when(postRepository.findById(post1.getId())).thenReturn(post1);
-	//	when(postRepository.findById(post2.getId())).thenReturn(post2);
-	//	when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
-
-	//	postController.createComment(post2, user.getUsername(), post1.getId(), null);
-	//	assertEquals(postController.getPostById(post2.getId()), postController.getAllComments(post1.getId()));
-	//}
 } 

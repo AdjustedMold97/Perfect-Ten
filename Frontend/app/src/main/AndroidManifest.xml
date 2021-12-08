@@ -20,8 +20,15 @@
             android:exported="false" />
         <activity
             android:name="com.example.PerfectTen.Screens.FindUserScreen"
-            android:label="Find User"
+            android:label="Find User"/>
+
+
+
+        <activity
+            android:name=".Screens.AdminScreen"
+            android:label="Admin"
             android:exported="false" />
+
         <activity
             android:name="com.example.PerfectTen.Screens.ProfileView"
             android:label="Profile View"
@@ -35,8 +42,10 @@
             android:label="Make a Post"
             android:exported="true" />
         <activity
+
             android:name="com.example.PerfectTen.Screens.LoginScreen"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -37,11 +37,21 @@ public class Const {
     public static final String COMMENT_LIST_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/posts/";
     public static final String COMMENT_LIST_URL_2 = "/all";
 
+
     //TODO these
     public static final String CHANGE_USERNAME_URL = "";
     public static final String CHANGE_PASSWORD_URL = "";
     public static final String CHANGE_EMAIL_URL = "";
     public static final String CHANGE_PFP_URL = "";
+
+    public static final String DELETE_USER_URL = "";
+    public static final String DELETE_POST_URL = "";
+    public static final String DELETE_COMMENT_URL = "http://coms-309-060.cs.iastate.edu:8080/posts/rm/";
+
+    public static final String USER_PRIVILEGE_LEVEL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
+    public static final String USER_PRIVILEGE_LEVEL_2 = "/privilege";
+
+
 
     //======================================== JSON ================================================
 

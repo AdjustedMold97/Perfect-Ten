@@ -101,10 +101,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
             });
 
+
 //            if(AppController.getPrivLevel()>0){
 //                holder.postObjectID.setText(View.VISIBLE);
 //
 //            }
+
 
         }
         catch (JSONException e) {

@@ -187,38 +187,18 @@ public class UserController {
             return null;
         }
         
-        // Update attributes and return new user
         List<Post> userPosts = user.getPosts();
-        List<User> friends = user.getFriends();
-        List<User> blockedList = user.getBlockedUsers();
         
-        // deleteUser(user.getUsername());
-        
+        // Update uname field for posts
         for (Post post : userPosts) {
             post.setUname(request.getUsername());
         }
 
-        /* for (User friend: friends) {
-            friend.addFriend(request);
-            request.addFriend(friend);
-        }
-
-        for (User blocked : blockedList) {
-            request.addBlockedUser(blocked);
-        }
-
-        List<User> otherUsers = userRepository.findAll();
-        for (User other : otherUsers) {
-            if (other.isBlocking(user)) {
-                other.addBlockedUser(request);
-            }
-        } */
-
+        // Update fields, save user, and return user
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
         userRepository.save(user);
-        //request.setId(id);
         return userRepository.findById(user.getId());
     }
 
@@ -626,6 +606,13 @@ public class UserController {
         return requestedUser.getPLevel();
     }
 
+    /**
+     * 
+     * @param user username of user to be promoted
+     * @param json JSON Object with pLevel key/value pair
+     * @return String representing success or failure
+     */
+    @ApiOperation(value = "Updates user's privilege level", response = String.class)
     @PutMapping(path = "/user/{user}/privilege/new")
     public String updateUserPLevel(@PathVariable String user, @RequestBody ObjectNode json) {
         User requestedUser = userRepository.findByUsername(user);
@@ -636,6 +623,7 @@ public class UserController {
         
         int pLevel = Integer.valueOf(input);
 
+        // This can only be used to promote users and the highest pLevel is 2 (admin)
         if (pLevel >= 3 && pLevel <= 0) {
         	return failure;
         }
@@ -643,6 +631,7 @@ public class UserController {
             return failure;
         }
 
+        // Update pLevel, save user, and return success
         requestedUser.setPLevel(pLevel);
         userRepository.save(requestedUser);
         return success;

@@ -114,7 +114,7 @@ public class PostController {
     }
 
     @PostMapping(path = "/posts/{id}/comment/{username}")
-    public String createComment(@RequestBody Post post, @PathVariable String username, @PathVariable int id) {
+    public String createCommentWithoutMedia(@RequestBody Post post, @PathVariable String username, @PathVariable int id) {
         if (post == null || userRepository.findByUsername(username) == null)
             return usernameFail;
 

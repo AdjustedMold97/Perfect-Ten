@@ -43,7 +43,7 @@ public class Const {
     public static final String CHANGE_EMAIL_URL = "";
     public static final String CHANGE_PFP_URL = "";
 
-    public static final String DMS_URL = "";
+    public static final String DMS_URL = "http://coms-309-060.cs.iastate.edu:8080/chat/";
 
     //======================================== JSON ================================================
 

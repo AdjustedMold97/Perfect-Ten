@@ -50,7 +50,7 @@ public class DMsScreen extends AppCompatActivity {
         URI uri;
 
         try {
-            uri = new URI(DMS_URL);
+        uri = new URI(DMS_URL + AppController.getTargetUser());
         } catch (Exception e) {
             e.printStackTrace();
             return;

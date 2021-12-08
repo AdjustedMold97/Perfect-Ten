@@ -617,8 +617,9 @@ public class UserController {
     }
 
     @PutMapping(path = "/user/{user}/privilege/new")
-    public String updateUserPLevel(@PathVariable String user, @RequestBody String input) {
+    public String updateUserPLevel(@PathVariable String user, @RequestBody ObjectNode json) {
         User requestedUser = userRepository.findByUsername(user);
+        String input = json.get("pLevel").textValue();
         if (input == null) {
         	return failure;
         }

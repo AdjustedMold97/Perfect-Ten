@@ -126,7 +126,7 @@ import org.json.JSONException;
          */
         public static class MyViewHolder extends RecyclerView.ViewHolder {
             TextView friendObjectName;
-            TextView friendObjectDesc;
+            //TextView friendObjectDesc;
             ImageView friendObjectImg;
             Button friendObjectDms;
 
@@ -140,7 +140,7 @@ import org.json.JSONException;
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 friendObjectName = itemView.findViewById(R.id.friendName);
-                friendObjectDesc = itemView.findViewById(R.id.friendDesc);
+                //friendObjectDesc = itemView.findViewById(R.id.friendDesc);
                 friendObjectImg = itemView.findViewById(R.id.friendImg);
                 friendObjectDms = itemView.findViewById(R.id.friendDms);
             }

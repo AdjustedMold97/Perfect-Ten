@@ -51,13 +51,10 @@
         android:id="@+id/sign_out_Button"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
         android:text="Sign Out"
-        app:layout_constraintBottom_toTopOf="@+id/settings_Button_profile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.941"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
+        app:layout_constraintTop_toTopOf="@+id/post_create_Button" />
 
     <Button
         android:id="@+id/post_create_Button"
@@ -74,23 +71,12 @@
     <Button
         android:id="@+id/admin_Button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="148dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="20dp"
         android:text="Admin"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/testview"
-        android:layout_width="129dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="520dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/home_Button_home"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/sign_out_Button"
+        app:layout_constraintTop_toTopOf="@+id/post_create_Button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

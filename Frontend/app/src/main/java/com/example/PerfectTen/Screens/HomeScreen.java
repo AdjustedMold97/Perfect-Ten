@@ -51,7 +51,7 @@ public class HomeScreen extends AppCompatActivity {
     PerfectTenRequester requester;
     String[] blockedUsers;
     JSONArray responseArr;
-    int privLevel = 0;
+    Button admin;
 
     /**
      * Calls onResume() method onCreate to populate the homeScreen view with postObjects
@@ -63,10 +63,6 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-
-        Button admin = findViewById(R.id.admin_Button);
-        admin.setOnClickListener(view -> startActivity(new Intent(this, AdminScreen.class)));
-
 
 
 
@@ -98,6 +94,7 @@ public class HomeScreen extends AppCompatActivity {
 
         toLogin.setOnClickListener(view -> {
             AppController.setUsername(null);
+            AppController.setPrivLevel(0);
             startActivity(new Intent(view.getContext(), LoginScreen.class));
         });
 
@@ -108,38 +105,42 @@ public class HomeScreen extends AppCompatActivity {
         Button post_button = findViewById(R.id.post_create_Button);
         post_button.setOnClickListener(view -> startActivity(new Intent(view.getContext(), PostCreation.class)));
 
+        admin = findViewById(R.id.admin_Button);
+        admin.setOnClickListener(view -> startActivity(new Intent(this, AdminScreen.class)));
+        admin.setVisibility(View.INVISIBLE);
+
         //getting posts
         getPosts();
-        getAdminStatus(); //TODO
+        getAdminStatus();
 
-        if(AppController.getPrivLevel()>0) {
-            admin.setVisibility(View.VISIBLE);
-
-        }
     }
 
     //TODO
     private void getAdminStatus() {
 
         requester = new PerfectTenRequester
-                (Const.USER_PRIVILEGE_LEVEL_1 + AppController.getUsername() + Const.USER_PRIVILEGE_LEVEL_2, null, new VolleyCallback() {
+                (Const.USER_USERNAME + AppController.getUsername(),
+                        null,
+                        new VolleyCallback() {
             @Override
             public void onSuccess(JSONArray response) {/* unreachable */}
 
             @Override
             public void onSuccess(JSONObject response) {
 
-                TextView test = findViewById(R.id.testview);
+
 
                 try {
-                    //test.setText(response.get("pvalue").toString());
-                    AppController.setPrivLevel(response.getInt("pvalue"));
 
+                    AppController.setPrivLevel(response.getInt(Const.PLEVEL_KEY));
 
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                if(AppController.getPrivLevel()>0)
+                    admin.setVisibility(View.VISIBLE);
 
             }
 

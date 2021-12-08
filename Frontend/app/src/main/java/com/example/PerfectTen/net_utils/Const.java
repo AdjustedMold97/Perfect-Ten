@@ -48,8 +48,11 @@ public class Const {
     public static final String DELETE_POST_URL = "";
     public static final String DELETE_COMMENT_URL = "http://coms-309-060.cs.iastate.edu:8080/posts/rm/";
 
-    public static final String USER_PRIVILEGE_LEVEL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
-    public static final String USER_PRIVILEGE_LEVEL_2 = "/privilege";
+    //public static final String USER_PRIVILEGE_LEVEL_1 = "http://coms-309-060.cs.iastate.edu:8080/user/";
+    //public static final String USER_PRIVILEGE_LEVEL_2 = "/privilege";
+
+    public static final String USER_USERNAME = "http://coms-309-060.cs.iastate.edu:8080/user/";
+
 
 
 
@@ -79,5 +82,6 @@ public class Const {
     public static final String ID_KEY = "id";
     public static final String USER_KEY = "user";
     public static final String TIME_KEY = "time";
+    public static final String PLEVEL_KEY = "plevel";
 
 }

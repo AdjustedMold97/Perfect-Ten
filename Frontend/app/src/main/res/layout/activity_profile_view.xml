@@ -115,7 +115,7 @@
         android:layout_width="94dp"
         android:layout_height="51dp"
         android:layout_marginStart="16dp"
-        android:text="Bye"
+        android:text="Delete"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/dms_Button" />
@@ -126,6 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Promote"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/admin_bye"
         app:layout_constraintTop_toBottomOf="@+id/admin_bye" />
 

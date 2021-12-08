@@ -36,4 +36,17 @@
         android:text="NO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/permaDeleteText"
+        android:layout_width="134dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="136dp"
+        android:text="fill"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

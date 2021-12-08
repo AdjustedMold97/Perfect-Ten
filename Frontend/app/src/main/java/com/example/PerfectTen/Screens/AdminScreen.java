@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.example.PerfectTen.R;
+import com.example.PerfectTen.app.AppController;
 import com.example.PerfectTen.net_utils.PerfectTenRequester;
 import com.example.PerfectTen.net_utils.VolleyCallback;
 
@@ -153,8 +154,13 @@ public class AdminScreen extends AppCompatActivity {
         String url;
         JSONObject obj = new JSONObject();
 
-        if (userFlag)
+        if (userFlag) {
+
+//           TODO make levels ones not able to delete level 2's
+//            if(AppController.getPrivLevel() > AppController.getTargetUser())
+
             url = DELETE_USER_URL + inputEdit.getText().toString();
+        }
 
         else
             url = DELETE_POST_URL + inputEdit.getText().toString();

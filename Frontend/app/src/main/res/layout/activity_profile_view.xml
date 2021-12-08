@@ -7,7 +7,7 @@
     tools:context=".Screens.ProfileView">
 
     <Button
-        android:id="@+id/home_Button_home"
+        android:id="@+id/home_Button_profile"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginStart="28dp"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/friends_Button_home"
+        android:id="@+id/friends_Button_profile"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginBottom="24dp"
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/settings_Button_home"
+        android:id="@+id/settings_Button_profile"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginEnd="28dp"
@@ -99,5 +99,15 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/PV_Posts_Recycler"
         app:layout_constraintTop_toBottomOf="@+id/add_friend_Button" />
+
+    <Button
+        android:id="@+id/dms_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Chat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

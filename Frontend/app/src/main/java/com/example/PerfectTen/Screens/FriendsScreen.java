@@ -51,13 +51,13 @@ public class FriendsScreen extends AppCompatActivity {
         getFriends();
 
         //Rigging the Universal Buttons
-        Button friend = findViewById(R.id.friends_Button_home);
+        Button friend = findViewById(R.id.friends_Button_profile);
         friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
 
-        Button settings = findViewById(R.id.settings_Button_home);
+        Button settings = findViewById(R.id.settings_Button_profile);
         settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(), SettingsScreen.class)));
 
-        Button home = findViewById(R.id.home_Button_home);
+        Button home = findViewById(R.id.home_Button_profile);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
 
         //Rigging "Add Friend" Button

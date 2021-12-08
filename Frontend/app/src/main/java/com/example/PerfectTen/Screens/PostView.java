@@ -80,6 +80,9 @@ public class PostView extends AppCompatActivity {
         Button submit = findViewById(R.id.submit_comment_Button);
         submit.setOnClickListener(view -> submitComment(commentText.getText().toString()));
 
+        Button back = findViewById(R.id.back_omment);
+        submit.setOnClickListener(view -> finish());
+
         titleView = findViewById(R.id.post_view_title);
         bodyView = findViewById(R.id.post_view_body);
 

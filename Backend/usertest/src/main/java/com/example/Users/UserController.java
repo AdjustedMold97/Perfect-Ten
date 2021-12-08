@@ -622,7 +622,7 @@ public class UserController {
         }
 
         requestedUser.setPLevel(pLevel);
-
+        userRepository.save(requestedUser);
         return success;
     }
 

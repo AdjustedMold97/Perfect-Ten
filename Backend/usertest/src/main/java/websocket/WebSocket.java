@@ -21,7 +21,6 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @ServerEndpoint(value = "/chat/{username}")
-@Component
 
 public class WebSocket {
 	

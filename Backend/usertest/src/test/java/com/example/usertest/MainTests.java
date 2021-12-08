@@ -239,6 +239,8 @@ class MainTests {
 		Post post1 = new Post("TestMessage1", "TestTitle1");
 		Post post2 = new Post("TestMessage2", "TestTitle2");
 		
+		when(postRepository.findById(post1.getId())).thenReturn(post1);
+
 		assertEquals("{\"message\":\"success\"}", postController.createComment(post2, user.getUsername(), post1.getId()));
 	}
 

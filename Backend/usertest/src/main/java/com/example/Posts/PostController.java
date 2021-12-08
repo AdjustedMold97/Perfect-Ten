@@ -87,6 +87,10 @@ public class PostController {
     public String createComment(@RequestBody Post post, @PathVariable String username, @PathVariable int id) {
     	if (post == null || userRepository.findByUsername(username) == null)
             return usernameFail;
+
+        if (postRepository.findById(id) == null) {
+            return failure;
+        }
         // User user = userRepository.findByUsername(username);
         post.setUser(userRepository.findByUsername(username));
         post.setTime();

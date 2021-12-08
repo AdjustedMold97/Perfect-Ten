@@ -18,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.example.PerfectTen.R;
 import com.example.PerfectTen.app.AppController;
+import com.example.PerfectTen.net_utils.Const;
 import com.example.PerfectTen.net_utils.PerfectTenRequester;
 import com.example.PerfectTen.net_utils.VolleyCallback;
 
@@ -38,7 +39,10 @@ public class AdminScreen extends AppCompatActivity {
 
     boolean userFlag;
 
+    String targetUserPriv;
+
     VolleyCallback callback;
+    VolleyCallback callbackPriv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,29 @@ public class AdminScreen extends AppCompatActivity {
         resultText = findViewById(R.id.admin_Error);
 
         userFlag = false;
+
+        callbackPriv = new VolleyCallback(){
+            
+            @Override
+            public void onSuccess(JSONArray response) {
+
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                //targetUserPriv = response.get("plevel");
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+                resultText.setText("Something went wrong...");
+
+
+            }
+        };
 
         callback = new VolleyCallback() {
 
@@ -156,6 +183,9 @@ public class AdminScreen extends AppCompatActivity {
 
         if (userFlag) {
 
+            requester = new PerfectTenRequester(Const.USER_PRIVILEGE_1 + inputEdit.getText().toString() + Const.USER_PRIVILEGE_2,
+                    null,
+                    callbackPriv);
 //           TODO make levels ones not able to delete level 2's
             //if(AppController.getPrivLevel() > inputEdit.getText().toString().//TODO need privlevel of user){
 

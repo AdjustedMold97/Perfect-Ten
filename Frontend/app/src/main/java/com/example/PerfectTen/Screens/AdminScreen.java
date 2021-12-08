@@ -157,9 +157,10 @@ public class AdminScreen extends AppCompatActivity {
         if (userFlag) {
 
 //           TODO make levels ones not able to delete level 2's
-//            if(AppController.getPrivLevel() > AppController.getTargetUser())
+            //if(AppController.getPrivLevel() > inputEdit.getText().toString().//TODO need privlevel of user){
 
             url = DELETE_USER_URL + inputEdit.getText().toString();
+            //}
         }
 
         else

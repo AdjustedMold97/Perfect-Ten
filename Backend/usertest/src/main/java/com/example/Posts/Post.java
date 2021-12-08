@@ -287,6 +287,10 @@ public class Post {
         children.add(child);
     }
 
+    public void removeChild(Post child) {
+        children.remove(child);
+    }
+
     public Boolean getIsAChild() {
         return isAChild;
     }

@@ -14,6 +14,9 @@
         android:theme="@style/Theme.PerfectTen"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Screens.PromoteUser"
+            android:exported="true" />
+        <activity
             android:name=".Screens.PermaDelete"
             android:exported="true" />
         <activity
@@ -25,8 +28,8 @@
             android:exported="false" />
         <activity
             android:name=".Screens.SettingsScreen"
-            android:label="Settings"
-            android:exported="false"/>
+            android:exported="false"
+            android:label="Settings" />
         <activity
             android:name=".Screens.FindUserScreen"
             android:label="Find User" />

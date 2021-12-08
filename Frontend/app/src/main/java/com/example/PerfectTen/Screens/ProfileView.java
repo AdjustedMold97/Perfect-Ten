@@ -118,6 +118,13 @@ public class ProfileView extends AppCompatActivity {
             adminBye.setVisibility(View.VISIBLE);
 
         }
+        if(AppController.getPrivLevel() > 1) {
+
+            Button changePirvLevel = findViewById(R.id.changePrivLevel);
+            changePirvLevel.setOnClickListener(view -> startActivity(new Intent(view.getContext(), PromoteUser.class)));
+            changePirvLevel.setVisibility(View.VISIBLE);
+
+        }
 
         //Rigging the "Add Friend" Button
         addFriendButton = findViewById(R.id.add_friend_Button);

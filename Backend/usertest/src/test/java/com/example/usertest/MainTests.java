@@ -283,6 +283,21 @@ class MainTests {
 		assertEquals("{\"message\":\"success\"}", userController.updateUserPLevel(user.getUsername(), obn));
 	}
 
+	public void testDeleteUser() {
+		User user = new User("TestUser", "test@email.com", "test123");
+
+		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
+
+		userController.storeExistingUser(user);
+
+		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
+
+		assertEquals("{\"message\":\"success\"}", userController.deleteUser(user.getUsername()));
+
+		assertEquals(null, userRepository.findByUsername(user.getUsername()));
+		
+	}
+
 	
 	
 	

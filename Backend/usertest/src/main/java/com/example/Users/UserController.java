@@ -274,7 +274,9 @@ public class UserController {
         }
 
         List<Post> userPosts = requestedUser.getPosts();
-        for (Post post : userPosts) {
+        List<Post> copy = new ArrayList<Post>(userPosts);
+        userPosts.clear();
+        for (Post post : copy) {
             if (postRepository.findById(post.getId()).getIsAChild()) {
                 List<Post> otherPosts = postRepository.findAll();
                 for (Post other : otherPosts) {
@@ -285,7 +287,6 @@ public class UserController {
             }
             postRepository.deleteById(post.getId());
         }
-        userPosts.clear();
 
         userRepository.deleteById(id);
         return success;

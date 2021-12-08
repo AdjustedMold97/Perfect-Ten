@@ -19,7 +19,7 @@ import lombok.Data;
 @Entity
 @Table(name = "messages")
 @Data
-public class message {
+public class Message {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,9 +39,9 @@ public class message {
     private Date sent = new Date();
 	
 	
-	public message() {};
+	public Message() {};
 	
-	public message(String userName, String content) {
+	public Message(String userName, String content) {
 		this.userName = userName;
 		this.content = content;
 	}

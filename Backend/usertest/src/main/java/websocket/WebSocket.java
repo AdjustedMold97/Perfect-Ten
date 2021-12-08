@@ -21,12 +21,12 @@ import org.springframework.stereotype.Controller;
 @Controller
 @ServerEndpoint(value = "/chat/{username}")
 
-public class websocket {
+public class WebSocket {
 	
-	private static messageRepository repo; 
+	private static MessageRepository repo; 
 	
 	@Autowired
-	public void setMessageRepository(messageRepository inputRepo) {
+	public void setMessageRepository(MessageRepository inputRepo) {
 		repo = inputRepo;  // we are setting the static variable
 	}
 
@@ -34,7 +34,7 @@ public class websocket {
 	private static Map<Session, String> sessionUsernameMap = new Hashtable<>();
 	private static Map<String, Session> usernameSessionMap = new Hashtable<>();
 
-	private final Logger logger = LoggerFactory.getLogger(websocket.class);
+	private final Logger logger = LoggerFactory.getLogger(WebSocket.class);
 
 	@OnOpen
 	public void onOpen(Session session, @PathParam("username") String username) 
@@ -53,7 +53,6 @@ public class websocket {
 		String message = "User:" + username + " has Joined the Chat";
 		broadcast(message);
 	}
-
 
 	@OnMessage
 	public void onMessage(Session session, String message) throws IOException {
@@ -76,9 +75,8 @@ public class websocket {
 		}
 
 		// Saving chat history to repository
-		repo.save(new message(username, message));
+		repo.save(new Message(username, message));
 	}
-
 
 	@OnClose
 	public void onClose(Session session) throws IOException {
@@ -93,7 +91,6 @@ public class websocket {
 		String message = username + " disconnected";
 		broadcast(message);
 	}
-
 
 	@OnError
 	public void onError(Session session, Throwable throwable) {
@@ -113,7 +110,6 @@ public class websocket {
 		}
 	}
 
-
 	private void broadcast(String message) {
 		sessionUsernameMap.forEach((session, username) -> {
 			try {
@@ -128,15 +124,14 @@ public class websocket {
 
 	}
 	
-
   // Gets the Chat history from the repository
 	private String getChatHistory() {
-		List<message> messages = repo.findAll();
+		List<Message> messages = repo.findAll();
     
     // convert the list to a string
 		StringBuilder sb = new StringBuilder();
 		if(messages != null && messages.size() != 0) {
-			for (message message : messages) {
+			for (Message message : messages) {
 				sb.append(message.getUserName() + ": " + message.getContent() + "\n");
 			}
 		}

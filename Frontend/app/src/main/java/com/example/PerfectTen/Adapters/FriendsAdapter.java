@@ -1,7 +1,14 @@
 package com.example.PerfectTen.Adapters;
 
+import static com.example.PerfectTen.net_utils.Const.BITMAP_HEIGHT;
+import static com.example.PerfectTen.net_utils.Const.BITMAP_WIDTH;
+import static com.example.PerfectTen.net_utils.Const.ERROR_RESPONSE_TAG;
+import static com.example.PerfectTen.net_utils.Const.GET_PFP_URL_1;
+import static com.example.PerfectTen.net_utils.Const.GET_PFP_URL_2;
+
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +19,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.ImageRequest;
 import com.example.PerfectTen.R;
 import com.example.PerfectTen.Screens.ProfileView;
 import com.example.PerfectTen.app.AppController;
@@ -82,7 +91,23 @@ import org.json.JSONException;
                 //TODO get mappings go here
                 holder.friendObjectName.setText(mtest.get(position).toString());
 
-                //holder.friendObjectImg.setImageBitmap(mtest.get(position).toString());
+                String friendName = mtest.get(position).toString();
+
+                ImageRequest imgReq = new ImageRequest(GET_PFP_URL_1 + friendName + GET_PFP_URL_2,
+
+                        response -> {
+
+                            holder.friendObjectImg.setImageBitmap(response);
+
+                        },
+
+                        BITMAP_WIDTH, BITMAP_HEIGHT, Bitmap.Config.ALPHA_8,
+
+                        error -> {
+                            VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage());
+                        });
+
+                AppController.getInstance().addToRequestQueue(imgReq);
 
                 //TODO holder.friendObjectImg.
 

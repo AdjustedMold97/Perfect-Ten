@@ -74,7 +74,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
             JSONObject temp;
             temp = (JSONObject) mtest.get(position);
 
-            holder.commentObjectUser.setText(temp.get(Const.USER_KEY).toString());
+            holder.commentObjectUser.setText(temp.get(Const.POST_USER_KEY).toString());
             holder.commentObjectText.setText(temp.get(Const.MESSAGE_KEY).toString());
 
         }

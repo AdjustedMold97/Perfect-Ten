@@ -178,7 +178,7 @@ public class AdminScreen extends AppCompatActivity {
             //TODO need user specifci ID for url
             url = DELETE_USER_URL + userID;
 
-           
+
 
             Map<String, String> params = new HashMap<>();
             params.put(Const.ID_KEY, userID);

@@ -94,7 +94,11 @@ public class ProfileView extends AppCompatActivity {
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
         friends.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
         settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(), SettingsScreen.class)));
-        dms.setOnClickListener(view -> startActivity(new Intent(view.getContext(), DMsScreen.class)));
+
+        dms.setOnClickListener(view -> {
+            AppController.setTargetUser(AppController.getTargetUser());
+            startActivity(new Intent(view.getContext(), DMsScreen.class));
+        });
 
         if(AppController.getPrivLevel()>1){
             adminBye.setVisibility(View.VISIBLE);

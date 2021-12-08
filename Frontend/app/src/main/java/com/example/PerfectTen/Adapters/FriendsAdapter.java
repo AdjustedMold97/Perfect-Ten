@@ -81,7 +81,7 @@ import org.json.JSONException;
 
                 //TODO get mappings go here
                 holder.friendObjectName.setText(mtest.get(position).toString());
-                //holder.friendObjectDesc.setText(temp.get("message").toString());
+
 
                 //TODO holder.friendObjectImg.
 
@@ -126,7 +126,6 @@ import org.json.JSONException;
          */
         public static class MyViewHolder extends RecyclerView.ViewHolder {
             TextView friendObjectName;
-            //TextView friendObjectDesc;
             ImageView friendObjectImg;
             Button friendObjectDms;
 
@@ -140,7 +139,6 @@ import org.json.JSONException;
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 friendObjectName = itemView.findViewById(R.id.friendName);
-                //friendObjectDesc = itemView.findViewById(R.id.friendDesc);
                 friendObjectImg = itemView.findViewById(R.id.friendImg);
                 friendObjectDms = itemView.findViewById(R.id.friendDms);
             }

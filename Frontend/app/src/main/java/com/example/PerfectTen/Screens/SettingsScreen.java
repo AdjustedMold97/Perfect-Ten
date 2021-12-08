@@ -1,5 +1,8 @@
 package com.example.PerfectTen.Screens;
 
+import static android.graphics.Color.GREEN;
+import static android.graphics.Color.RED;
+import static android.graphics.Color.colorSpace;
 import static com.example.PerfectTen.net_utils.Const.BITMAP_HEIGHT;
 import static com.example.PerfectTen.net_utils.Const.BITMAP_WIDTH;
 import static com.example.PerfectTen.net_utils.Const.CHANGE_PFP_URL_1;
@@ -200,9 +203,10 @@ public class SettingsScreen extends AppCompatActivity {
             @Override
             public void onSuccess(JSONObject response) {
 
-                appliedText.setVisibility(View.VISIBLE);
-
                 Log.d(RESULT_TAG, "Received User Info.");
+                appliedText.setText("Changes Applied!");
+                appliedText.setVisibility(View.VISIBLE);
+                appliedText.setTextColor(GREEN);
 
             }
 
@@ -210,6 +214,9 @@ public class SettingsScreen extends AppCompatActivity {
             public void onError(VolleyError error) {
 
                 VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage());
+                appliedText.setText("Falied");
+                appliedText.setVisibility(View.VISIBLE);
+                appliedText.setTextColor(RED);
 
             }
         });

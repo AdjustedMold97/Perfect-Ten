@@ -63,6 +63,9 @@ public class FriendsScreen extends AppCompatActivity {
         //Rigging "Add Friend" Button
         Button addFriend = findViewById(R.id.add_friend_screen_Button);
         addFriend.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FindUserScreen.class)));
+
+        Button toHub = findViewById(R.id.toHub);
+        toHub.setOnClickListener(view -> startActivity(new Intent(view.getContext(), DMsScreen.class)));
     }
 
     /**

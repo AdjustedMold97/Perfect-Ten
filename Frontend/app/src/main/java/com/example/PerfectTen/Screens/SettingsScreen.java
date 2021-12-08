@@ -1,31 +1,39 @@
 package com.example.PerfectTen.Screens;
 
-import static com.example.PerfectTen.net_utils.Const.CHANGE_USERNAME_URL;
+import static com.example.PerfectTen.net_utils.Const.CHANGE_PFP_URL_1;
+import static com.example.PerfectTen.net_utils.Const.CHANGE_PFP_URL_2;
+import static com.example.PerfectTen.net_utils.Const.ERROR_RESPONSE_TAG;
+import static com.example.PerfectTen.net_utils.Const.RESPONSE_TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.view.View;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.example.PerfectTen.R;
 import com.example.PerfectTen.app.AppController;
 import com.example.PerfectTen.net_utils.PerfectTenRequester;
 import com.example.PerfectTen.net_utils.VolleyCallback;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Base64;
 
 /**
  * Activity where a user can edit app settings
@@ -34,7 +42,7 @@ import java.util.Scanner;
  */
 public class SettingsScreen extends AppCompatActivity {
 
-    ImageView settingsPfP;
+    ImageButton settingsPfP;
     EditText usernameEdit;
     EditText passwordEdit;
     EditText emailEdit;
@@ -45,13 +53,13 @@ public class SettingsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_screen);
 
-        Button friend = findViewById(R.id.friends_Button_profile);
+        Button friend = findViewById(R.id.friends_Button_settings);
         friend.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
 
-        Button settings = findViewById(R.id.settings_Button_profile);
+        Button settings = findViewById(R.id.settings_Button_settings);
         settings.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SettingsScreen.class)));
 
-        Button home = findViewById(R.id.home_Button_profile);
+        Button home = findViewById(R.id.home_Button_settings);
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
 
         settingsPfP = findViewById(R.id.settings_Profile_Pic);
@@ -79,74 +87,84 @@ public class SettingsScreen extends AppCompatActivity {
 
     }
 
-    boolean failureFlag;
-
     //TODO
     private void applyChanges() {
 
-        failureFlag = false;
 
-        //if the username is changed, we must change it.
-        if (!(usernameEdit.getText().equals(AppController.getUsername()))) {
 
-            JSONObject newUsername = new JSONObject();
-
-            PerfectTenRequester requester
-                    = new PerfectTenRequester(CHANGE_USERNAME_URL, newUsername, new VolleyCallback() {
-
-                @Override
-                public void onSuccess(JSONArray response) {
-                    //unreachable
-                }
-
-                @Override
-                public void onSuccess(JSONObject response) {
-
-                }
-
-                @Override
-                public void onError(VolleyError error) {
-                    failureFlag = true;
-                }
-            });
-
-            requester.request();
-        }
-
-        /*
-         * TODO
-         * password change
-         * email change
-         */
-
-        if (failureFlag) {
-
-            appliedText.setText("Something went wrong...");
-            appliedText.setTextColor(Color.RED);
-
-        }
-
-        appliedText.setVisibility(View.VISIBLE);
     }
 
+    private static final int PICK_IMAGE = 100;
+    
     //TODO
     private void changePfP() {
 
-        File f = new File(Environment.DIRECTORY_PICTURES);
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
 
-        Scanner scnr = null;
+    }
+
+    Uri imageUri;
+    Bitmap bitmap;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        imageUri = data.getData();
+        bitmap = null;
 
         try {
-            scnr = new Scanner(f);
-        } catch (FileNotFoundException e) {
+            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
-        while (scnr.hasNext()) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
 
+        @SuppressLint({"NewApi", "LocalSuppress"}) String encodedImage = Base64.getEncoder().encodeToString(byteArray);
 
+        JSONObject obj = new JSONObject();
 
+        try {
+            obj.put("file", encodedImage);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
+        PerfectTenRequester requester
+                = new PerfectTenRequester(Request.Method.PUT, CHANGE_PFP_URL_1 + AppController.getUsername() + CHANGE_PFP_URL_2, obj, new VolleyCallback() {
+
+            @Override
+            public void onSuccess(JSONArray response) {
+                //unreachable
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                Log.d(RESPONSE_TAG, response.toString());
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
+                VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage());
+                VolleyLog.d("Error String ", error.toString());
+
+            }
+        });
+
+        requester.request();
+
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+
+            Bitmap resized = Bitmap.createScaledBitmap(bitmap, 200, 200, true);
+            settingsPfP.setImageBitmap(resized);
+
+        }
     }
 }

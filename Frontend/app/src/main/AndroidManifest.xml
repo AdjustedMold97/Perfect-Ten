@@ -52,10 +52,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Screens.SettingsScreen"
-            android:exported="true"
-            android:label="Settings" />
-        <activity
             android:name=".Screens.FriendsScreen"
             android:exported="true"
             android:label="Friends" />

@@ -92,28 +92,6 @@ public class Post {
     }
 
     /**
-     * the most useful constructor that makes a post with message, title and user set to the prams
-     * @param message
-     * @param title
-     * @param media
-     */
-    public Post(String message, String title, MultipartFile media) {
-        this.message = message;
-        this.title = title;
-        children = new ArrayList<Post>();
-        
-        this.extension = media.getOriginalFilename();
-        try { 
-            byte[] file = media.getBytes();
-            SerialBlob blob = new SerialBlob(file);
-            Blob image = blob;
-            this.media = image;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * constructor
      * @param message
      * @param title
@@ -126,32 +104,6 @@ public class Post {
     	uname = user.getUsername();
         children = new ArrayList<Post>();
     }
-    
-    /**
-     * constuctor
-     * @param message
-     * @param title
-     * @param user
-     * @param media
-     */
-    public Post(String message, String title, User user, MultipartFile media) {
-    	this.message = message;
-    	this.title = title;
-    	this.user = user;
-    	uname = user.getUsername();
-        children = new ArrayList<Post>();
-    	
-    	 this.extension = media.getOriginalFilename();
-         try { 
-             byte[] file = media.getBytes();
-             SerialBlob blob = new SerialBlob(file);
-             Blob image = blob;
-             this.media = image;
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
-    }
-    
     
     // =============================== Getters and Setters for each field ================================== //
 

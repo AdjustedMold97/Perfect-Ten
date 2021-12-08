@@ -41,6 +41,7 @@
         android:id="@+id/DMs_Feed_TextView"
         android:layout_width="411dp"
         android:layout_height="438dp"
+        android:nestedScrollingEnabled="true"
         android:scrollbars="vertical"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/dms_Input_Text"

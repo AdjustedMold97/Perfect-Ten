@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +39,7 @@ public class DMsScreen extends AppCompatActivity {
         backBtn.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
 
         mOutput = findViewById(R.id.DMs_Feed_TextView);
+        mOutput.setMovementMethod(new ScrollingMovementMethod());
         mInput = findViewById(R.id.dms_Input_Text);
         send = findViewById(R.id.dms_send_Button);
         send.setOnClickListener(view -> sendMessage());

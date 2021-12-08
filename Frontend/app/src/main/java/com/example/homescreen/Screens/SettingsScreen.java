@@ -5,28 +5,23 @@ import static com.example.homescreen.net_utils.Const.CHANGE_PFP_URL_2;
 import static com.example.homescreen.net_utils.Const.ERROR_RESPONSE_TAG;
 import static com.example.homescreen.net_utils.Const.RESPONSE_TAG;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.StringRequest;
 import com.example.homescreen.R;
 import com.example.homescreen.app.AppController;
 import com.example.homescreen.net_utils.PerfectTenRequester;
@@ -38,13 +33,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Base64;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Activity where a user can edit app settings
@@ -132,7 +121,7 @@ public class SettingsScreen extends AppCompatActivity {
         }
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 10, stream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
 
         try {
@@ -143,8 +132,6 @@ public class SettingsScreen extends AppCompatActivity {
 
         @SuppressLint({"NewApi", "LocalSuppress"}) String encodedImage = Base64.getEncoder().encodeToString(byteArray);
 
-        System.out.println(encodedImage);
-
         JSONObject obj = new JSONObject();
 
         try {
@@ -154,7 +141,7 @@ public class SettingsScreen extends AppCompatActivity {
         }
 
         PerfectTenRequester requester
-                = new PerfectTenRequester(Request.Method.POST, CHANGE_PFP_URL_1 + AppController.getUsername() + CHANGE_PFP_URL_2, obj, new VolleyCallback() {
+                = new PerfectTenRequester(Request.Method.PUT, CHANGE_PFP_URL_1 + AppController.getUsername() + CHANGE_PFP_URL_2, obj, new VolleyCallback() {
 
             @Override
             public void onSuccess(JSONArray response) {
@@ -189,7 +176,5 @@ public class SettingsScreen extends AppCompatActivity {
         });
 
         requester.request();
-
-
     }
 }

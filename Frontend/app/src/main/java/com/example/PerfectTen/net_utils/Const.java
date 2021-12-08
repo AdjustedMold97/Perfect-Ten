@@ -58,10 +58,6 @@ public class Const {
 
     public static final String USER_USERNAME = "http://coms-309-060.cs.iastate.edu:8080/user/";
 
-
-
->>>>>>> Frontend/app/src/main/java/com/example/PerfectTen/net_utils/Const.java
-
     //======================================== JSON ================================================
 
     public static final String SUCCESS_MSG = "success";

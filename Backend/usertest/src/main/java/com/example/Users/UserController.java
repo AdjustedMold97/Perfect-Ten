@@ -295,6 +295,15 @@ public class UserController {
         List<Post> userPosts = requestedUser.getPosts();
         for (Post post : userPosts) {
             requestedUser.removePost(post);
+            
+            if (postRepository.findById(post.getId()).getIsAChild()) {
+                List<Post> otherPosts = postRepository.findAll();
+                for (Post other : otherPosts) {
+                    if (other.getChildren().contains(postRepository.findById(post.getId()))) {
+                        other.removeChild(postRepository.findById(post.getId()));
+                    }
+                }
+            }
             postRepository.deleteById(post.getId());
         }
 

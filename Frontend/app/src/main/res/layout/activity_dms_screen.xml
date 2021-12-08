@@ -6,27 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Screens.DMsScreen">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/dms_username_TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="Username"
-        android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
     <Button
         android:id="@+id/dms_back_Button"
         android:layout_width="wrap_content"
@@ -39,8 +18,9 @@
 
     <TextView
         android:id="@+id/DMs_Feed_TextView"
-        android:layout_width="411dp"
-        android:layout_height="438dp"
+        android:layout_width="408dp"
+        android:layout_height="606dp"
+        android:layout_marginBottom="8dp"
         android:nestedScrollingEnabled="true"
         android:scrollbars="vertical"
         android:textColor="#000000"

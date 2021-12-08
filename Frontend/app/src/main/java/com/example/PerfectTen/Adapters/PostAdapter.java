@@ -108,6 +108,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             }
 
 
+
+
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -137,6 +139,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         TextView postObjectID;
         TextView postObjectUname;
         TextView postObjectTime;
+        Boolean isAChild;
+        JSONArray children;
         /**
          * ID's for postObjectTitle and postObjectBody
          * Can be found in post_object.xml

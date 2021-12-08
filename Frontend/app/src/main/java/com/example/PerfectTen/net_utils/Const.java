@@ -83,5 +83,7 @@ public class Const {
     public static final String USER_KEY = "user";
     public static final String TIME_KEY = "time";
     public static final String PLEVEL_KEY = "plevel";
+    public static final String ISACHILD_KEY = "isAChild";
+    public static final String CHILDREN = "children";
 
 }

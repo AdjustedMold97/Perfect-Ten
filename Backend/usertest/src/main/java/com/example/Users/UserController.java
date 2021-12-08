@@ -194,7 +194,26 @@ public class UserController {
         
         // Update attributes and return new user
         List<Post> userPosts = user.getPosts();
+        List<User> friends = user.getFriends();
+        List<User> blockedList = user.getBlockedUsers();
         deleteUser(id);
+        
+        for (User friend: friends) {
+            friend.addFriend(request);
+            request.addFriend(friend);
+        }
+
+        for (User blocked : blockedList) {
+            request.addBlockedUser(blocked);
+        }
+
+        List<User> otherUsers = userRepository.findAll();
+        for (User other : otherUsers) {
+            if (other.isBlocking(user)) {
+                other.addBlockedUser(request);
+            }
+        }
+
         request.setPosts(userPosts);
         userRepository.save(request);
         request.setId(id);

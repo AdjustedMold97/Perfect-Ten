@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class AdminScreen extends AppCompatActivity {
 
@@ -168,14 +169,15 @@ public class AdminScreen extends AppCompatActivity {
         PerfectTenRequester requester;
         String url = null;
         JSONObject requestObj = null;
+        String username;
 
         if (userFlag)
-            url = DELETE_USER_URL;
-        requestObj =
 
-                username = String.valueOf(username_input.getText());
-                password = String.valueOf(password_input.getText());
-                
+            url = DELETE_USER_URL;
+        username = String.valueOf(inputEdit1.getText());
+        requestObj
+
+
                 Map<String, String> params = new HashMap<>();
                 params.put(Const.USERNAME_KEY, username);
 

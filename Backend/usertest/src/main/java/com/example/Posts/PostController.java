@@ -144,7 +144,9 @@ public class PostController {
 
         int newId = (int) id;
 
-    	//postRepository.deleteById(newId);
+        User user = userRepository.findByUsername(postRepository.findById(newId).getUname());
+        user.removePost(postRepository.findById(newId));
+
         postRepository.deleteById(newId);
         return success;
     }

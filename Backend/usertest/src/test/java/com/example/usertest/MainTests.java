@@ -253,6 +253,6 @@ class MainTests {
 		when(postRepository.findById(post1.getId())).thenReturn(post1);
 		when(postRepository.findById(post1.getId())).thenReturn(post1);
 
-		assertEquals("{\"message\":\"success\"}", postController.updatePost(post1.getId(), post2));
+		assertEquals(post2, postController.updatePost(post1.getId(), post2));
 	}
 } 

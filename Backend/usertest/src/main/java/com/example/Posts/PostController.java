@@ -62,6 +62,21 @@ public class PostController {
         return postRepository.findById(id);
     }
 
+    @PostMapping(path = "/posts/new/{username}")
+    public String createPostWithoutMedia(@RequestBody Post post, @PathVariable String username) {
+        if (post == null || userRepository.findByUsername(username) == null)
+            return usernameFail;
+        // User user = userRepository.findByUsername(username);
+        post.setUser(userRepository.findByUsername(username));
+        post.setTime();
+        post.setIsAChild(false);
+
+        postRepository.save(post);
+        userRepository.findByUsername(username).addPost(post);
+        userRepository.save(userRepository.findByUsername(username));
+        return success;
+    }
+
     /**
      * Makes a new user by specified user
      * @param post
@@ -69,7 +84,7 @@ public class PostController {
      * @return String
      */
     @ApiOperation(value = "Makes a new user by specified user", response = String.class)
-    @PostMapping(path = "/posts/new/{username}")
+    @PostMapping(path = "/posts/new2/{username}")
     public String createPost(@RequestBody Post post, @PathVariable String username, @RequestParam String file){
         if (post == null || userRepository.findByUsername(username) == null)
             return usernameFail;
@@ -97,6 +112,28 @@ public class PostController {
         userRepository.save(userRepository.findByUsername(username));
         return success;
     }
+
+    @PostMapping(path = "/posts/{id}/comment/{username}")
+    public String createComment(@RequestBody Post post, @PathVariable String username, @PathVariable int id) {
+        if (post == null || userRepository.findByUsername(username) == null)
+            return usernameFail;
+
+        if (postRepository.findById(id) == null) {
+            return failure;
+        }
+        // User user = userRepository.findByUsername(username);
+        post.setUser(userRepository.findByUsername(username));
+        post.setTime();
+        post.setIsAChild(true);
+
+        postRepository.save(post);
+        userRepository.findByUsername(username).addPost(post);
+        userRepository.save(userRepository.findByUsername(username));
+        postRepository.findById(id).addChild(post);
+        postRepository.save(postRepository.findById(id));
+        return success;
+    }
+
     
     /**
      * Make a new comment on a specified comment by id by the specifiyed user
@@ -105,7 +142,7 @@ public class PostController {
      * @return String
      */
     @ApiOperation(value = "Make a new comment on a specified comment by id by the specifiyed user", response = String.class)
-    @PostMapping(path = "/posts/{id}/comment/{username}")
+    @PostMapping(path = "/posts/{id}/comment2/{username}")
     public String createComment(@RequestBody Post post, @PathVariable String username, @PathVariable int id, @RequestParam String file) {
     	if (post == null || userRepository.findByUsername(username) == null)
             return usernameFail;

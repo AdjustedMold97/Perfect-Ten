@@ -40,12 +40,13 @@ public class Const {
     public static final String CHANGE_PFP_URL_2 = "/pic/new";
     public static final String GET_PFP_URL = "";
 
-
     //TODO these
     public static final String CHANGE_USERNAME_URL = "";
     public static final String CHANGE_PASSWORD_URL = "";
     public static final String CHANGE_EMAIL_URL = "";
     public static final String CHANGE_PFP_URL = "";
+
+    public static final String DMS_URL = "http://coms-309-060.cs.iastate.edu:8080/chat/";
 
     public static final String DELETE_USER_URL = "";
     public static final String DELETE_POST_URL = "";
@@ -55,9 +56,6 @@ public class Const {
     //public static final String USER_PRIVILEGE_LEVEL_2 = "/privilege";
 
     public static final String USER_USERNAME = "http://coms-309-060.cs.iastate.edu:8080/user/";
-
-
-
 
     //======================================== JSON ================================================
 

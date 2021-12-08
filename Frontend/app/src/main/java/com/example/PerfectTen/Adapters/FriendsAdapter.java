@@ -89,11 +89,11 @@ import org.json.JSONException;
                     AppController.setTargetUser(holder.friendObjectName.getText().toString());
                     mContext.startActivity(new Intent(view.getContext(), ProfileView.class));
                 });
+
                 holder.friendObjectName.setOnClickListener(view -> {
                     AppController.setTargetUser(holder.friendObjectName.getText().toString());
                     mContext.startActivity(new Intent(view.getContext(), ProfileView.class));
                 });
-
 
                  holder.friendObjectDms.setOnClickListener(view -> {
                      AppController.setTargetUser(holder.friendObjectName.getText().toString());

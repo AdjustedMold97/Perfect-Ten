@@ -16,16 +16,18 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.PerfectTen.R;
-import com.example.PerfectTen.net_utils.Const;
 import com.example.PerfectTen.net_utils.PerfectTenRequester;
 import com.example.PerfectTen.net_utils.VolleyCallback;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-
+//<<<<<<< HEAD
+//import java.util.HashMap;
+//import java.util.Map;
+//
+//=======
+//>>>>>>> 28185ed63ae45d1fcbc12f67be7bd25d7f1a75b4
 public class AdminScreen extends AppCompatActivity {
 
     Button deleteUser;
@@ -174,15 +176,28 @@ public class AdminScreen extends AppCompatActivity {
         if (userFlag)
 
             url = DELETE_USER_URL;
-        username = String.valueOf(inputEdit1.getText());
-        requestObj
+//<<<<<<< HEAD
+//        username = String.valueOf(inputEdit1.getText());
+//        requestObj
+//
+//
+//                Map<String, String> params = new HashMap<>();
+//                params.put(Const.USERNAME_KEY, username);
+//=======
+      //  requestObj =
 
+              //  username = String.valueOf(username_input.getText());
+              //  password = String.valueOf(password_input.getText());
+                
+              //  Map<String, String> params = new HashMap<>();
+               // params.put(Const.USERNAME_KEY, username);
 
-                Map<String, String> params = new HashMap<>();
-                params.put(Const.USERNAME_KEY, username);
+        else if (postFlag) {
+//>>>>>>> 28185ed63ae45d1fcbc12f67be7bd25d7f1a75b4
 
-        else if (postFlag)
             url = DELETE_POST_URL;
+
+        }
 
         else if (commentFlag)
             url = DELETE_COMMENT_URL + inputEdit1.getText().toString() + "/" + inputEdit2.getText().toString();

@@ -188,7 +188,7 @@ public class UserController {
         }
         
         // If new username is the same as old username, return null
-        if(!user.getUsername().equals(request.getUsername())) {
+        if(user.getUsername().equals(request.getUsername())) {
         	return null;
         }
         

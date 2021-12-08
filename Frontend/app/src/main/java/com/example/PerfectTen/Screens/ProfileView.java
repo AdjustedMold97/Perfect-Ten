@@ -1,18 +1,28 @@
 package com.example.PerfectTen.Screens;
 
+import static com.example.PerfectTen.net_utils.Const.BITMAP_HEIGHT;
+import static com.example.PerfectTen.net_utils.Const.BITMAP_WIDTH;
+import static com.example.PerfectTen.net_utils.Const.ERROR_RESPONSE_TAG;
+import static com.example.PerfectTen.net_utils.Const.GET_PFP_URL_1;
+import static com.example.PerfectTen.net_utils.Const.GET_PFP_URL_2;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.ImageRequest;
 import com.example.PerfectTen.Adapters.PostAdapter;
 import com.example.PerfectTen.R;
 import com.example.PerfectTen.app.AppController;
@@ -70,6 +80,8 @@ public class ProfileView extends AppCompatActivity {
     Button blockButton;
     RecyclerView recycler;
 
+    ImageView profilePic;
+
     /**
      *
      * Initializes the views found in the activity,
@@ -89,7 +101,6 @@ public class ProfileView extends AppCompatActivity {
         Button friends = findViewById(R.id.friends_Button_profile);
         Button settings = findViewById(R.id.settings_Button_profile);
         Button dms = findViewById(R.id.dms_Button);
-        Button adminBye = findViewById(R.id.admin_bye);
 
         home.setOnClickListener(view -> startActivity(new Intent(view.getContext(), HomeScreen.class)));
         friends.setOnClickListener(view -> startActivity(new Intent(view.getContext(), FriendsScreen.class)));
@@ -100,10 +111,13 @@ public class ProfileView extends AppCompatActivity {
             startActivity(new Intent(view.getContext(), DMsScreen.class));
         });
 
-        if(AppController.getPrivLevel()>1){
+        if(AppController.getPrivLevel() > 1) {
+
+            Button adminBye = findViewById(R.id.admin_bye);
+            adminBye.setOnClickListener(view -> startActivity(new Intent(view.getContext(), PermaDelete.class)));
             adminBye.setVisibility(View.VISIBLE);
+
         }
-        adminBye.setOnClickListener(view -> startActivity(new Intent(view.getContext(), PermaDelete.class)));
 
         //Rigging the "Add Friend" Button
         addFriendButton = findViewById(R.id.add_friend_Button);
@@ -136,6 +150,8 @@ public class ProfileView extends AppCompatActivity {
         //Initializing RecyclerView
         recycler = findViewById(R.id.PV_Posts_Recycler);
 
+        profilePic = findViewById(R.id.profile_pic_ImageView);
+
         //populating the post TextViews
         fetchPostData();
 
@@ -146,6 +162,26 @@ public class ProfileView extends AppCompatActivity {
 
         checkFriendStatus();
         checkBlockedStatus();
+        getProfilePic();
+    }
+
+    private void getProfilePic() {
+
+        ImageRequest imgReq = new ImageRequest(GET_PFP_URL_1 + AppController.getTargetUser() + GET_PFP_URL_2,
+
+                response -> {
+
+                    profilePic.setImageBitmap(response);
+
+                },
+
+                BITMAP_WIDTH, BITMAP_HEIGHT, Bitmap.Config.ALPHA_8,
+
+                error -> {
+                    VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage());
+                });
+
+        AppController.getInstance().addToRequestQueue(imgReq);
     }
 
     /**

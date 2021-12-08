@@ -83,8 +83,6 @@ public class SettingsScreen extends AppCompatActivity {
         setUpSettings();
     }
 
-
-
     private void setUpSettings() {
 
         usernameEdit.setHint(AppController.getUsername());

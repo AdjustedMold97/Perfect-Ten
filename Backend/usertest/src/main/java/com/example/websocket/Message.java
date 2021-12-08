@@ -1,4 +1,4 @@
-package websocket;
+package com.example.websocket;
 
 import java.util.Date;
 

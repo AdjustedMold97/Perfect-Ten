@@ -251,7 +251,7 @@ class MainTests {
 		Post post2 = new Post("TestMessage2", "TestTitle2");
 		
 		when(postRepository.findById(post1.getId())).thenReturn(post1);
-		when(postRepository.findById(post1.getId())).thenReturn(post1);
+		when(postRepository.findById(post2.getId())).thenReturn(post2);
 
 		assertEquals(post2, postController.updatePost(post1.getId(), post2));
 	}

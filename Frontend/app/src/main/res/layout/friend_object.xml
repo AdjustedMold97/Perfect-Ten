@@ -25,6 +25,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="28dp"
         android:text="description"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/friendImg" />
 
@@ -48,5 +49,6 @@
         android:text="DM"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

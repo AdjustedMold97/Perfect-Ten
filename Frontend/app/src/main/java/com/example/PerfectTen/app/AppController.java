@@ -173,10 +173,10 @@ public class AppController extends Application {
     public static int getPostID() { return postID; }
     public static void setPostID (int _postID) { postID = _postID; }
 
-    public static boolean isAdmin;
-
-    public static void setAdminStatus (boolean _isAdmin) { isAdmin = _isAdmin; }
-    public static boolean getAdminStatus() { return isAdmin; }
+//    public static boolean isAdmin;
+//
+//    public static void setAdminStatus (boolean _isAdmin) { isAdmin = _isAdmin; }
+//    public static boolean getAdminStatus() { return isAdmin; }
 
     /**
      * Used for the privilege level of a user

@@ -242,7 +242,7 @@ class MainTests {
 		when(postRepository.findById(post1.getId())).thenReturn(post1);
 		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
 
-		assertEquals("{\"message\":\"success\"}", postController.createComment(post2, user.getUsername(), post1.getId()));
+		assertEquals("{\"message\":\"success\"}", postController.createComment(post2, user.getUsername(), post1.getId(), null));
 	}
 
 } 

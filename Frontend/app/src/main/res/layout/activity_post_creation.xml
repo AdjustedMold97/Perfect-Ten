@@ -6,20 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Screens.PostCreation">
 
-    <EditText
-        android:id="@+id/post_body_EditText"
-        android:layout_width="240dp"
-        android:layout_height="361dp"
-        android:ems="10"
-        android:hint="Write your post here!"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.535" />
-
     <Button
         android:id="@+id/post_back_Button"
         android:layout_width="66dp"
@@ -50,12 +36,27 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Title"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.182" />
+        app:layout_constraintVertical_bias="0.182"
+        android:gravity="start|top"
+        tools:layout_editor_absoluteY="197dp"/>
+
+    <EditText
+        android:id="@+id/post_creation_body_editor"
+        android:layout_width="287dp"
+        android:layout_height="314dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Type Here!"
+        android:inputType="textMultiLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_title_EditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

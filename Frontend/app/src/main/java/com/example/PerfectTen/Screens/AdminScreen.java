@@ -171,13 +171,13 @@ public class AdminScreen extends AppCompatActivity {
 
         if (userFlag)
             url = DELETE_USER_URL;
-        requestObj =
+      //  requestObj =
 
-                username = String.valueOf(username_input.getText());
-                password = String.valueOf(password_input.getText());
+              //  username = String.valueOf(username_input.getText());
+              //  password = String.valueOf(password_input.getText());
                 
-                Map<String, String> params = new HashMap<>();
-                params.put(Const.USERNAME_KEY, username);
+              //  Map<String, String> params = new HashMap<>();
+               // params.put(Const.USERNAME_KEY, username);
 
         else if (postFlag)
             url = DELETE_POST_URL;

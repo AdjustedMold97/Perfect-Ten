@@ -255,13 +255,8 @@ public class UserController {
         }
 
         User requestedUser = userRepository.findById(id);
+        
         // Else, delete user's posts, remove them from other's lists and return success
-        List<Post> userPosts = requestedUser.getPosts();
-        for (Post post : userPosts) {
-            requestedUser.removePost(post);
-            postRepository.deleteById(post.getId());
-        }
-
         List<User> otherUsers = userRepository.findAll();
         for (User user : otherUsers) {
             if (user.isFriendsWith(requestedUser)) {
@@ -274,6 +269,12 @@ public class UserController {
             if (requestedUser.isBlocking(user)) {
                 requestedUser.removeBlockedUser(user);
             }
+        }
+
+        List<Post> userPosts = requestedUser.getPosts();
+        for (Post post : userPosts) {
+            requestedUser.removePost(post);
+            postRepository.deleteById(post.getId());
         }
 
         userRepository.deleteById(id);

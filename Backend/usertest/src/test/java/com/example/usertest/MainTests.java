@@ -182,7 +182,7 @@ class MainTests {
 
 		when(userRepository.findByUsername("TestUser")).thenReturn(user);
 
-		assertEquals("{\"message\":\"success\"}", postController.createPost(post, user.getUsername()));
+		assertEquals("{\"message\":\"success\"}", postController.createPost(post, user.getUsername(), null));
 	}
 	
 	@Test

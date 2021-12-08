@@ -43,6 +43,8 @@ public class Const {
     public static final String CHANGE_EMAIL_URL = "";
     public static final String CHANGE_PFP_URL = "";
 
+    public static final String DMS_URL = "";
+
     //======================================== JSON ================================================
 
     public static final String SUCCESS_MSG = "success";

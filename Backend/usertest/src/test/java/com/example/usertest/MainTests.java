@@ -259,6 +259,7 @@ class MainTests {
 		assertEquals(post2, postController.updatePost(post1.getId(), post2));
 	}
 	
+	@Test
 	public void testUpdatePost2() {
 		Post post1 = new Post("TestMessage1", "TestTitle1");
 		Post post2 = new Post("TestMessage2", "TestTitle2");

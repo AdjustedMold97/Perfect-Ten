@@ -212,26 +212,6 @@ class MainTests {
 		assertEquals("{\"message\":\"error1\"}", postController.getCommentById(1,1));
 		assertEquals("{\"message\":\"error1\"}", postController.getCommentById(2,0));
 	} */
-	
-	/* @Test
-	public void CreateCommentTest() {
-		User user = new User("TestUser", "test@gmail.com", "testpassword");
-		Post post1 = new Post("TestMessage1", "TestTitle1", user);
-		Post post2 = new Post("TestMessage2", "TestTitle2", user);
-		post1.addComment("TestComment", user);
-		
-		when(userRepository.findByUsername("TestUser")).thenReturn(user);
-		when(postRepository.findById(1)).thenReturn(post1);
-		when(postRepository.findById(2)).thenReturn(post2);
-		
-		ObjectMapper mapper = new ObjectMapper();
-
-		ObjectNode obn = mapper.createObjectNode();
-		obn.set("id", mapper.convertValue(1, JsonNode.class));
-		obn.set("message", mapper.convertValue("Test", JsonNode.class));
-
-		assertEquals("{\"message\":\"success\"}", postController.createComment(obn, "TestUser"));
-	} */
 
 	@Test
 	public void testCreateComment() {
@@ -242,7 +222,28 @@ class MainTests {
 		when(postRepository.findById(post1.getId())).thenReturn(post1);
 		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
 
-		assertEquals("{\"message\":\"success\"}", postController.createComment(post2, user.getUsername(), post1.getId(), null));
+		assertEquals("{\"message\":\"success\"}", postController.createCommentWithoutMedia(post2, user.getUsername(), post1.getId()));
+	}
+
+	@Test
+	public void testGetComments() {
+		User user = new User("TestUser", "test@gmail.com", "testpassword");
+		User user2 = new User("TestUser2", "test2@gmail.com", "testpassword2");
+		Post post1 = new Post("TestMessage1", "TestTitle1");
+		Post post2 = new Post("TestMessage2", "TestTitle2");
+		
+		when(postRepository.findById(post1.getId())).thenReturn(post1);
+		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
+		
+		postController.createCommentWithoutMedia(post2, user.getUsername(), post1.getId());
+		//post1.addChild(post2);
+
+		List<Post> children = new ArrayList<>();
+		children.add(post2);
+		when(post1.getChildren()).thenReturn(children);
+
+		assertEquals(children, postController.getAllComments(post1.getId()));
+
 	}
 
 	@Test
@@ -256,19 +257,48 @@ class MainTests {
 		assertEquals(post2, postController.updatePost(post1.getId(), post2));
 	}
 	
-	public void testUpdatePost2() {
-		Post post1 = new Post("TestMessage1", "TestTitle1");
-		Post post2 = new Post("TestMessage2", "TestTitle2");
-		Post post3 = new Post("TestMessage3", "TestTitle3");
-		
-		when(postRepository.findById(post1.getId())).thenReturn(post1);
-		when(postRepository.findById(post2.getId())).thenReturn(post2);
-		
-		postController.updatePost(post1.getId(), post2);
-		
-		assertEquals(post3, postController.updatePost(post2.getId(), post3));
-	}
+	//@Test
+	//public void testUpdatePost2() {
+	//	Post post1 = new Post("TestMessage1", "TestTitle1");
+	//	Post post2 = new Post("TestMessage2", "TestTitle2");
+	//	Post post3 = new Post("TestMessage3", "TestTitle3");
+	//	
+	//	when(postRepository.findById(post1.getId())).thenReturn(post1);
+	//	when(postRepository.findById(post2.getId())).thenReturn(post2);
+	//	when(postRepository.findById(post3.getId())).thenReturn(post3);
+	//	
+	//	postController.updatePost(post1.getId(), post2);
+	//	
+	//	assertEquals(post3, postController.updatePost(post1.getId(), post3));
+	//}
 	
+	@Test
+	public void testUpdatePLevel() {
+		User user = new User("TestUser", "test@email.com", "test123", 0);
+
+		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		ObjectNode obn = mapper.createObjectNode();
+		obn.set("pLevel", mapper.convertValue("2", JsonNode.class));
+
+		assertEquals("{\"message\":\"success\"}", userController.updateUserPLevel(user.getUsername(), obn));
+	}
+
+	@Test
+	public void testDeleteUser() {
+		User user = new User("TestUser", "test@email.com", "test123");
+		user.setId(1);
+		userController.storeExistingUser(user);
+
+		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
+		when(userRepository.findById(1)).thenReturn(user);
+
+		assertEquals("{\"message\":\"success\"}", userController.deleteUser(user.getUsername()));
+		
+	}
+
 	
 	
 	

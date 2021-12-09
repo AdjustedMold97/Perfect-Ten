@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.PerfectTen.R;
+import com.example.PerfectTen.app.AppController;
 import com.example.PerfectTen.net_utils.Const;
 
 import org.json.JSONArray;
@@ -55,6 +56,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.comment_object, parent,false);
+
         return new MyViewHolder(view);
 
     }
@@ -74,8 +76,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
             JSONObject temp;
             temp = (JSONObject) mtest.get(position);
 
-            holder.commentObjectUser.setText(temp.get(Const.USER_KEY).toString());
+            String idstring = temp.get(Const.ID_KEY).toString();
+
+            holder.commentObjectUser.setText(temp.get(Const.POST_USER_KEY).toString());
             holder.commentObjectText.setText(temp.get(Const.MESSAGE_KEY).toString());
+            holder.commentObjectID.setText("ID: " + idstring);
+
+            if(AppController.getPrivLevel()>0)
+                holder.commentObjectID.setVisibility(View.VISIBLE);
 
         }
         catch (JSONException e) {
@@ -102,6 +110,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
 
         TextView commentObjectText;
         TextView commentObjectUser;
+        TextView commentObjectID;
 
         /**
          * ID's for postObjectTitle and postObjectBody
@@ -113,6 +122,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
             super(itemView);
             commentObjectText = itemView.findViewById(R.id.commentObjectText);
             commentObjectUser = itemView.findViewById(R.id.commentObjectUsername);
+            commentObjectID = itemView.findViewById(R.id.commentObjectID);
 
         }
     }

@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".Screens.PostView">
 
     <TextView
         android:id="@+id/post_view_title"
-        android:layout_width="325dp"
-        android:layout_height="66dp"
+        android:layout_width="324dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
         android:text="TITLE"
@@ -20,10 +20,10 @@
 
     <TextView
         android:id="@+id/post_view_body"
-        android:layout_width="375dp"
-        android:layout_height="150dp"
+        android:layout_width="389dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
         android:hint="BODY"
         android:textSize="16sp"
@@ -35,31 +35,52 @@
         android:id="@+id/comment_EditText"
         android:layout_width="314dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="8dp"
         android:hint="Comment Here!"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/submit_comment_Button"
-        android:layout_width="89dp"
-        android:layout_height="42dp"
+        android:layout_width="79dp"
+        android:layout_height="38dp"
         android:layout_marginStart="4dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="2dp"
         android:text="Submit"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/comment_EditText"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/comments_Recycler"
-        android:layout_width="408dp"
-        android:layout_height="374dp"
-        android:layout_marginTop="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/comment_EditText"
+        android:layout_width="399dp"
+        android:layout_height="162dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_view_body"
-        app:layout_constraintVertical_bias="0.241" />
+        app:layout_constraintTop_toBottomOf="@+id/post_view_body" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="4dp"
+        android:text="TextView"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comments_Recycler" />
+
+    <Button
+        android:id="@+id/back_omment"
+        android:layout_width="35dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:text="X"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

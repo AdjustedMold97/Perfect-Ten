@@ -416,8 +416,8 @@ public class ProfileView extends AppCompatActivity {
 
         requester = new PerfectTenRequester(Request.Method.PUT, Const.REMOVE_FRIEND_URL_1 + AppController.getUsername() + Const.REMOVE_FRIEND_URL_2, user,
                 new VolleyCallback() {
-                    @Override
 
+                    @Override
                     public void onSuccess(JSONArray response) {
                         //unreachable code
                     }

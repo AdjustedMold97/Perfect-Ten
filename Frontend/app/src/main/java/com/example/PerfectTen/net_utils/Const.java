@@ -41,9 +41,16 @@ public class Const {
     public static final String USER_LIST_URL = "http://coms-309-060.cs.iastate.edu:8080/user/list/usernames";
 
     public static final String GET_POST_URL = "http://coms-309-060.cs.iastate.edu:8080/posts/";
-    public static final String CREATE_COMMENT_URL = "http://coms-309-060.cs.iastate.edu:8080/posts/new/comment/";
-    public static final String COMMENT_LIST_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/posts/";
-    public static final String COMMENT_LIST_URL_2 = "/all";
+
+    /*
+     * After 1:
+     *      Parent post ID
+     *
+     * After 2:
+     *      Username
+     */
+    public static final String CREATE_COMMENT_URL_1 = "http://coms-309-060.cs.iastate.edu:8080/posts/";
+    public static final String CREATE_COMMENT_URL_2 = "/comment/";
 
     /*
      * All urls related to user settings changes
@@ -95,8 +102,8 @@ public class Const {
     public static final String USER_KEY = "user";
     public static final String TIME_KEY = "time";
     public static final String PLEVEL_KEY = "plevel";
-    public static final String ISACHILD_KEY = "isAChild";
-    public static final String CHILDREN = "children";
+    public static final String IS_A_CHILD_KEY = "isAChild";
+    public static final String CHILDREN_KEY = "children";
 
     //===================================== NUMBERS ================================================
 

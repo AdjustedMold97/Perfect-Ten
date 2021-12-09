@@ -75,7 +75,6 @@ import org.json.JSONException;
         /**
          * OnBind sets the values for each ViewHolder object that will be displayed on the screen
          * JSONObject temp is a object to hold the position in mtest JSONArray
-         * TODO need mappings for jsonObject of Users
          * The "title", "message", "pfp" are pulled from the JSONObject temp
          * @param holder
          * @param position -position in JSONArray
@@ -84,28 +83,18 @@ import org.json.JSONException;
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             try {
-                //TODO use keys here not get position for later
-//                JSONObject temp;
-//                temp = (JSONObject) mtest.get(position);
 
-                //TODO get mappings go here
                 holder.friendObjectName.setText(mtest.get(position).toString());
 
                 String friendName = mtest.get(position).toString();
 
                 ImageRequest imgReq = new ImageRequest(GET_PFP_URL_1 + friendName + GET_PFP_URL_2,
 
-                        response -> {
-
-                            holder.friendObjectImg.setImageBitmap(response);
-
-                        },
+                        response -> holder.friendObjectImg.setImageBitmap(response),
 
                         BITMAP_WIDTH, BITMAP_HEIGHT, Bitmap.Config.ALPHA_8,
 
-                        error -> {
-                            VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage());
-                        });
+                        error -> VolleyLog.d(ERROR_RESPONSE_TAG, error.getMessage()));
 
                 AppController.getInstance().addToRequestQueue(imgReq);
 

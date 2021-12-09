@@ -1,23 +1,28 @@
 package com.example.PerfectTen.Screens;
 
-import static com.example.PerfectTen.net_utils.Const.COMMENT_LIST_URL_1;
-import static com.example.PerfectTen.net_utils.Const.COMMENT_LIST_URL_2;
-import static com.example.PerfectTen.net_utils.Const.CREATE_COMMENT_URL;
+import static com.example.PerfectTen.net_utils.Const.CHILDREN_KEY;
+import static com.example.PerfectTen.net_utils.Const.CREATE_COMMENT_URL_1;
+import static com.example.PerfectTen.net_utils.Const.CREATE_COMMENT_URL_2;
 import static com.example.PerfectTen.net_utils.Const.ID_KEY;
 import static com.example.PerfectTen.net_utils.Const.MESSAGE_KEY;
 import static com.example.PerfectTen.net_utils.Const.RESULT_TAG;
+import static com.example.PerfectTen.net_utils.Const.TITLE_KEY;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.example.PerfectTen.Adapters.CommentAdapter;
 import com.example.PerfectTen.R;
 import com.example.PerfectTen.app.AppController;
 import com.example.PerfectTen.net_utils.Const;
@@ -27,6 +32,9 @@ import com.example.PerfectTen.net_utils.VolleyCallback;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The code for the pop-up PostView.
@@ -38,6 +46,12 @@ public class PostView extends AppCompatActivity {
     //TextViews for the post
     TextView titleView;
     TextView bodyView;
+
+    JSONArray commentsArr;
+
+    RecyclerView commentsRecycler;
+    RecyclerView.LayoutManager mLayoutManager;
+    CommentAdapter mAdapter;
 
     //JSONObject containing the post
     JSONObject post;
@@ -67,10 +81,19 @@ public class PostView extends AppCompatActivity {
         EditText commentText = findViewById(R.id.comment_EditText);
 
         Button submit = findViewById(R.id.submit_comment_Button);
-        submit.setOnClickListener(view -> submitComment(commentText.getText().toString()));
+        submit.setOnClickListener(view -> {
+
+            submitComment(commentText.getText().toString());
+            commentText.setText("");
+
+        });
+        Button back = findViewById(R.id.back_omment);
+        back.setOnClickListener(view -> finish());
 
         titleView = findViewById(R.id.post_view_title);
         bodyView = findViewById(R.id.post_view_body);
+
+        commentsRecycler = findViewById(R.id.comments_Recycler);
 
         getPost();
     }
@@ -110,10 +133,15 @@ public class PostView extends AppCompatActivity {
 
                 post = response;
 
-                System.out.println(post.toString());
+                try {
+                    commentsArr = (JSONArray) response.get(CHILDREN_KEY);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 setUpTextPost();
-                getComments();
+                populateComments();
+               // getComments();
             }
 
             @Override
@@ -125,6 +153,15 @@ public class PostView extends AppCompatActivity {
         });
 
         requester.request();
+    }
+
+    private void populateComments() {
+
+        mAdapter = new CommentAdapter(this, commentsArr);
+        commentsRecycler.setAdapter(mAdapter);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        commentsRecycler.setLayoutManager(mLayoutManager);
     }
 
     /**
@@ -135,10 +172,11 @@ public class PostView extends AppCompatActivity {
     private void submitComment(String comment) {
 
         JSONObject obj = new JSONObject();
+        String url = CREATE_COMMENT_URL_1 + AppController.getPostID() + CREATE_COMMENT_URL_2 + AppController.getUsername();
 
         try {
 
-            obj.put(ID_KEY, String.valueOf(AppController.getPostID()));
+            obj.put(TITLE_KEY, "");
             obj.put(MESSAGE_KEY, comment);
 
         } catch (JSONException e) {
@@ -146,7 +184,7 @@ public class PostView extends AppCompatActivity {
         }
 
         PerfectTenRequester requester
-                = new PerfectTenRequester(CREATE_COMMENT_URL + AppController.getUsername(), obj, new VolleyCallback() {
+                = new PerfectTenRequester(url, obj, new VolleyCallback() {
             @Override
             public void onSuccess(JSONArray response) {
                 //unreachable
@@ -156,48 +194,13 @@ public class PostView extends AppCompatActivity {
             public void onSuccess(JSONObject response) {
 
                 Log.d("Result ", "Comment added successfully.");
-                getComments();
+                getPost();
 
             }
 
             @Override
             public void onError(VolleyError error) {
                 //TODO
-            }
-        });
-
-        requester.request();
-    }
-
-    /**
-     * Receives all comments and populates
-     * the RecyclerView.
-     */
-    private void getComments() {
-
-        Context c = this;
-
-        PerfectTenRequester requester
-                = new PerfectTenRequester(COMMENT_LIST_URL_1 + AppController.getPostID() + COMMENT_LIST_URL_2, new VolleyCallback() {
-            @Override
-            public void onSuccess(JSONArray response) {
-
-                Log.d(RESULT_TAG, "Received the comments array.");
-
-                //TODO for some reason using this code prevents us from clicking on the EditText...
-//                RecyclerView commentRecycler = findViewById(R.id.comments_Recycler);
-//                commentRecycler.setAdapter(new CommentAdapter(c, response));
-//                commentRecycler.setLayoutManager(new LinearLayoutManager(c));
-            }
-
-            @Override
-            public void onSuccess(JSONObject response) {
-                //unreachable
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-
             }
         });
 

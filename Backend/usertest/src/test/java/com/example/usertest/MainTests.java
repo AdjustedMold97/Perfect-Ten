@@ -266,6 +266,7 @@ class MainTests {
 		
 		when(postRepository.findById(post1.getId())).thenReturn(post1);
 		when(postRepository.findById(post2.getId())).thenReturn(post2);
+		when(postRepository.findById(post3.getId())).thenReturn(post3);
 		
 		postController.updatePost(post1.getId(), post2);
 		

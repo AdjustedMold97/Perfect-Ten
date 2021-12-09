@@ -21,8 +21,10 @@ public class EthanMockitotests {
 
         @Mock
         private View fakeview;
+    private Object ServerMock;
+    private Object AppController;
 
-        @Test
+    @Test
         public void TestCommentAdapter(){
 
             EditText mockedTitle = mock(EditText.class);
@@ -35,9 +37,17 @@ public class EthanMockitotests {
 
             assertEquals("fake Body",mockedBody.getText());
 
-            int mockID = mock(AppController.getPostID());
+            //int mockID = mock(AppController.getPostID());
 
+            ServerMock mock = new ServerMock();
 
+            System.out.print(mock.getClass());
+
+            assertEquals(mock.toString(),ServerMock );
+
+            //AppController mockapp = (com.example.PerfectTen.app.AppController) mock(AppController);
+
+            //assertEquals(AppController.getPrivLevel() == "0");
 
 
         }

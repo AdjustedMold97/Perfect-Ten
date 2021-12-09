@@ -271,7 +271,7 @@ class MainTests {
 		
 		postController.updatePost(post1.getId(), post2);
 		
-		assertEquals(post3, postController.updatePost(post2.getId(), post3));
+		assertEquals(post3, postController.updatePost(post1.getId(), post3));
 	}
 	
 	

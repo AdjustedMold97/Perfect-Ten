@@ -7,8 +7,8 @@
 
     <TextView
         android:id="@+id/commentObjectText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="98dp"
+        android:layout_height="23dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="60dp"
         android:text="comment body"

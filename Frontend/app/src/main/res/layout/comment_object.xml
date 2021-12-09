@@ -3,25 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/commentObjectText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="60dp"
         android:text="comment body"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/commentObjectUsername"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/commentObjectUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="268dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="28dp"
         android:text="username"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/commentObjectID"
+        android:layout_width="70dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="36dp"
+        android:text="ID"
+        android:textColor="#2196F3"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/commentObjectText"
+        app:layout_constraintTop_toTopOf="@+id/commentObjectUsername" />
 </androidx.constraintlayout.widget.ConstraintLayout>

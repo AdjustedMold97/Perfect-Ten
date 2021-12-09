@@ -1,10 +1,9 @@
 package com.example.PerfectTen.Screens;
 
 import static com.example.PerfectTen.net_utils.Const.CHILDREN_KEY;
-import static com.example.PerfectTen.net_utils.Const.COMMENT_LIST_URL_1;
-import static com.example.PerfectTen.net_utils.Const.COMMENT_LIST_URL_2;
 import static com.example.PerfectTen.net_utils.Const.CREATE_COMMENT_URL_1;
 import static com.example.PerfectTen.net_utils.Const.CREATE_COMMENT_URL_2;
+import static com.example.PerfectTen.net_utils.Const.ID_KEY;
 import static com.example.PerfectTen.net_utils.Const.MESSAGE_KEY;
 import static com.example.PerfectTen.net_utils.Const.RESULT_TAG;
 import static com.example.PerfectTen.net_utils.Const.TITLE_KEY;
@@ -13,10 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,6 +32,9 @@ import com.example.PerfectTen.net_utils.VolleyCallback;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The code for the pop-up PostView.
@@ -78,7 +81,20 @@ public class PostView extends AppCompatActivity {
         EditText commentText = findViewById(R.id.comment_EditText);
 
         Button submit = findViewById(R.id.submit_comment_Button);
-        submit.setOnClickListener(view -> submitComment(commentText.getText().toString()));
+        submit.setOnClickListener(new View.OnClickListener() {
+
+
+
+        @Override
+        public void onClick(View view) {
+
+            submitComment(commentText.getText().toString());
+            commentText.setText("");
+
+            }
+        });
+        Button back = findViewById(R.id.back_omment);
+        back.setOnClickListener(view -> finish());
 
         titleView = findViewById(R.id.post_view_title);
         bodyView = findViewById(R.id.post_view_body);
@@ -165,7 +181,7 @@ public class PostView extends AppCompatActivity {
         String url = CREATE_COMMENT_URL_1 + AppController.getPostID() + CREATE_COMMENT_URL_2 + AppController.getUsername();
 
         try {
-
+            obj.put(ID_KEY, AppController.getPostID());
             obj.put(TITLE_KEY, "");
             obj.put(MESSAGE_KEY, comment);
 
@@ -191,41 +207,6 @@ public class PostView extends AppCompatActivity {
             @Override
             public void onError(VolleyError error) {
                 //TODO
-            }
-        });
-
-        requester.request();
-    }
-
-    /**
-     * Receives all comments and populates
-     * the RecyclerView.
-     */
-    private void getComments() {
-
-        Context c = this;
-
-        PerfectTenRequester requester
-                = new PerfectTenRequester(COMMENT_LIST_URL_1 + AppController.getPostID() + COMMENT_LIST_URL_2, new VolleyCallback() {
-            @Override
-            public void onSuccess(JSONArray response) {
-
-                Log.d(RESULT_TAG, "Received the comments array.");
-
-                //TODO for some reason using this code prevents us from clicking on the EditText...
-//                RecyclerView commentRecycler = findViewById(R.id.comments_Recycler);
-//                commentRecycler.setAdapter(new CommentAdapter(c, response));
-//                commentRecycler.setLayoutManager(new LinearLayoutManager(c));
-            }
-
-            @Override
-            public void onSuccess(JSONObject response) {
-                //unreachable
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-
             }
         });
 

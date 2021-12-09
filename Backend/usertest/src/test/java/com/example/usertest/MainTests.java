@@ -288,16 +288,13 @@ class MainTests {
 	@Test
 	public void testDeleteUser() {
 		User user = new User("TestUser", "test@email.com", "test123");
-
-		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
-
+		user.setId(1);
 		userController.storeExistingUser(user);
 
 		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
+		when(userRepository.findById(1)).thenReturn(user);
 
 		assertEquals("{\"message\":\"success\"}", userController.deleteUser(user.getUsername()));
-
-		assertEquals(null, userRepository.findByUsername(user.getUsername()));
 		
 	}
 

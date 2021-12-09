@@ -81,17 +81,11 @@ public class PostView extends AppCompatActivity {
         EditText commentText = findViewById(R.id.comment_EditText);
 
         Button submit = findViewById(R.id.submit_comment_Button);
-        submit.setOnClickListener(new View.OnClickListener() {
-
-
-
-        @Override
-        public void onClick(View view) {
+        submit.setOnClickListener(view -> {
 
             submitComment(commentText.getText().toString());
             commentText.setText("");
 
-            }
         });
         Button back = findViewById(R.id.back_omment);
         back.setOnClickListener(view -> finish());
@@ -181,7 +175,7 @@ public class PostView extends AppCompatActivity {
         String url = CREATE_COMMENT_URL_1 + AppController.getPostID() + CREATE_COMMENT_URL_2 + AppController.getUsername();
 
         try {
-            obj.put(ID_KEY, AppController.getPostID());
+
             obj.put(TITLE_KEY, "");
             obj.put(MESSAGE_KEY, comment);
 

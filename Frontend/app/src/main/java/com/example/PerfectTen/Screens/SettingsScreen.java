@@ -281,4 +281,22 @@ public class SettingsScreen extends AppCompatActivity {
             AppController.getInstance().addToRequestQueue(strReq);
         }
     }
+
+    /**
+     * Method created for Mockito Testing.
+     *
+     * @param username
+     * @param password
+     * @param email
+     * @return
+     */
+    public JSONObject getJsonObject(String username, String password, String email) {
+
+        Map<String, String> setup = new HashMap<>();
+        setup.put("username", username);
+        setup.put("password", password);
+        setup.put("email", email);
+
+        return new JSONObject(setup);
+    }
 }

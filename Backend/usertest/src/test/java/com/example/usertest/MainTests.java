@@ -244,8 +244,6 @@ class MainTests {
 
 		assertEquals(children, postController.getAllComments(post1.getId()));
 
-
-		assertEquals("{\"message\":\"success\"}", postController.createComment(post2, user.getUsername(), post1.getId(), null));
 	}
 
 	@Test
@@ -259,6 +257,7 @@ class MainTests {
 		assertEquals(post2, postController.updatePost(post1.getId(), post2));
 	}
 	
+	@Test
 	public void testUpdatePost2() {
 		Post post1 = new Post("TestMessage1", "TestTitle1");
 		Post post2 = new Post("TestMessage2", "TestTitle2");
@@ -272,6 +271,33 @@ class MainTests {
 		assertEquals(post3, postController.updatePost(post2.getId(), post3));
 	}
 	
+	@Test
+	public void testUpdatePLevel() {
+		User user = new User("TestUser", "test@email.com", "test123", 0);
+
+		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		ObjectNode obn = mapper.createObjectNode();
+		obn.set("pLevel", mapper.convertValue("2", JsonNode.class));
+
+		assertEquals("{\"message\":\"success\"}", userController.updateUserPLevel(user.getUsername(), obn));
+	}
+
+	@Test
+	public void testDeleteUser() {
+		User user = new User("TestUser", "test@email.com", "test123");
+		user.setId(1);
+		userController.storeExistingUser(user);
+
+		when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
+		when(userRepository.findById(1)).thenReturn(user);
+
+		assertEquals("{\"message\":\"success\"}", userController.deleteUser(user.getUsername()));
+		
+	}
+
 	
 	
 	
